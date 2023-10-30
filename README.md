@@ -17,7 +17,7 @@ Follow these steps to get the frontend up and running on your local machine:
    Navigate to the project directory and install the necessary dependencies using npm:
 
    ```bash
-   cd smart-waste-frontend
+   cd sep4_frontend
    npm install
    ```
 
