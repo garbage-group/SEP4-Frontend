@@ -9,7 +9,7 @@ Follow these steps to get the frontend up and running on your local machine:
 1. **Clone the Repository**:
 
    ```bash
-   git clone [frontend_repo_url]
+   git clone [https://github.com/garbage-group/SEP4-Frontend]
    ```
 
 2. **Install Dependencies**:
