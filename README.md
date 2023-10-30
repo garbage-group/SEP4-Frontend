@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Smart Waste Management System Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the frontend repository of the Smart Waste Management System. This web application provides an intuitive interface for managing and monitoring waste collection processes in urban areas. Here, we'll guide you through setting up and contributing to this project.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Follow these steps to get the frontend up and running on your local machine:
 
-### `npm start`
+1. **Clone the Repository**:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+   ```bash
+   git clone [frontend_repo_url]
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Install Dependencies**:
 
-### `npm test`
+   Navigate to the project directory and install the necessary dependencies using npm:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd smart-waste-frontend
+   npm install
+   ```
 
-### `npm run build`
+3. **Start the Development Server**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   Start the development server to see the project in action:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   This will open a new browser window/tab with the web application.
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The Smart Waste Management System frontend offers the following key features:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Map Interface**: Display the locations of waste bins, their fill levels, and optimized collection routes using React.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Notifications**: Alert waste collection teams about bins that need immediate attention.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Collection Reports**: Generate route plans, estimated collection times, and historical fill level data.
 
-## Learn More
+- **Admin Dashboard**: Allow municipal administrators to monitor system health, view reports, and manage settings.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+We welcome contributions to enhance the frontend of our Smart Waste Management System. If you'd like to contribute, please follow these guidelines:
 
-### Code Splitting
+1. Fork the repository.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Create a new branch for your feature or bug fix.
 
-### Analyzing the Bundle Size
+3. Make your changes and test thoroughly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Push your changes to your fork and create a pull request.
 
-### Making a Progressive Web App
+5. Ensure that your pull request includes a clear description of the changes and why they are needed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## License
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [Garbage Group].
