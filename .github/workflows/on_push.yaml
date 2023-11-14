@@ -52,13 +52,11 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.6
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: build
-        env:
-          ACCESS_TOKEN: ${{ secrets.DEPLOY_TO_GITHUB_PAGE }}
+          github_token: ${{ secrets.DEPLOY_TO_GITHUB_PAGE}}
+          publish_dir: ./build
 
       - name: Save new version
         run: echo "${{ steps.version.outputs.version }}" > version
