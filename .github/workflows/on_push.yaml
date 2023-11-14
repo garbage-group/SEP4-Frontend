@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run deploy # Replace with your build command
+      # - name: Build
+      #   run:  # Replace with your build command
 
       - name: Deploy to GitHub Pages
         run: |
@@ -29,6 +29,7 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git checkout --orphan gh-pages
           git rm -rf .
+          npm run deploy
           mv build/* .
           git add .
           git commit -m "Deploy to GitHub Pages"
