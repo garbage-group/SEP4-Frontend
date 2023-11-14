@@ -21,7 +21,18 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run deploy
+        run: npm run deploy # Replace with your build command
+
+      - name: Deploy to GitHub Pages
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv build/* .
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push -f origin gh-pages
 
       - name: Test
         run: npm run test
@@ -52,11 +63,11 @@ jobs:
       #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.DEPLOY_TO_GITHUB_PAGE}}
-          publish_dir: ./build
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.DEPLOY_TO_GITHUB_PAGE}}
+      #     publish_dir: ./build
 
       # - name: Save new version
       #   run: echo "${{ steps.version.outputs.version }}" > version
