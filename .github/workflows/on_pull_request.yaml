@@ -1,6 +1,8 @@
 name: Pull Request Created
 on:
   pull_request:
+    types:
+      - opened
     branches:
       - master
 
