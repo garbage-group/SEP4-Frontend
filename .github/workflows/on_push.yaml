@@ -2,7 +2,7 @@ name: Push to master
 on:
   push:
     branches:
-      - 6_cicd
+      - master
 
 jobs:
   build:
