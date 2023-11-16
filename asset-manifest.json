@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SEP4-Frontend/static/css/main.0da5f528.css",
+    "main.js": "/SEP4-Frontend/static/js/main.a74aa094.js",
+    "index.html": "/SEP4-Frontend/index.html",
+    "main.0da5f528.css.map": "/SEP4-Frontend/static/css/main.0da5f528.css.map",
+    "main.a74aa094.js.map": "/SEP4-Frontend/static/js/main.a74aa094.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0da5f528.css",
+    "static/js/main.a74aa094.js"
+  ]
+}
