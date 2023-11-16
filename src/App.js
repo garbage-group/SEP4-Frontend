@@ -1,7 +1,8 @@
+
 import HumidityDisplay from './components/HumidityDisplay';
 import './styles/HumidityDisplay.css';
 
-function App() {
+export default function Humidity() {
     return (
         <div className="App">
             <header className="App-header">
@@ -11,5 +12,10 @@ function App() {
         </div>
     );
 }
-export default App;
+
+
+
+export function App() {
+  return <h1>Hello World!</h1>;
+}
 
