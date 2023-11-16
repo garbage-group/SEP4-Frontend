@@ -1,6 +1,6 @@
-# Smart Waste Management System Frontend
+# Waste Management System Frontend
 
-Welcome to the frontend repository of the Smart Waste Management System. This web application provides an intuitive interface for managing and monitoring waste collection processes in urban areas. Here, we'll guide you through setting up and contributing to this project.
+Frontend repository of the Waste Management System. This web application provides an intuitive interface for managing and monitoring waste collection processes in urban areas. Here, we'll guide you through setting up and contributing to this project.
 
 ## Getting Started
 
