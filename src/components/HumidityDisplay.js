@@ -13,15 +13,15 @@ function HumidityDisplay() {
         try {
             const response = await fetch(`http://localhost:8080/bins/${binId}/humidity`); // URL provided by the Cloud team
 
-            if (response.ok) {
-                const humidityValue = await response.json();
-                setHumidity(humidityValue);
-            } else {
-                setHumidity('Not found');
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            setError('Error fetching data'); // set error message
+            if (!response.ok) {
+                throw new Error('Error fetching data');
+            } 
+
+            const humidityValue = await response.json();
+            setHumidity(humidityValue);
+
+        } catch (err) {
+            setError(err.message); // set error message
             setHumidity(null); // reset humidity
         } finally {
             setLoading(false); // end loading regardless of result
