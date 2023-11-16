@@ -15,7 +15,7 @@ function HumidityDisplay() {
 
             if (!response.ok) {
                 throw new Error('Error fetching data');
-            } 
+            }
 
             const humidityValue = await response.json();
             setHumidity(humidityValue);
@@ -48,7 +48,7 @@ function HumidityDisplay() {
             {error && <p>{error}</p>} {/* Display error message */}
             {humidity !== null && (
                 <div>
-                    <p>Humidity Level: {humidity}</p>
+                    <p>Humidity Level: {humidity.value}</p>
                 </div>
             )}
         </div>
