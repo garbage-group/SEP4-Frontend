@@ -1,23 +1,33 @@
-import HumidityDisplay from "./components/HumidityDisplay";
-import { Navbar } from "./components/Navbar";
 import "../src/styles/App.css";
-import { Sidebar } from "./components/Sidebar";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { RouterProvider, createHashRouter } from "react-router-dom";
+import { Root } from "./routes/Root";
+import { Overview } from "./routes/Overview";
+import { Collectors } from "./routes/Collectors";
 
-export default function Humidity() {
-  return (
-    <div className="App">
-      <div className="navbar">
-        <Navbar />
-      </div>
+const queryClient = new QueryClient();
 
-      <div className="body-container">
-        <Sidebar />
-        <HumidityDisplay />
-      </div>
-    </div>
-  );
-}
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Overview />,
+      },
+      {
+        path: "/collectors",
+        element: <Collectors />,
+      },
+    ],
+  },
+]);
 
 export function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }

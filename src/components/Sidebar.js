@@ -5,6 +5,7 @@ import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
+import { Link } from "react-router-dom";
 
 export function Sidebar() {
   return (
@@ -12,31 +13,50 @@ export function Sidebar() {
       <div className="selected-element"></div>
 
       <div className="navs">
-        <div className="nav-element active">
-          <HomeOutlinedIcon />
-          <p>Overview</p>
-        </div>
+        <NavItem
+          to="/"
+          linkText="Overview"
+          icon={<HomeOutlinedIcon />}
+          className="nav-element active"
+        />
 
-        <div className="nav-element">
-          <GroupOutlinedIcon />
-          <p>Collectors</p>
-        </div>
+        <NavItem
+          to="/collectors"
+          linkText="Collectors"
+          icon={<GroupOutlinedIcon />}
+          className="nav-element"
+        />
 
-        <div className="nav-element">
-          <DeleteOutlineOutlinedIcon />
-          <p>Bins</p>
-        </div>
+        <NavItem
+          to="/bins"
+          linkText="Bins"
+          icon={<DeleteOutlineOutlinedIcon />}
+          className="nav-element"
+        />
 
-        <div className="nav-element">
-          <MapOutlinedIcon />
-          <p>Maps</p>
-        </div>
+        <NavItem
+          to="/map"
+          linkText="Map"
+          icon={<MapOutlinedIcon />}
+          className="nav-element"
+        />
 
-        <div className="nav-element">
-          <AnalyticsOutlinedIcon />
-          <p>Analytics</p>
-        </div>
+        <NavItem
+          to="/analytics"
+          linkText="Analytics"
+          icon={<AnalyticsOutlinedIcon />}
+          className="nav-element"
+        />
       </div>
     </div>
+  );
+}
+
+function NavItem({ to, icon, linkText, onClick, className }) {
+  return (
+    <Link to={to} onClick={onClick} className={className}>
+      {icon}
+      <p>{linkText}</p>
+    </Link>
   );
 }
