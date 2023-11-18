@@ -6,11 +6,27 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export function Sidebar() {
+  const [topPosition, setTopPosition] = useState("3vh");
+
+  useEffect(() => {
+    const storedPostion = localStorage.getItem("activePosition");
+
+    if (storedPostion) {
+      setTopPosition(storedPostion);
+    }
+  }, []);
+
+  function handleNavItemClick(newTopPosition) {
+    setTopPosition(newTopPosition);
+    localStorage.setItem("activePosition", newTopPosition);
+  }
+
   return (
     <div className="sidebar-container">
-      <div className="selected-element"></div>
+      <div className="selected-element" style={{ top: topPosition }}></div>
 
       <div className="navs">
         <NavItem
@@ -18,6 +34,7 @@ export function Sidebar() {
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
           className="nav-element active"
+          onClick={() => handleNavItemClick("3vh")}
         />
 
         <NavItem
@@ -25,6 +42,7 @@ export function Sidebar() {
           linkText="Collectors"
           icon={<GroupOutlinedIcon />}
           className="nav-element"
+          onClick={() => handleNavItemClick("11vh")}
         />
 
         <NavItem
@@ -32,6 +50,7 @@ export function Sidebar() {
           linkText="Bins"
           icon={<DeleteOutlineOutlinedIcon />}
           className="nav-element"
+          onClick={() => handleNavItemClick("20vh")}
         />
 
         <NavItem
@@ -39,6 +58,7 @@ export function Sidebar() {
           linkText="Map"
           icon={<MapOutlinedIcon />}
           className="nav-element"
+          onClick={() => handleNavItemClick("28vh")}
         />
 
         <NavItem
@@ -46,6 +66,7 @@ export function Sidebar() {
           linkText="Analytics"
           icon={<AnalyticsOutlinedIcon />}
           className="nav-element"
+          onClick={() => handleNavItemClick("36.5vh")}
         />
       </div>
     </div>
