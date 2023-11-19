@@ -75,9 +75,9 @@ export function Sidebar() {
 
 function NavItem({ to, icon, linkText, onClick, className }) {
   return (
-    <Link to={to} onClick={onClick} className={className}>
+    <div to={to} onClick={onClick} className={className}>
       {icon}
       <p>{linkText}</p>
-    </Link>
+    </div>
   );
 }
