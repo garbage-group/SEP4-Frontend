@@ -1,0 +1,18 @@
+.overview-container {
+  display: grid;
+  grid-template-rows: 30vh 60vh;
+}
+
+.map-list-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  column-gap: 2vw;
+  margin: 0px 10px;
+}
+
+.map-placeholder {
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  height: 60vh;
+  width: 63vw;
+}

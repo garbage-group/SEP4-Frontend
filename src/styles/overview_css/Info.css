@@ -1,0 +1,12 @@
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 2vw;
+  margin: 10px;
+}
+
+.info-box {
+  border-radius: 10px;
+  height: 25vh;
+  background-color: #e0e0e0;
+}
