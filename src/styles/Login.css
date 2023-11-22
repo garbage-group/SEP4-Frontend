@@ -1,5 +1,5 @@
 
-body {
+.page-container {
   margin: 0;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@ body {
   overflow: hidden;
   background-color:  #F1FDFB;
   
-}
+} 
 
 .background-container {
   position: absolute;

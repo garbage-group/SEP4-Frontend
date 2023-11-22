@@ -30,6 +30,8 @@ export function Login({ setIsLoggedIn }) {
 
     return (
         <>
+        <div className="page-container">
+
             <div className="background-container">
             </div>
             <div className="content-container">
@@ -63,6 +65,7 @@ export function Login({ setIsLoggedIn }) {
                     <p>"Empowering a Sustainable Tomorrow: Our Smart Waste Management Solution, where Innovation Meets Responsibility. Seamlessly Connecting Communities and Businesses to Effortlessly Manage, Monitor, and Minimize Waste. Together, Let's Build a Greener, Cleaner Future, One Smart Bin at a Time."</p>
                 </div> */}
             </div>
+        </div>
         </>
 
     )
