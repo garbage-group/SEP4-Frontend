@@ -9,6 +9,6 @@ export function Navbar({setIsLoggedIn}) {
   }
 
   return <div className="navbar-container">
-    <Button onClick={handleSignOut} className="button">Sign Out</Button>
+    <Button onClick={handleSignOut} className="signOut">Sign Out</Button>
   </div>;
 }
