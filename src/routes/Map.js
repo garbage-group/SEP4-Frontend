@@ -1,4 +1,4 @@
-function Map() {
+export function Map() {
     return (
         <div>
             This is a beautiful map
@@ -6,4 +6,4 @@ function Map() {
     )
 }
 
-export default Map
+

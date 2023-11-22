@@ -1,4 +1,4 @@
-function Collectors() {
+export function Collectors() {
     return (
         <div>
             List of Collectors
@@ -6,4 +6,4 @@ function Collectors() {
     )
 }
 
-export default Collectors
+

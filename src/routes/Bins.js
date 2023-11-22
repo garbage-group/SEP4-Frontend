@@ -1,4 +1,4 @@
-function Bins() {
+export function Bins() {
     return (
         <div>
             List of Bins
@@ -6,4 +6,4 @@ function Bins() {
     )
 }
 
-export default Bins
+

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar"
 import { Sidebar } from "../components/Sidebar"
 
-function Root() {
+export function Root() {
     return (
         <>
             <div>
@@ -20,4 +20,4 @@ function Root() {
     )
 }
 
-export default Root;
+
