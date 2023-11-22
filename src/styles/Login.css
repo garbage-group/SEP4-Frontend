@@ -7,6 +7,7 @@ body {
   height: 100vh;
   box-sizing: border-box;  
   overflow: hidden;
+  background-color:  #F1FDFB;
   
 }
 
@@ -67,7 +68,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     
+}
+
+.leftContainer img {
+    width: 10vw;
 }
 
 form {
@@ -88,10 +94,16 @@ h2 {
 input {
     background-color: #eee;
     border: none;
-    padding: 0.7em 0.9em;
-    width: 100%;
-    margin: 0.5vw 0;
+    padding: 0.7em 2em;
 }
+
+.inputField, .passwordField{
+    display: flex;
+    margin: 0.5vw 0;
+    width: 100%;
+    gap: 0.5vw;
+}
+
 
 button {
     border-radius: 20px;
@@ -101,6 +113,8 @@ button {
     font-size: 0.75em;
     font-weight: bold;
     padding: 0.7em 2.9em;
+    margin-left: 2vw;
+    margin-top: 1vh;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
@@ -119,6 +133,7 @@ p{
     letter-spacing: 0.04em;
 }
 
+
 /* .footer {
     display: flex;
     align-items: center;
@@ -131,8 +146,8 @@ p{
 
 
 .background-container {
-	-webkit-animation: background-container 25s ease-in-out infinite alternate both;
-	        animation: background-container 25s ease-in-out infinite alternate both;
+	-webkit-animation: background-container 20s ease-in-out infinite alternate both;
+	        animation: background-container 20s ease-in-out infinite alternate both;
 }
 
 /*Animation background image login*/

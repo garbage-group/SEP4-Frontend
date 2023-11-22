@@ -2,8 +2,6 @@
 import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
-import { Navbar } from "./components/Navbar";
-import { Sidebar } from "./components/Sidebar";
 // import { HumidityDisplay } from "./components/HumidityDisplay";
 import { Overview } from "./routes/Overview";
 import { Collectors } from "./routes/Collectors";
@@ -44,8 +42,10 @@ const queryClient = new QueryClient();
 
 export function App() {
   return (
+    <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router}/>
-      </QueryClientProvider> 
-  );
+      </QueryClientProvider>
+     </>
+     )
 }
