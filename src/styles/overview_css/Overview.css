@@ -13,6 +13,31 @@
 .map-placeholder {
   border-radius: 10px;
   background-color: #e0e0e0;
-  height: 60vh;
+  height: 58vh;
   width: 63vw;
 }
+
+
+/*Media Queries*/
+/*For Small Screens and down*/
+@media (max-width: 767.98px) {
+  .overview-container {
+    grid-template-rows: auto auto;
+  }
+
+  .map-list-container {
+    grid-template-columns: 1fr;
+    margin: 0px 10px;
+    row-gap: 10px;
+  }
+
+  .map-placeholder {
+    width: 100%;
+  }
+}
+
+/* Medium screens (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+/* Extra-large screens (1500px and above) */
+@media (min-width: 1600px) {}

@@ -56,6 +56,8 @@
   transition: top 0.6s ease;
 }
 
+
+/*Media Queries*/
 /*For Small Screens and down*/
 @media (max-width: 767.98px) {
   .active {
