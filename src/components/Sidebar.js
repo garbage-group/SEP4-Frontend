@@ -1,10 +1,12 @@
-import "../styles/Sidebar.css";
+import React from "react";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
+
+import "../styles/Sidebar.css";
 
 export function Sidebar() {
   return (

@@ -1,7 +1,9 @@
 import React from "react";
-import { ListOfCollectors } from "./overview/ListofCollectors";
-import "../styles/overview_css/Overview.css";
+
 import { Info } from "./overview/Info";
+import { ListOfCollectors } from "./overview/ListofCollectors";
+
+import "../styles/overview_css/Overview.css";
 
 export function Overview() {
   return (
