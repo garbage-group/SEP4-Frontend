@@ -1,7 +1,10 @@
 import { Form } from "react-router-dom";
-import "../styles/Login.css";
-import { useState } from "react";
 
+import PersonIcon from '@mui/icons-material/Person';
+import KeyIcon from '@mui/icons-material/Key';
+import logo from "../images/logo.png"
+
+import "../styles/Login.css";
 
 export function Login({ setIsLoggedIn }) {
     return (
@@ -13,14 +16,24 @@ export function Login({ setIsLoggedIn }) {
 
                 <div className="container">
                     <div className="leftContainer">
+                        <div>
+                            <img src={logo} alt="logo" />
+                        </div>
                         <h3>Welcome back!</h3>
                         <p>What's up Saran Singh aka KERALA GUY</p>
                     </div>
-                    <div className="signInContainer">
+                    <div className="signInContainer">             
                         <Form>
                             <h2>Sign in</h2>
-                            <input type="text" placeholder="Username" />
-                            <input type="password" placeholder="Password" />
+                            <div className="inputField">
+                                <PersonIcon />
+                                <input type="text" placeholder="Username" required />
+
+                            </div>
+                            <div className="passwordField">
+                                <KeyIcon />
+                                <input type="password" placeholder="Password" required />
+                            </div>
                             <button>Sign In</button>
                         </Form>
                     </div>
