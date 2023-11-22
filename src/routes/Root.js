@@ -23,7 +23,7 @@ export function Root() {
             {isLoggedIn ?
                 (<>
                     <div>
-                        <Navbar />
+                        <Navbar setIsLoggedIn={setIsLoggedIn}/>
                     </div>
 
                     <div className="body-container">

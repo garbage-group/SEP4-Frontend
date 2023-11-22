@@ -54,7 +54,7 @@ export function Login({ setIsLoggedIn }) {
                                 <KeyIcon />
                                 <input type="password" placeholder="Password" required />
                             </div>
-                            <Button onClick={handleSignIn}>Sign In</Button>
+                            <Button onClick={handleSignIn} className="button">Sign In</Button>
                         </Form>
                     </div>
                 </div>
