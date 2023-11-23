@@ -12,16 +12,17 @@ import { Button } from "../components/Button";
 
 export function Login({ setIsLoggedIn }) {
 
-    // useEffect(() => {
-    //     // Check if user is already logged in from localStorage
-    //     const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    //     if (storedIsLoggedIn === "true") {
-    //         setIsLoggedIn(true);
-    //     }
-    // }, [setIsLoggedIn]);
+    useEffect(() => {
+        // Check if user is already logged in from localStorage
+        const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+        if (storedIsLoggedIn === "true") {
+            setIsLoggedIn(true);
+        }
+    }, [setIsLoggedIn]);
 
     //Handles login process
-    function handleSignIn() {
+    function handleSignIn(e) {
+        e.preventDefault();
         setIsLoggedIn(true);
         // Store login state in localStorage
         localStorage.setItem("isLoggedIn", "true");
@@ -50,14 +51,14 @@ export function Login({ setIsLoggedIn }) {
                                 <h2>Sign in</h2>
                                 <div className="inputField">
                                     <PersonIcon />
-                                    <input type="text" placeholder="Username" required />
+                                    <input type="text" placeholder="Username" required={true} />
 
                                 </div>
                                 <div className="passwordField">
                                     <KeyIcon />
-                                    <input type="password" placeholder="Password" required />
+                                    <input type="password" placeholder="Password" required={true} />
                                 </div>
-                                <Button onClick={handleSignIn} className="signIn">Sign In</Button>
+                                <Button onClick={(e) => handleSignIn(e)} className="signIn">Sign In</Button>
                             </Form>
                         </div>
                     </div>
