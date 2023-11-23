@@ -1,0 +1,24 @@
+button {
+    background-color: #007bff; 
+    color: #fff;
+    padding: 12px 20px; 
+    border: none;
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 18px; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    max-width: 200px; 
+    margin: 20px auto; 
+  }
+  
+  button img {
+    max-width: 30px; 
+    height: auto;
+  }
+  
+  button:hover {
+    background-color:aquamarine; 
+  }
+  

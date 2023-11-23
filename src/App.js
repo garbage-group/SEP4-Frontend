@@ -1,21 +1,20 @@
 
-import HumidityDisplay from './components/HumidityDisplay';
-import './styles/HumidityDisplay.css';
 
-export default function Humidity() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                {/* Other content */}
-                <HumidityDisplay />
-            </header>
-        </div>
-    );
+import React from 'react';
+import SignUp from './components/SignUp';
+import './styles/App.css'; // You can create and import a global CSS file for general styles
+
+function App() {
+  return (
+    <div className="App">
+      {/* Other components or pages can be added here */}
+      <SignUp />
+    </div>
+  );
 }
 
+export default App;
 
 
-export function App() {
-  return <h1>Hello World!</h1>;
-}
+
 
