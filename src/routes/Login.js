@@ -1,5 +1,5 @@
 import { Form } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import PersonIcon from '@mui/icons-material/Person';
 import KeyIcon from '@mui/icons-material/Key';
@@ -7,10 +7,14 @@ import logo from "../images/logo.png"
 
 import "../styles/Login.css";
 import { Button } from "../components/Button";
+import { Password } from "@mui/icons-material";
 
 
 
 export function Login({ setIsLoggedIn }) {
+    const [error, setError] = useState("");
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
 
     useEffect(() => {
         // Check if user is already logged in from localStorage
@@ -23,11 +27,20 @@ export function Login({ setIsLoggedIn }) {
     //Handles login process
     function handleSignIn(e) {
         e.preventDefault();
-        setIsLoggedIn(true);
-        // Store login state in localStorage
-        localStorage.setItem("isLoggedIn", "true");
-    }
 
+        if(userName !== "" && password !== ""){
+
+            if(userName === "admin" && password === "password"){
+                setIsLoggedIn(true);
+                // Store login state in localStorage
+                localStorage.setItem("isLoggedIn", "true");
+            } else {
+                setError("Username and password do not match");
+            }
+        } else {
+            setError("Username or password field is empty");
+        }
+    }
 
     return (
         <>
@@ -47,18 +60,19 @@ export function Login({ setIsLoggedIn }) {
                             <p>Waste & material traceability solution for sustainable facilities</p>
                         </div>
                         <div className="signInContainer">
-                            <Form>
+                            <Form onSubmit={(e) => handleSignIn(e)}>
                                 <h2>Sign in</h2>
                                 <div className="inputField">
                                     <PersonIcon />
-                                    <input type="text" placeholder="Username" required={true} />
+                                    <input type="text" placeholder="Username" required onChange={(e) => setUserName(e.target.value)}/>
 
                                 </div>
                                 <div className="passwordField">
                                     <KeyIcon />
-                                    <input type="password" placeholder="Password" required={true} />
+                                    <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 <Button onClick={(e) => handleSignIn(e)} className="signIn">Sign In</Button>
+                                <div className="errorMessage">{error}</div>
                             </Form>
                         </div>
                     </div>
