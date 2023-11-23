@@ -11,7 +11,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  box-sizing: content-box;
+  box-sizing: border-box;
   overflow: hidden;
 
 }

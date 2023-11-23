@@ -138,6 +138,13 @@ input {
   }
 }
 
+.checkbox {
+  width: 90%;
+  display: flex;
+  font-size: 0.7em;
+  margin-left: 2vw;
+}
+
 p {
   font-size: 0.9em;
   line-height: 1.2em;
@@ -145,7 +152,7 @@ p {
 }
 
 .errorMessage {
-  font-size: 0.8em; 
+  font-size: 0.8em;
   text-align: center;
   color: red;
 }
@@ -203,6 +210,10 @@ p {
 
   .signInContainer {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .signIn {
@@ -212,6 +223,13 @@ p {
   .inputField,
   .passwordField {
     margin: 1.3vw 0;
+  }
+
+  .checkbox {
+    width: 90%;
+    display: flex;
+    font-size: 0.7em;
+    margin-left: 5vw;
   }
 
   h3 {
@@ -254,6 +272,10 @@ p {
 
   .signInContainer {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .signIn {
@@ -262,14 +284,14 @@ p {
 
   .inputField,
   .passwordField {
-    margin: 1.3vw 0;
+    margin: 1.4vw 0;
     height: 4vh;
   }
 
-  input {
-    width: 25vw;
-    font-size: 1.4em;
+  input{
+    font-size: 1em;
   }
+
 
   h3 {
     margin: 0;
@@ -291,17 +313,23 @@ p {
     font-size: 1.3em;
   }
 
+  .checkbox {
+    font-size: 0.8em;
+    margin-left: 2.5vw;
+    
+  }
+
   .background-container {
     animation: none;
   }
 }
 
-@media (min-width: 992px) and (max-width: 1024px){
-  .container{
+@media (min-width: 992px) and (max-width: 1024px) {
+  .container {
     width: 70vw;
   }
 
-    .leftContainer {
+  .leftContainer {
     width: 100%;
 
     text-wrap: pretty;
@@ -332,8 +360,7 @@ p {
   }
 
   input {
-    width: 25vw;
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 
   h3 {
@@ -355,5 +382,11 @@ p {
     margin-top: 2vh;
     font-size: 1.3em;
   }
-}
 
+  
+  .checkbox {
+    font-size: 1em;
+    margin-left: 2vw;
+    
+  }
+}

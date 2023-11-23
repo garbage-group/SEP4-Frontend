@@ -5,7 +5,8 @@ import { Button } from "./Button";
 export function Navbar({setIsLoggedIn}) {
   function handleSignOut(){
     setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", "false")
+    localStorage.setItem("isLoggedIn", "false");
+    
   }
 
   return <div className="navbar-container">

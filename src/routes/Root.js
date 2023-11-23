@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom"
 import { useEffect, useState } from "react";
+
 import { Navbar } from "../components/Navbar"
 import { Sidebar } from "../components/Sidebar"
-import { Login } from "./Login";
-
-
+import { Login } from "../components/Login";
 
 
 export function Root() {
@@ -23,7 +22,7 @@ export function Root() {
             {isLoggedIn ?
                 (<>
                     <div>
-                        <Navbar setIsLoggedIn={setIsLoggedIn}/>
+                        <Navbar setIsLoggedIn={setIsLoggedIn} />
                     </div>
 
                     <div className="body-container">
@@ -32,8 +31,8 @@ export function Root() {
                             <Outlet />
                         </div>
                     </div>
-                </>) 
-            : <Login setIsLoggedIn={setIsLoggedIn}/>}
+                </>)
+                : <Login setIsLoggedIn={setIsLoggedIn} />}
         </>
 
     )
