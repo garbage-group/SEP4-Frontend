@@ -99,16 +99,18 @@ export function Login({ setIsLoggedIn }) {
                             </Form>
                         </div>
                     </div>
-                    {/* <div className="footer">
 
-                    <p>"Empowering a Sustainable Tomorrow: Our Smart Waste Management Solution, where Innovation Meets Responsibility. Seamlessly Connecting Communities and Businesses to Effortlessly Manage, Monitor, and Minimize Waste. Together, Let's Build a Greener, Cleaner Future, One Smart Bin at a Time."</p>
-                </div> */}
+                    <div className="header">
+
+                        <h1>"Smart Waste Management Solution"</h1>
+                    </div>
+                    <div className="footer">
+                        <h3>Smart waste bins are equipped with advanced sensors that detect fill levels and notify collection services in real-time. This optimizes collection routes, reducing fuel consumption and minimizing unnecessary pickups.</h3>
+                    </div>
                 </div>
             </div>
         </>
-
     )
-
 }
 
 
