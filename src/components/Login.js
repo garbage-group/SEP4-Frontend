@@ -82,7 +82,7 @@ export function Login({ setIsLoggedIn }) {
                             <p>Waste & material traceability solution for sustainable facilities</p>
                         </div>
                         <div className="signInContainer">
-                            <Form onSubmit={(e) => handleSignIn(e)}>
+                            <form onSubmit={(e) => handleSignIn(e)}>
                                 <h2>Sign in</h2>
                                 <div className="inputField">
                                     <PersonIcon />
@@ -96,7 +96,7 @@ export function Login({ setIsLoggedIn }) {
                                 <div className="checkbox"><input type="checkbox" checked={Boolean(check)} onChange={(e) => handleCheckbox(e)} />Remember me</div>
                                 <Button onClick={(e) => handleSignIn(e)} className="signIn">Sign In</Button>
                                 <div className="errorMessage">{error}</div>
-                            </Form>
+                            </form>
                         </div>
                     </div>
 
