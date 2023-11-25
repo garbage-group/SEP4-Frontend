@@ -1,4 +1,4 @@
-import { Form } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 
 import PersonIcon from '@mui/icons-material/Person';
@@ -85,17 +85,17 @@ export function Login({ setIsLoggedIn }) {
                             <form onSubmit={(e) => handleSignIn(e)}>
                                 <h2>Sign in</h2>
                                 <div className="inputField">
-                                    <PersonIcon />
+                                    <PersonIcon data-testid="person-icon" />
                                     <input type="text" placeholder="Username" value={userName} onChange={(e) => setUserName(e.target.value)} />
 
                                 </div>
                                 <div className="passwordField">
-                                    <KeyIcon />
+                                    <KeyIcon data-testid="key-icon" />
                                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 <div className="checkbox"><input type="checkbox" checked={Boolean(check)} onChange={(e) => handleCheckbox(e)} />Remember me</div>
                                 <Button onClick={(e) => handleSignIn(e)} className="signIn">Sign In</Button>
-                                <div className="errorMessage">{error}</div>
+                                <div className="errorMessage" data-testid="error-message">{error}</div>
                             </form>
                         </div>
                     </div>
