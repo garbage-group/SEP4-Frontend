@@ -1,21 +1,56 @@
 
-import HumidityDisplay from './components/HumidityDisplay';
-import './styles/HumidityDisplay.css';
+import React from "react";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 
-export default function Humidity() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                {/* Other content */}
-                <HumidityDisplay />
-            </header>
-        </div>
-    );
-}
+// import { HumidityDisplay } from "./components/HumidityDisplay";
+import { Overview } from "./routes/Overview";
+import { Collectors } from "./routes/Collectors";
+import { Bins } from "./routes/Bins";
+import { Analytics } from "./routes/Analytics";
+import { Map } from "./routes/Map";
+import { Root } from './routes/Root'
+
+import "../src/styles/App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/",
+        element: <Overview />
+      },
+      {
+        path: "/collectors",
+        element: <Collectors />
+      },
+      {
+        path: "/bins",
+        element: <Bins />
+      },
+      {
+        path: "/map",
+        element: <Map />
+      },
+      {
+        path: "/analytics",
+        element: <Analytics />
+      },
+    ],
+  },
+]);
+
+const queryClient = new QueryClient();
 
 export function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router}/>
+      </QueryClientProvider>
+     </>
+     )
 }
-

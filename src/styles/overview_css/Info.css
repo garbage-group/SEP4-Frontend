@@ -1,0 +1,29 @@
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 2vw;
+  margin: 10px;
+}
+
+.info-box {
+  border-radius: 10px;
+  height: 25vh;
+  background-color: #e0e0e0;
+}
+
+/*Media Queries*/
+/*For Small Screens and down*/
+@media (max-width: 767.98px) {
+  .info-container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2vw;
+    row-gap: 2vh;
+  }
+
+}
+
+/* Medium screens (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+/* Extra-large screens (1500px and above) */
+@media (min-width: 1600px) {}
