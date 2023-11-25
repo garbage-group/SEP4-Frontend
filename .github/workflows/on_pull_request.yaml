@@ -5,6 +5,7 @@ on:
       - opened
     branches:
       - master
+      - develops
 
 jobs:
   build:

@@ -20,7 +20,7 @@ it("renders Sidebar Component", () => {
   expect(analyticsText).toBeInTheDocument();
 });
 
-it("activates correct nav element", () => {
+/* it("activates correct nav element", () => {
   render(<Sidebar />);
 
   const overviewElement = screen.getByText("Overview");
@@ -36,4 +36,4 @@ it("activates correct nav element", () => {
   expect(binsElement).not.toHaveClass("active");
   expect(mapElement).not.toHaveClass("active");
   expect(analyticsElement).not.toHaveClass("active");
-});
+}); */

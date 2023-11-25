@@ -8,9 +8,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.SEP_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4.0.0
@@ -60,3 +66,11 @@ jobs:
 
       - name: Save new version
         run: echo "${{ steps.version.outputs.version }}" > version
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions"          
+          git config  user.email "actions@github.com"
+          git add version
+          git commit -m "[skip ci] Bump version to ${{ steps.version.outputs.version }}"
+          git push origin master
