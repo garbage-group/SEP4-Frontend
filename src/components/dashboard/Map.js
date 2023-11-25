@@ -1,9 +1,9 @@
 import React from "react";
-import "../../styles/Map.css"
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import logoImage from "../../images/bin-icon.png";
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import logoImage from "../../images/bin-icon.png";
+import "../../styles/Map.css"
 
 const Map = () => {
   const position = [55.863520, 9.837690];
