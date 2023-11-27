@@ -17,8 +17,8 @@ const Map = () => {
   return (
     <MapContainer center={position} zoom={zoom} className="map-container">
       <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        // url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
       <Marker position={[55.86352, 9.83769]} icon={garbageIcon}>
         <Popup>

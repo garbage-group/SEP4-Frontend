@@ -16,7 +16,7 @@ export function Sidebar() {
           to="/"
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
-          className="nav-element active"
+          className="nav-element"
         />
 
         <NavItem
