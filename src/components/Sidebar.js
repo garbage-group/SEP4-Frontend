@@ -5,7 +5,6 @@ import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
-
 import "../styles/Sidebar.css";
 
 export function Sidebar() {
