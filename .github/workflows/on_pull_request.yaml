@@ -5,6 +5,7 @@ on:
       - opened
     branches:
       - master
+      - develop
 
 jobs:
   build:
@@ -26,4 +27,4 @@ jobs:
         run: npm run build
 
       - name: Test
-        run: npm run test
+        run: npm run test'
