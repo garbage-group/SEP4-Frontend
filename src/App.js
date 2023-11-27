@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
@@ -12,6 +13,8 @@ import { Root } from './routes/Root'
 
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+
+export default App;
 
 
 const router = createHashRouter([
@@ -44,6 +47,7 @@ const router = createHashRouter([
 ]);
 
 const queryClient = new QueryClient();
+
 
 export function App() {
   return (

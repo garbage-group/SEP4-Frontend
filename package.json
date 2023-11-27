@@ -18,7 +18,8 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "test": "jest"
   },
   "scripts": {
     "start": "react-scripts start",
