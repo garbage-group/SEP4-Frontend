@@ -1,41 +1,42 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { Navbar } from "../components/Navbar"
-import { Sidebar } from "../components/Sidebar"
+import { Navbar } from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
 import { Login } from "../components/Login";
-
+import { Footer } from "../components/Footer";
 
 export function Root() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // When the component mounts, check if user is already logged in from localStorage
-    useEffect(() => {
-        const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-        if (storedIsLoggedIn === "true") {
-            setIsLoggedIn(true);
-        }
-    }, []);
+  // When the component mounts, check if user is already logged in from localStorage
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+    if (storedIsLoggedIn === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-    return (
+  return (
+    <>
+      {isLoggedIn ? (
         <>
-            {isLoggedIn ?
-                (<>
-                    <div>
-                        <Navbar setIsLoggedIn={setIsLoggedIn} />
-                    </div>
+          <div>
+            <Navbar setIsLoggedIn={setIsLoggedIn} />
+          </div>
 
-                    <div className="body-container">
-                        <Sidebar />
-                        <div className="outlet">
-                            <Outlet />
-                        </div>
-                    </div>
-                </>)
-                : <Login setIsLoggedIn={setIsLoggedIn} />}
+          <div className="body-container">
+            <Sidebar />
+            <div className="outlet">
+              <Outlet />
+            </div>
+          </div>
+
+          <Footer />
         </>
-
-    )
+      ) : (
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      )}
+    </>
+  );
 }
-
-

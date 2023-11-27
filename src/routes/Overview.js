@@ -1,7 +1,8 @@
 import React from "react";
-import { Info } from "./overview/Info";
-import { ListOfCollectors } from "./overview/ListofCollectors";
 import "../styles/overview_css/Overview.css";
+import { Info } from "../components/overview/Info";
+import { ListOfCollectors } from "../components/overview/ListofCollectors";
+import { Map } from "../components/overview/Map";
 
 export function Overview() {
   return (
@@ -9,7 +10,9 @@ export function Overview() {
       <Info />
 
       <div className="map-list-container">
-        <div className="map-placeholder"></div>
+        <div className="map-placeholder">
+          <Map />
+        </div>
         <ListOfCollectors />
       </div>
     </div>
