@@ -24,7 +24,7 @@ body {
   flex: 1;
   margin: 10px 4px 0px 4px;
   border-radius: 10px;
-  border: 1px solid var(--accent);
+  /* border: 1px solid var(--accent); */
 }
 
 /*Media Queries*/

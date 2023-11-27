@@ -1,27 +1,192 @@
-/*Navbar Styling*/
 .navbar-container {
-  height: 7vh;
-  background-color: bisque;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  width: 100%;
+  height: 9vh;
+  background-image: url("../images//svgs/sidebar_bg.svg");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
 }
 
-.signOut {
-    border-radius: 20px;
-    border: 1px solid #0B3568;
-    background-color: #0B3568;
-    color: #ffffff;
-    font-size: 0.75em;
-    font-weight: bold;
-    padding: 0.7em 2.9em;
-    margin-left: 2vw;
-    margin-top: 1vh;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-    &:active {
-        transform: scale(0.95);
-    }
-    &:focus{
-        outline: none;
-    }
+.navbar-logo {
+  margin-top: 10.1%;
+  height: 100px;
+}
+
+.top-nav-middle {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 0;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  width: 200px;
+  padding: 5px;
+}
+
+/* Icon styles */
+.top-nav-right {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.top-nav-right svg {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 30px;
+  color: #8AF3E9;
+  font-size: 24px;
+}
+
+.top-nav-right svg:hover {
+  transform: scale(1.1);
+}
+
+
+.profile-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.dropdown-menu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+.top-nav-right svg,
+.profile-menu>svg {
+  margin-left: 30px;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+
+  /* Small screens: adjust navbar height, logo size, and spacing */
+  .navbar-container {
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .navbar-logo {
+    /* Smaller logo for mobile */
+    margin-top: 0;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .top-nav-middle,
+  .top-nav-right {
+    width: 100%;
+    justify-content: center;
+    margin: 5px 0;
+  }
+
+  .search-bar input {
+    width: calc(100% - 20px);
+  }
+
+  .top-nav-right svg {
+    margin-left: 15px;
+  }
+
+  .dropdown-menu {
+    right: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Medium screens: adjust padding and logo size */
+
+  .navbar-container {
+    padding: 5px 15px;
+  }
+
+  .navbar-logo {
+    height: 80px;
+    /* Adjust logo size for tablets */
+  }
+
+  .search-bar input {
+    width: 180px;
+    /* Adjust width for tablets */
+  }
+
+  .top-nav-right svg {
+    margin-left: 20px;
+    /* Adjust spacing for tablets */
+  }
+}
+
+@media (min-width: 1600px) {
+
+  /* Large screens: adjust spacing and layout */
+  .navbar-container {
+    padding: 5px 40px;
+  }
+
+  .search-bar input {
+    width: 250px;
+    /* Larger input field for wider screens */
+  }
+
+  .top-nav-right svg {
+    margin-left: 40px;
+    /* More space between icons for larger screens */
+  }
+}
+
+/* Ensuring the overflow is hidden for all screen sizes */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.top-nav-right svg,
+.profile-menu>svg {
+  vertical-align: middle;
 }
