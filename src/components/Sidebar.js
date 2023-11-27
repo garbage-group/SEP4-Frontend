@@ -6,6 +6,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import "../styles/Sidebar.css";
+import { NavLink } from "react-router-dom";
 
 export function Sidebar() {
   return (
@@ -52,9 +53,9 @@ export function Sidebar() {
 
 function NavItem({ to, icon, linkText, className }) {
   return (
-    <div to={to} className={className}>
+    <NavLink to={to} className={className}>
       {icon}
       <p>{linkText}</p>
-    </div>
+    </NavLink>
   );
 }

@@ -4,6 +4,8 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
+// import { Button } from "./Button";
+// import { useNavigate } from "react-router-dom";
 
 export function Navbar() {
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);

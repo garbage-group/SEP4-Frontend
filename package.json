@@ -21,7 +21,8 @@
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
     "string-to-color": "^2.2.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "test": "jest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,6 +49,8 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.0.0",
+    "jest": "^27.5.1",
+    "jest-fetch-mock": "^3.0.3"
   }
 }
