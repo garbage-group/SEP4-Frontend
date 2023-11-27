@@ -5,7 +5,6 @@ import '../styles/SignUp.css';
 import humanIcon from '../styles/images/human_icon.png';
 import passwordIcon from '../styles/images/password.png';
 import pencilIcon from '../styles/images/pencil.png';
-import signupIcon from '../styles/images/signup.png';
 import { Button } from '../components/Button';
 
 
@@ -43,12 +42,11 @@ const SignUp = () => {
         <div className="content-container">
           <div className="container">
             <div className="header">
-              <div className="text">SignUp</div>
-              <div className="underline"></div>
+              <div className="text">Add new garbage colector</div>
             </div>
             <div className="inputs">
             <div className="input">
-          <img src={humanIcon} alt="" />
+          <img src={humanIcon} alt="Username Icon" />
           <input
             type="text"
             placeholder="Username"
@@ -58,7 +56,7 @@ const SignUp = () => {
         </div>
 
         <div className="input">
-          <img src={humanIcon} alt="" />
+          <img src={humanIcon} alt="Full Name Icon" />
           <input
             type="text"
             placeholder="Full Name"
@@ -68,7 +66,7 @@ const SignUp = () => {
         </div>
 
         <div className="input">
-          <img src={pencilIcon} alt="" />
+          <img src={pencilIcon} alt="Region Icon" />
           <input
             type="text"
             placeholder="Region"
@@ -78,7 +76,7 @@ const SignUp = () => {
         </div>
 
         <div className="input">
-          <img src={passwordIcon} alt="" />
+          <img src={passwordIcon} alt="Password Icon" />
           <input
             type="password"
             placeholder="Password"
@@ -88,7 +86,7 @@ const SignUp = () => {
         </div>
 
         <div className="input">
-          <img src={passwordIcon} alt="" />
+          <img src={passwordIcon} alt="Repeat Password Icon" />
           <input
             type="password"
             placeholder="Repeat Password"
@@ -98,8 +96,7 @@ const SignUp = () => {
         </div>
             </div>
             <Button onClick={handleSignUp} className="signIn">
-              <img src={signupIcon} alt="" />
-            </Button>
+            Sign up</Button>
           </div>
         </div>
       </div>
