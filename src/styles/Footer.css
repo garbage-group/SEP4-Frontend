@@ -1,0 +1,120 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* This ensures vertical alignment */
+    padding: 10px;
+    background-color: #0E2A47;
+    color: #8AF3E9;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+/* Styles for each section in the footer */
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    flex: 1;
+}
+
+
+
+/* Styles for quick links list */
+.footer-quick-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px;
+}
+
+.footer-quick-links li {
+    margin-bottom: px;
+}
+
+.footer-quick-links li a {
+    color: #8AF3E9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-quick-links li a:hover {
+    color: #ffffff;
+}
+
+
+/* Styles for social media icons */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.social-icons a {
+    color: #8AF3E9;
+    margin: 0 10px;
+    text-decoration: none;
+    display: flex;
+}
+
+.social-icons a:hover {
+    color: #ffffff;
+}
+
+.footer-credits {
+    text-align: center;
+}
+
+.footer-credits p {
+    margin: 5px 0;
+    line-height: 1.2;
+}
+
+
+.footer-copyright {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 0.75rem;
+    color: #8AF3E9;
+    background-color: #2A3E4C;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 767.98px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .footer-quick-links ul {
+        margin: 10px auto;
+    }
+
+    .social-icons {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .footer-container {
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 1600px) {
+    .footer-container {
+        justify-content: space-around;
+    }
+}
