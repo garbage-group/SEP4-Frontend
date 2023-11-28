@@ -7,8 +7,10 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import "../styles/Sidebar.css";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../contexts/LoginAuthContext";
 
 export function Sidebar() {
+  const {role} = useAuth();
   return (
     <div className="sidebar-container">
       <div className="navs">
@@ -40,12 +42,12 @@ export function Sidebar() {
           className="nav-element"
         />
 
-        <NavItem
+        {role.toLowerCase() === "municipality worker" && <NavItem
           to="/analytics"
           linkText="Analytics"
           icon={<AnalyticsOutlinedIcon />}
           className="nav-element"
-        />
+        />}
       </div>
     </div>
   );
