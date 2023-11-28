@@ -1,11 +1,11 @@
 import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import { Overview } from "./routes/Overview";
-import { Collectors } from "./routes/Collectors";
+import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
 import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
-import { Root } from './routes/Root'
+import { Root } from "./routes/Root";
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -17,30 +17,29 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <Overview />
+        element: <Overview />,
       },
       {
-        path: "/collectors",
-        element: <Collectors />
+        path: "/users",
+        element: <Users />,
       },
       {
         path: "/bins",
-        element: <Bins />
+        element: <Bins />,
       },
       {
         path: "/map",
-        element: <Map />
+        element: <Map />,
       },
       {
         path: "/analytics",
-        element: <Analytics />
+        element: <Analytics />,
       },
     ],
   },
 ]);
 
 const queryClient = new QueryClient();
-
 
 export function App() {
   return (
@@ -49,5 +48,5 @@ export function App() {
         <RouterProvider router={router} />
       </QueryClientProvider>
     </>
-  )
+  );
 }

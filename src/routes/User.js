@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-const Collectors = () => {
-  return <div>Collectors</div>;
+const Users = () => {
+  return <div className="users-container"></div>;
 };
 
 function FetchListOfUsers() {
@@ -22,4 +22,4 @@ function FetchListOfUsers() {
   return { isLoading, isError, data };
 }
 
-export { Collectors, FetchListOfUsers };
+export { Users, FetchListOfUsers };

@@ -12,20 +12,23 @@ import { MoreVertOutlined } from "@mui/icons-material";
 import stc from "string-to-color";
 
 import "../../styles/overview_css/ListOfCollectors.css";
-import { FetchListOfUsers } from "../../routes/Collectors";
-import { NavLink } from "react-router-dom";
+import { FetchListOfUsers } from "../../routes/User";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export function ListOfCollectors() {
   const { isLoading, isError, data: collectorsData } = FetchListOfUsers();
+  const navigate = useNavigate();
+
+  function handleViewAllUsersClick() {
+    navigate("/collectors");
+  }
 
   return (
     <div className="list-container">
       <div className="title-container">
         <p>Garbage Collectors</p>
 
-        <NavLink to="/collectors" className="view-users">
-          View All Users
-        </NavLink>
+        <p onClick={handleViewAllUsersClick}> View All Users</p>
       </div>
       <List>
         {isLoading && <p>Loading.....</p>}

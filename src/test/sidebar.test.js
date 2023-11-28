@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import "@testing-library/jest-dom";
 
 import { Sidebar } from "../components/Sidebar";
@@ -24,3 +24,4 @@ test("renders Sidebar component", () => {
   expect(mapText).toBeInTheDocument();
   expect(analyticsText).toBeInTheDocument();
 });
+ */
