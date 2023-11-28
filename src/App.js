@@ -1,13 +1,17 @@
 import React from "react";
+
 import { RouterProvider, createHashRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import { Overview } from "./routes/Overview";
 import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
 import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
 import { Root } from "./routes/Root";
+import { UserListProvider } from "./contexts/UserListContext";
+
 import "../src/styles/App.css";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 export default App;
 const router = createHashRouter([
@@ -45,7 +49,9 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <UserListProvider>
+          <RouterProvider router={router} />
+        </UserListProvider>
       </QueryClientProvider>
     </>
   );

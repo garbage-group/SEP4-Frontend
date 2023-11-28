@@ -10,19 +10,22 @@ import {
 } from "@mui/material";
 import { MoreVertOutlined } from "@mui/icons-material";
 import stc from "string-to-color";
+import { useNavigate } from "react-router-dom";
 
 import "../../styles/overview_css/ListOfCollectors.css";
-import { FetchListOfUsers } from "../../routes/User";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useUserListContext } from "../../contexts/UserListContext";
 
+// Component to display a list of collectors
 export function ListOfCollectors() {
-  const { isLoading, isError, data: collectorsData } = FetchListOfUsers();
+  const { isLoading, isError, data } = useUserListContext();
   const navigate = useNavigate();
 
+  // Handler function to navigate to the "users" page
   function handleViewAllUsersClick() {
-    navigate("/collectors");
+    navigate("/users");
   }
 
+  // Main render method for the ListOfCollectors component
   return (
     <div className="list-container">
       <div className="title-container">
@@ -34,10 +37,11 @@ export function ListOfCollectors() {
         {isLoading && <p>Loading.....</p>}
         {isError && <p>Error loading data</p>}
 
+        {/* Render collectors if data is available */}
         {!isLoading &&
-          collectorsData &&
-          Array.isArray(collectorsData) &&
-          collectorsData.map((collector, index) => (
+          data &&
+          Array.isArray(data) &&
+          data.map((collector, index) => (
             <CollectorComponent
               key={index}
               username={collector.username}
@@ -49,6 +53,7 @@ export function ListOfCollectors() {
   );
 }
 
+// Component to display individual collector information
 function CollectorComponent({ fullname, username }) {
   return (
     <ListItem
@@ -60,6 +65,7 @@ function CollectorComponent({ fullname, username }) {
         </IconButton>
       }
     >
+      {/* Displaying collector avatar and information */}
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />
       </ListItemAvatar>
@@ -68,11 +74,13 @@ function CollectorComponent({ fullname, username }) {
   );
 }
 
+// Function to convert a string to a color
 function stringToColor(string) {
   const colour = stc(string);
   return colour;
 }
 
+// Function to generate an avatar from a string
 function stringAvatar(fullname) {
   const bgColor = { bgcolor: stringToColor(fullname) };
   const [firstName, lastName] = fullname.split(" ");
