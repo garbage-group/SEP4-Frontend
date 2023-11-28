@@ -6,38 +6,71 @@ import KeyIcon from '@mui/icons-material/Key';
 import logo from "../images/logo.png"
 
 import "../styles/Login.css";
-import { Button } from "./Button";
+import { Button } from "../components/Button";
+import { useNavigate } from "react-router";
+import { useAuth } from "../contexts/LoginAuthContext";
 
 
-
-export function Login({ setIsLoggedIn }) {
+export function Login() {
     const [error, setError] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [check, setCheck] = useState(false);
+    const navigate = useNavigate();
+
+    const {updateAuthInfo} = useAuth();
+
+    //function to extract data from jwt token
+    function extractDataFromJWT(token) {
+        const [, payloadBase64] = token.split('.');
+        const payloadString = atob(payloadBase64); // Decodes Base64
+        const payload = JSON.parse(payloadString);
+        return payload;
+    }
 
     //Handles login process
-    function handleSignIn(e) {
+    async function handleSignIn(e) {
         e.preventDefault();
 
-        if (userName !== "" && password !== "") {
+        if (userName && password) {
+                try {
+                    const res = await fetch("https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({username: userName, password: password}),
+                    });
+                    if (!res.ok) {
+                        throw new Error("Username and password do not match")
+                    }
+                    const data = await res.json();
+                
+                    //extract username and role from jwt token
+                    const jwtToken = data.token;
+                    const extractedData = extractDataFromJWT(jwtToken);
+            
+                    // Update the user context with the token, username, and role
+                    updateAuthInfo(data.token, extractedData.username, extractedData.role);
+                    console.log(extractedData.role);
+                    
+                    
+                    
+                    navigate("/overview");
 
-            if (userName === "admin" && password === "password") {
+                    // Store login credentials in localStorage
+                    if (check) {
+                        localStorage.setItem("userName", userName);
+                        localStorage.setItem("password", password);
+                    } else {
+                        localStorage.removeItem("userName", userName);
+                        localStorage.removeItem("password", password);
+                    }
 
-                // Store login state in localStorage
-                localStorage.setItem("isLoggedIn", "true");
-                if (check) {
-                    localStorage.setItem("userName", userName);
-                    localStorage.setItem("password", password);
-                } else {
-                    localStorage.removeItem("userName", userName);
-                    localStorage.removeItem("password", password);
+                } catch (err) {
+                    setError(err.message)
                 }
-                setIsLoggedIn(true);
-
-            } else {
-                setError("Username and password do not match");
-            }
+            
         } else {
             setError("Username or password field is empty");
         }
@@ -58,7 +91,6 @@ export function Login({ setIsLoggedIn }) {
 
     //hanlde checkbox
     function handleCheckbox(e) {
-
         setCheck(e.target.checked);
         localStorage.setItem("checked", (e.target.checked));
     }

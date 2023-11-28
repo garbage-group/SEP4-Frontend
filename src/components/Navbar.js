@@ -4,21 +4,23 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
-// import { Button } from "./Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/LoginAuthContext";
 
-export function Navbar({ setIsLoggedIn }) {
+export function Navbar() {
   const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const {logout} = useAuth();
+
   const navigate = useNavigate();
   // Function to toggle the dropdown menu
   const toggleProfileDropdown = () => {
     setProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
-  function handleLogout() {
+  function handleLogout(e) {
+    logout();
     navigate("/", { replace: true });
-    setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", "false");
+
   }
 
   return (
@@ -40,7 +42,7 @@ export function Navbar({ setIsLoggedIn }) {
           <AccountCircleOutlinedIcon onClick={toggleProfileDropdown} />
           {isProfileDropdownOpen && (
             <div className="dropdown-menu">
-              <a href="/logout" onClick={handleLogout}>Log Out</a>
+              <Link onClick={handleLogout}>Log Out</Link>
             </div>
           )}
         </div>

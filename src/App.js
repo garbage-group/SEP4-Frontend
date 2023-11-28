@@ -8,15 +8,22 @@ import { Map } from "./routes/Map";
 import { Root } from './routes/Root'
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Login } from "./routes/Login";
+import { AuthProvider } from "./contexts/LoginAuthContext";
 
-export default App;
+
 const router = createHashRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+
   {
     path: "/",
     element: <Root />,
     children: [
       {
-        path: "/",
+        path: "/overview",
         element: <Overview />
       },
       {
@@ -46,8 +53,12 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
       </QueryClientProvider>
     </>
   )
 }
+
+export default App;

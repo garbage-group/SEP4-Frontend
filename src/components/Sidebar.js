@@ -13,7 +13,7 @@ export function Sidebar() {
     <div className="sidebar-container">
       <div className="navs">
         <NavItem
-          to="/"
+          to="/overview"
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
           className="nav-element"
