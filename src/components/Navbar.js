@@ -1,25 +1,19 @@
-import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
 // import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
 
 export function Navbar({ setIsLoggedIn }) {
-  const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
-  // Function to toggle the dropdown menu
-  const toggleProfileDropdown = () => {
-    setProfileDropdownOpen(!isProfileDropdownOpen);
-  };
-
   function handleLogout() {
     navigate("/", { replace: true });
     setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", "false");
   }
+
 
   return (
     <div className="navbar-container">
@@ -36,13 +30,10 @@ export function Navbar({ setIsLoggedIn }) {
 
       <div className="top-nav-right">
         <NotificationsNoneOutlinedIcon />
-        <div className="profile-menu">
-          <AccountCircleOutlinedIcon onClick={toggleProfileDropdown} />
-          {isProfileDropdownOpen && (
-            <div className="dropdown-menu">
-              <a href="/logout" onClick={handleLogout}>Log Out</a>
-            </div>
-          )}
+        <div className="icon-button">
+          <button onClick={handleLogout}>
+            <LogoutIcon />
+          </button>
         </div>
       </div>
     </div>
