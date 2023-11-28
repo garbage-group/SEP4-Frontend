@@ -37,17 +37,19 @@ export function ListOfCollectors() {
         {isLoading && <p>Loading.....</p>}
         {isError && <p>Error loading data</p>}
 
-        {/* Render collectors if data is available */}
+        {/* Render 5 users if data is available */}
         {!isLoading &&
           data &&
           Array.isArray(data) &&
-          data.map((collector, index) => (
-            <CollectorComponent
-              key={index}
-              username={collector.username}
-              fullname={collector.name}
-            />
-          ))}
+          data
+            .filter((item, index) => index < 5)
+            .map((collector, index) => (
+              <CollectorComponent
+                key={index}
+                username={collector.username}
+                fullname={collector.name}
+              />
+            ))}
       </List>
     </div>
   );
