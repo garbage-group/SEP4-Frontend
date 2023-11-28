@@ -1,0 +1,58 @@
+/* whole container styling */
+.users-container {
+  background-color: #e0e0e0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.65fr 0.35fr;
+  border-radius: 10px;
+  margin-left: 0.5vw;
+  justify-content: center;
+}
+
+
+/* styling for container rendering userlist */
+.userlist-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* list header styling. contains: members text, number of members, add button */
+.list-header {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.members-text {
+  color: #2b3b57;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* styling elements in right side of list header */
+.right-content {
+  display: flex;
+  column-gap: 2vw;
+}
+
+.number-of-users {
+  color: #2b3b57;
+  font-size: 16px;
+}
+
+.add-member-button {
+  height: 7vh !important;
+}
+
+
+
+
+/* list body styling */
+
+
+/* styling for container rendering filters(maybe) */
+.filter-container {
+  /* border: 1px solid brown; */
+}
