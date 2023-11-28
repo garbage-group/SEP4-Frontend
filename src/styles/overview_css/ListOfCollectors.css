@@ -44,10 +44,15 @@
 
 }
 
-.title-container>p:nth-child(2) {
-  font-size: 12px;
+.view-users {
+  font-size: 10px;
   text-decoration: underline;
   cursor: pointer;
+  padding-top: 7px;
+}
+
+.view-users:visited {
+  color: black;
 }
 
 .listitem-collector {

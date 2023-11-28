@@ -12,37 +12,35 @@ import { MoreVertOutlined } from "@mui/icons-material";
 import stc from "string-to-color";
 
 import "../../styles/overview_css/ListOfCollectors.css";
-
-function stringToColor(string) {
-  const colour = stc(string);
-  return colour;
-}
-
-function stringAvatar(fullname) {
-  const bgColor = { bgcolor: stringToColor(fullname) };
-  const [firstName, lastName] = fullname.split(" ");
-  const initials = firstName[0] + (lastName ? lastName[0] : "");
-
-  return { sx: bgColor, children: initials };
-}
-
-const collectorsList = [
-  { fullname: "Rajib Paudyal", username: "rajipkanxo01" },
-  { fullname: "Suhani Pandey", username: "iamSuhani5" },
-  { fullname: "Pramesh Shrestha", username: "prmsstha" },
-];
+import { FetchListOfUsers } from "../../routes/Collectors";
+import { NavLink } from "react-router-dom";
 
 export function ListOfCollectors() {
+  const { isLoading, isError, data: collectorsData } = FetchListOfUsers();
+
   return (
     <div className="list-container">
       <div className="title-container">
         <p>Garbage Collectors</p>
-        <p>View All Users</p>
+
+        <NavLink to="/collectors" className="view-users">
+          View All Users
+        </NavLink>
       </div>
       <List>
-        {collectorsList.map((collector, index) => (
-          <CollectorComponent key={index} {...collector} />
-        ))}
+        {isLoading && <p>Loading.....</p>}
+        {isError && <p>Error loading data</p>}
+
+        {!isLoading &&
+          collectorsData &&
+          Array.isArray(collectorsData) &&
+          collectorsData.map((collector, index) => (
+            <CollectorComponent
+              key={index}
+              username={collector.username}
+              fullname={collector.name}
+            />
+          ))}
       </List>
     </div>
   );
@@ -65,4 +63,17 @@ function CollectorComponent({ fullname, username }) {
       <ListItemText primary={fullname} secondary={`@${username}`} />
     </ListItem>
   );
+}
+
+function stringToColor(string) {
+  const colour = stc(string);
+  return colour;
+}
+
+function stringAvatar(fullname) {
+  const bgColor = { bgcolor: stringToColor(fullname) };
+  const [firstName, lastName] = fullname.split(" ");
+  const initials = firstName[0] + (lastName ? lastName[0] : "");
+
+  return { sx: bgColor, children: initials };
 }
