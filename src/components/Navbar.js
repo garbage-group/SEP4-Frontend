@@ -3,15 +3,24 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
-// import { Button } from "./Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/LoginAuthContext";
 
-export function Navbar({ setIsLoggedIn }) {
+
+export function Navbar() {
+  const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const {logout} = useAuth();
+
   const navigate = useNavigate();
-  function handleLogout() {
+  // Function to toggle the dropdown menu
+  const toggleProfileDropdown = () => {
+    setProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  function handleLogout(e) {
+    logout();
     navigate("/", { replace: true });
-    setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", "false");
+
   }
 
 
@@ -29,7 +38,6 @@ export function Navbar({ setIsLoggedIn }) {
       </div>
 
       <div className="top-nav-right">
-        <NotificationsNoneOutlinedIcon />
         <div className="icon-button">
           <button onClick={handleLogout}>
             <LogoutIcon />
