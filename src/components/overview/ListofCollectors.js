@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { List } from "@mui/material";
+import { CircularProgress, List } from "@mui/material";
 import { useUserListContext } from "../../contexts/UserListContext";
 import { IndividualUserComponent } from "../users/InvidualUser";
 
@@ -26,7 +26,7 @@ export function ListOfCollectors() {
         <p onClick={handleViewAllUsersClick}> View All Users</p>
       </div>
       <List>
-        {isLoading && <p>Loading.....</p>}
+        {isLoading && <CircularProgress />}
         {isError && <p>Error loading data</p>}
 
         {/* Render 5 users if data is available */}
