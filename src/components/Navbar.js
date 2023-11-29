@@ -1,21 +1,16 @@
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/LoginAuthContext";
 
 
 export function Navbar() {
-  const [isProfileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
   const {logout} = useAuth();
 
   const navigate = useNavigate();
-  // Function to toggle the dropdown menu
-  const toggleProfileDropdown = () => {
-    setProfileDropdownOpen(!isProfileDropdownOpen);
-  };
 
   function handleLogout(e) {
     logout();
