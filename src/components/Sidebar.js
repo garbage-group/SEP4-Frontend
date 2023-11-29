@@ -7,10 +7,9 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import "../styles/Sidebar.css";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../contexts/LoginAuthContext";
 
 export function Sidebar() {
-  const {role} = useAuth();
+  const role = localStorage.getItem("role");
   return (
     <div className="sidebar-container">
       <div className="navs">

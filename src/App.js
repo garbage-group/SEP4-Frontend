@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import { Overview } from "./routes/Overview";
 import { Collectors } from "./routes/Collectors";
@@ -7,9 +7,11 @@ import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
 import { Root } from './routes/Root'
 import "../src/styles/App.css";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
+import BinList from "./components/Bin/BinList";
+import { Spinner } from "./components/Spinner";
 
 
 const router = createHashRouter([
@@ -32,7 +34,21 @@ const router = createHashRouter([
       },
       {
         path: "/bins",
-        element: <Bins />
+        element: <Bins />,
+        children: [
+          {
+            path: "",
+            element: <BinList />
+          },
+          {
+            path: "binList",
+            element: <BinList />
+          },
+          {
+            path: "bins/form",
+            element: <p>Form</p>
+          },
+        ],
       },
       {
         path: "/map",

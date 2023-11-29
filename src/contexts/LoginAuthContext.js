@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
         setUsername(username);
         setRole(role);
         setIsAuthenticated(true);
+        localStorage.setItem("role", role);
     };
 
     const logout = () => {
@@ -21,6 +22,7 @@ const AuthProvider = ({ children }) => {
         setUsername(null);
         setRole(null);
         setIsAuthenticated(false);
+        localStorage.removeItem("role", role);
     };
 
     return (
