@@ -3,9 +3,14 @@ import "@testing-library/jest-dom";
 
 import { Sidebar } from "../components/Sidebar";
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
-it("renders Sidebar Component", () => {
-  render(<Sidebar />);
+test("renders Sidebar component", () => {
+  render(
+    <MemoryRouter>
+      <Sidebar />
+    </MemoryRouter>
+  );
 
   const overviewText = screen.getByText("Overview");
   const collectorsText = screen.getByText("Collectors");
@@ -19,21 +24,3 @@ it("renders Sidebar Component", () => {
   expect(mapText).toBeInTheDocument();
   expect(analyticsText).toBeInTheDocument();
 });
-
-/* it("activates correct nav element", () => {
-  render(<Sidebar />);
-
-  const overviewElement = screen.getByText("Overview");
-  const collectorsElement = screen.getByText("Collectors");
-  const binsElement = screen.getByText("Bins");
-  const mapElement = screen.getByText("Map");
-  const analyticsElement = screen.getByText("Analytics");
-
-  // console.log(Array.from(overviewElement.classList));
-
-  // expect(overviewElement).toHaveClass("active");
-  expect(collectorsElement).not.toHaveClass("active");
-  expect(binsElement).not.toHaveClass("active");
-  expect(mapElement).not.toHaveClass("active");
-  expect(analyticsElement).not.toHaveClass("active");
-}); */
