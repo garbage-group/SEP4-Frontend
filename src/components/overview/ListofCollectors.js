@@ -1,19 +1,11 @@
 import React from "react";
 
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-} from "@mui/material";
-import { MoreVertOutlined } from "@mui/icons-material";
-import stc from "string-to-color";
 import { useNavigate } from "react-router-dom";
+import { List } from "@mui/material";
+import { useUserListContext } from "../../contexts/UserListContext";
+import { IndividualUserComponent } from "../users/InvidualUser";
 
 import "../../styles/overview_css/ListOfCollectors.css";
-import { useUserListContext } from "../../contexts/UserListContext";
 
 // Component to display a list of collectors
 export function ListOfCollectors() {
@@ -44,7 +36,7 @@ export function ListOfCollectors() {
           data
             .filter((item, index) => index < 5)
             .map((collector, index) => (
-              <CollectorComponent
+              <IndividualUserComponent
                 key={index}
                 username={collector.username}
                 fullname={collector.name}
@@ -53,40 +45,4 @@ export function ListOfCollectors() {
       </List>
     </div>
   );
-}
-
-// Component to display individual collector information
-function CollectorComponent({ fullname, username }) {
-  return (
-    <ListItem
-      className="listitem-collector"
-      style={{ width: "auto" }}
-      secondaryAction={
-        <IconButton edge="end">
-          <MoreVertOutlined />
-        </IconButton>
-      }
-    >
-      {/* Displaying collector avatar and information */}
-      <ListItemAvatar>
-        <Avatar {...stringAvatar(fullname)} />
-      </ListItemAvatar>
-      <ListItemText primary={fullname} secondary={`@${username}`} />
-    </ListItem>
-  );
-}
-
-// Function to convert a string to a color
-function stringToColor(string) {
-  const colour = stc(string);
-  return colour;
-}
-
-// Function to generate an avatar from a string
-function stringAvatar(fullname) {
-  const bgColor = { bgcolor: stringToColor(fullname) };
-  const [firstName, lastName] = fullname.split(" ");
-  const initials = firstName[0] + (lastName ? lastName[0] : "");
-
-  return { sx: bgColor, children: initials };
 }

@@ -1,6 +1,6 @@
 /* whole container styling */
 .users-container {
-  background-color: #e0e0e0;
+  background-color: #e7eafb;
   height: 100%;
   display: grid;
   grid-template-columns: 1.65fr 0.35fr;
@@ -14,15 +14,19 @@
 .userlist-container {
   display: flex;
   flex-direction: column;
+  height: 91vh;
 }
 
 /* list header styling. contains: members text, number of members, add button */
 .list-header {
   display: flex;
   flex-direction: row;
-  padding: 10px 10px;
+  padding: 5px 5px;
   justify-content: space-between;
   align-items: center;
+  background-color: #ffffff;
+  margin: 1vh 1vw;
+  border-radius: 15px;
 }
 
 .members-text {
@@ -44,12 +48,36 @@
 
 .add-member-button {
   height: 7vh !important;
+  border-radius: 15px !important;
+  background-color: #133a64 !important;
+}
+
+/* list body styling */
+.list-body {
+  margin: 1vh 1vw;
+  padding: 2vh 0.3vw;
+  background-color: #ffffff;
+  border-radius: 15px;
+  flex: 1;
+  overflow: auto;
 }
 
 
+/* Scrollbar Styles (for Webkit browsers) */
+.list-body::-webkit-scrollbar {
+  width: 0.5vw;
+}
 
+.list-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
 
-/* list body styling */
+.list-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
 
 
 /* styling for container rendering filters(maybe) */
