@@ -46,6 +46,18 @@
   font-size: 16px;
 }
 
+.refresh-icon {
+  margin-top: 2vh !important;
+  color: #597391;
+  cursor: pointer;
+  /* background-color: #e1e8ef; */
+  border-radius: 4px;
+  transform: scale(1.2);
+
+}
+
+
+
 .add-member-button {
   height: 7vh !important;
   border-radius: 15px !important;
@@ -60,6 +72,7 @@
   border-radius: 15px;
   flex: 1;
   overflow: auto;
+  position: relative;
 }
 
 .extra-elements {
@@ -117,9 +130,12 @@
   border-radius: 10px;
 }
 
-
-
-
+.loadingTruck {
+  transform: scale(3);
+  position: absolute;
+  top: 30vh;
+  left: 30vw;
+}
 
 /* Scrollbar Styles (for Webkit browsers) */
 .list-body::-webkit-scrollbar {

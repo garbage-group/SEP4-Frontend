@@ -8,8 +8,11 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import "../styles/user_css/User.css";
+import loadingTruck from "../images/users/loadingTruck.gif";
+import { LoadingComponent } from "../components/LoadingError";
 
 // Users component
 function Users() {
@@ -25,7 +28,11 @@ function Users() {
 // UserListContainer component
 function UserListContainer() {
   // Use UserListContext to fetch user data
-  const { isLoading, isError, data } = useUserListContext();
+  const { isLoading, isError, data, refreshData } = useUserListContext();
+
+  function handleRefreshClick() {
+    refreshData();
+  }
 
   return (
     <div className="userlist-container">
@@ -35,7 +42,8 @@ function UserListContainer() {
 
         {/* Render right content with user count and Add User button */}
         <div className="right-content">
-          <p className="number-of-users">{data ? data.length : 0} users </p>
+          <p className="number-of-users">{data ? data.length : 0} users</p>
+          <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} />
           <Button
             variant="contained"
             className="add-member-button"
@@ -46,11 +54,11 @@ function UserListContainer() {
         </div>
       </div>
 
-      {isLoading && <p>Loading.....</p>}
-      {isError && <p>Error loading data</p>}
-
       {/* Render list body with individual user components */}
       <div className="list-body">
+        {isLoading && <LoadingComponent />}
+        {isError && <p>Error loading data</p>}
+
         {/* Render users if data is available */}
         {!isLoading &&
           data &&
@@ -62,7 +70,10 @@ function UserListContainer() {
               fullname={collector.name}
               showExtraElements={true}
               extraElements={
-                <ExtraElements region={collector.address.city} role={"Admin"} />
+                <ExtraElements
+                  region={collector.region}
+                  role={collector.role}
+                />
               }
             />
           ))}
@@ -74,7 +85,7 @@ function UserListContainer() {
 // Extra elements component
 function ExtraElements({ region, role }) {
   return (
-    <div className="extra-elements" a>
+    <div className="extra-elements">
       <Chip
         icon={<PlaceOutlinedIcon />}
         label={region ? region : "N/A"}
@@ -82,7 +93,7 @@ function ExtraElements({ region, role }) {
         className="extra-elements-chip"
       />
       <Chip
-        label={role}
+        label={role ? role : "N/A"}
         icon={<PersonOutlineOutlinedIcon />}
         className="extra-elements-chip"
         sx={{ m: 1 }}
@@ -92,16 +103,16 @@ function ExtraElements({ region, role }) {
       <div className="userminus-wrapper">
         <PersonRemoveOutlinedIcon
           data-testid="remove-button"
-          className={`userminus-icon ${role !== "Admin" ? "disabled" : ""}`}
+          className={`userminus-icon `}
+          // ${role !== "Admin" ? "disabled" : ""}
         />
       </div>
 
       <div className="userminus-wrapper">
         <ModeEditOutlineOutlinedIcon
           data-testid="edit-button"
-          className={`useredit-icon ${
-            role === "Garbage Collector" ? "disabled" : ""
-          }`}
+          className={`useredit-icon `}
+          // ${ role === "Garbage Collector" ? "disabled" : ""}
         />
       </div>
     </div>

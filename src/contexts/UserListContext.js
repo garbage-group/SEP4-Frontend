@@ -1,22 +1,24 @@
 import { React, createContext, useContext } from "react";
 import { useQuery } from "react-query";
+import { fetchUserInfo } from "../api/FetchFromAPI";
 
 export const UserContext = createContext();
 
 function UserListProvider({ children }) {
-  const { isLoading, isError, data } = useQuery(
-    "collectorsData",
-    () =>
-      fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
-        res.json()
-      ),
-    {
-      staleTime: Infinity,
-    }
-  );
+  const queryKey = "collectorsData";
+  const queryFn = () => fetchUserInfo();
+
+  const { isLoading, isError, data, refetch } = useQuery(queryKey, queryFn, {
+    staleTime: Infinity,
+  });
+
+  const refreshData = async () => {
+    alert("Refresh");
+    await refetch();
+  };
 
   return (
-    <UserContext.Provider value={{ isLoading, isError, data }}>
+    <UserContext.Provider value={{ isLoading, isError, data, refreshData }}>
       {children}
     </UserContext.Provider>
   );
