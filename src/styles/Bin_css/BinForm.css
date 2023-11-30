@@ -1,0 +1,48 @@
+.binForm {
+  background-color: white;
+  border-radius: 7px;
+  padding: 2rem 3rem;
+  display: flex;
+  height: 40%;
+
+justify-content: center;
+  max-height: 90%;
+  gap: 2rem;
+  font-weight: bold;
+}
+
+
+.binRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+ align-items: center;
+ margin-left: 1.6vw;
+  
+}
+
+.row1, .row2 {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  
+}
+
+
+.form.loading {
+  opacity: 0.3;
+}
+
+#capacity, #threshold,
+#latitude, #longitude {
+  width: 6vw;
+
+}
+
+.binButtons {
+  display: flex;
+  gap: 5vw;
+}
+
+

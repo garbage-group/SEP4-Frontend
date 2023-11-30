@@ -47,9 +47,9 @@ function Bin() {
             <div className="row">
                 <h6>Bin</h6>
                 {/* <input type="text" disabled value={id}/> */}
-                <h3>
+                <p>
                     {id}
-                </h3>
+                </p>
             </div>
 
             <div className="row">
@@ -99,7 +99,7 @@ function Bin() {
             </div>
 
             <div>
-                <BackButton />
+                <BackButton>&larr; Back </BackButton>
             </div>
         </div>
 

@@ -5,7 +5,7 @@
   gap: 1.6rem;
   align-items: center;
 
-  background-color: var(--primary);
+  background-color: white;
   border-radius: 7px;
   padding: 1rem 2rem;
   border-left: 5px solid var(--primary);
@@ -76,6 +76,6 @@
 }
 
 .deleteBtn:hover {
-  background-color: goldenrod;
+  background-color: #00c46a;
   color: #143A63;
 }

@@ -14,6 +14,7 @@ import BinList from "./components/Bin/BinList";
 
 import { BinProvider } from "./contexts/BinContext";
 import Bin from "./components/Bin/Bin";
+import BinForm from "./components/Bin/BinForm";
 
 
 const router = createHashRouter([
@@ -51,8 +52,8 @@ const router = createHashRouter([
             element: <Bin />
           },
           {
-            path: "bins/form",
-            element: <p>Form</p>
+            path: "form",
+            element: <BinForm />
           },
         ],
       },
