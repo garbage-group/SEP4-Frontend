@@ -22,7 +22,6 @@ export function Root() {
 
           <Footer />
         </>
-      ) 
     </>
   );
 }
