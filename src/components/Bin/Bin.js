@@ -64,7 +64,7 @@ function Bin() {
 
             <div className="row">
                 <h6>Fill Threshold</h6>
-                <p>{fillThreshold}</p>
+                <p>{fillThreshold}%</p>
             </div>
 
             <div className="row">
@@ -82,7 +82,7 @@ function Bin() {
                 <h6>Fill Level</h6>
                 {fillLevels && fillLevels.length > 0 && (
                     <>
-                        <p>{fillLevels[fillLevels.length - 1].value}</p>
+                        <p>{fillLevels[fillLevels.length - 1].value}%</p>
                         <p>{formatDate(fillLevels[fillLevels.length - 1].dateTime || null)}</p>
                     </>
                 )}
@@ -92,7 +92,7 @@ function Bin() {
                 <h6>Humidity</h6>
                 {humidity && humidity.length > 0 && (
                     <>
-                        <p>{humidity[humidity.length - 1].value}</p>
+                        <p>{humidity[humidity.length - 1].value}%</p>
                         <p>{formatDate(humidity[humidity.length - 1].dateTime || null)}</p>
                     </>
                 )}
