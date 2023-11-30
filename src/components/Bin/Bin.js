@@ -99,7 +99,7 @@ function Bin() {
             </div>
 
             <div>
-                <BackButton>&larr; Back </BackButton>
+                <BackButton className={"btn"}>&larr; Back </BackButton>
             </div>
         </div>
 

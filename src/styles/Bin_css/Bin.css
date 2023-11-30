@@ -55,3 +55,23 @@
   color: var(--color-brand--1);
 } 
 
+.btn {
+  color: white;
+  text-transform: uppercase;
+  padding: 0.3rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  background-color: #143A63;
+
+}
+
+.btn:hover{
+  background-color: #00c46a;
+  color: #143A63;
+}
+

@@ -1,4 +1,4 @@
-.btn {
+/* .btn {
   color: inherit;
   text-transform: uppercase;
   padding: 0.3rem 1.2rem;
@@ -8,15 +8,13 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 1rem;
-
+  background-color: #143A63;
+ font-weight: 600;
+  
+  border: 1px solid #143A63;
 }
 
 .btn:hover{
   background-color: #00c46a;
 }
-
-.back {
-  font-weight: 600;
-  background: none;
-  border: 1px solid currentColor;
-}
+ */

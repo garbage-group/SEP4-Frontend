@@ -14,6 +14,7 @@ function BinProvider({children}){
     const [currentBin, setCurrentBin] = useState({});
     const {token, isAuthenticated} = useAuth();
 
+    //get all bins
     useEffect(function(){
         async function fetchBins(){
             try{
@@ -34,6 +35,7 @@ function BinProvider({children}){
         if(isAuthenticated) fetchBins();
     },[token, isAuthenticated]);
 
+    //get bin by id
     async function getBin(id) {
         if(Number(id) === currentBin.id) return;
 
@@ -54,6 +56,7 @@ function BinProvider({children}){
         }
     }
 
+    //create new bin
     async function createBin(newBin) {
         try {
             setIsLoading(true);
@@ -73,6 +76,7 @@ function BinProvider({children}){
         }
     }
 
+    //delete bin by id
     async function deleteBin(id) {
         try {
             setIsLoading(true);

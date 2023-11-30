@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/Bin_css/BackButton.css"
 
-function BackButton({ children }) {
+function BackButton({ children, className }) {
     const navigate = useNavigate();
     return (
         <button
@@ -12,7 +12,7 @@ function BackButton({ children }) {
                     /*This will navigate to 1 history back in url */
                 }
             }}
-            className="btn back"
+            className={className}
         >
             {children}
         </button>

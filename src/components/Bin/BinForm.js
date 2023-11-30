@@ -1,8 +1,8 @@
 
 import {useURLPosition} from "../../hooks/useURLPosition";
-
 import "../../styles/Bin_css/BinForm.css";
 import BackButton from "./BackButton";
+
 
 function BinForm() {
  
@@ -37,8 +37,8 @@ function BinForm() {
 
 
             <div className="binButtons">
-                <BackButton>Add</BackButton>
-                <BackButton>&larr; Back </BackButton>
+                <button className={"btn"}>Add</button>
+                <BackButton className={"btn"}>&larr; Back </BackButton>
             </div>
         </form>
     )
