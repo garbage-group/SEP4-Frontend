@@ -3,7 +3,7 @@
   background-color: #e7eafb;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 0.35fr;
+  grid-template-columns: 1.2fr 0.35fr;
   border-radius: 10px;
   margin-left: 0.5vw;
   justify-content: center;
@@ -74,6 +74,7 @@
 
 .userminus-icon {
   padding: 7px !important;
+  color: #c25425 !important;
 }
 
 
@@ -81,9 +82,40 @@
   cursor: pointer;
   background-color: #feebe6;
   border-radius: 10px;
-  padding: 7px;
+  /* padding: 7px; */
 }
 
+.userminus-wrapper {
+  cursor: not-allowed;
+  margin-top: 5px;
+}
+
+.userminus-icon.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #feebe6;
+  border-radius: 10px;
+}
+
+.useredit-icon {
+  padding: 7px !important;
+  color: #415d6a !important;
+  margin-left: 10px;
+}
+
+.useredit-icon:hover {
+  cursor: pointer;
+  background-color: #c7e5e3;
+  border-radius: 10px;
+  /* padding: 7px; */
+}
+
+.useredit-icon.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #c7e5e3;
+  border-radius: 10px;
+}
 
 
 
@@ -109,4 +141,8 @@
 /* styling for container rendering filters(maybe) */
 .filter-container {
   /* border: 1px solid brown; */
+  background-color: #ffffff;
+  margin: 1vh 1vw;
+  margin-left: 0;
+  border-radius: 15px;
 }

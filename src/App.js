@@ -27,6 +27,7 @@ const router = createHashRouter([
         path: "/users",
         element: <Users />,
       },
+      
       {
         path: "/bins",
         element: <Bins />,

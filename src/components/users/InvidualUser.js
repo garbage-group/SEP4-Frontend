@@ -1,11 +1,9 @@
 import {
-  IconButton,
   ListItem,
   ListItemAvatar,
   Avatar,
   ListItemText,
 } from "@mui/material";
-import { MoreVertOutlined } from "@mui/icons-material";
 import stc from "string-to-color";
 
 import "../../styles/user_css/IndividualUser.css";
@@ -18,15 +16,7 @@ export function IndividualUserComponent({
   extraElements,
 }) {
   return (
-    <ListItem
-      className="listitem-collector"
-      style={{ width: "auto" }}
-      secondaryAction={
-        <IconButton edge="end">
-          <MoreVertOutlined />
-        </IconButton>
-      }
-    >
+    <ListItem className="listitem-collector" style={{ width: "auto" }}>
       {/* Displaying collector avatar and information */}
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />

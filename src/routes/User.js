@@ -1,12 +1,14 @@
 import React from "react";
 
-import { Button, Chip, Icon } from "@mui/material";
+import { Button, Chip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 import "../styles/user_css/User.css";
 
@@ -87,7 +89,18 @@ function ExtraElements({ region, role }) {
         sx={{ m: 1 }}
       />
 
-      <UserMinus />
+      {/* Disables edit and remove button if user is not admin */}
+      <div className="userminus-wrapper">
+        <PersonRemoveOutlinedIcon
+          className={`userminus-icon ${role !== "Admin" ? "disabled" : ""}`}
+        />
+      </div>
+
+      <div className="userminus-wrapper">
+        <ModeEditOutlineOutlinedIcon
+          className={`useredit-icon ${role !== "Admin" ? "disabled" : ""}`}
+        />
+      </div>
     </div>
   );
 }
@@ -96,25 +109,6 @@ function ExtraElements({ region, role }) {
 function FilterContainer() {
   return <div className="filter-container"></div>;
 }
-
-const UserMinus = ({ size = 20, color = "#CF4307" }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke={color}
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="arcs"
-    className="userminus-icon"
-  >
-    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-    <circle cx="8.5" cy="7" r="4"></circle>
-    <line x1="23" y1="11" x2="17" y2="11"></line>
-  </svg>
-);
 
 // Export Users component
 export { Users };
