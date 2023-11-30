@@ -1,19 +1,23 @@
 
 import { useContext, useEffect, useState } from "react";
-import { createContext } from "vm";
+// import { createContext } from "vm";
+import { createContext } from "react";
+import { useAuth } from "./LoginAuthContext";
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
-const BinContext =  createContext();
+const BinContext = createContext();
 
-function BinProvider({children}){
+function BinProvider({ children }) {
     const [bins, setBins] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentBin, setCurrentBin] = useState({});
+    const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
+    const { token } = useAuth();
 
-    useEffect(function(){
-        async function fetchBins(){
-            try{
+    useEffect(function () {
+        async function fetchBins() {
+            try {
                 setIsLoading(true);
                 const res = await fetch(`${BASE_URL}/bins/all`);
                 const data = await res.json();
@@ -25,10 +29,10 @@ function BinProvider({children}){
             }
         }
         fetchBins();
-    },[]);
+    }, []);
 
     async function getBin(id) {
-        if(Number(id) === currentBin.id) return;
+        if (Number(id) === currentBin.id) return;
 
 
         try {
@@ -77,6 +81,25 @@ function BinProvider({children}){
         }
     }
 
+    async function getBinHumidity(binId) {
+        try {
+            setIsLoading(true);
+            const response = await fetch(`${BASE_URL}/bins/${binId}/humidity`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                }
+            });
+            const humidityData = await response.json();
+            setCurrentBinHumidity(humidityData);
+        } catch (error) {
+            console.error("Error fetching humidity data:", error);
+            alert("There was an error loading the humidity data: " + error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+
     return (
         <BinContext.Provider
             value={{
@@ -84,6 +107,8 @@ function BinProvider({children}){
                 isLoading,
                 currentBin,
                 getBin,
+                currentBinHumidity,
+                getBinHumidity,
                 createBin,
                 deleteBin,
             }}
@@ -102,4 +127,4 @@ function useBins() {
     return context;
 }
 
-export {BinProvider, useBins};
+export { BinProvider, useBins };
