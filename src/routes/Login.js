@@ -35,10 +35,12 @@ export function Login() {
         e.preventDefault();
         setIsLoading(true);
 
+        const URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate"
+
         if (userName && password) {
                 try {
 
-                    const res = await fetch("https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate", {
+                    const res = await fetch(URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter, Navigate } from "react-router-dom";
 import { Overview } from "./routes/Overview";
 import { Collectors } from "./routes/Collectors";
 import { Bins } from "./routes/Bins";
@@ -11,7 +11,9 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
-import { Spinner } from "./components/Spinner";
+
+import { BinProvider } from "./contexts/BinContext";
+import Bin from "./components/Bin/Bin";
 
 
 const router = createHashRouter([
@@ -38,11 +40,15 @@ const router = createHashRouter([
         children: [
           {
             path: "",
-            element: <BinList />
+            element: <Navigate to={"binList"} replace/>
           },
           {
             path: "binList",
             element: <BinList />
+          },
+          {
+            path: "binList/:id",
+            element: <Bin />
           },
           {
             path: "bins/form",
@@ -70,7 +76,9 @@ export function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <BinProvider>
+            <RouterProvider router={router} />
+          </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>

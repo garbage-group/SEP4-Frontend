@@ -1,8 +1,10 @@
 
-import { useContext, useEffect, useState } from "react";
-import { createContext } from "vm";
+import { useContext, useEffect, useState, createContext } from "react";
+import { useAuth } from "./LoginAuthContext";
+
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
+// const BASE_URL = "http://localhost:8080";
 
 const BinContext =  createContext();
 
@@ -10,12 +12,17 @@ function BinProvider({children}){
     const [bins, setBins] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentBin, setCurrentBin] = useState({});
+    const {token, isAuthenticated} = useAuth();
 
     useEffect(function(){
         async function fetchBins(){
             try{
                 setIsLoading(true);
-                const res = await fetch(`${BASE_URL}/bins/all`);
+                const res = await fetch(`${BASE_URL}/bins/all`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 const data = await res.json();
                 setBins(data);
             } catch (e) {
@@ -24,20 +31,24 @@ function BinProvider({children}){
                 setIsLoading(false);
             }
         }
-        fetchBins();
-    },[]);
+        if(isAuthenticated) fetchBins();
+    },[token, isAuthenticated]);
 
     async function getBin(id) {
         if(Number(id) === currentBin.id) return;
 
-
         try {
             setIsLoading(true);
-            const res = await fetch(`${BASE_URL}/bins/${id}`);
+            const res = await fetch(`${BASE_URL}/bins/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             const data = await res.json();
+            console.log(data)
             setCurrentBin(data);
-        } catch {
-            alert("There was an error loading data");
+        } catch (e){
+            console.log(e.message);
         } finally {
             setIsLoading(false);
         }
@@ -67,6 +78,9 @@ function BinProvider({children}){
             setIsLoading(true);
             await fetch(`${BASE_URL}/bins/delete/${id}`, {
                 method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
             setBins((bins) => bins.filter((bin) => bin.id !== id));
