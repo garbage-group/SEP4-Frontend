@@ -7,7 +7,6 @@ import { useUserListContext } from "../contexts/UserListContext";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
-import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 import "../styles/user_css/User.css";
@@ -36,7 +35,7 @@ function UserListContainer() {
 
         {/* Render right content with user count and Add User button */}
         <div className="right-content">
-          <p className="number-of-users"> {data ? data.length : 0} users </p>
+          <p className="number-of-users">{data ? data.length : 0} users </p>
           <Button
             variant="contained"
             className="add-member-button"
@@ -75,7 +74,7 @@ function UserListContainer() {
 // Extra elements component
 function ExtraElements({ region, role }) {
   return (
-    <div className="extra-elements">
+    <div className="extra-elements" a>
       <Chip
         icon={<PlaceOutlinedIcon />}
         label={region ? region : "N/A"}
@@ -92,13 +91,17 @@ function ExtraElements({ region, role }) {
       {/* Disables edit and remove button if user is not admin */}
       <div className="userminus-wrapper">
         <PersonRemoveOutlinedIcon
+          data-testid="remove-button"
           className={`userminus-icon ${role !== "Admin" ? "disabled" : ""}`}
         />
       </div>
 
       <div className="userminus-wrapper">
         <ModeEditOutlineOutlinedIcon
-          className={`useredit-icon ${role !== "Admin" ? "disabled" : ""}`}
+          data-testid="edit-button"
+          className={`useredit-icon ${
+            role === "Garbage Collector" ? "disabled" : ""
+          }`}
         />
       </div>
     </div>
