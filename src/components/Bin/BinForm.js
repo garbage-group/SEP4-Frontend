@@ -31,7 +31,7 @@ function BinForm() {
 
             <div className="binRow">
                 <label htmlFor="longitude">Longitude</label>
-                <input id="longitude" type="number" placeholder="Enter longitude" required/>
+                <input id="longitude" type="number" placeholder="Enter longitude..." required/>
             </div>
             </div>
 

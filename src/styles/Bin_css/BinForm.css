@@ -37,6 +37,8 @@ justify-content: center;
 #capacity, #threshold,
 #latitude, #longitude {
   width: 6vw;
+  background-color: #D1EEDF;
+  border-radius: 4px;
 
 }
 
