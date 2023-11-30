@@ -15,7 +15,7 @@ const formatDate = (date) =>
 
 function BinItem({ bin }) {
     const { currentBin, deleteBin } = useBins();
-    const { id, deviceId, emptiedLast, capacity, latitude, longitude } = bin;
+    const { id, emptiedLast, capacity, latitude, longitude } = bin;
 
 
 
@@ -26,9 +26,9 @@ function BinItem({ bin }) {
 
     return (
         <li>
-            <Link className={`binItem ${id === currentBin.id ? "" : "binItem--active"}`} to={`${id}`}>
+            <Link className={`binItem ${id === currentBin.id ? "binItem--active" : ""}`} to={`${id}?lat=${latitude}&lng${longitude}`}>
                 <span className="emoji">{<DeleteIcon />}</span>
-                <h3 className="name">Bin {id}</h3>
+                <h3 className="name">Bin {id} <span>(Capacity: {capacity})</span></h3>
 
                 <time className="date">
                     <div>
