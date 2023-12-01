@@ -94,3 +94,33 @@
   filter: brightness(0.7);
   color: #0077e0;
 }
+
+.edit-button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  padding: 0 16px;
+  background-color: #0070d2;
+  border-radius: 0.25rem;
+  border: 1px solid #0070d2;
+  color: #fff;
+  font-size: 13px;
+  line-height: 28px;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.edit-button:hover {
+  background-color: #005fb2;
+  border-color: #005fb2;
+}
+
+.editbutton_disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 0px;
+  filter: brightness(0.7);
+  /* background-color: #6cb9cc; */
+}

@@ -39,16 +39,12 @@ function BinMap() {
     },
     [mapLat, mapLng]
   );
-
   // Extract the id from the pathname
-  const id = location.pathname.split("/").pop();
-  console.log(id);
+  // const id = location.pathname.split("/").pop();
+  // console.log(id);
 
   return (
-    <div
-      className="mapContainer"
-      //   onClick={() => navigate("form")}
-    >
+    <div className="mapContainer" onClick={() => navigate("form")}>
       <MapContainer
         className="map"
         center={mapPosition}

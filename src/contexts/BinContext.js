@@ -48,7 +48,7 @@ function BinProvider({ children }) {
         },
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setCurrentBin(data);
     } catch (e) {
       console.log(e.message);
@@ -98,11 +98,38 @@ function BinProvider({ children }) {
   }
 
   //update bin by id
-  async function updateBin(id) {
+  //update bin by id
+  async function updateBin(id, updatedBin) {
     try {
-    } catch {
-    } finally {
+      const newUpdatedBin = {
+        id: updatedBin.id,
+        fillthreshold: updatedBin.newFIllThreshold,
+        latitude: updatedBin.newLatitude,
+        longitude: updatedBin.newLongitude,
+      };
+
       setIsLoading(true);
+
+      const res = await fetch(`${BASE_URL}/bins/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(newUpdatedBin),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Request Payload:", JSON.stringify(newUpdatedBin));
+
+      /* if (res.ok) {
+        // If successful, update the currentBin value
+        setCurrentBin(newUpdatedBin);
+      } */
+    } catch (error) {
+      alert(error);
+      console.error("Error updating bin:", error.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
