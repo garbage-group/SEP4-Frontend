@@ -23,8 +23,8 @@
 }
 
 .leaflet-popup .leaflet-popup-content p:first-child {
-  font-size: 1.3rem;
-  line-height: 1;
+  font-size: 1.1rem;
+  line-height: 0.1;
 }
 
 .leaflet-popup .leaflet-popup-tip {
