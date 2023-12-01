@@ -50,12 +50,12 @@ function BinForm() {
 
             <div className="binRow">
                 <label htmlFor="capacity">Capacity</label>
-                <input id="capacity" type="number"  placeholder="Bin capacity..." required value={capacity} onChange={(e) => setCapacity(e.target.value)}/>
+                <input id="capacity" type="number" min={0}  placeholder="Bin capacity..." required value={capacity} onChange={(e) => setCapacity(e.target.value)}/>
             </div>
 
                 <div className="binRow">
                 <label htmlFor="threshold">Fill Threshold</label>
-                    <input id="threshold" type="number" placeholder="Bin threshold..." required value={threshold} onChange={(e) => setThreshold(e.target.value)} />
+                    <input id="threshold" type="number" max={100} min={0} placeholder="Bin threshold..." required value={threshold} onChange={(e) => setThreshold(e.target.value)} />
             </div>
             </div>
 
