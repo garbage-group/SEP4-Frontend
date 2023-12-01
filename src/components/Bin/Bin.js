@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router";
 import { Spinner } from "../Spinner";
@@ -6,122 +6,194 @@ import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 import { Button } from "@mui/material";
 
-
-
+// Function to format date in a readable format
 const formatDate = (date) =>
-    new Intl.DateTimeFormat("en", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        weekday: "long",
-    }).format(new Date(date));
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    weekday: "long",
+  }).format(new Date(date));
 
 function Bin() {
-    const { id } = useParams();
+  // Extracting bin ID from URL params
+  const { id } = useParams();
+  const [isDisabled, setIsDisabled] = useState(true);
 
-    const { getBin, currentBin, isLoading } = useBins();
+  // Accessing functions and data from BinContext
+  const { getBin, currentBin, isLoading } = useBins();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await getBin(id);
-        };
+  useEffect(() => {
+    const fetchData = async () => {
+      await getBin(id);
+    };
 
-        fetchData();
-    },
-        [id, getBin]
-    );
+    fetchData();
+  }, [id, getBin]);
 
-    //extracting data from bin object;
-    const { deviceId, capacity, emptiedLast, fillThreshold, latitude, longitude, fillLevels, humidity } = currentBin;
+  //extracting data from bin object;
+  const {
+    deviceId,
+    capacity,
+    emptiedLast,
+    fillThreshold,
+    latitude,
+    longitude,
+    fillLevels,
+    humidity,
+  } = currentBin;
 
+  // Loading spinner while data is being fetched
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-    if (isLoading) {
-        return <Spinner />;
-    }
+  //handle edit
+  function handleEdit() {
+    setIsDisabled(!isDisabled);
+  }
 
+  //handle save
+  function handleSave(e) {}
 
-    //handle edit 
-    const handleEdit = (e) =>{
-        e.preventDefault();
+  return (
+    <div className="bin">
+      {/* Displaying Bin Id */}
+      <div className="row">
+        <BinField
+          className="binInput binInput_disabled"
+          type="number"
+          value={id}
+          label={"Bin"}
+        />
+      </div>
 
-        //rest of the code here
-    }
+      {/* Displaying Bin Capacity */}
+      <div className="row">
+        <BinField
+          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+          type="number"
+          value={capacity}
+          label={"Capacity"}
+        />
+      </div>
 
-    //handle save
-    const handleSave = (e) => {
-        e.preventDefault();
+      {/* Displaying Device Id */}
+      <div className="row">
+        <BinField
+          className="binInput binInput_disabled"
+          value={deviceId}
+          label={"Device Id"}
+        />
+      </div>
 
-        //rest of the code here
-    }
+      {/* Displaying Fill Threshold */}
+      <div className="row">
+        <BinField
+          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+          value={`${fillThreshold}%`}
+          label={"Fill Threshold"}
+          disabled
+        />
+      </div>
 
-    return (
+      {/* Displaying Latitude and longitude */}
+      <div className="row">
+        <h6>Position</h6>
+        <label htmlFor="lat">Latitude</label>
+        <input
+          id="lat"
+          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+          type="number"
+          value={latitude}
+        />
+        <label htmlFor="lng">Longitude</label>
+        <input
+          id="lng"
+          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+          type="number"
+          value={longitude}
+        />
+      </div>
 
-        <div className="bin">
+      {/* Displaying Last Emptied Time */}
+      <div className="row">
+        <BinField
+          className="binInput binInput_disabled"
+          value={formatDate(emptiedLast || null)}
+          label={"Last emptied on"}
+        />
+      </div>
 
-            <div className="row">
-                <h6>Bin</h6>
-                <input className="binInput" type="number" disabled value={id}/>
-            </div>
+      {/* Displaying Current Fill Level */}
+      <div className="row">
+        {/* value */}
+        <BinField
+          className="binInput binInput_disabled"
+          value={`${
+            fillLevels && fillLevels.length > 0
+              ? fillLevels[fillLevels.length - 1].value
+              : ""
+          } %`}
+          label={"Fill Level"}
+        />
 
-            <div className="row">
-                <h6>Capacity</h6>
-              
-                <input className="binInput" value={ capacity } disabled/>
-            </div>
+        {/* recorded on */}
+        <BinField
+          className="binInput binInput_disabled"
+          value={`${
+            fillLevels && fillLevels.length > 0
+              ? formatDate(fillLevels[fillLevels.length - 1].dateTime || null)
+              : ""
+          }`}
+          label={""}
+        />
+      </div>
 
-            <div className="row">
-                <h6>Device Id</h6>
-                <input className="binInput" value={deviceId} disabled/>
-            </div>
+      {/* Displaying Current Humidity */}
+      <div className="row">
+        {/* value */}
+        <BinField
+          className="binInput binInput_disabled"
+          value={`${
+            humidity && humidity.length > 0
+              ? humidity[humidity.length - 1].value
+              : ""
+          }%`}
+          label={"Humidity"}
+        />
 
-            <div className="row">
-                <h6>Fill Threshold</h6>
-                <input className="binInput" value={`${fillThreshold}%`} disabled /> 
-            </div>
+        {/* recorded on */}
+        <BinField
+          className="binInput binInput_disabled"
+          value={`${
+            humidity && humidity.length > 0
+              ? formatDate(humidity[humidity.length - 1].dateTime || null)
+              : ""
+          }`}
+          label={""}
+        />
+      </div>
 
-            <div className="row">
-                <h6>Position</h6>
-                <label htmlFor="lat">Latitude</label>
-                <input id="lat" className="binInput" type="number" value={latitude} disabled />
-                <label htmlFor="lng">Longitude</label>
-                <input id="lng" className="binInput" type="number" value={longitude} disabled />
-            </div>
+      {/* Buttons for navigation and actions */}
+      <div>
+        <BackButton className={"btn"}>&larr; Back </BackButton>
+        <Button onClick={handleEdit}>Edit</Button>
+        <Button onClick={handleSave} disabled>
+          Save
+        </Button>
+      </div>
+    </div>
+  );
+}
 
-            <div className="row">
-                <h6>Last emptied on</h6>
-                <input className="binInput" value={formatDate(emptiedLast || null)} disabled/>
-            </div>
-
-            <div className="row">
-                <h6>Fill Level</h6>
-               
-                {fillLevels && fillLevels.length > 0 && (
-                    <>
-                        <input className="binInput" value={`${fillLevels[fillLevels.length - 1].value } %`} disabled/>
-                        
-                        <input className="binInput" value={`${formatDate(fillLevels[fillLevels.length - 1].dateTime || null)}`} disabled/>
-                    </>
-                )}
-            </div>
-
-            <div className="row">
-                <h6>Humidity</h6>
-                {humidity && humidity.length > 0 && (
-                    <>
-                        <input className="binInput" value={`${humidity[humidity.length - 1].value}%}`} disabled/>
-                        <input className="binInput" value={`${formatDate(humidity[humidity.length - 1].dateTime || null) }`} disabled/>                   
-                    </>
-                )}
-            </div>
-
-            <div>
-                <BackButton className={"btn"}>&larr; Back </BackButton>
-                <Button onClick={handleEdit} >Edit</Button>
-                <Button onClick={handleSave} disabled>Save</Button>
-            </div>
-        </div>
-
-    )
+function BinField({ value, label, className, type = "text" }) {
+  return (
+    <>
+      <h6>{label}</h6>
+      <input className={className} type={type} value={value} />
+    </>
+  );
 }
 
 export default Bin;

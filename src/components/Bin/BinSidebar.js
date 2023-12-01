@@ -1,19 +1,16 @@
 import BinNav from "./BinNav";
 
-import "../../styles/Bin_css/BinSidebar.css"
+import "../../styles/Bin_css/BinSidebar.css";
 import { Outlet } from "react-router";
 
 function BinSidebar() {
-    return (
-        <div className="sidebar">
+  return (
+    <div className="sidebar">
+      <BinNav />
 
-            <BinNav />
-
-
-            <Outlet />
-
-        </div>
-    )
+      <Outlet />
+    </div>
+  );
 }
 
-export default BinSidebar
+export default BinSidebar;
