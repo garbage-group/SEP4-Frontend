@@ -1,11 +1,11 @@
-function BinLayout() {
-    return (
-        <div className={styles.app}>
-            <BinSidebar />
-            <Map />
-            <InfoSidebar />
-        </div>
-    );
-}
+// function BinLayout() {
+//     return (
+//         <div>
+//             <BinSidebar />
+//             <BinMap />
+//             <InfoSidebar />
+//         </div>
+//     );
+// }
 
-export default AppLayout
+// export default BinLayout

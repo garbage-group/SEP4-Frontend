@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
+import { Button } from "@mui/material";
 
 
 
@@ -38,52 +39,67 @@ function Bin() {
         return <Spinner />;
     }
 
+
+    //handle edit 
+    const handleEdit = (e) =>{
+        e.preventDefault();
+
+        //rest of the code here
+    }
+
+    //handle save
+    const handleSave = (e) => {
+        e.preventDefault();
+
+        //rest of the code here
+    }
+
     return (
-
-
 
         <div className="bin">
 
             <div className="row">
                 <h6>Bin</h6>
-                {/* <input type="text" disabled value={id}/> */}
-                <p>
-                    {id}
-                </p>
+                <input className="binInput" type="number" disabled value={id}/>
             </div>
 
             <div className="row">
                 <h6>Capacity</h6>
-                <p>{capacity}</p>
+              
+                <input className="binInput" value={ capacity } disabled/>
             </div>
 
             <div className="row">
                 <h6>Device Id</h6>
-                <p>{deviceId}</p>
+                <input className="binInput" value={deviceId} disabled/>
             </div>
 
             <div className="row">
                 <h6>Fill Threshold</h6>
-                <p>{fillThreshold}%</p>
+                <input className="binInput" value={`${fillThreshold}%`} disabled /> 
             </div>
 
             <div className="row">
                 <h6>Position</h6>
-                <p>Latitude {latitude}</p>
-                <p>Longitude {longitude}</p>
+                <label htmlFor="lat">Latitude</label>
+                <input id="lat" className="binInput" type="number" value={latitude} disabled />
+                <label htmlFor="lng">Longitude</label>
+                <input id="lng" className="binInput" type="number" value={longitude} disabled />
             </div>
 
             <div className="row">
                 <h6>Last emptied on</h6>
-                <p>{formatDate(emptiedLast || null)}</p>
+                <input className="binInput" value={formatDate(emptiedLast || null)} disabled/>
             </div>
 
             <div className="row">
                 <h6>Fill Level</h6>
+               
                 {fillLevels && fillLevels.length > 0 && (
                     <>
-                        <p>{fillLevels[fillLevels.length - 1].value}%</p>
-                        <p>{formatDate(fillLevels[fillLevels.length - 1].dateTime || null)}</p>
+                        <input className="binInput" value={`${fillLevels[fillLevels.length - 1].value } %`} disabled/>
+                        
+                        <input className="binInput" value={`${formatDate(fillLevels[fillLevels.length - 1].dateTime || null)}`} disabled/>
                     </>
                 )}
             </div>
@@ -92,14 +108,16 @@ function Bin() {
                 <h6>Humidity</h6>
                 {humidity && humidity.length > 0 && (
                     <>
-                        <p>{humidity[humidity.length - 1].value}%</p>
-                        <p>{formatDate(humidity[humidity.length - 1].dateTime || null)}</p>
+                        <input className="binInput" value={`${humidity[humidity.length - 1].value}%}`} disabled/>
+                        <input className="binInput" value={`${formatDate(humidity[humidity.length - 1].dateTime || null) }`} disabled/>                   
                     </>
                 )}
             </div>
 
             <div>
                 <BackButton className={"btn"}>&larr; Back </BackButton>
+                <Button onClick={handleEdit} >Edit</Button>
+                <Button onClick={handleSave} disabled>Save</Button>
             </div>
         </div>
 
