@@ -1,0 +1,31 @@
+.nav {
+  margin-top: 3rem;
+  /* margin-bottom: 0rem; */
+
+}
+
+.nav ul {
+  list-style: none;
+  /* display: flex; */
+  background-color: var(--primary);
+  border-radius: 7px;
+  text-align: center;
+}
+
+.nav a:link,
+.nav a:visited {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-right: 2.3rem;
+  border-radius: 5px;
+  
+}
+
+/* CSS Modules feature */
+.nav a:global(.active) {
+  background-color: var(--primary);
+}

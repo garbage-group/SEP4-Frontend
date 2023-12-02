@@ -1,0 +1,43 @@
+.map-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.map {
+    height: 100%;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+    background-color: rgb(176, 218, 160);
+    color: rgb(20, 45, 99);
+    border-radius: 5px;
+}
+
+.leaflet-popup .leaflet-popup-content {
+    font-size: 0.7rem;
+    display: block;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.leaflet-popup .leaflet-popup-content p:first-child {
+    font-size: 1.1rem;
+    line-height: 0.1;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+    background-color: rgb(170, 221, 150);
+}
+
+/* New CSS for separation */
+.leaflet-popup .leaflet-popup-content .data-section {
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(100, 150, 100, 0.3);
+}
+
+/* Last section should not have a border */
+.leaflet-popup .leaflet-popup-content .data-section:last-child {
+    border-bottom: none;
+}

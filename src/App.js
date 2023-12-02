@@ -10,7 +10,9 @@ import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
-
+import BinList from "./components/Bin/BinList";
+// import { Spinner } from "./components/Spinner";
+import { BinProvider } from "./contexts/BinContext";
 
 const router = createHashRouter([
   {
@@ -32,7 +34,21 @@ const router = createHashRouter([
       },
       {
         path: "/bins",
-        element: <Bins />
+        element: <Bins />,
+        children: [
+          {
+            path: "",
+            element: <BinList />
+          },
+          {
+            path: "binList",
+            element: <BinList />
+          },
+          {
+            path: "bins/form",
+            element: <p>Form</p>
+          },
+        ],
       },
       {
         path: "/map",
@@ -54,7 +70,9 @@ export function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <BinProvider>
+            <RouterProvider router={router} />
+          </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
