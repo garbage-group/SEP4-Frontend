@@ -1,6 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/Bin_css/BinMap.css";
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import L from "leaflet";
 import { useBins } from "../../contexts/BinContext";
 import { useEffect, useState } from "react";
@@ -15,11 +22,11 @@ function BinMap() {
     const [mapPosition, setMapPosition] = useState([55.85, 9.84]);
     const [lat, lng] = useURLPosition();
 
-    //garbage icon
-    const garbageIcon = L.icon({
-        iconUrl: logoImage,
-        iconSize: [30, 30],
-    });
+  //garbage icon
+  const garbageIcon = L.icon({
+    iconUrl: logoImage,
+    iconSize: [30, 30],
+  });
 
     //setting  map position
     useEffect(function(){
@@ -36,42 +43,43 @@ function BinMap() {
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                     />
 
-                {bins.map((bin) => (
-                    <Marker position={[bin.latitude, bin.longitude]} key={bin.id} icon={garbageIcon}>
-                        <Popup>
-                            <p>Bin {bin.id}</p>
-                            <span>
-                                Threshold: {bin.fillThreshold}, Capacity: {bin.capacity}
-                            </span>
+        {bins.map((bin) => (
+          <Marker
+            position={[bin.latitude, bin.longitude]}
+            key={bin.id}
+            icon={garbageIcon}
+          >
+            <Popup>
+              <p>Bin {bin.id}</p>
+              <span>
+                Threshold: {bin.fillThreshold}, Capacity: {bin.capacity}
+              </span>
+            </Popup>
+          </Marker>
+        ))}
 
-                        </Popup>
-                    </Marker>
-                ))}
-
-                <ChangeMapPosition position={mapPosition} />
-                <DetectCLick />
-
-            </MapContainer>
-        </div>
-    )
+        <ChangeMapPosition position={mapPosition} />
+        <DetectCLick />
+      </MapContainer>
+    </div>
+  );
 }
 
 //component to change the map view as per position
 function ChangeMapPosition({ position }) {
-    const map = useMap();
-    map.setView(position);
-    return null;
+  const map = useMap();
+  map.setView(position);
+  return null;
 }
 
 //detecting a click on the map
 function DetectCLick() {
-    const navigate = useNavigate();
-    useMapEvents({
-        click: e => {
-            navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
-        }
-    })
+  const navigate = useNavigate();
+  useMapEvents({
+    click: (e) => {
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
+    },
+  });
 }
 
-
-export default BinMap
+export default BinMap;
