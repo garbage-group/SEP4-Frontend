@@ -13,23 +13,49 @@ function BinProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const [currentBin, setCurrentBin] = useState({});
     const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
-    const { token } = useAuth();
+    const { token, isAuthenticated } = useAuth();
+    const fetchInterval = 3600000; // 1 hour in milliseconds
 
-    useEffect(function () {
+    useEffect(() => {
+        let intervalId;
+
         async function fetchBins() {
+            if (!isAuthenticated || !token) {
+                return; // Do not fetch if not authenticated or if token is unavailable
+            }
+
             try {
                 setIsLoading(true);
-                const res = await fetch(`${BASE_URL}/bins/all`);
-                const data = await res.json();
+                const response = await fetch(`${BASE_URL}/bins/all`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
                 setBins(data);
-            } catch (e) {
-                alert(e.message);
+            } catch (error) {
+                console.error("Error fetching bins:", error);
+                alert("Failed to fetch bins: " + error.message);
             } finally {
                 setIsLoading(false);
             }
         }
-        fetchBins();
-    }, []);
+
+        if (isAuthenticated) {
+            fetchBins(); // Fetch immediately if authenticated
+            intervalId = setInterval(fetchBins, fetchInterval); // Set up polling
+        }
+
+        return () => {
+            if (intervalId) {
+                clearInterval(intervalId); // Clear the interval on cleanup
+            }
+        };
+    }, [token, isAuthenticated]);
+
 
     async function getBin(id) {
         if (Number(id) === currentBin.id) return;
@@ -46,6 +72,8 @@ function BinProvider({ children }) {
             setIsLoading(false);
         }
     }
+
+
 
     async function createBin(newBin) {
         try {
