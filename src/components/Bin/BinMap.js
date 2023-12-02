@@ -18,9 +18,9 @@ import { useURLPosition } from "../../hooks/useURLPosition";
 function BinMap() {
     const navigate = useNavigate();
     const { bins } = useBins();
-   
     const [mapPosition, setMapPosition] = useState([55.85, 9.84]);
-    const [lat, lng] = useURLPosition();
+    const [mapLat, mapLng] = useURLPosition();
+
 
   //garbage icon
   const garbageIcon = L.icon({
@@ -30,10 +30,10 @@ function BinMap() {
 
     //setting  map position
     useEffect(function(){
-        if (lat && lng) {
-            setMapPosition([lat, lng]);
+        if (mapLat&& mapLng) {
+            setMapPosition([Number(mapLat), Number(mapLng)]);    
         }
-    },[lat, lng]);
+    },[mapLat, mapLng]);
 
     
    
@@ -69,7 +69,6 @@ function BinMap() {
 function ChangeMapPosition({ position }) {
   const map = useMap();
   map.setView(position);
-  return null;
 }
 
 //detecting a click on the map
@@ -77,7 +76,7 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
     click: (e) => {
-    e.originalEvent.preventDefault();
+      // e.originalEvent.preventDefault();
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
     },
   });

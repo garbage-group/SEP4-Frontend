@@ -26,7 +26,7 @@ function BinItem({ bin }) {
 
     return (
         <li>
-            <Link className={`binItem ${id === currentBin.id ? "binItem--active" : ""}`} to={`${id}?lat=${latitude}&lng${longitude}`}>
+            <Link className={`binItem ${id === currentBin.id ? "binItem--active" : ""}`} to={`${id}?lat=${latitude}&lng=${longitude}`}>
                 <span className="emoji">{<DeleteIcon />}</span>
                 <h3 className="name">Bin {id} <span>(Capacity: {capacity})</span></h3>
 

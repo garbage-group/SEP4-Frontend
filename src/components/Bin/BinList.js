@@ -5,7 +5,7 @@ import BinItem from "./BinItem";
 
 function BinList() {
   const { bins, isLoading } = useBins();
-  // console.log(bins)
+  console.log(bins)
 
   if (isLoading) {
     return <Spinner />;

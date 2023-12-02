@@ -42,7 +42,7 @@ function Bin() {
   );
   const [newLatitude, setNewLatitude] = useState(currentBin.latitude);
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
- 
+
 
   /*   // Accessing functions and data from BinContext
   const { getBin, currentBin, isLoading } = useBins(); */
@@ -127,19 +127,20 @@ function Bin() {
           className="binInput binInput_disabled"
           type="number"
           value={id}
+          readOnly
         />
       </div>
 
       {/* Displaying Bin Capacity */}
       <div className="row">
-        <h6>Capacity</h6>
-        <input className={"binInput binInput_disabled"} value={capacity} />
+        <h6>Capacity(Liter)</h6>
+        <input className={"binInput binInput_disabled"} value={capacity} readOnly />
       </div>
 
       {/* Displaying Device Id */}
       <div className="row">
         <h6>Device Id</h6>
-        <input className="binInput binInput_disabled" value={deviceId} />
+        <input className="binInput binInput_disabled" value={deviceId} readOnly />
       </div>
 
       {/* Displaying Fill Threshold */}
@@ -182,6 +183,7 @@ function Bin() {
         <input
           className="binInput binInput_disabled"
           value={formatDate(emptiedLast || null)}
+          readOnly
         />
       </div>
 
@@ -194,6 +196,7 @@ function Bin() {
             <input
               className="binInput binInput_disabled"
               value={`${fillLevels[fillLevels.length - 1].value} %`}
+              readOnly
             />
 
             <input
@@ -201,6 +204,7 @@ function Bin() {
               value={`${formatDate(
                 fillLevels[fillLevels.length - 1].dateTime || null
               )}`}
+              readOnly
             />
           </>
         )}
@@ -214,12 +218,14 @@ function Bin() {
             <input
               className="binInput binInput_disabled"
               value={`${humidity[humidity.length - 1].value}%`}
+              readOnly
             />
             <input
               className="binInput binInput_disabled"
               value={`${formatDate(
                 humidity[humidity.length - 1].dateTime || null
               )}`}
+              readOnly
             />
           </>
         )}
