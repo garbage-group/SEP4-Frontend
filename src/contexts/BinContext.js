@@ -121,10 +121,10 @@ function BinProvider({ children }) {
 
       console.log("Request Payload:", JSON.stringify(newUpdatedBin));
 
-      /* if (res.ok) {
+      if (res.ok) {
         // If successful, update the currentBin value
         setCurrentBin(newUpdatedBin);
-      } */
+      }
     } catch (error) {
       alert(error);
       console.error("Error updating bin:", error.message);

@@ -116,6 +116,7 @@ function Bin() {
           className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
           value={`${isDisabled ? fillThreshold : newFIllThreshold}`}
           onChange={(e) => setNewFillThreshold(e.target.value)}
+          data-testid="Fill Threshold"
         />
       </div>
 
@@ -129,6 +130,7 @@ function Bin() {
           type="number"
           value={`${isDisabled ? latitude : newLatitude}`}
           onChange={(e) => setNewLatitude(e.target.value)}
+          data-testid="Latitude"
         />
         <label htmlFor="lng">Longitude</label>
         <input
@@ -137,6 +139,7 @@ function Bin() {
           type="number"
           value={`${isDisabled ? longitude : newLongitude}`}
           onChange={(e) => setNewLongitude(e.target.value)}
+          data-testid="Longitude"
         />
       </div>
 
