@@ -12,7 +12,7 @@ function BinProvider({children}){
     const [currentBin, setCurrentBin] = useState({});
     // const {token, isAuthenticated} = useAuth();
     const token = localStorage.getItem("token");
-    const isAuthenticated = localStorage.getItem("authenticate");
+    const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
     console.log(typeof isAuthenticated);
 
     //get all bins
@@ -33,7 +33,7 @@ function BinProvider({children}){
                 setIsLoading(false);
             }
         }
-        if(isAuthenticated === "true") fetchBins();
+        if(isAuthenticated) fetchBins();
     },[token, isAuthenticated]);
 
   //get bin by id

@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import "../../styles/Bin_css/BinMap.css";
 import {
   MapContainer,
@@ -59,7 +59,7 @@ function BinMap() {
         ))}
 
         <ChangeMapPosition position={mapPosition} />
-        <DetectCLick />
+        <DetectClick />
       </MapContainer>
     </div>
   );
@@ -73,10 +73,11 @@ function ChangeMapPosition({ position }) {
 }
 
 //detecting a click on the map
-function DetectCLick() {
+function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
     click: (e) => {
+    e.originalEvent.preventDefault();
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
     },
   });

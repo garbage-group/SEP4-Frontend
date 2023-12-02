@@ -6,10 +6,22 @@
 
 .nav ul {
   list-style: none;
-  /* display: flex; */
+  display: flex;
+  justify-content: center;
+
   background-color: #05D671;
   border-radius: 7px;
   text-align: center;
+  margin-left: 1.8rem;
+
+}
+
+.isActive {
+  background-color: yellow;
+}
+
+.iActive {
+  background-color: red;
 }
 
 .nav a:link,
