@@ -75,6 +75,35 @@ function Bin() {
 
   //handle save
   function handleSave() {
+    const isValidFillThreshold =
+      newFIllThreshold >= 0 && newFIllThreshold <= 100;
+    const isValidLatitude = newLatitude >= -90 && newLatitude <= 90;
+    const isValidLongitude = newLongitude >= -180 && newLongitude <= 180;
+
+    if (!isValidFillThreshold) {
+      // Handle invalid fill threshold
+      console.error(
+        "Invalid fill threshold. Please enter a value between 0 and 100."
+      );
+      return;
+    }
+
+    if (!isValidLatitude) {
+      // Handle invalid latitude
+      console.error(
+        "Invalid latitude. Please enter a value between -90 and 90."
+      );
+      return;
+    }
+
+    if (!isValidLongitude) {
+      // Handle invalid longitude
+      console.error(
+        "Invalid longitude. Please enter a value between -180 and 180."
+      );
+      return;
+    }
+
     const updatedBin = {
       id,
       newFIllThreshold,
