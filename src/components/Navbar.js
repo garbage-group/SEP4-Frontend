@@ -1,4 +1,5 @@
 import SearchIcon from "@mui/icons-material/Search";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import LogoutIcon from '@mui/icons-material/Logout';
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
@@ -8,7 +9,7 @@ import { useAuth } from "../contexts/LoginAuthContext";
 
 export function Navbar() {
 
-  const {logout} = useAuth();
+  const { logout } = useAuth();
 
   const navigate = useNavigate();
 
@@ -17,7 +18,6 @@ export function Navbar() {
     navigate("/", { replace: true });
 
   }
-
 
   return (
     <div className="navbar-container">
@@ -33,12 +33,12 @@ export function Navbar() {
       </div>
 
       <div className="top-nav-right">
-        <div className="icon-button">
-          <button onClick={handleLogout}>
-            <LogoutIcon />
-          </button>
-        </div>
+        <NotificationsNoneOutlinedIcon />
+        <button className="icon-button" onClick={handleLogout}>
+          <LogoutIcon />
+        </button>
       </div>
+
     </div>
   );
 }
