@@ -4,11 +4,11 @@ import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import logoImage from "../../images/bin-icon.png";
 import "../../styles/MapOverview.css";
-import { useBins } from "../../contexts/BinContext"; // Import useBins hook
+import { useBins } from "../../contexts/BinContext";
 
-const Map = () => {
-  const { bins } = useBins(); // Use bins data from BinContext
-  const zoom = 12.5; // Set bin zoom
+const MapOverview = () => {
+  const { bins } = useBins();
+  const zoom = 12.5;
 
   const garbageIcon = L.icon({
     iconUrl: logoImage,
@@ -29,20 +29,29 @@ const Map = () => {
         <Marker key={bin.id} position={[bin.latitude, bin.longitude]} icon={garbageIcon}>
           <Popup className="custom-popup">
             <div className="data-section">
-              Bin ID: {bin.id} <br /> <br />
+              <strong>Bin ID: {bin.id}</strong> <br /> <br />
+
+              Capacity: {bin.capacity ? bin.capacity : 'N/A'} <br />
+              Last Emptied Time: {bin.emptiedLast ? formatDateAndTime(bin.emptiedLast) : 'N/A'} <br />
+              Last Pickup Time: {bin.pickUpTime ? formatDateAndTime(bin.pickUpTime) : 'N/A'} <br />
+              Fill Threshold: {bin.fillThreshold ? `${bin.fillThreshold}%` : 'N/A'} <br />
+            </div>
+
+            <div className="data-section">
               Latest Fill Level: {bin.fillLevels && bin.fillLevels.length > 0 ? `${bin.fillLevels[bin.fillLevels.length - 1].value}%` : 'N/A'} <br />
               Date: {bin.fillLevels && bin.fillLevels.length > 0 ? formatDateAndTime(bin.fillLevels[bin.fillLevels.length - 1].dateTime) : 'N/A'} <br />
             </div>
+
             <div className="data-section">
               Latest Humidity: {bin.humidity && bin.humidity.length > 0 ? `${bin.humidity[bin.humidity.length - 1].value}%` : 'N/A'} <br />
               Date: {bin.humidity && bin.humidity.length > 0 ? formatDateAndTime(bin.humidity[bin.humidity.length - 1].dateTime) : 'N/A'}
             </div>
+            <a href={`/map?lat=${bin.latitude}&lng=${bin.longitude}`}>Directions to this Bin</a>
           </Popup>
         </Marker>
       ))}
-
     </MapContainer>
   );
 };
 
-export { Map };
+export { MapOverview };
