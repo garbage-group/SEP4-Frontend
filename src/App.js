@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import { Overview } from "./routes/Overview";
 import { Collectors } from "./routes/Collectors";
@@ -7,12 +7,12 @@ import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
 import { Root } from './routes/Root'
 import "../src/styles/App.css";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
-import { Spinner } from "./components/Spinner";
-
+// import { Spinner } from "./components/Spinner";
+import { BinProvider } from "./contexts/BinContext";
 
 const router = createHashRouter([
   {
@@ -70,7 +70,9 @@ export function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <RouterProvider router={router} />
+          <BinProvider>
+            <RouterProvider router={router} />
+          </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
