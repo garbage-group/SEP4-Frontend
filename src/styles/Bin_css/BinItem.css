@@ -38,7 +38,7 @@
   color: black;
 }
 
-.name > span {
+.name>span {
   font-size: 0.7em;
   font-weight: normal;
 }
@@ -47,7 +47,7 @@
   font-size: 1rem;
 }
 
-.date > div {
+.date>div {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -67,7 +67,7 @@
   border-radius: 50%;
   border: none;
   background-color: #143A63;
-  color:  var(--primary);
+  color: var(--primary);
   font-size: 1.6rem;
   font-weight: 400;
   cursor: pointer;
@@ -78,3 +78,25 @@
   background-color: #00c46a;
   color: #143A63;
 }
+
+
+/*small devices and down*/
+@media (max-width: 767.98px) {
+
+
+  .date {
+    display: none;
+  }
+
+  .emoji {
+    display: none;
+  }
+
+}
+
+/*medium devices only*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+
+/* */
+@media (min-width: 1200px) {}

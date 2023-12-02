@@ -29,9 +29,9 @@ function BinForm() {
   
 
 
-    // Handling form submission
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  // Handling form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
         // Creating a new bin object
         const newBin = {
@@ -70,20 +70,21 @@ function BinForm() {
                     />
                 </div>
 
-                <div className="binRow">
-                    <label htmlFor="threshold">Fill Threshold</label>
-                    <input
-                        id="threshold"
-                        type="number"
-                        max={100}
-                        min={0}
-                        placeholder="Bin threshold..."
-                        required
-                        value={threshold}
-                        onChange={(e) => setThreshold(e.target.value)}
-                    />
-                </div>
-            </div>
+        <div className="binRow">
+          <label htmlFor="threshold">Fill Threshold</label>
+          <input
+            id="threshold"
+            type="number"
+            max={100}
+            min={0}
+            placeholder="Bin threshold..."
+            required
+            value={threshold}
+            onChange={(e) => setThreshold(e.target.value)}
+            className="binForm_input"
+          />
+        </div>
+      </div>
 
             {/* Form Section: Latitude and Longitude */}
             <div className="row2">
@@ -122,7 +123,5 @@ function BinForm() {
         </form>
     );
 }
-
-
 
 export default BinForm;
