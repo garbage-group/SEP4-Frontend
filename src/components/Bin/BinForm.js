@@ -44,6 +44,8 @@ function BinForm() {
         }
     }
 
+    
+
     return (
         <form className="binForm" onSubmit={handleSubmit}>
             <div className="row1">

@@ -58,9 +58,7 @@ export function Login() {
                     const extractedData = extractDataFromJWT(jwtToken);
             
                     // Update the user context with the token, username, and role
-                    updateAuthInfo(data.token, extractedData.username, extractedData.role);
-                    console.log(extractedData.role);
-                    
+                    updateAuthInfo(data.token, extractedData.username, extractedData.role);       
                     
                     
                     navigate("/overview");

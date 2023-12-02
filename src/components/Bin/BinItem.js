@@ -19,7 +19,7 @@ function BinItem({ bin }) {
 
 
 
-    function handleClick(e) {
+    function handleDelete(e) {
         e.preventDefault();
         deleteBin(id);
     }
@@ -38,7 +38,7 @@ function BinItem({ bin }) {
                     </div>
 
                 </time>
-                <button className="deleteBtn" onClick={handleClick}>&times;</button>
+                <button className="deleteBtn" onClick={handleDelete}>&times;</button>
 
             </Link>
         </li>

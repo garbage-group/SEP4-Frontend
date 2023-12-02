@@ -12,7 +12,9 @@ function BinProvider({children}){
     const [bins, setBins] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentBin, setCurrentBin] = useState({});
-    const {token, isAuthenticated} = useAuth();
+    // const {token, isAuthenticated} = useAuth();
+    const token = localStorage.getItem("token");
+    const isAuthenticated = localStorage.getItem("authenticate");
 
     //get all bins
     useEffect(function(){
@@ -32,7 +34,7 @@ function BinProvider({children}){
                 setIsLoading(false);
             }
         }
-        if(isAuthenticated) fetchBins();
+        if(isAuthenticated === "true") fetchBins();
     },[token, isAuthenticated]);
 
     //get bin by id

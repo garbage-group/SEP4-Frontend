@@ -13,7 +13,7 @@ function BinMap() {
     const { bins } = useBins();
    
     const [mapPosition, setMapPosition] = useState([55.85, 9.84]);
-    const [mapLat, mapLng] = useURLPosition();
+    const [lat, lng] = useURLPosition();
 
     //garbage icon
     const garbageIcon = L.icon({
@@ -23,11 +23,12 @@ function BinMap() {
 
     //setting  map position
     useEffect(function(){
-        if (mapLat && mapLng) {
-            setMapPosition([mapLat, mapLng]);
+        if (lat && lng) {
+            setMapPosition([lat, lng]);
         }
-    },[mapLat, mapLng]);
+    },[lat, lng]);
 
+    
    
     return (
         <div className="mapContainer" onClick={() => navigate("form")}>

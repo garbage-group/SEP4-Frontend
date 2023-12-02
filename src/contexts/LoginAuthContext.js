@@ -14,6 +14,8 @@ const AuthProvider = ({ children }) => {
         setUsername(username);
         setRole(role);
         setIsAuthenticated(true);
+        localStorage.setItem("authenticate", true);
+        localStorage.setItem("token", token);
         localStorage.setItem("role", role);
     };
 
@@ -22,6 +24,8 @@ const AuthProvider = ({ children }) => {
         setUsername(null);
         setRole(null);
         setIsAuthenticated(false);
+        localStorage.removeItem("authenticate", false);
+        localStorage.removeItem("token", token);
         localStorage.removeItem("role", role);
     };
 
