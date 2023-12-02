@@ -41,12 +41,14 @@ export function Sidebar() {
           className="nav-element"
         />
 
-        {role.toLowerCase() === "municipality worker" && <NavItem
-          to="/analytics"
-          linkText="Analytics"
-          icon={<AnalyticsOutlinedIcon />}
-          className="nav-element"
-        />}
+        {role.toLowerCase() === "municipality worker" && (
+          <NavItem
+            to="/analytics"
+            linkText="Analytics"
+            icon={<AnalyticsOutlinedIcon />}
+            className="nav-element"
+          />
+        )}
       </div>
     </div>
   );
