@@ -30,8 +30,7 @@ const MapOverview = () => {
           <Popup className="custom-popup">
             <div className="data-section">
               <strong>Bin ID: {bin.id}</strong> <br /> <br />
-
-              Capacity: {bin.capacity ? bin.capacity : 'N/A'} <br />
+              Capacity: {bin.capacity ? `${bin.capacity} Liters` : 'N/A'} <br />
               Last Emptied Time: {bin.emptiedLast ? formatDateAndTime(bin.emptiedLast) : 'N/A'} <br />
               Last Pickup Time: {bin.pickUpTime ? formatDateAndTime(bin.pickUpTime) : 'N/A'} <br />
               Fill Threshold: {bin.fillThreshold ? `${bin.fillThreshold}%` : 'N/A'} <br />

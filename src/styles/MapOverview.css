@@ -15,7 +15,7 @@
 }
 
 .leaflet-popup .leaflet-popup-content {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     display: block;
     align-items: center;
     margin-right: 0.5rem;
@@ -34,7 +34,7 @@
 .leaflet-popup .leaflet-popup-content .data-section {
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgb(100, 150, 100);
+    border-bottom: 1px solid rgb(100, 150, 100, 0.3);
 }
 
 /* Last section should not have a border */
