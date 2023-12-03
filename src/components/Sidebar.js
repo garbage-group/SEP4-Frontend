@@ -5,12 +5,12 @@ import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
-import "../styles/Sidebar.css";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../contexts/LoginAuthContext";
+
+import "../styles/Sidebar.css";
 
 export function Sidebar() {
-  const { role } = useAuth();
+  const role = localStorage.getItem("role");
 
   return (
     <div className="sidebar-container">

@@ -11,8 +11,11 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 import "../styles/user_css/User.css";
-import loadingTruck from "../images/users/loadingTruck.gif";
+// import loadingTruck from "../images/users/loadingTruck.gif";
 import { LoadingComponent } from "../components/LoadingError";
+import { useAuth } from "../contexts/LoginAuthContext";
+
+const currentUserRole = localStorage.getItem("role");
 
 // Users component
 function Users() {
@@ -103,16 +106,18 @@ function ExtraElements({ region, role }) {
       <div className="userminus-wrapper">
         <PersonRemoveOutlinedIcon
           data-testid="remove-button"
-          className={`userminus-icon `}
-          // ${role !== "Admin" ? "disabled" : ""}
+          className={`userminus-icon ${
+            currentUserRole !== "municipality worker" ? "disabled" : ""
+          } `}
         />
       </div>
 
       <div className="userminus-wrapper">
         <ModeEditOutlineOutlinedIcon
           data-testid="edit-button"
-          className={`useredit-icon `}
-          // ${ role === "Garbage Collector" ? "disabled" : ""}
+          className={`useredit-icon ${
+            currentUserRole !== "municipality worker" ? "disabled" : ""
+          }  `}
         />
       </div>
     </div>

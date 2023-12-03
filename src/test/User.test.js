@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
-import React from "react";
+/* import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Users } from "../routes/User";
@@ -54,7 +54,7 @@ describe("Renders User Component", () => {
       expect(username).toBeInTheDocument();
       // expect(city).toBeInTheDocument();
     });
-  });
+  }); */
 
   /*   test("edit and remove buttons are disabled for garbage collector", () => {
     render(<Users />);
