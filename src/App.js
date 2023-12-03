@@ -13,6 +13,7 @@ import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
 // import { Spinner } from "./components/Spinner";
 import { BinProvider } from "./contexts/BinContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 const router = createHashRouter([
   {
@@ -64,19 +65,20 @@ const router = createHashRouter([
 
 const queryClient = new QueryClient();
 
-
 export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <BinProvider>
-            <RouterProvider router={router} />
+            <NotificationProvider>
+              <RouterProvider router={router} />
+            </NotificationProvider>
           </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
-  )
+  );
 }
 
 export default App;

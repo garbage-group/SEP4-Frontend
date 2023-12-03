@@ -2,22 +2,36 @@ import React from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import logoImage from "../../images/bin-icon.png";
+import GreenBinImage from "../../images/bin-icon.png";
+import RedBinImage from "../../images/bin-icon-full.png";
 import "../../styles/MapOverview.css";
 import { useBins } from "../../contexts/BinContext";
+import { useNotifications } from "../../contexts/NotificationContext";
 
 const MapOverview = () => {
   const { bins } = useBins();
+  const { notifications } = useNotifications(); // Use the useNotifications hook
   const zoom = 12.5;
 
   const garbageIcon = L.icon({
-    iconUrl: logoImage,
+    iconUrl: GreenBinImage,
     iconSize: [38, 38],
   });
+
+  const fullGarbageIcon = L.icon({
+    iconUrl: RedBinImage,
+    iconSize: [38, 38],
+  });
+
 
   const formatDateAndTime = (dateTimeString) => {
     const dateObj = new Date(dateTimeString);
     return `${dateObj.toLocaleDateString()} ${dateObj.toLocaleTimeString()}`;
+  };
+
+  // Function to check if a bin has a notification
+  const hasNotification = (binId) => {
+    return notifications.some((notification) => notification.binId === binId);
   };
 
   return (
@@ -26,7 +40,7 @@ const MapOverview = () => {
         url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
       />
       {bins.map((bin) => (
-        <Marker key={bin.id} position={[bin.latitude, bin.longitude]} icon={garbageIcon}>
+        <Marker key={bin.id} position={[bin.latitude, bin.longitude]} icon={hasNotification(bin.id) ? fullGarbageIcon : garbageIcon}>
           <Popup className="custom-popup">
             <div className="data-section">
               <strong>Bin ID: {bin.id}</strong> <br /> <br />
