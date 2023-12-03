@@ -40,7 +40,7 @@ const MapOverview = () => {
       />
       {bins.map((bin) => (
         <Marker key={bin.id} position={[bin.latitude, bin.longitude]} icon={hasNotification(bin.id) ? fullGarbageIcon : garbageIcon}>
-          <Popup className="custom-popup">
+          <Popup className="custom-popup" offset={[9, -6]}>
             <div className="data-section">
               <strong>Bin ID: {bin.id}</strong> <br /> <br />
               Capacity: {bin.capacity ? `${bin.capacity} Liters` : 'N/A'} <br />
