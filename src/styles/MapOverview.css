@@ -9,7 +9,7 @@
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper {
-    background-color: rgb(176, 218, 160);
+    background-color: rgb(239, 240, 238);
     color: rgb(20, 45, 99);
     border-radius: 5px;
 }
@@ -27,7 +27,7 @@
 }
 
 .leaflet-popup .leaflet-popup-tip {
-    background-color: rgb(170, 221, 150);
+    background-color: rgb(239, 240, 238);
 }
 
 /* New CSS for separation */
