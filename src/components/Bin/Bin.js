@@ -6,7 +6,6 @@ import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 
-
 // Function to format date in a readable format
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -42,7 +41,6 @@ function Bin() {
   );
   const [newLatitude, setNewLatitude] = useState(currentBin.latitude);
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
-
 
   /*   // Accessing functions and data from BinContext
   const { getBin, currentBin, isLoading } = useBins(); */
@@ -134,13 +132,21 @@ function Bin() {
       {/* Displaying Bin Capacity */}
       <div className="row">
         <h6>Capacity(Liter)</h6>
-        <input className={"binInput binInput_disabled"} value={capacity} readOnly />
+        <input
+          className={"binInput binInput_disabled"}
+          value={capacity}
+          readOnly
+        />
       </div>
 
       {/* Displaying Device Id */}
       <div className="row">
         <h6>Device Id</h6>
-        <input className="binInput binInput_disabled" value={deviceId} readOnly />
+        <input
+          className="binInput binInput_disabled"
+          value={deviceId}
+          readOnly
+        />
       </div>
 
       {/* Displaying Fill Threshold */}
@@ -182,7 +188,7 @@ function Bin() {
         <h6>Last emptied on</h6>
         <input
           className="binInput binInput_disabled"
-          value={emptiedLast ? formatDate(emptiedLast || null) : "N/A"}
+          value={emptiedLast ? formatDate(emptiedLast) : "N/A"}
           readOnly
         />
       </div>
@@ -232,17 +238,20 @@ function Bin() {
       </div>
 
       {/* Buttons for navigation and actions */}
-      <div>
+      <div className="buttons-container">
         <BackButton className={"btn"}>&larr; Back </BackButton>
-        <button onClick={handleEdit} className="edit-button">
-          Edit
-        </button>
-        <button
-          onClick={handleSave}
-          className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
-        >
-          Save
-        </button>
+
+        <div className="edit-save-button">
+          <button onClick={handleEdit} className="edit-button">
+            Edit
+          </button>
+          <button
+            onClick={handleSave}
+            className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );

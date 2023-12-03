@@ -4,7 +4,6 @@
   background-color: white;
   border-radius: 7px;
   overflow: auto;
-  display: flex;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
@@ -113,7 +112,7 @@
 .edit-button:hover {
   background-color: #00c46a;
   border-color: #00c46a;
-   color: #143A63;
+  color: #143A63;
 
 }
 
@@ -124,3 +123,32 @@
   filter: brightness(0.7);
   /* background-color: #6cb9cc; */
 }
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.edit-save-button {}
+
+/*small devices and down*/
+@media (max-width: 767.98px) {
+  .bin {
+    display: block;
+    padding: 1vw;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttons-container {
+    width: 100%;
+  }
+}
+
+/*medium devices only*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+
+/* */
+@media (min-width: 1200px) {}
