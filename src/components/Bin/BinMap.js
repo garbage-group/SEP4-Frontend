@@ -76,7 +76,7 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
     click: (e) => {
-      // e.originalEvent.preventDefault();
+      e.originalEvent.preventDefault();
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
     },
   });

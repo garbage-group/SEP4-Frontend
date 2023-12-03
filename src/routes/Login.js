@@ -58,10 +58,8 @@ export function Login() {
                     const extractedData = extractDataFromJWT(jwtToken);
             
                     // Update the user context with the token, username, and role
-                    updateAuthInfo(data.token, extractedData.username, extractedData.role);       
+                    await updateAuthInfo(data.token, extractedData.username, extractedData.role);       
                     
-                    
-                    navigate("/overview");
 
                     // Store login credentials in localStorage
                     if (check) {
@@ -71,6 +69,8 @@ export function Login() {
                         localStorage.removeItem("userName", userName);
                         localStorage.removeItem("password", password);
                     }
+                    
+                    navigate("/overview");
 
                 } catch (err) {
                     setError(err.message)

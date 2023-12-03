@@ -13,7 +13,7 @@ function BinProvider({children}){
     // const {token, isAuthenticated} = useAuth();
     const token = localStorage.getItem("token");
     const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
-    console.log(typeof isAuthenticated);
+  
 
     //get all bins
     useEffect(function(){

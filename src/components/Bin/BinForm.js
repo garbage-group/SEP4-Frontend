@@ -9,15 +9,13 @@ function BinForm() {
     // State hooks for form inputs and necessary values
 
     const [mapLat, mapLng] = useURLPosition();
-    console.log(`in form ${mapLat} ${mapLng}`);
     const [capacity, setCapacity] = useState("");
     const [threshold, setThreshold] = useState("");
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
     const { createBin } = useBins();
     const navigate = useNavigate();
-    console.log("lat", lat);
-    console.log("lng", lng);
+   
 
     useEffect(function() {
         if(mapLat && mapLng){
@@ -26,8 +24,6 @@ function BinForm() {
         }
     },[mapLat, mapLng]);
    
-  
-
 
   // Handling form submission
   const handleSubmit = async (e) => {
