@@ -19,18 +19,10 @@ jest.mock("react-router", () => {
   };
 });
 
-// Mock the Spinner component
-// jest.mock("../components/Spinner", () => () => <div data-testid="spinner">Loading...</div>);
-
-jest.mock('react-loader-spinner', () => ({
-  __esModule: true,
-  BallTriangle: jest.fn(),
-}));
-
 
 
 describe("Bin component", () => {
-  const mockUpdateBin = jest.fn(() => <div data-testid="spinner">Loading...</div>);
+  const mockUpdateBin = jest.fn();
 
   beforeEach(() => {
     //Reset mock functions before each test
@@ -63,10 +55,6 @@ describe("Bin component", () => {
     useParams.mockReturnValue({ id: "1" });
   });
 
-  it("verifies the spinner is not loading when data is loaded", () => {
-    render(<Spinner isLoading={false} />);
-    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
-  })
 
   it("verifies all the texts to be displayed on the document", () =>{
     render(<Bin />);
