@@ -10,9 +10,8 @@ jest.mock("../contexts/LoginAuthContext", () => ({
 }));
 
 describe("Navbar Component", () => {
-  //   const useAuth = jest.fn();
+  // Mock the return value of useAuth
   beforeEach(() => {
-    // Mock the return value of useAuth
     require("../contexts/LoginAuthContext").useAuth.mockReturnValue({
       logout: jest.fn(),
     });
