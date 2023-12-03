@@ -1,28 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 import { Navbar } from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
-import { Login } from "../components/Login";
+// import { Login } from "../components/Login";
 import { Footer } from "../components/Footer";
 
 export function Root() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // When the component mounts, check if user is already logged in from localStorage
-  useEffect(() => {
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    if (storedIsLoggedIn === "true") {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
   return (
     <>
-      {isLoggedIn ? (
         <>
           <div>
-            <Navbar setIsLoggedIn={setIsLoggedIn} />
+            <Navbar  />
           </div>
 
           <div className="body-container">
@@ -34,9 +22,6 @@ export function Root() {
 
           <Footer />
         </>
-      ) : (
-        <Login setIsLoggedIn={setIsLoggedIn} />
-      )}
     </>
   );
 }

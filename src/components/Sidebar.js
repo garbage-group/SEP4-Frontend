@@ -8,12 +8,14 @@ import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
 import "../styles/Sidebar.css";
 import { NavLink } from "react-router-dom";
 
+
 export function Sidebar() {
+  const role = localStorage.getItem("role");
   return (
     <div className="sidebar-container">
       <div className="navs">
         <NavItem
-          to="/"
+          to="/overview"
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
           className="nav-element"
@@ -40,12 +42,12 @@ export function Sidebar() {
           className="nav-element"
         />
 
-        <NavItem
+        {role.toLowerCase() === "municipality worker" && <NavItem
           to="/analytics"
           linkText="Analytics"
           icon={<AnalyticsOutlinedIcon />}
           className="nav-element"
-        />
+        />}
       </div>
     </div>
   );

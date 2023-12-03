@@ -9,15 +9,18 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "@tanstack/react-query": "^5.8.9",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "leaflet": "^1.9.4",
+    "leaflet-control-geocoder": "^2.4.0",
+    "leaflet-routing-machine": "^3.2.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-leaflet": "^4.2.1",
-    "react-loading-skeleton": "^3.3.1",
+    "react-loader-spinner": "^5.4.5",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
@@ -28,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +53,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
+    "@babel/preset-react": "^7.23.3",
+    "babel-jest": "^29.7.0",
     "gh-pages": "^6.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
+    "jest-canvas-mock": "^2.5.2",
     "jest-fetch-mock": "^3.0.3"
   }
 }

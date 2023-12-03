@@ -1,7 +1,7 @@
 import React from "react";
 
 import { RouterProvider, createHashRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+// import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Overview } from "./routes/Overview";
 import { Users } from "./routes/User";
@@ -12,25 +12,49 @@ import { Root } from "./routes/Root";
 import { UserListProvider } from "./contexts/UserListContext";
 
 import "../src/styles/App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Login } from "./routes/Login";
+import { AuthProvider } from "./contexts/LoginAuthContext";
+import BinList from "./components/Bin/BinList";
+// import { Spinner } from "./components/Spinner";
+import { BinProvider } from "./contexts/BinContext";
 
-export default App;
 const router = createHashRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+
   {
     path: "/",
     element: <Root />,
     children: [
       {
-        path: "/",
+        path: "/overview",
         element: <Overview />,
       },
       {
         path: "/users",
         element: <Users />,
       },
-      
+
       {
         path: "/bins",
         element: <Bins />,
+        children: [
+          {
+            path: "",
+            element: <BinList />,
+          },
+          {
+            path: "binList",
+            element: <BinList />,
+          },
+          {
+            path: "bins/form",
+            element: <p>Form</p>,
+          },
+        ],
       },
       {
         path: "/map",
@@ -50,10 +74,16 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <UserListProvider>
-          <RouterProvider router={router} />
-        </UserListProvider>
+        <AuthProvider>
+          <BinProvider>
+            <UserListProvider>
+              <RouterProvider router={router} />
+            </UserListProvider>
+          </BinProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   );
 }
+
+export default App;

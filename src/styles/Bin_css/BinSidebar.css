@@ -1,0 +1,18 @@
+.sidebar {
+  flex-basis: 20rem;
+  /* background-color: var(--color-dark--1); */
+  background-color: #143A63;
+  padding: 3rem 5rem 3.5rem 5rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outlet-style {
+    /* Add your specific styles for the Outlet component here */
+    /* For example: */
+    padding: 10px;
+    background-color: #f0f0f0;
+    /* Add any other styles as needed */
+}
