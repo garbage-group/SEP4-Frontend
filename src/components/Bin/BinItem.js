@@ -19,16 +19,25 @@ function BinItem({ bin }) {
     deleteBin(id);
   }
 
-    return (
-        <li>
-            <Link className={`binItem ${id === currentBin.id ? "binItem--active" : ""}`} to={`${id}?lat=${latitude}&lng=${longitude}`}>
-                <span className="emoji">{<DeleteIcon />}</span>
-                <h3 className="name">Bin {id} <span>(Capacity: {capacity})</span></h3>
+  return (
+    <li>
+      <Link
+        className={`binItem ${id === currentBin.id ? "binItem--active" : ""}`}
+        to={`${id}?lat=${latitude}&lng=${longitude}`}
+      >
+        <span className="emoji">{<DeleteIcon />}</span>
+        <h3 className="name">
+          Bin {id} <span>(Capacity: {capacity})</span>
+        </h3>
 
         <time className="date">
           <div>
             <p>Last emptied: </p>
-            {formatDate(emptiedLast)}
+            {emptiedLast ? (
+              formatDate(emptiedLast)
+            ) : (
+              <span className="na">N/A</span>
+            )}
           </div>
         </time>
         <button className="deleteBtn" onClick={handleDelete}>
