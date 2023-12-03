@@ -182,7 +182,7 @@ function Bin() {
         <h6>Last emptied on</h6>
         <input
           className="binInput binInput_disabled"
-          value={formatDate(emptiedLast || null)}
+          value={emptiedLast ? formatDate(emptiedLast || null) : "N/A"}
           readOnly
         />
       </div>

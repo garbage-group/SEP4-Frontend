@@ -27,8 +27,8 @@ function BinItem({ bin }) {
 
         <time className="date">
           <div>
-            <p>Last emptied: </p>
-            {formatDate(emptiedLast)}
+            <p>Last emptied: </p> 
+            {emptiedLast ? formatDate(emptiedLast) : "N/A"}
           </div>
         </time>
         <button className="deleteBtn" onClick={handleDelete}>
