@@ -23,7 +23,6 @@ const MapOverview = () => {
     iconSize: [38, 38],
   });
 
-
   const formatDateAndTime = (dateTimeString) => {
     const dateObj = new Date(dateTimeString);
     return `${dateObj.toLocaleDateString()} ${dateObj.toLocaleTimeString()}`;
@@ -45,9 +44,9 @@ const MapOverview = () => {
             <div className="data-section">
               <strong>Bin ID: {bin.id}</strong> <br /> <br />
               Capacity: {bin.capacity ? `${bin.capacity} Liters` : 'N/A'} <br />
+              Fill Threshold: {bin.fillThreshold ? `${bin.fillThreshold}%` : 'N/A'} <br />
               Last Emptied Time: {bin.emptiedLast ? formatDateAndTime(bin.emptiedLast) : 'N/A'} <br />
               Last Pickup Time: {bin.pickUpTime ? formatDateAndTime(bin.pickUpTime) : 'N/A'} <br />
-              Fill Threshold: {bin.fillThreshold ? `${bin.fillThreshold}%` : 'N/A'} <br />
             </div>
 
             <div className="data-section">
@@ -59,6 +58,15 @@ const MapOverview = () => {
               Latest Humidity: {bin.humidity && bin.humidity.length > 0 ? `${bin.humidity[bin.humidity.length - 1].value}%` : 'N/A'} <br />
               Date: {bin.humidity && bin.humidity.length > 0 ? formatDateAndTime(bin.humidity[bin.humidity.length - 1].dateTime) : 'N/A'}
             </div>
+
+            {hasNotification(bin.id) && (
+              <div className="data-section">
+                Fill Threshold reached: {formatDateAndTime(notifications.find((notification) => notification.binId === bin.id).timestamp)}
+                <br />
+                Scheduled Pickup Time: {formatDateAndTime(notifications.find((notification) => notification.binId === bin.id).scheduledPickupTime)}
+              </div>
+            )}
+
             <a href={`/map?lat=${bin.latitude}&lng=${bin.longitude}`}>Directions to this Bin</a>
           </Popup>
         </Marker>

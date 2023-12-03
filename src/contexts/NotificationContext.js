@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./LoginAuthContext";
+import moment from "moment"; // Import moment.js for date manipulation
+
 const NotificationContext = createContext();
 
 function NotificationProvider({ children }) {
@@ -7,6 +9,22 @@ function NotificationProvider({ children }) {
     const { isAuthenticated, token } = useAuth();
     const fetchInterval = 60000; // 1 minute in milliseconds
     const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
+
+    // Function to calculate scheduled pickup time
+    const calculateScheduledPickupTime = (notification) => {
+        const notificationTimestamp = moment(notification.timestamp);
+        const pickupTimeStart = moment(notificationTimestamp).set({ hour: 8, minute: 0, second: 0 });
+        const pickupTimeEnd = moment(notificationTimestamp).set({ hour: 12, minute: 0, second: 0 });
+        const nextDayPickupTime = moment(notificationTimestamp).add(1, "days").set({ hour: 9, minute: 0, second: 0 });
+
+        if (notificationTimestamp.isBetween(pickupTimeStart, pickupTimeEnd)) {
+            // If notification received between 8 AM and 12 PM, add 5 hours to it
+            return notificationTimestamp.add(5, "hours").format();
+        } else {
+            // Otherwise, set pickup time to next day 9 AM
+            return nextDayPickupTime.format();
+        }
+    };
 
     useEffect(() => {
         let intervalId;
@@ -25,7 +43,14 @@ function NotificationProvider({ children }) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setNotifications(data);
+
+                // Calculate scheduled pickup time for each notification
+                const notificationsWithScheduledTime = data.map((notification) => ({
+                    ...notification,
+                    scheduledPickupTime: calculateScheduledPickupTime(notification),
+                }));
+
+                setNotifications(notificationsWithScheduledTime);
             } catch (error) {
                 console.error("Error fetching notifications:", error);
             }
