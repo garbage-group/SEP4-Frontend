@@ -1,11 +1,16 @@
 import React from "react";
+
 import { RouterProvider, createHashRouter } from "react-router-dom";
+// import { QueryClient, QueryClientProvider } from "react-query";
+
 import { Overview } from "./routes/Overview";
-import { Collectors } from "./routes/Collectors";
+import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
 import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
-import { Root } from './routes/Root'
+import { Root } from "./routes/Root";
+import { UserListProvider } from "./contexts/UserListContext";
+
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
@@ -26,37 +31,38 @@ const router = createHashRouter([
     children: [
       {
         path: "/overview",
-        element: <Overview />
+        element: <Overview />,
       },
       {
-        path: "/collectors",
-        element: <Collectors />
+        path: "/users",
+        element: <Users />,
       },
+
       {
         path: "/bins",
         element: <Bins />,
         children: [
           {
             path: "",
-            element: <BinList />
+            element: <BinList />,
           },
           {
             path: "binList",
-            element: <BinList />
+            element: <BinList />,
           },
           {
             path: "bins/form",
-            element: <p>Form</p>
+            element: <p>Form</p>,
           },
         ],
       },
       {
         path: "/map",
-        element: <Map />
+        element: <Map />,
       },
       {
         path: "/analytics",
-        element: <Analytics />
+        element: <Analytics />,
       },
     ],
   },
@@ -64,19 +70,20 @@ const router = createHashRouter([
 
 const queryClient = new QueryClient();
 
-
 export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <BinProvider>
-            <RouterProvider router={router} />
+            <UserListProvider>
+              <RouterProvider router={router} />
+            </UserListProvider>
           </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
-  )
+  );
 }
 
 export default App;

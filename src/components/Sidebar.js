@@ -22,8 +22,8 @@ export function Sidebar() {
         />
 
         <NavItem
-          to="/collectors"
-          linkText="Collectors"
+          to="/users"
+          linkText="User"
           icon={<GroupOutlinedIcon />}
           className="nav-element"
         />
