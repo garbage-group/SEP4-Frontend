@@ -1,8 +1,11 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import React from 'react';
 import "@testing-library/jest-dom";
 import Bin from "../components/Bin/Bin";
 import { useBins } from "../contexts/BinContext";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
+import { Spinner } from "../components/Spinner";
+
 
 // Mock the useBins context
 jest.mock("../contexts/BinContext.js");
@@ -16,8 +19,18 @@ jest.mock("react-router", () => {
   };
 });
 
-describe("Update Bin", () => {
-  const mockUpdateBin = jest.fn();
+// Mock the Spinner component
+// jest.mock("../components/Spinner", () => () => <div data-testid="spinner">Loading...</div>);
+
+jest.mock('react-loader-spinner', () => ({
+  __esModule: true,
+  BallTriangle: jest.fn(),
+}));
+
+
+
+describe("Bin component", () => {
+  const mockUpdateBin = jest.fn(() => <div data-testid="spinner">Loading...</div>);
 
   beforeEach(() => {
     //Reset mock functions before each test
@@ -48,6 +61,37 @@ describe("Update Bin", () => {
 
     // Mock the useParams hook
     useParams.mockReturnValue({ id: "1" });
+  });
+
+  it("verifies the spinner is not loading when data is loaded", () => {
+    render(<Spinner isLoading={false} />);
+    expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+  })
+
+  it("verifies all the texts to be displayed on the document", () =>{
+    render(<Bin />);
+
+    expect(screen.getByText(/Bin/i)).toBeInTheDocument();
+    expect(screen.getByText(/Capacity/i)).toBeInTheDocument();
+    expect(screen.getByText(/Device Id/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fill Threshold/i)).toBeInTheDocument();
+    expect(screen.getByText(/Position/i)).toBeInTheDocument();
+    expect(screen.getByText(/Last emptied on/i)).toBeInTheDocument();
+    expect(screen.getByText(/Fill Level/i)).toBeInTheDocument();
+    expect(screen.getByText(/Humidity/i)).toBeInTheDocument();
+  });
+
+  it("verifies that the input fields displays the values", () => {
+    render(<Bin />);
+    expect(screen.getByTestId(/Bin/i)).toHaveValue(1);
+    expect(screen.getByTestId(/Capacity/i)).toHaveValue("100");
+    expect(screen.getByTestId(/DeviceId/i)).toHaveValue('8080');
+    expect(screen.getByTestId(/Fill Threshold/i)).toHaveValue('75');
+    expect(screen.getByTestId(/Latitude/i)).toHaveValue(40.7128);
+    expect(screen.getByTestId(/Longitude/i)).toHaveValue(-74.006);
+    expect(screen.getByTestId(/fillLevel/i)).toHaveValue('75%');
+    expect(screen.getByTestId(/Humidity/i)).toHaveValue('40%');
+
   });
 
   it("calls updateBin when Save button is clicked", async () => {

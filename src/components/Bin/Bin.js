@@ -66,7 +66,7 @@ function Bin() {
 
   // Loading spinner while data is being fetched
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner data-testid="spinner" />;
   }
 
   //handle edit
@@ -125,6 +125,7 @@ function Bin() {
           className="binInput binInput_disabled"
           type="number"
           value={id}
+          data-testid="binId"
           readOnly
         />
       </div>
@@ -135,6 +136,7 @@ function Bin() {
         <input
           className={"binInput binInput_disabled"}
           value={capacity}
+          data-testid="capacity"
           readOnly
         />
       </div>
@@ -145,6 +147,7 @@ function Bin() {
         <input
           className="binInput binInput_disabled"
           value={deviceId}
+          data-testid="deviceId"
           readOnly
         />
       </div>
@@ -189,6 +192,7 @@ function Bin() {
         <input
           className="binInput binInput_disabled"
           value={emptiedLast ? formatDate(emptiedLast) : "N/A"}
+          data-testid="emptiedLast"
           readOnly
         />
       </div>
@@ -201,7 +205,8 @@ function Bin() {
           <>
             <input
               className="binInput binInput_disabled"
-              value={`${fillLevels[fillLevels.length - 1].value} %`}
+              value={`${fillLevels[fillLevels.length - 1].value}%`}
+              data-testid="fillLevel"
               readOnly
             />
 
@@ -210,6 +215,7 @@ function Bin() {
               value={`${formatDate(
                 fillLevels[fillLevels.length - 1].dateTime || null
               )}`}
+              data-testid="fillDate"
               readOnly
             />
           </>
@@ -224,6 +230,7 @@ function Bin() {
             <input
               className="binInput binInput_disabled"
               value={`${humidity[humidity.length - 1].value}%`}
+              data-testid="humidity"
               readOnly
             />
             <input
