@@ -12,7 +12,7 @@ jest.mock("react-router", () => {
   return {
     ...module,
     useParams: jest.fn(),
-    useNavigate: jest.fn(),
+    useNavigate: () => jest.fn(),
   };
 });
 

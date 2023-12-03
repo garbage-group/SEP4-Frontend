@@ -1,40 +1,41 @@
 import { useContext, useEffect, useState, createContext } from "react";
 
-
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
 
 const BinContext = createContext();
 
-function BinProvider({children}){
-    const [bins, setBins] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [currentBin, setCurrentBin] = useState({});
-    // const {token, isAuthenticated} = useAuth();
-    const token = localStorage.getItem("token");
-    const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
-  
+function BinProvider({ children }) {
+  const [bins, setBins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentBin, setCurrentBin] = useState({});
+  // const {token, isAuthenticated} = useAuth();
+  const token = localStorage.getItem("token");
+  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
 
-    //get all bins
-    useEffect(function(){
-        async function fetchBins(){
-            try{
-                setIsLoading(true);
-                const res = await fetch(`${BASE_URL}/bins/all`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const data = await res.json();
-                setBins(data);
-            } catch (e) {
-                alert(e.message);
-            } finally {
-                setIsLoading(false);
-            }
+  //get all bins
+  useEffect(
+    function () {
+      async function fetchBins() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(`${BASE_URL}/bins/all`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await res.json();
+          setBins(data);
+        } catch (e) {
+          alert(e.message);
+        } finally {
+          setIsLoading(false);
         }
-        if(isAuthenticated) fetchBins();
-    },[token, isAuthenticated]);
+      }
+      if (isAuthenticated) fetchBins();
+    },
+    [token, isAuthenticated]
+  );
 
   //get bin by id
   async function getBin(id) {
@@ -48,7 +49,7 @@ function BinProvider({children}){
         },
       });
       const data = await res.json();
-      // console.log(data);
+      console.log(data);
       setCurrentBin(data);
     } catch (e) {
       console.log(e.message);
