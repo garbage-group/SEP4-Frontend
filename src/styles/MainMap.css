@@ -1,0 +1,73 @@
+/* Styles for the map container */
+.map-container {
+    width: 100%;
+    height: 600px;
+    /* Adjust the height as needed */
+    margin: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Styles for the custom markers */
+.leaflet-div-icon {
+    background: transparent;
+    border: none;
+}
+
+/* Styles for the popups */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+.leaflet-popup-content {
+    margin: 12px 20px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.leaflet-popup-tip-container {
+    width: 20px;
+    height: 11px;
+}
+
+/* Styles for routing machine */
+.leaflet-routing-container {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size: 0.9em;
+}
+
+.leaflet-routing-container-hide {
+    display: none;
+}
+
+/* Styles for the geocoder search box */
+.leaflet-control-geocoder {
+    margin-bottom: 10px;
+    width: 250px;
+    /* Adjust the width as needed */
+}
+
+/* /* .leaflet-control-geocoder-icon {
+    background-image: url('path_to_search_icon.png');
+    /* Optional: Path to a custom search icon */
+*/ */ .leaflet-bar a {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 600px) {
+    .map-container {
+        height: 400px;
+    }
+
+    .leaflet-control-geocoder {
+        width: 200px;
+    }
+}

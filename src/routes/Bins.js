@@ -1,7 +1,22 @@
+
+
+import BinMap from "../components/Bin/BinMap";
+import BinSidebar from "../components/Bin/BinSidebar";
+
+import "../styles/Bin_css/Bins.css";
+
+
+
+
+
 export function Bins() {
+ 
+
     return (
-        <div>
-            List of Bins
+        <div className="mainContainer">
+            <BinSidebar />
+            <BinMap />
+            {/* <InfoSidebar /> */}
         </div>
     )
 }

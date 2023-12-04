@@ -1,0 +1,163 @@
+/* whole container styling */
+.users-container {
+  background-color: #e7eafb;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.2fr 0.35fr;
+  border-radius: 10px;
+  margin-left: 0.5vw;
+  justify-content: center;
+}
+
+
+/* styling for container rendering userlist */
+.userlist-container {
+  display: flex;
+  flex-direction: column;
+  height: 91vh;
+}
+
+/* list header styling. contains: members text, number of members, add button */
+.list-header {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  margin: 1vh 1vw;
+  border-radius: 15px;
+}
+
+.members-text {
+  color: #2b3b57;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* styling elements in right side of list header */
+.right-content {
+  display: flex;
+  column-gap: 2vw;
+}
+
+.number-of-users {
+  color: #2b3b57;
+  font-size: 16px;
+}
+
+.refresh-icon {
+  margin-top: 2vh !important;
+  color: #597391;
+  cursor: pointer;
+  /* background-color: #e1e8ef; */
+  border-radius: 4px;
+  transform: scale(1.2);
+
+}
+
+
+
+.add-member-button {
+  height: 7vh !important;
+  border-radius: 15px !important;
+  background-color: #133a64 !important;
+}
+
+/* list body styling */
+.list-body {
+  margin: 1vh 1vw;
+  padding: 2vh 0.3vw;
+  background-color: #ffffff;
+  border-radius: 15px;
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.extra-elements {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.extra-elements-chip {
+  cursor: pointer !important;
+}
+
+.userminus-icon {
+  padding: 7px !important;
+  color: #c25425 !important;
+}
+
+
+.userminus-icon:hover {
+  cursor: pointer;
+  background-color: #feebe6;
+  border-radius: 10px;
+  /* padding: 7px; */
+}
+
+.userminus-wrapper {
+  cursor: not-allowed;
+  margin-top: 5px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #feebe6;
+  border-radius: 10px;
+}
+
+.useredit-icon {
+  padding: 7px !important;
+  color: #415d6a !important;
+  margin-left: 10px;
+}
+
+.useredit-icon:hover {
+  cursor: pointer;
+  background-color: #c7e5e3;
+  border-radius: 10px;
+}
+
+/* .useredit-icon.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #c7e5e3;
+  border-radius: 10px;
+} */
+
+.loadingTruck {
+  transform: scale(3);
+  position: absolute;
+  top: 30vh;
+  left: 30vw;
+}
+
+/* Scrollbar Styles (for Webkit browsers) */
+.list-body::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+.list-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.list-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+
+/* styling for container rendering filters(maybe) */
+.filter-container {
+  /* border: 1px solid brown; */
+  background-color: #ffffff;
+  margin: 1vh 1vw;
+  margin-left: 0;
+  border-radius: 15px;
+}

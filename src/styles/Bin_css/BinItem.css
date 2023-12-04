@@ -1,0 +1,102 @@
+.binItem,
+.binItem:link,
+.binItem:visited {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  padding: 1rem 2rem;
+  border-left: 5px solid var(--primary);
+  cursor: pointer;
+  border-left: 1rem solid #00c46a;
+  color: black;
+  text-decoration: none;
+
+
+}
+
+.binItem--active {
+  border: 2px solid #00c46a;
+
+}
+
+.binItem:hover {
+  transform: translateY(-0.1rem);
+}
+
+.emoji {
+  font-size: 2rem;
+  line-height: 1;
+
+}
+
+.name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-right: auto;
+  color: black;
+}
+
+.name>span {
+  font-size: 0.7em;
+  font-weight: normal;
+}
+
+.date {
+  font-size: 1rem;
+}
+
+.date>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  width: 17vh
+}
+
+.date p {
+  margin: 0;
+}
+
+.deleteBtn {
+  height: 2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  background-color: #143A63;
+  color: var(--primary);
+  font-size: 1.6rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: #00c46a;
+  color: #143A63;
+}
+
+
+/*small devices and down*/
+@media (max-width: 767.98px) {
+
+
+  .date {
+    display: none;
+  }
+
+  .emoji {
+    display: none;
+  }
+
+}
+
+/*medium devices only*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+
+/* */
+@media (min-width: 1200px) {}

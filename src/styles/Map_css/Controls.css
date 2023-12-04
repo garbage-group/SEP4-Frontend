@@ -1,0 +1,38 @@
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+    /* Light grey background */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+    margin-bottom: 10px;
+    /* Space before the map starts */
+}
+
+.controls-container input {
+    padding: 5px 10px;
+    margin-right: 10px;
+    /* Space between inputs */
+    flex-grow: 1;
+    /* Inputs take up equal space */
+    border: 1px solid #ced4da;
+    /* Light grey border */
+    border-radius: 4px;
+}
+
+.controls-container button {
+    padding: 5px 15px;
+    background-color: #007bff;
+    /* Bootstrap primary blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.controls-container button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}

@@ -1,39 +1,71 @@
 import React from "react";
-import { RouterProvider, createHashRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter, Navigate } from "react-router-dom";
 import { Overview } from "./routes/Overview";
-import { Collectors } from "./routes/Collectors";
+import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
 import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
-import { Root } from './routes/Root'
+import { Root } from "./routes/Root";
+import { UserListProvider } from "./contexts/UserListContext";
+
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Login } from "./routes/Login";
+import { AuthProvider } from "./contexts/LoginAuthContext";
+import BinList from "./components/Bin/BinList";
+import Bin from "./components/Bin/Bin";
+import BinForm from "./components/Bin/BinForm";
+import { BinProvider } from "./contexts/BinContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
-export default App;
 const router = createHashRouter([
+  {
+    path: "/",
+    element: <Login />,
+  },
+
   {
     path: "/",
     element: <Root />,
     children: [
       {
-        path: "/",
-        element: <Overview />
+        path: "/overview",
+        element: <Overview />,
       },
       {
-        path: "/collectors",
-        element: <Collectors />
+        path: "/users",
+        element: <Users />,
       },
+
       {
         path: "/bins",
-        element: <Bins />
+        element: <Bins />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to={"binList"} replace />,
+          },
+          {
+            path: "binList",
+            element: <BinList />,
+          },
+          {
+            path: "binList/:id",
+            element: <Bin />,
+          },
+          {
+            path: "form",
+            element: <BinForm />,
+          },
+        ],
       },
       {
         path: "/map",
-        element: <Map />
+        element: <Map />,
       },
       {
         path: "/analytics",
-        element: <Analytics />
+        element: <Analytics />,
       },
     ],
   },
@@ -41,13 +73,22 @@ const router = createHashRouter([
 
 const queryClient = new QueryClient();
 
-
 export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <BinProvider>
+            <UserListProvider>
+              <NotificationProvider>
+                <RouterProvider router={router} />
+              </NotificationProvider>
+            </UserListProvider>
+          </BinProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
-  )
+  );
 }
+
+export default App;

@@ -1,0 +1,30 @@
+.sidebar {
+  flex-basis: 35rem;
+  /* background-color: var(--color-dark--1); */
+  background-color: #143A63;
+  padding: 3rem 5rem 3.5rem 3rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outlet-style {
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+
+/*small devices and down*/
+@media (max-width: 767.98px) {
+  .sidebar {
+    padding: 5px;
+  }
+}
+
+/*medium devices only*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+
+/* */
+@media (min-width: 1200px) {}

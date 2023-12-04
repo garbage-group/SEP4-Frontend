@@ -16,8 +16,13 @@ body {
 
 }
 
+body::-webkit-scrollbar {
+  width: 0;
+}
+
 .body-container {
   display: flex;
+  height: 92vh;
 }
 
 .outlet {

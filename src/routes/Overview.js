@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/overview_css/Overview.css";
 import { Info } from "../components/overview/Info";
 import { ListOfCollectors } from "../components/overview/ListofCollectors";
-import { Map } from "../components/overview/MapOverview";
+import { MapOverview } from "../components/overview/MapOverview";
 
 export function Overview() {
   return (
@@ -11,7 +11,7 @@ export function Overview() {
 
       <div className="map-list-container">
         <div className="map-placeholder">
-          <Map />
+          <MapOverview />
         </div>
         <ListOfCollectors />
       </div>
