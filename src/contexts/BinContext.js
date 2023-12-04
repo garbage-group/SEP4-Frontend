@@ -8,33 +8,31 @@ const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 const BinContext = createContext();
 
-
-function BinProvider({children}){
-    const [bins, setBins] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [currentBin, setCurrentBin] = useState({});
+function BinProvider({ children }) {
+  const [bins, setBins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentBin, setCurrentBin] = useState({});
   const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
 
-    useEffect(function(){
-      
-      let intervalId;
-        async function fetchBins(){
-            try{
-                setIsLoading(true);
-                const res = await fetch(`${BASE_URL}/bins/all`);
-                const data = await res.json();
-                setBins(data);
-            } catch (e) {
-                alert(e.message);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        fetchBins();
-    },[]);
+  useEffect(function () {
+    let intervalId;
+    async function fetchBins() {
+      try {
+        setIsLoading(true);
+        const res = await fetch(`${BASE_URL}/bins/all`);
+        const data = await res.json();
+        setBins(data);
+      } catch (e) {
+        alert(e.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchBins();
+  }, []);
 
   //get bin by id
   async function getBin(id) {
@@ -166,21 +164,6 @@ function BinProvider({children}){
       {children}
     </BinContext.Provider>
   );
-  return (
-    <BinContext.Provider
-      value={{
-        bins,
-        isLoading,
-        currentBin,
-        getBin,
-        updateBin,
-        createBin,
-        deleteBin,
-      }}
-    >
-      {children}
-    </BinContext.Provider>
-  );
 }
 
 //Create custom hook to consume BinContext
@@ -190,12 +173,6 @@ function useBins() {
     throw new Error("Bin context was used outside the BinProvider ");
   }
   return context;
-  const context = useContext(BinContext);
-  if (context === undefined) {
-    throw new Error("Bin context was used outside the BinProvider ");
-  }
-  return context;
 }
 
-export { BinProvider, useBins };
 export { BinProvider, useBins };
