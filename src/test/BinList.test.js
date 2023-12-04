@@ -5,9 +5,6 @@ import BinList from "../components/Bin/BinList";
 import { useBins } from "../contexts/BinContext";
 
 
-
-
-
 jest.mock("../contexts/BinContext.js");
 
 jest.mock("../components/Bin/BinItem", () => ({ bin }) => (

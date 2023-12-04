@@ -40,7 +40,7 @@ function BinItem({ bin }) {
             )}
           </div>
         </time>
-        <button className="deleteBtn" onClick={handleDelete}>
+        <button className="deleteBtn" onClick={handleDelete} data-testid="deleteBin">
           &times;
         </button>
       </Link>
