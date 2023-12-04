@@ -18,6 +18,7 @@ body {
 
 .body-container {
   display: flex;
+  height: 92vh;
 }
 
 .outlet {
