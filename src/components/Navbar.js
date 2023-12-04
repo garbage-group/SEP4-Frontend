@@ -5,6 +5,7 @@ import logo from "../images/logo.png";
 import "../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/LoginAuthContext";
+import Notifications from "../components/Notifications";
 
 
 export function Navbar() {
@@ -33,7 +34,8 @@ export function Navbar() {
       </div>
 
       <div className="top-nav-right">
-        <NotificationsNoneOutlinedIcon />
+        <Notifications />
+        {/* <NotificationsNoneOutlinedIcon /> */}
         <button className="icon-button" onClick={handleLogout}>
           <LogoutIcon />
         </button>

@@ -13,8 +13,6 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
-
-// import { BinProvider } from "./contexts/BinContext";
 import Bin from "./components/Bin/Bin";
 import BinForm from "./components/Bin/BinForm";
 import { BinProvider } from "./contexts/BinContext";
@@ -89,6 +87,7 @@ export function App() {
           </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
+      
     </>
   );
 }
