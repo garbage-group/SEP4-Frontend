@@ -66,7 +66,7 @@ function Bin() {
 
   // Loading spinner while data is being fetched
   if (isLoading) {
-    return <Spinner data-testid="spinner" />;
+    return <Spinner />;
   }
 
   //handle edit

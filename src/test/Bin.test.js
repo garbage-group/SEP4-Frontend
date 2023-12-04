@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import Bin from "../components/Bin/Bin";
 import { useBins } from "../contexts/BinContext";
 import {  useParams } from "react-router-dom";
-import { Spinner } from "../components/Spinner";
+
 
 
 // Mock the useBins context
