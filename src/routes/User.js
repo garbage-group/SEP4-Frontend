@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button, Chip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
@@ -15,6 +15,7 @@ import "../styles/user_css/User.css";
 import { LoadingComponent } from "../components/LoadingError";
 
 const currentUserRole = localStorage.getItem("role");
+console.log(currentUserRole);
 
 // Users component
 function Users() {
@@ -29,11 +30,59 @@ function Users() {
 
 // UserListContainer component
 function UserListContainer() {
+  const [currentUserRole, setCurrentUserRole] = useState(
+    localStorage.getItem("role")
+  );
+
+  useEffect(() => {
+    // Update the role when it changes in localStorage
+    setCurrentUserRole(localStorage.getItem("role"));
+  }, []);
+
   // Use UserListContext to fetch user data
   const { isLoading, isError, data, refreshData } = useUserListContext();
 
   function handleRefreshClick() {
     refreshData();
+  }
+
+  function handleAddButtonClick() {
+    alert("Clicked");
+  }
+
+  // Extra elements component
+  function ExtraElements({ region, role }) {
+    return (
+      <div className="extra-elements">
+        <Chip
+          icon={<PlaceOutlinedIcon />}
+          label={region ? region : "N/A"}
+          sx={{ m: 1 }}
+          className="extra-elements-chip"
+        />
+        <Chip
+          label={role ? role : "N/A"}
+          icon={<PersonOutlineOutlinedIcon />}
+          className="extra-elements-chip"
+          sx={{ m: 1 }}
+        />
+
+        {/* Disables edit and remove button if user is not admin */}
+        <PersonRemoveOutlinedIcon
+          data-testid="remove-button"
+          className={`userminus-icon ${
+            currentUserRole !== "municipality worker" ? "disabled" : ""
+          }`}
+        />
+
+        <ModeEditOutlineOutlinedIcon
+          data-testid="edit-button"
+          className={`useredit-icon ${
+            currentUserRole !== "municipality worker" ? "disabled" : ""
+          }`}
+        />
+      </div>
+    );
   }
 
   return (
@@ -48,8 +97,11 @@ function UserListContainer() {
           <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} />
           <Button
             variant="contained"
-            className="add-member-button"
+            className={`add-member-button ${
+              currentUserRole !== "municipality worker" ? "disabled" : ""
+            }`}
             endIcon={<PersonAddAltRoundedIcon />}
+            onClick={handleAddButtonClick}
           >
             Add User
           </Button>
@@ -79,45 +131,6 @@ function UserListContainer() {
               }
             />
           ))}
-      </div>
-    </div>
-  );
-}
-
-// Extra elements component
-function ExtraElements({ region, role }) {
-  return (
-    <div className="extra-elements">
-      <Chip
-        icon={<PlaceOutlinedIcon />}
-        label={region ? region : "N/A"}
-        sx={{ m: 1 }}
-        className="extra-elements-chip"
-      />
-      <Chip
-        label={role ? role : "N/A"}
-        icon={<PersonOutlineOutlinedIcon />}
-        className="extra-elements-chip"
-        sx={{ m: 1 }}
-      />
-
-      {/* Disables edit and remove button if user is not admin */}
-      <div className="userminus-wrapper">
-        <PersonRemoveOutlinedIcon
-          data-testid="remove-button"
-          className={`userminus-icon ${
-            currentUserRole !== "municipality worker" ? "disabled" : ""
-          } `}
-        />
-      </div>
-
-      <div className="userminus-wrapper">
-        <ModeEditOutlineOutlinedIcon
-          data-testid="edit-button"
-          className={`useredit-icon ${
-            currentUserRole !== "municipality worker" ? "disabled" : ""
-          }  `}
-        />
       </div>
     </div>
   );

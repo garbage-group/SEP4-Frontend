@@ -103,7 +103,7 @@
   margin-top: 5px;
 }
 
-.userminus-icon.disabled {
+.disabled {
   pointer-events: none;
   opacity: 0.5;
   background-color: #feebe6;
@@ -120,15 +120,14 @@
   cursor: pointer;
   background-color: #c7e5e3;
   border-radius: 10px;
-  /* padding: 7px; */
 }
 
-.useredit-icon.disabled {
+/* .useredit-icon.disabled {
   pointer-events: none;
   opacity: 0.5;
   background-color: #c7e5e3;
   border-radius: 10px;
-}
+} */
 
 .loadingTruck {
   transform: scale(3);
