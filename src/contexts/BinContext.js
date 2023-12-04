@@ -23,8 +23,14 @@ function BinProvider({ children }) {
         return;
       }
       try {
+
+        
         setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/bins/all`);
+        const res = await fetch(`${BASE_URL}/bins/all`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
         const data = await res.json();
         setBins(data);
       } catch (e) {
