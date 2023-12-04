@@ -13,7 +13,6 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import "../styles/user_css/User.css";
 // import loadingTruck from "../images/users/loadingTruck.gif";
 import { LoadingComponent } from "../components/LoadingError";
-import { useAuth } from "../contexts/LoginAuthContext";
 
 const currentUserRole = localStorage.getItem("role");
 
