@@ -16,7 +16,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
-// import { Spinner } from "./components/Spinner";
+// import { Spinner } from "./components/Spinner";a
 import { BinProvider } from "./contexts/BinContext";
 
 const router = createHashRouter([
