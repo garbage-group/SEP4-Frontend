@@ -1,0 +1,48 @@
+/* MapOverview.css */
+
+.map-container {
+    width: 100%;
+    height: 100vh;
+    /* Adjust the height as needed */
+}
+
+/* Customize Leaflet Popup */
+.custom-popup .leaflet-popup-content-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.custom-popup .leaflet-popup-content {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.custom-popup .leaflet-popup-tip-container {
+    width: 20px;
+    height: 11px;
+}
+
+.custom-popup .leaflet-popup-tip {
+    background-color: #fff;
+}
+
+/* Data sections within the popup */
+.data-section {
+    margin-bottom: 12px;
+}
+
+.data-section strong {
+    font-weight: 600;
+}
+
+/* Link styles */
+.custom-popup a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.custom-popup a:hover {
+    text-decoration: underline;
+}

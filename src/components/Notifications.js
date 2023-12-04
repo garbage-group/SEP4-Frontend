@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import { useNotifications } from '../contexts/NotificationsContext';
+import { useNotifications } from '../contexts/NotificationContext';
 import '../styles/Notifications.css'; // Link to your new CSS file
 
 const Notifications = () => {
@@ -23,7 +23,7 @@ const Notifications = () => {
             <div
               key={notification.id}
               className={`notification-dropdown-item ${notification.unread ? 'unread' : ''}`}
-              onClick={() => markAsRead(notification.id)} 
+              onClick={() => markAsRead(notification.id)}
             >
               {notification.message}
             </div>
