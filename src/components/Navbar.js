@@ -1,15 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/LoginAuthContext";
 import Notifications from "../components/Notifications";
 
-
 export function Navbar() {
-
   const { logout } = useAuth();
 
   const navigate = useNavigate();
@@ -17,7 +14,6 @@ export function Navbar() {
   function handleLogout() {
     logout();
     navigate("/", { replace: true });
-
   }
 
   return (
@@ -40,7 +36,6 @@ export function Navbar() {
           <LogoutIcon />
         </button>
       </div>
-
     </div>
   );
 }

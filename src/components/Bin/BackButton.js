@@ -8,6 +8,7 @@ function BackButton({ children, className }) {
       onClick={(e) => {
         e.preventDefault();
         navigate(-1);
+        // eslint-disable-next-line no-lone-blocks
         {
           /*This will navigate to 1 history back in url */
         }

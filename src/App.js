@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouterProvider, createHashRouter, Navigate } from "react-router-dom";
 import { Overview } from "./routes/Overview";
 import { Users } from "./routes/User";
@@ -43,7 +43,7 @@ const router = createHashRouter([
         children: [
           {
             path: "",
-            element: <Navigate to={"binList"} replace/>
+            element: <Navigate to={"binList"} replace />,
           },
           {
             path: "binList",
@@ -51,11 +51,11 @@ const router = createHashRouter([
           },
           {
             path: "binList/:id",
-            element: <Bin />
+            element: <Bin />,
           },
           {
             path: "form",
-            element: <BinForm />
+            element: <BinForm />,
           },
         ],
       },
@@ -87,7 +87,6 @@ export function App() {
           </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
-      
     </>
   );
 }
