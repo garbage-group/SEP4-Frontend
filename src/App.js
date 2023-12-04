@@ -10,6 +10,7 @@ import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
+import { NotificationsProvider } from "./contexts/NotificationsContext";
 
 
 const router = createHashRouter([
@@ -54,9 +55,12 @@ export function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
+        <NotificationsProvider>
           <RouterProvider router={router} />
+          </NotificationsProvider>
         </AuthProvider>
       </QueryClientProvider>
+      
     </>
   )
 }
