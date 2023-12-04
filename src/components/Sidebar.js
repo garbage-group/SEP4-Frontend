@@ -5,11 +5,13 @@ import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AnalyticsOutlinedIcon from "@mui/icons-material/AnalyticsOutlined";
-import "../styles/Sidebar.css";
 import { NavLink } from "react-router-dom";
+
+import "../styles/Sidebar.css";
 
 export function Sidebar() {
   const role = localStorage.getItem("role");
+
   return (
     <div className="sidebar-container">
       <div className="navs">
@@ -21,8 +23,8 @@ export function Sidebar() {
         />
 
         <NavItem
-          to="/collectors"
-          linkText="Collectors"
+          to="/users"
+          linkText="User"
           icon={<GroupOutlinedIcon />}
           className="nav-element"
         />

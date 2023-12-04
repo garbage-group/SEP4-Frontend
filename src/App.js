@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { RouterProvider, createHashRouter, Navigate } from "react-router-dom";
 import { Overview } from "./routes/Overview";
-import { Collectors } from "./routes/Collectors";
+import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
 import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
-import { Root } from './routes/Root'
+import { Root } from "./routes/Root";
+import { UserListProvider } from "./contexts/UserListContext";
+
 import "../src/styles/App.css";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
 
-import { BinProvider } from "./contexts/BinContext";
+// import { BinProvider } from "./contexts/BinContext";
 import Bin from "./components/Bin/Bin";
 import BinForm from "./components/Bin/BinForm";
-
+import { BinProvider } from "./contexts/BinContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 const router = createHashRouter([
   {
@@ -29,12 +32,13 @@ const router = createHashRouter([
     children: [
       {
         path: "/overview",
-        element: <Overview />
+        element: <Overview />,
       },
       {
-        path: "/collectors",
-        element: <Collectors />
+        path: "/users",
+        element: <Users />,
       },
+
       {
         path: "/bins",
         element: <Bins />,
@@ -45,7 +49,7 @@ const router = createHashRouter([
           },
           {
             path: "binList",
-            element: <BinList />
+            element: <BinList />,
           },
           {
             path: "binList/:id",
@@ -59,11 +63,11 @@ const router = createHashRouter([
       },
       {
         path: "/map",
-        element: <Map />
+        element: <Map />,
       },
       {
         path: "/analytics",
-        element: <Analytics />
+        element: <Analytics />,
       },
     ],
   },
@@ -71,19 +75,22 @@ const router = createHashRouter([
 
 const queryClient = new QueryClient();
 
-
 export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <BinProvider>
-            <RouterProvider router={router} />
+            <UserListProvider>
+              <NotificationProvider>
+                <RouterProvider router={router} />
+              </NotificationProvider>
+            </UserListProvider>
           </BinProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>
-  )
+  );
 }
 
 export default App;

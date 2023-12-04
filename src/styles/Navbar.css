@@ -5,8 +5,7 @@
   padding: 0 20px;
   width: 100%;
   height: 9vh;
-  background-image: url("../images//svgs/sidebar_bg.svg");
-  background-size: contain;
+  background-image: url("../images/svgs/sidebar_bg.svg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,7 +13,6 @@
 }
 
 .navbar-logo {
-  margin-top: 10.1%;
   height: 100px;
 }
 
@@ -42,7 +40,6 @@
   background-color: #fff;
 }
 
-/* Icon styles */
 .top-nav-right {
   display: flex;
   align-items: center;
@@ -61,25 +58,11 @@
   transform: scale(1.1);
 }
 
-html,
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-
-.top-nav-right svg,
-.logout>svg {
-  margin-left: 30px;
-  font-size: 30px;
-  vertical-align: middle;
-}
-
 .icon-button {
-  background: none;
+  background: transparent;
   border: none;
-  cursor: pointer;
   padding: 0;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -87,14 +70,10 @@ body {
 
 .icon-button:focus {
   outline: none;
-
 }
-
 
 /* Responsive adjustments */
 @media (max-width: 767.98px) {
-
-  /* Small screens: adjust navbar height, logo size, and spacing */
   .navbar-container {
     height: auto;
     flex-direction: column;
@@ -102,8 +81,6 @@ body {
   }
 
   .navbar-logo {
-    /* Smaller logo for mobile */
-    margin-top: 0;
     height: 60px;
     margin-bottom: 10px;
   }
@@ -122,59 +99,42 @@ body {
   .top-nav-right svg {
     margin-left: 15px;
   }
-
-
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-  /* Medium screens: adjust padding and logo size */
-
   .navbar-container {
     padding: 5px 15px;
   }
 
   .navbar-logo {
     height: 80px;
-    /* Adjust logo size for tablets */
   }
 
   .search-bar input {
     width: 180px;
-    /* Adjust width for tablets */
   }
 
   .top-nav-right svg {
     margin-left: 20px;
-    /* Adjust spacing for tablets */
   }
 }
 
 @media (min-width: 1600px) {
-
-  /* Large screens: adjust spacing and layout */
   .navbar-container {
     padding: 5px 40px;
   }
 
   .search-bar input {
     width: 250px;
-    /* Larger input field for wider screens */
   }
 
   .top-nav-right svg {
     margin-left: 40px;
-    /* More space between icons for larger screens */
   }
 }
 
-/* Ensuring the overflow is hidden for all screen sizes */
 html,
 body {
   max-width: 100%;
   overflow-x: hidden;
-}
-
-.top-nav-right svg,
-.logout>svg {
-  vertical-align: middle;
 }

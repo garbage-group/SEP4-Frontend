@@ -1,41 +1,40 @@
-import { useContext, useEffect, useState, createContext } from "react";
+import { useContext, useEffect, useState } from "react";
+// import { createContext } from "vm";
+import { createContext } from "react";
+import { useAuth } from "./LoginAuthContext";
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
 
 const BinContext = createContext();
 
-function BinProvider({ children }) {
-  const [bins, setBins] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentBin, setCurrentBin] = useState({});
-  // const {token, isAuthenticated} = useAuth();
+
+function BinProvider({children}){
+    const [bins, setBins] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [currentBin, setCurrentBin] = useState({});
+  const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
+  const fetchInterval = 3600000; // 1 hour in milliseconds
 
-  //get all bins
-  useEffect(
-    function () {
-      async function fetchBins() {
-        try {
-          setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/bins/all`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          const data = await res.json();
-          setBins(data);
-        } catch (e) {
-          alert(e.message);
-        } finally {
-          setIsLoading(false);
+    useEffect(function(){
+      
+      let intervalId;
+        async function fetchBins(){
+            try{
+                setIsLoading(true);
+                const res = await fetch(`${BASE_URL}/bins/all`);
+                const data = await res.json();
+                setBins(data);
+            } catch (e) {
+                alert(e.message);
+            } finally {
+                setIsLoading(false);
+            }
         }
-      }
-      if (isAuthenticated) fetchBins();
-    },
-    [token, isAuthenticated]
-  );
+        fetchBins();
+    },[]);
 
   //get bin by id
   async function getBin(id) {
@@ -98,6 +97,23 @@ function BinProvider({ children }) {
     }
   }
 
+  async function getBinHumidity(binId) {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${BASE_URL}/bins/${binId}/humidity`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const humidityData = await response.json();
+      setCurrentBinHumidity(humidityData);
+    } catch (error) {
+      console.error("Error fetching humidity data:", error);
+      alert("There was an error loading the humidity data: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   //update bin by id
   //update bin by id
   async function updateBin(id, updatedBin) {
@@ -141,6 +157,22 @@ function BinProvider({ children }) {
         isLoading,
         currentBin,
         getBin,
+        currentBinHumidity,
+        getBinHumidity,
+        createBin,
+        deleteBin,
+      }}
+    >
+      {children}
+    </BinContext.Provider>
+  );
+  return (
+    <BinContext.Provider
+      value={{
+        bins,
+        isLoading,
+        currentBin,
+        getBin,
         updateBin,
         createBin,
         deleteBin,
@@ -158,6 +190,12 @@ function useBins() {
     throw new Error("Bin context was used outside the BinProvider ");
   }
   return context;
+  const context = useContext(BinContext);
+  if (context === undefined) {
+    throw new Error("Bin context was used outside the BinProvider ");
+  }
+  return context;
 }
 
+export { BinProvider, useBins };
 export { BinProvider, useBins };
