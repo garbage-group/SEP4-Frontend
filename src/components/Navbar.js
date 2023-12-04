@@ -13,7 +13,7 @@ export function Navbar() {
 
   const navigate = useNavigate();
 
-  function handleLogout(e) {
+  function handleLogout() {
     logout();
     navigate("/", { replace: true });
 

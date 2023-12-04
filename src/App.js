@@ -1,8 +1,5 @@
-import React from "react";
-
-import { RouterProvider, createHashRouter } from "react-router-dom";
-// import { QueryClient, QueryClientProvider } from "react-query";
-
+import React, { useState } from "react";
+import { RouterProvider, createHashRouter, Navigate } from "react-router-dom";
 import { Overview } from "./routes/Overview";
 import { Users } from "./routes/User";
 import { Bins } from "./routes/Bins";
@@ -16,7 +13,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
-// import { Spinner } from "./components/Spinner";a
+
+// import { BinProvider } from "./contexts/BinContext";
+import Bin from "./components/Bin/Bin";
+import BinForm from "./components/Bin/BinForm";
 import { BinProvider } from "./contexts/BinContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 
@@ -45,15 +45,19 @@ const router = createHashRouter([
         children: [
           {
             path: "",
-            element: <BinList />,
+            element: <Navigate to={"binList"} replace/>
           },
           {
             path: "binList",
             element: <BinList />,
           },
           {
-            path: "bins/form",
-            element: <p>Form</p>,
+            path: "binList/:id",
+            element: <Bin />
+          },
+          {
+            path: "form",
+            element: <BinForm />
           },
         ],
       },

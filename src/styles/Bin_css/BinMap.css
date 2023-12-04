@@ -2,6 +2,32 @@
   flex: 1;
   height: 100%;
   position: relative;
-  background-color: rgb(28, 153, 153);
   border-radius: 10px;
 }
+
+.map {
+  height: 100%;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: #00c46a;
+  color: #143A63 ;
+  border-radius: 5px;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 0.8rem;
+  display: block;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.leaflet-popup .leaflet-popup-content p:first-child {
+  font-size: 1.1rem;
+  line-height: 0.1;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: #00c46a;
+}
+

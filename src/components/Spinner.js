@@ -5,8 +5,8 @@ export function Spinner() {
     return (
         <div className='spinner'>
             <BallTriangle
-                height={100}
-                width={100}
+                height={60}
+                width={60}
                 radius={5}
                 color="#FF3131"
                 ariaLabel="ball-triangle-loading"

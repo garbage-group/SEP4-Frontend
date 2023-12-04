@@ -35,10 +35,12 @@ export function Login() {
         e.preventDefault();
         setIsLoading(true);
 
+        const URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate"
+
         if (userName && password) {
                 try {
 
-                    const res = await fetch("https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate", {
+                    const res = await fetch(URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -56,12 +58,8 @@ export function Login() {
                     const extractedData = extractDataFromJWT(jwtToken);
             
                     // Update the user context with the token, username, and role
-                    updateAuthInfo(data.token, extractedData.username, extractedData.role);
-                    console.log(extractedData.role);
+                    await updateAuthInfo(data.token, extractedData.username, extractedData.role);       
                     
-                    
-                    
-                    navigate("/overview");
 
                     // Store login credentials in localStorage
                     if (check) {
@@ -71,6 +69,8 @@ export function Login() {
                         localStorage.removeItem("userName", userName);
                         localStorage.removeItem("password", password);
                     }
+                    
+                    navigate("/overview");
 
                 } catch (err) {
                     setError(err.message)
