@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-// import { createContext } from "vm";
 import { createContext } from "react";
-import { useAuth } from "./LoginAuthContext";
+
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
@@ -20,6 +19,9 @@ function BinProvider({ children }) {
   useEffect(function () {
     let intervalId;
     async function fetchBins() {
+      if(!isAuthenticated || !token){
+        return;
+      }
       try {
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/bins/all`);
@@ -31,8 +33,20 @@ function BinProvider({ children }) {
         setIsLoading(false);
       }
     }
-    fetchBins();
-  }, []);
+    if(isAuthenticated){
+
+      fetchBins();
+      intervalId = setInterval(fetchBins, fetchInterval);
+    }
+
+    return() => {
+      if(intervalId){
+        clearInterval(intervalId);
+      }
+    }
+  }, [isAuthenticated, token]);
+
+  
 
   //get bin by id
   async function getBin(id) {
@@ -57,6 +71,9 @@ function BinProvider({ children }) {
 
   //create new bin
   async function createBin(newBin) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
     try {
       setIsLoading(true);
       const res = await fetch(`${BASE_URL}/bins`, {
@@ -78,6 +95,9 @@ function BinProvider({ children }) {
 
   //delete bin by id
   async function deleteBin(id) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
     try {
       setIsLoading(true);
       await fetch(`${BASE_URL}/bins/delete/${id}`, {
@@ -96,6 +116,9 @@ function BinProvider({ children }) {
   }
 
   async function getBinHumidity(binId) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
     try {
       setIsLoading(true);
       const response = await fetch(`${BASE_URL}/bins/${binId}/humidity`, {
@@ -115,6 +138,9 @@ function BinProvider({ children }) {
   //update bin by id
   //update bin by id
   async function updateBin(id, updatedBin) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
     try {
       const newUpdatedBin = {
         id: updatedBin.id,
@@ -159,6 +185,7 @@ function BinProvider({ children }) {
         getBinHumidity,
         createBin,
         deleteBin,
+        updateBin
       }}
     >
       {children}
