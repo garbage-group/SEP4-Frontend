@@ -19,9 +19,7 @@ function BinProvider({ children }) {
   useEffect(function () {
     let intervalId;
     async function fetchBins() {
-      if(!isAuthenticated || !token){
-        return;
-      }
+   
       try {
 
         
@@ -56,6 +54,10 @@ function BinProvider({ children }) {
 
   //get bin by id
   async function getBin(id) {
+
+    if (!isAuthenticated || !token) {
+      return;
+    }
     if (Number(id) === currentBin.id) return;
 
     try {
