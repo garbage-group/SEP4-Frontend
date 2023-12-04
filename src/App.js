@@ -18,6 +18,7 @@ import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
 // import { Spinner } from "./components/Spinner";a
 import { BinProvider } from "./contexts/BinContext";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 const router = createHashRouter([
   {
@@ -77,7 +78,9 @@ export function App() {
         <AuthProvider>
           <BinProvider>
             <UserListProvider>
-              <RouterProvider router={router} />
+              <NotificationProvider>
+                <RouterProvider router={router} />
+              </NotificationProvider>
             </UserListProvider>
           </BinProvider>
         </AuthProvider>
