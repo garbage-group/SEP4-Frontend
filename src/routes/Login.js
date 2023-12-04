@@ -9,9 +9,11 @@ import "../styles/Login.css";
 import { Button } from "../components/Button";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/LoginAuthContext";
+import { Spinner } from "../components/Spinner";
 
 
 export function Login() {
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -31,10 +33,14 @@ export function Login() {
     //Handles login process
     async function handleSignIn(e) {
         e.preventDefault();
+        setIsLoading(true);
+
+        const URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate"
 
         if (userName && password) {
                 try {
-                    const res = await fetch("https://garbage-backend-service-kq2hras2oq-ey.a.run.app/users/authenticate", {
+
+                    const res = await fetch(URL, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -45,18 +51,15 @@ export function Login() {
                         throw new Error("Username and password do not match")
                     }
                     const data = await res.json();
+                    
                 
                     //extract username and role from jwt token
                     const jwtToken = data.token;
                     const extractedData = extractDataFromJWT(jwtToken);
             
                     // Update the user context with the token, username, and role
-                    updateAuthInfo(data.token, extractedData.username, extractedData.role);
-                    console.log(extractedData.role);
+                    await updateAuthInfo(data.token, extractedData.username, extractedData.role);       
                     
-                    
-                    
-                    navigate("/overview");
 
                     // Store login credentials in localStorage
                     if (check) {
@@ -66,13 +69,18 @@ export function Login() {
                         localStorage.removeItem("userName", userName);
                         localStorage.removeItem("password", password);
                     }
+                    
+                    navigate("/overview");
 
                 } catch (err) {
                     setError(err.message)
+                } finally {
+                    setIsLoading(false);
                 }
             
         } else {
             setError("Username or password field is empty");
+            setIsLoading(false);
         }
     }
 
@@ -97,6 +105,7 @@ export function Login() {
 
 
     return (
+        isLoading ? <Spinner /> :
         <>
             <div className="page-container">
 

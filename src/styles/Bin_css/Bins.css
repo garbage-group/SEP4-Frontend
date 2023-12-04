@@ -1,0 +1,7 @@
+.mainContainer {
+  height: 90vh;
+  padding: 0 0.5rem ;
+  overscroll-behavior-y: none;
+  display: flex;
+  position: relative;
+}

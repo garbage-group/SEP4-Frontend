@@ -1,38 +1,21 @@
 import React, { useState } from "react";
-
+import { useBins } from "../contexts/BinContext";
 import "../styles/HumidityDisplay.css";
 
 function HumidityDisplay() {
   const [binId, setBinId] = useState("");
-  const [humidity, setHumidity] = useState(null);
-  const [loading, setLoading] = useState(false); // added loading state
-  const [error, setError] = useState(""); // added error state
-
-  const fetchHumidity = async () => {
-    setLoading(true); // start loading
-    setError(""); // reset error state
-    try {
-      const response = await fetch(
-        `http://localhost:8080/bins/${binId}/humidity`
-      ); // URL provided by the Cloud team
-
-      if (!response.ok) {
-        throw new Error("Error fetching data");
-      }
-
-      const humidityValue = await response.json();
-      setHumidity(humidityValue);
-    } catch (err) {
-      setError(err.message); // set error message
-      setHumidity(null); // reset humidity
-    } finally {
-      setLoading(false); // end loading regardless of result
-    }
-  };
+  const { getBinHumidity, currentBinHumidity, isLoading, error } = useBins();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetchHumidity();
+    getBinHumidity(binId);
+  };
+
+  const formatDateAndTime = (dateTimeString) => {
+    const dateObj = new Date(dateTimeString);
+    const date = dateObj.toLocaleDateString(); // e.g., "11/30/2023"
+    const time = dateObj.toLocaleTimeString(); // e.g., "11:35:55 AM"
+    return { date, time };
   };
 
   return (
@@ -46,11 +29,13 @@ function HumidityDisplay() {
         />
         <button type="submit">Get Humidity</button>
       </form>
-      {loading && <p>Loading...</p>} {/* Show loading text */}
-      {error && <p>{error}</p>} {/* Display error message */}
-      {humidity !== null && (
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {currentBinHumidity && (
         <div>
-          <p>Humidity Level: {humidity.value}</p>
+          <p>Humidity Level: {currentBinHumidity.value}</p>
+          <p>Date: {formatDateAndTime(currentBinHumidity.dateTime).date}</p>
+          <p>Time: {formatDateAndTime(currentBinHumidity.dateTime).time}</p>
         </div>
       )}
     </div>

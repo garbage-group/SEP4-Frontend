@@ -1,0 +1,154 @@
+/* Styles for the container of bins */
+.bin {
+  padding: 0rem 2rem;
+  background-color: white;
+  border-radius: 7px;
+  overflow: auto;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 90%;
+}
+
+/* Styles for individual rows within the container */
+.row {
+  width: 48%;
+  margin-bottom: 10px;
+}
+
+
+/* Styles for heading elements within the .bin container */
+.bin h6 {
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 0;
+  margin-top: 0.5em;
+  margin-bottom: 0;
+
+}
+
+/* Styles for h3 elements within the .bin container */
+.bin h3 {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  padding: 0rem 1rem;
+
+}
+
+
+/* Styles for spans within h3 elements */
+.bin h3 span {
+  font-size: 3.2rem;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+/* Styles for paragraph elements within the .bin container */
+.bin p {
+  font-size: 1rem;
+}
+
+/* Styles for links within the .bin container */
+.bin a:link,
+.bin a:visited {
+  font-size: 1.6rem;
+  color: var(--color-brand--1);
+}
+
+/* Styles for buttons with the class .btn */
+.btn {
+  color: white;
+  text-transform: uppercase;
+  padding: 0.3rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  background-color: #143A63;
+
+}
+
+/* Hover styles for buttons with the class .btn */
+.btn:hover {
+  background-color: #00c46a;
+  color: #143A63;
+}
+
+/* Styles for elements with the class .binInput */
+.binInput {
+  background-color: #D1EEDF;
+  border-radius: 10px;
+}
+
+.binInput_disabled {
+  cursor: not-allowed;
+  color: #143A63;
+}
+
+.edit-button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  padding: 0 16px;
+  background-color: #143A63;
+  border-radius: 0.25rem;
+  border: 1px solid #143A63;
+  color: #fff;
+  font-size: 13px;
+  line-height: 28px;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.edit-button:hover {
+  background-color: #00c46a;
+  border-color: #00c46a;
+  color: #143A63;
+
+}
+
+.editbutton_disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 0px;
+  filter: brightness(0.7);
+  /* background-color: #6cb9cc; */
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.edit-save-button {}
+
+/*small devices and down*/
+@media (max-width: 767.98px) {
+  .bin {
+    display: block;
+    padding: 1vw;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttons-container {
+    width: 100%;
+  }
+}
+
+/*medium devices only*/
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+
+/* */
+@media (min-width: 1200px) {}
