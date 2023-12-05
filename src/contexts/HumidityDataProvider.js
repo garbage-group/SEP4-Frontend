@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/LoginAuthContext";
 
 const HumidityDataContext = createContext();
 
-export const HumidityDataProvider = ({ children }) => {
+const HumidityDataProvider = ({ children,binId }) => {
     const { token } = useAuth();
 
     const fetchHumidity = async ({ queryKey }) => {
@@ -33,3 +33,13 @@ export const HumidityDataProvider = ({ children }) => {
         </HumidityDataContext.Provider>
     );
 };
+
+const useHumidity = () => {
+    const context = useContext(HumidityDataContext);
+    if (context === undefined) {
+        throw new Error("HumidityContext was used outside the HumidityProvider ");
+    }
+    return context;
+};
+
+export { HumidityDataProvider, useHumidity };

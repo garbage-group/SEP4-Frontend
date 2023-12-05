@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "../../styles/overview_css/WeatherInfo.css"
 
 function WeatherInfo() {
     const [query, setQuery] = useState("");
