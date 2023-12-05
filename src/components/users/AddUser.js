@@ -5,6 +5,7 @@ import passwordIcon from '../../styles/images/password.png';
 import pencilIcon from '../../styles/images/pencil.png';
 import { Button } from '../Button';
 import { useUserManagement } from '../../contexts/UserContext';
+import Modal from '../Modal.js'; // Adjust the import path as necessary
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
@@ -12,17 +13,29 @@ const AddUser = () => {
   const [region, setRegion] = useState('Horsens North'); // Default to first option
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const USER_ROLE = "Garbage Collector";
   const { addUser, isLoading } = useUserManagement();
 
+  const showModal = (message) => {
+    setModalMessage(message);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalMessage('');
+  };
+
   async function handleAddUser() {
     if (!username || !fullName || !region || !password || !repeatPassword) {
-      alert('Please fill in all fields.');
+      showModal('Please fill in all fields.');
       return;
     }
 
     if (password !== repeatPassword) {
-      alert('Passwords do not match. Please re-enter your passwords.');
+      showModal('Passwords do not match. Please re-enter your passwords.');
       return;
     }
 
@@ -36,15 +49,15 @@ const AddUser = () => {
 
     try {
       await addUser(userData);
-      alert(`Successfully signed up: ${username}`);
+      showModal(`Successfully signed up: ${username}`);
       // Reset form after successful signup
       setUsername('');
       setFullName('');
-      setRegion('');
+      setRegion('Horsens North'); // Reset to the default value
       setPassword('');
       setRepeatPassword('');
     } catch (error) {
-      alert('Failed to sign up user. Please try again.');
+      showModal(error.message);
     }
   }
 
@@ -114,7 +127,11 @@ const AddUser = () => {
           </Button>
         </div>
       </div>
+      <Modal isOpened={isModalOpen} onClose={closeModal}>
+        {modalMessage}
+      </Modal>
     </div>
   );
 };
+
 export { AddUser };

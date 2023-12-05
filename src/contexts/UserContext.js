@@ -19,11 +19,24 @@ export function UserManagementProvider({ children }) {
                 },
                 body: JSON.stringify(userData),
             });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            // Check if the response has content and is of type JSON
+            const contentType = response.headers.get('content-type');
+            let data;
+            if (contentType && contentType.indexOf('application/json') !== -1) {
+                data = await response.json();
             }
-            const data = await response.json();
-            return data;
+            if (response.ok) {
+                return data;
+            } else {
+                // Handle different statuses
+                if (response.status === 409) {
+                    throw new Error(`Failed to sign up. Username: ${userData.username} already exists.`);
+                } else if (response.status === 500) {
+                    throw new Error('Error code 500, Failed to sign up user.');
+                } else {
+                    throw new Error(data?.message || 'An unknown error occurred.');
+                }
+            }
         } catch (error) {
             console.error('Error:', error);
             throw error; // Rethrow the error to be handled in the component
