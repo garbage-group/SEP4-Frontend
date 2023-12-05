@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../../styles/overview_css/Info.css";
+import { TrafficInformation } from "./TrafficInformation";
 
 function Info() {
   return (
@@ -18,14 +19,6 @@ function Info() {
         <CurrentTime />
       </div>
     </div>
-  );
-}
-
-function TrafficInformation() {
-  return (
-    <>
-      <p>Traffic Information</p>
-    </>
   );
 }
 

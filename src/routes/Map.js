@@ -1,9 +1,9 @@
+import { TrafficInformation } from "../components/overview/TrafficInformation";
+
 export function Map() {
-    return (
-        <div>
-            This is a beautiful map
-        </div>
-    )
+  return (
+    <div>
+      <TrafficInformation />
+    </div>
+  );
 }
-
-
