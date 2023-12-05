@@ -1,0 +1,50 @@
+.MuiTable-root {
+  /* color: white !important; */
+  border-radius: 10px;
+  width: 100% !important;
+  height: 100% !important;
+  /* border: 1px solid var(--accent) !important; */
+}
+
+.table-container {
+  width: 50vw;
+  height: 50vh;
+  background-color: #e0e0e0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.MuiTableCell-body {
+  /* background-color: aqua; */
+  border-bottom: 1px solid black !important;
+}
+
+.table-heading :nth-child(1) {
+  background-color: rgb(0, 255, 89) !important;
+  width: 6% !important;
+}
+
+.table-heading :nth-child(2) {
+  background-color: aqua !important;
+  width: 10% !important;
+}
+
+.table-heading :nth-child(3) {
+  background-color: bisque !important;
+  width: 21% !important;
+}
+
+.table-heading :nth-child(4) {
+  background-color: cadetblue;
+  width: 21% !important;
+}
+
+.table-heading :nth-child(5) {
+  width: 21% !important;
+}
+
+.table-heading :nth-child(6) {
+  background-color: gold !important;
+  width: 21% !important;
+}
