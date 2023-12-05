@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router";
 import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
+import Modal from "../Modal";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -22,7 +22,7 @@ function Bin() {
 
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading } = useBins();
-  const navigate = useNavigate();
+
 
   //extracting data from bin object;
   const {
@@ -41,6 +41,13 @@ function Bin() {
   );
   const [newLatitude, setNewLatitude] = useState(currentBin.latitude);
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   /*   // Accessing functions and data from BinContext
   const { getBin, currentBin, isLoading } = useBins(); */
@@ -72,6 +79,7 @@ function Bin() {
   //handle edit
   function handleEdit() {
     setIsDisabled(!isDisabled);
+    
   }
 
   //handle save
@@ -113,11 +121,20 @@ function Bin() {
     };
 
     updateBin(id, updatedBin);
-    navigate("/bins/binList");
+    setIsModalOpen(true);
+    
   }
 
   return (
     <div className="bin">
+      <Modal isOpened={isModalOpen} onClose={closeModal}>
+        <div className="savedImage">
+
+          <img src={require("../../images/popUp/tick.gif")} alt="" />
+          
+        </div>
+        <span>Data Updated</span>
+        </Modal>
       {/* Displaying Bin Id */}
       <div className="row">
         <h6>Bin</h6>
@@ -260,6 +277,8 @@ function Bin() {
           </button>
         </div>
       </div>
+
+      
     </div>
   );
 }
