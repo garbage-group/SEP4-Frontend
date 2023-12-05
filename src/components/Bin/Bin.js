@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router";
 import { Spinner } from "../Spinner";
@@ -23,7 +22,7 @@ function Bin() {
 
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading } = useBins();
-  const navigate = useNavigate();
+
 
   //extracting data from bin object;
   const {
@@ -80,6 +79,7 @@ function Bin() {
   //handle edit
   function handleEdit() {
     setIsDisabled(!isDisabled);
+    
   }
 
   //handle save
@@ -122,7 +122,7 @@ function Bin() {
 
     updateBin(id, updatedBin);
     setIsModalOpen(true);
-    // navigate("/bins/binList");
+    
   }
 
   return (
