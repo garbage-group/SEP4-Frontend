@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./LoginAuthContext";
-import moment from "moment"; // Import moment.js for date manipulation
+import moment from "moment"; // Import moment.js for date manipulation 
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 const NotificationContext = createContext();
@@ -58,14 +58,19 @@ function NotificationProvider({ children }) {
                 }
                 const data = await response.json();
 
-                const notificationsWithScheduledTime = data.map((notification) => ({
-                    ...notification,
-                    scheduledPickupTime: calculateScheduledPickupTime(notification),
+                const notificationsWithScheduledTime = data.map((item) => ({
+                    ...item,
+                    id: item.binId, // Or use a unique identifier from your API
+                    message: `Bin ${item.binId} reached ${item.levelValue}% fill level`,
+                    scheduledPickupTime: calculateScheduledPickupTime(item),
                     unread: true, // Assuming all notifications are initially unread
-                }));
+                }))
+
+
 
                 setNotifications(notificationsWithScheduledTime);
                 updateUnreadCount(notificationsWithScheduledTime);
+
             } catch (error) {
                 console.error("Error fetching notifications:", error);
             }
@@ -97,5 +102,7 @@ function useNotifications() {
     }
     return context;
 }
+
+
 
 export { NotificationProvider, useNotifications };

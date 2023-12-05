@@ -8,14 +8,12 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import RefreshIcon from "@mui/icons-material/Refresh";
+// import RefreshIcon from "@mui/icons-material/Refresh";
 
 import "../styles/user_css/User.css";
-// import loadingTruck from "../images/users/loadingTruck.gif";
 import { LoadingComponent } from "../components/LoadingError";
 
 const currentUserRole = localStorage.getItem("role");
-console.log(currentUserRole);
 
 // Users component
 function Users() {
@@ -40,11 +38,7 @@ function UserListContainer() {
   }, []);
 
   // Use UserListContext to fetch user data
-  const { isLoading, isError, data, refreshData } = useUserListContext();
-
-  function handleRefreshClick() {
-    refreshData();
-  }
+  const { isLoading, users: data } = useUserListContext();
 
   function handleAddButtonClick() {
     alert("Clicked");
@@ -94,7 +88,7 @@ function UserListContainer() {
         {/* Render right content with user count and Add User button */}
         <div className="right-content">
           <p className="number-of-users">{data ? data.length : 0} users</p>
-          <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} />
+          {/* <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} /> */}
           <Button
             variant="contained"
             className={`add-member-button ${
@@ -111,23 +105,19 @@ function UserListContainer() {
       {/* Render list body with individual user components */}
       <div className="list-body">
         {isLoading && <LoadingComponent />}
-        {isError && <p>Error loading data</p>}
 
         {/* Render users if data is available */}
         {!isLoading &&
           data &&
           Array.isArray(data) &&
-          data.map((collector, index) => (
+          data.map((user, index) => (
             <IndividualUserComponent
               key={index}
-              username={collector.username}
-              fullname={collector.name}
+              username={user.username}
+              fullname={user.fullname}
               showExtraElements={true}
               extraElements={
-                <ExtraElements
-                  region={collector.region}
-                  role={collector.role}
-                />
+                <ExtraElements region={user.region} role={user.role} />
               }
             />
           ))}

@@ -9,7 +9,7 @@ import "../../styles/overview_css/ListOfCollectors.css";
 
 // Component to display a list of collectors
 export function ListOfCollectors() {
-  const { isLoading, isError, data } = useUserListContext();
+  const { isLoading, users: data } = useUserListContext();
   const navigate = useNavigate();
 
   // Handler function to navigate to the "users" page
@@ -27,7 +27,6 @@ export function ListOfCollectors() {
       </div>
       <List>
         {isLoading && <CircularProgress />}
-        {isError && <p>Error loading data</p>}
 
         {/* Render 5 users if data is available */}
         {!isLoading &&
@@ -35,11 +34,11 @@ export function ListOfCollectors() {
           Array.isArray(data) &&
           data
             .filter((item, index) => index < 5)
-            .map((collector, index) => (
+            .map((user, index) => (
               <IndividualUserComponent
                 key={index}
-                username={collector.username}
-                fullname={collector.name}
+                username={user.username}
+                fullname={user.fullname}
               />
             ))}
       </List>
