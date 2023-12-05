@@ -8,11 +8,27 @@
 
 .table-container {
   width: 50vw;
-  height: 50vh;
+  height: 63vh;
   background-color: #e0e0e0;
-  overflow: hidden;
+  overflow: auto;
   border-radius: 10px;
   margin: 10px;
+}
+
+/* Scrollbar Styles (for Webkit browsers) */
+.table-container::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+.table-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
 }
 
 .MuiTableCell-body {
