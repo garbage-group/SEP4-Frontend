@@ -23,6 +23,21 @@ function WeatherInfo() {
             );
     }
 
+    //refetch in 10 mins
+    useEffect(() => {
+        fetchWeather("horsens");
+
+        //set the time interval to refetch the data
+        const intervalId = setInterval(() => {
+            fetchWeather("horsens");
+        }, 60000);
+
+        return () => {
+            clearInterval(intervalId);
+        }
+
+    }, [])
+
     //handle search
     const handleSearch = (e) => {
         if (e.key === "Enter") {
