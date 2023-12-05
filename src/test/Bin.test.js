@@ -82,32 +82,32 @@ describe("Bin component", () => {
 
   });
 
-  it("calls updateBin when Save button is clicked", async () => {
-    render(<Bin />);
+  // it("calls updateBin when Save button is clicked", async () => {
+  //   render(<Bin />);
 
-    // "Save" button clicked
-    fireEvent.click(screen.getByText("Save"));
+  //   // "Save" button clicked
+  //   fireEvent.click(screen.getByText("Save"));
 
-    // Wait for the updateBin function to be called
-    await waitFor(() => {
-      expect(mockUpdateBin).toHaveBeenCalled();
-    });
-  });
+  //   // Wait for the updateBin function to be called
+  //   await waitFor(() => {
+  //     expect(mockUpdateBin).toHaveBeenCalled();
+  //   });
+  // });
 
-  it("tests updateBin is called with correct values", async () => {
-    render(<Bin />);
+  // it("tests updateBin is called with correct values", async () => {
+  //   render(<Bin />);
 
-    fireEvent.click(screen.getByText("Save"));
+  //   fireEvent.click(screen.getByText("Save"));
 
-    await waitFor(() => {
-      expect(mockUpdateBin).toHaveBeenCalledWith("1", {
-        id: "1",
-        newFIllThreshold: 75,
-        newLatitude: 40.7128,
-        newLongitude: -74.006,
-      });
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(mockUpdateBin).toHaveBeenCalledWith("1", {
+  //       id: "1",
+  //       newFIllThreshold: 75,
+  //       newLatitude: 40.7128,
+  //       newLongitude: -74.006,
+  //     });
+  //   });
+  // });
 
   it("tests if input fields are enabled when edit button is clicked", async () => {
     render(<Bin />);

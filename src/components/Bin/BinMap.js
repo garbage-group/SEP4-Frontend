@@ -44,34 +44,36 @@ function BinMap() {
 
 
   return (
-    <div className="mapContainer" >
-      <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
-        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-        />
+    <>
+      <div className="mapContainer" >
+        <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
+          <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+          />
 
-        {bins.map((bin) => (
-          <Marker
-            position={[bin.latitude, bin.longitude]}
-            key={bin.id}
-            icon={garbageIcon}
-          >
-            <Popup>
-              <p>Bin {bin.id}</p>
-              <span>
-                Threshold: {bin.fillThreshold}, Capacity: {bin.capacity}
-              </span>
-            </Popup>
-          </Marker>
-        ))}
+          {bins.map((bin) => (
+            <Marker
+              position={[bin.latitude, bin.longitude]}
+              key={bin.id}
+              icon={garbageIcon}
+            >
+              <Popup>
+                <p>Bin {bin.id}</p>
+                <span>
+                  Threshold: {bin.fillThreshold}, Capacity: {bin.capacity}
+                </span>
+              </Popup>
+            </Marker>
+          ))}
 
-        <ChangeMapPosition position={mapPosition} />
-        <DetectClick setIsModalOpen={setIsModalOpen} />
-        <Modal isOpened={isModalOpen} onClose={closeModal}>
-          <DoDisturbOnIcon className="errorIcon" />
-          <span> You are not authorized to add a bin.</span>
-        </Modal>
-      </MapContainer>
-    </div>
+          <ChangeMapPosition position={mapPosition} />
+          <DetectClick setIsModalOpen={setIsModalOpen} />
+        </MapContainer>
+      </div>
+      <Modal isOpened={isModalOpen} onClose={closeModal}>
+        <DoDisturbOnIcon className="errorIcon" />
+        <span> You are not authorized to add a bin.</span>
+      </Modal>
+    </>
   );
 }
 
