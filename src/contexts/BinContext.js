@@ -77,7 +77,7 @@ function BinProvider({ children }) {
       console.log(data);
       setCurrentBin(data);
     } catch {
-        <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
+        return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
     } finally {
       setIsLoading(false);
     }
