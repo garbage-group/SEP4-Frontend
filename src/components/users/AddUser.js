@@ -9,10 +9,10 @@ import { useUserManagement } from '../../contexts/UserContext';
 const AddUser = () => {
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState('Horsens North'); // Default to first option
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const USER_ROLE = "Garbage Collector"; // Define a constant role
+  const USER_ROLE = "Garbage Collector";
   const { addUser, isLoading } = useUserManagement();
 
   async function handleAddUser() {
@@ -57,7 +57,6 @@ const AddUser = () => {
             <div className="adduser-title">Add New User</div>
           </div>
           <div className="adduser-inputs">
-
             <img src={humanIcon} alt="Username Icon" />
             <input
               type="text"
@@ -79,12 +78,16 @@ const AddUser = () => {
 
           <div className="input-text">
             <img src={pencilIcon} alt="Region Icon" />
-            <input
-              type="text"
-              placeholder="Region"
+            <select
               value={region}
               onChange={(e) => setRegion(e.target.value)}
-            />
+              className="region-select"
+            >
+              <option value="Horsens North">Horsens North</option>
+              <option value="Horsens South">Horsens South</option>
+              <option value="Horsens East">Horsens East</option>
+              <option value="Horsens West">Horsens West</option>
+            </select>
           </div>
 
           <div className="input-text">
@@ -106,13 +109,12 @@ const AddUser = () => {
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
+          <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
+            {isLoading ? 'Signing up...' : 'Sign up'}
+          </Button>
         </div>
-        <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
-          {isLoading ? 'Signing up...' : 'Sign up'}
-        </Button>
       </div>
     </div>
   );
 };
-
 export { AddUser };

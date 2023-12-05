@@ -92,6 +92,41 @@
   /* Slightly darker shade on hover */
 }
 
+.region-select {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  background-color: white;
+  color: #333;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+/* Style for the icon inside the dropdown */
+.region-select-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+}
+
+.region-select:focus {
+  outline: none;
+  border-color: #007bff;
+  /* Change to match your theme color */
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .adduser-content {
