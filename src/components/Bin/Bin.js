@@ -126,8 +126,8 @@ function Bin() {
   }
 
   return (
-    <div className="bin">
-      <Modal isOpened={isModalOpen} onClose={closeModal}>
+    <>
+       <Modal isOpened={isModalOpen} onClose={closeModal}>
         <div className="savedImage">
 
           <img src={require("../../images/popUp/tick.gif")} alt="" />
@@ -135,151 +135,155 @@ function Bin() {
         </div>
         <span>Data Updated</span>
         </Modal>
-      {/* Displaying Bin Id */}
-      <div className="row">
-        <h6>Bin</h6>
-        <input
-          className="binInput binInput_disabled"
-          type="number"
-          value={id}
-          data-testid="binId"
-          readOnly
-        />
-      </div>
+      <div className="bin">
 
-      {/* Displaying Bin Capacity */}
-      <div className="row">
-        <h6>Capacity(Liter)</h6>
-        <input
-          className={"binInput binInput_disabled"}
-          value={capacity}
-          data-testid="capacity"
-          readOnly
-        />
-      </div>
-
-      {/* Displaying Device Id */}
-      <div className="row">
-        <h6>Device Id</h6>
-        <input
-          className="binInput binInput_disabled"
-          value={deviceId}
-          data-testid="deviceId"
-          readOnly
-        />
-      </div>
-
-      {/* Displaying Fill Threshold */}
-      <div className="row">
-        <h6>Fill Threshold</h6>
-        <input
-          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
-          value={`${isDisabled ? fillThreshold : newFIllThreshold}`}
-          onChange={(e) => setNewFillThreshold(e.target.value)}
-          data-testid="Fill Threshold"
-        />
-      </div>
-
-      {/* Displaying Latitude and longitude */}
-      <div className="row">
-        <h6>Position</h6>
-        <label htmlFor="lat">Latitude</label>
-        <input
-          id="lat"
-          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
-          type="number"
-          value={`${isDisabled ? latitude : newLatitude}`}
-          onChange={(e) => setNewLatitude(e.target.value)}
-          data-testid="Latitude"
-        />
-        <label htmlFor="lng">Longitude</label>
-        <input
-          id="lng"
-          className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
-          type="number"
-          value={`${isDisabled ? longitude : newLongitude}`}
-          onChange={(e) => setNewLongitude(e.target.value)}
-          data-testid="Longitude"
-        />
-      </div>
-
-      {/* Displaying Last Emptied Time */}
-      <div className="row">
-        <h6>Last emptied on</h6>
-        <input
-          className="binInput binInput_disabled"
-          value={emptiedLast ? formatDate(emptiedLast) : "N/A"}
-          data-testid="emptiedLast"
-          readOnly
-        />
-      </div>
-
-      {/* Displaying Current Fill Level */}
-      <div className="row">
-        <h6>Fill Level</h6>
-
-        {fillLevels && fillLevels.length > 0 && (
-          <>
-            <input
-              className="binInput binInput_disabled"
-              value={`${fillLevels[fillLevels.length - 1].value}%`}
-              data-testid="fillLevel"
-              readOnly
-            />
-
-            <input
-              className="binInput binInput_disabled"
-              value={`${formatDate(
-                fillLevels[fillLevels.length - 1].dateTime || null
-              )}`}
-              data-testid="fillDate"
-              readOnly
-            />
-          </>
-        )}
-      </div>
-
-      {/* Displaying Current Humidity */}
-      <div className="row">
-        <h6>Humidity</h6>
-        {humidity && humidity.length > 0 && (
-          <>
-            <input
-              className="binInput binInput_disabled"
-              value={`${humidity[humidity.length - 1].value}%`}
-              data-testid="humidity"
-              readOnly
-            />
-            <input
-              className="binInput binInput_disabled"
-              value={`${formatDate(
-                humidity[humidity.length - 1].dateTime || null
-              )}`}
-              readOnly
-            />
-          </>
-        )}
-      </div>
-
-      {/* Buttons for navigation and actions */}
-      <div className="buttons-container">
-        <BackButton className={"btn"}>&larr; Back </BackButton>
-
-        <div className="edit-save-button">
-          <button onClick={handleEdit} className="edit-button">
-            Edit
-          </button>
-          <button
-            onClick={handleSave}
-            className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
-          >
-            Save
-          </button>
+        {/* Displaying Bin Id */}
+        <div className="row">
+          <h6>Bin</h6>
+          <input
+            className="binInput binInput_disabled"
+            type="number"
+            value={id}
+            data-testid="binId"
+            readOnly
+          />
         </div>
-      </div>
 
-      
-    </div>
+        {/* Displaying Bin Capacity */}
+        <div className="row">
+          <h6>Capacity(Liter)</h6>
+          <input
+            className={"binInput binInput_disabled"}
+            value={capacity}
+            data-testid="capacity"
+            readOnly
+          />
+        </div>
+
+        {/* Displaying Device Id */}
+        <div className="row">
+          <h6>Device Id</h6>
+          <input
+            className="binInput binInput_disabled"
+            value={deviceId}
+            data-testid="deviceId"
+            readOnly
+          />
+        </div>
+
+        {/* Displaying Fill Threshold */}
+        <div className="row">
+          <h6>Fill Threshold</h6>
+          <input
+            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+            value={`${isDisabled ? fillThreshold : newFIllThreshold}`}
+            onChange={(e) => setNewFillThreshold(e.target.value)}
+            data-testid="Fill Threshold"
+          />
+        </div>
+
+        {/* Displaying Latitude and longitude */}
+        <div className="row">
+          <h6>Position</h6>
+          <label htmlFor="lat">Latitude</label>
+          <input
+            id="lat"
+            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+            type="number"
+            value={`${isDisabled ? latitude : newLatitude}`}
+            onChange={(e) => setNewLatitude(e.target.value)}
+            data-testid="Latitude"
+          />
+          <label htmlFor="lng">Longitude</label>
+          <input
+            id="lng"
+            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+            type="number"
+            value={`${isDisabled ? longitude : newLongitude}`}
+            onChange={(e) => setNewLongitude(e.target.value)}
+            data-testid="Longitude"
+          />
+        </div>
+
+        {/* Displaying Last Emptied Time */}
+        <div className="row">
+          <h6>Last emptied on</h6>
+          <input
+            className="binInput binInput_disabled"
+            value={emptiedLast ? formatDate(emptiedLast) : "N/A"}
+            data-testid="emptiedLast"
+            readOnly
+          />
+        </div>
+
+        {/* Displaying Current Fill Level */}
+        <div className="row">
+          <h6>Fill Level</h6>
+
+          {fillLevels && fillLevels.length > 0 && (
+            <>
+              <input
+                className="binInput binInput_disabled"
+                value={`${fillLevels[fillLevels.length - 1].value}%`}
+                data-testid="fillLevel"
+                readOnly
+              />
+
+              <input
+                className="binInput binInput_disabled"
+                value={`${formatDate(
+                  fillLevels[fillLevels.length - 1].dateTime || null
+                )}`}
+                data-testid="fillDate"
+                readOnly
+              />
+            </>
+          )}
+        </div>
+
+        {/* Displaying Current Humidity */}
+        <div className="row">
+          <h6>Humidity</h6>
+          {humidity && humidity.length > 0 && (
+            <>
+              <input
+                className="binInput binInput_disabled"
+                value={`${humidity[humidity.length - 1].value}%`}
+                data-testid="humidity"
+                readOnly
+              />
+              <input
+                className="binInput binInput_disabled"
+                value={`${formatDate(
+                  humidity[humidity.length - 1].dateTime || null
+                )}`}
+                readOnly
+              />
+            </>
+          )}
+        </div>
+
+        {/* Buttons for navigation and actions */}
+        <div className="buttons-container">
+          <BackButton className={"btn"}>&larr; Back </BackButton>
+
+          <div className="edit-save-button">
+            <button onClick={handleEdit} className="edit-button">
+              Edit
+            </button>
+            <button
+              onClick={handleSave}
+              className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
+            >
+              Save
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+    </>
+   
   );
 }
 
