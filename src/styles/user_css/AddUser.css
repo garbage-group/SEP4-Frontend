@@ -1,125 +1,115 @@
+/* Main container for the add user section */
 .adduser-page-container {
   position: relative;
-}
-
-.adduser-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
-  align-items: center;
   justify-content: center;
-  animation: adduser-background-animation 25s ease-in-out infinite alternate both;
+  align-items: center;
+  min-height: 100%;
+  /* Ensures full height */
 }
 
+/* Container for form content */
 .adduser-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.adduser-form-container {
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: calc(100% - 40px);
+  /* Full width with padding */
+  max-width: 400px;
+  /* Maximum width of the form */
+  margin: 20px auto;
+  /* Center form in the available space */
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  width: 80%;
-  max-width: 600px;
-  padding: 20px;
   box-sizing: border-box;
 }
 
+/* Header of the form */
 .adduser-header {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.5rem;
   color: #333;
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  -webkit-background-clip: text;
-  color: transparent;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.adduser-inputs {
-  display: flex;
-  flex-direction: column;
+/* Input container */
+.adduser-inputs,
+.input-text {
   width: 100%;
-}
-
-.adduser-input-field {
-  display: flex;
-  align-items: center;
   margin-bottom: 15px;
+  position: relative;
+  /* For absolute positioning of icons */
 }
 
-.adduser-input-field img {
-  margin-right: 10px;
-  max-width: 24px;
-  height: auto;
+/* Icon inside input container */
+.adduser-inputs img,
+.input-text img {
+  position: absolute;
+  /* Position the icon absolutely within the input container */
+  left: 10px;
+  /* 10px from the left */
+  top: 50%;
+  /* Center vertically */
+  transform: translateY(-50%);
+  /* Offset by half its height for perfect centering */
+  width: 24px;
+  /* Width of the icon */
+  height: 24px;
+  /* Height of the icon */
 }
 
-input-text {
-  padding: 12px;
+/* Style for input fields */
+.adduser-inputs input,
+.input-text input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  /* Padding to make room for the icon */
   border: 1px solid #ccc;
   border-radius: 4px;
-  outline: none;
-  margin-top: 8px;
-  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+  /* Include padding in width calculation */
 }
 
+/* Sign up button */
 .adduser-signup-btn {
-  border-radius: 20px;
-  border: 1px solid #ff4b2b;
+  width: 50%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
   background-color: #ff4b2b;
-  color: #ffffff;
-  font-size: 0.9em;
-  font-weight: bold;
-  padding: 0.7em 2.9em;
-  margin: 1.3vh 0;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  transition: transform 80ms ease-in;
+  color: white;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  &:active {
-    transform: scale(0.95);
-  }
+.adduser-signup-btn:hover {
+  background-color: #e04322;
+  /* Slightly darker shade on hover */
+}
 
-  &:focus {
-    outline: none;
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .adduser-content {
+    max-width: 90%;
+    /* Allow the form to take more width on smaller screens */
   }
 }
 
-@keyframes adduser-background-animation {
-  0% {
-    transform: scale(1) translateY(0);
-    transform-origin: 50% 16%;
-  }
-
-  100% {
-    transform: scale(1.25) translateY(-15px);
-    transform-origin: top;
+@media (min-width: 601px) and (max-width: 991px) {
+  .adduser-content {
+    max-width: 80%;
+    /* Adjust the form width on medium screens */
   }
 }
 
-/* Media Queries */
-@media (min-width: 601px) and (max-width: 991.98px) {
-  .adduser-form-container {
-    width: 90%;
-  }
-}
-
-@media (min-width: 992px) and (max-width: 1024px) {
-  .adduser-form-container {
-    width: 80%;
+@media (min-width: 992px) {
+  .adduser-content {
+    max-width: 400px;
+    /* Fixed max width on larger screens */
   }
 }
