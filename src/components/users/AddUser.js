@@ -123,7 +123,7 @@ const AddUser = ({ onCancel }) => {
             />
           </div>
           <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
-            {isLoading ? 'Signing up...' : 'Sign up'}
+            {isLoading ? 'Signing up' : 'Sign up'}
           </Button>
 
 

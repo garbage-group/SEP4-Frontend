@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { Button, Chip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
@@ -30,13 +30,13 @@ function Users() {
 
 // UserListContainer component
 function UserListContainer() {
-  const [currentUserRole, setCurrentUserRole] = useState(
-    localStorage.getItem("role")
-  );
+  // const [currentUserRole, setCurrentUserRole] = useState(
+  //   localStorage.getItem("role")
+  // );
 
   useEffect(() => {
     // Update the role when it changes in localStorage
-    setCurrentUserRole(localStorage.getItem("role"));
+    // setCurrentUserRole(localStorage.getItem("role"));
   }, []);
 
   // Use UserListContext to fetch user data

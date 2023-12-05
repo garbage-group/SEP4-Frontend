@@ -22,9 +22,7 @@ function UserListProvider({ children }) {
         });
         const data = await res.json();
 
-        // console.log(isAuthenticated);
 
-        console.log(users.fullname);
 
         setUsers(data);
       } catch (e) {
