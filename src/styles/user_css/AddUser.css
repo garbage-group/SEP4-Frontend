@@ -75,9 +75,10 @@
 
 /* Sign up button */
 .adduser-signup-btn {
-  width: 50%;
+  width: 40%;
   padding: 10px;
   margin-top: 15px;
+  margin-right: 45px;
   border: none;
   border-radius: 4px;
   background-color: #ff4b2b;
@@ -125,6 +126,22 @@
   /* Change to match your theme color */
 }
 
+.adduser-cancel-btn {
+  width: 40%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #c0c0c0;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.adduser-cancel-btn:hover {
+  background-color: #a9a9a9;
+}
 
 /* Responsive adjustments */
 @media (max-width: 600px) {

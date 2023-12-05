@@ -7,7 +7,7 @@ import { Button } from '../Button';
 import { useUserManagement } from '../../contexts/UserContext';
 import Modal from '../Modal.js'; // Adjust the import path as necessary
 
-const AddUser = () => {
+const AddUser = ({ onCancel }) => {
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [region, setRegion] = useState('Horsens North'); // Default to first option
@@ -124,6 +124,11 @@ const AddUser = () => {
           </div>
           <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
             {isLoading ? 'Signing up...' : 'Sign up'}
+          </Button>
+
+
+          <Button onClick={onCancel} className="adduser-cancel-btn">
+            Cancel
           </Button>
         </div>
       </div>
