@@ -1,4 +1,4 @@
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../styles/Bin_css/BinMap.css";
 import {
   MapContainer,
@@ -11,15 +11,21 @@ import {
 import L from "leaflet";
 import { useBins } from "../../contexts/BinContext";
 import { useEffect, useState } from "react";
-
+import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import logoImage from "../../images/bin-icon.png";
 import { useURLPosition } from "../../hooks/useURLPosition";
+import { useAuth } from "../../contexts/LoginAuthContext";
+import Modal from "../Modal";
 
 function BinMap() {
-    const navigate = useNavigate();
-    const { bins } = useBins();
-    const [mapPosition, setMapPosition] = useState([55.85, 9.84]);
-    const [mapLat, mapLng] = useURLPosition();
+  const { bins } = useBins();
+  const [mapPosition, setMapPosition] = useState([55.85, 9.84]);
+  const [mapLat, mapLng] = useURLPosition();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
 
   //garbage icon
@@ -28,20 +34,20 @@ function BinMap() {
     iconSize: [30, 30],
   });
 
-    //setting  map position
-    useEffect(function(){
-        if (mapLat&& mapLng) {
-            setMapPosition([Number(mapLat), Number(mapLng)]);    
-        }
-    },[mapLat, mapLng]);
+  //setting  map position
+  useEffect(function () {
+    if (mapLat && mapLng) {
+      setMapPosition([Number(mapLat), Number(mapLng)]);
+    }
+  }, [mapLat, mapLng]);
 
-    
-   
-    return (
-        <div className="mapContainer" onClick={() => navigate("form")}>
-            <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
-                <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-                    />
+
+
+  return (
+    <div className="mapContainer" >
+      <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
+        <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        />
 
         {bins.map((bin) => (
           <Marker
@@ -59,7 +65,11 @@ function BinMap() {
         ))}
 
         <ChangeMapPosition position={mapPosition} />
-        <DetectClick />
+        <DetectClick setIsModalOpen={setIsModalOpen} />
+        <Modal isOpened={isModalOpen} onClose={closeModal}>
+          <DoDisturbOnIcon className="errorIcon" />
+          <span> You are not authorized to add a bin.</span>
+        </Modal>
       </MapContainer>
     </div>
   );
@@ -72,12 +82,21 @@ function ChangeMapPosition({ position }) {
 }
 
 //detecting a click on the map
-function DetectClick() {
+function DetectClick({ setIsModalOpen }) {
   const navigate = useNavigate();
+  const { role } = useAuth();
+
+
+
   useMapEvents({
     click: (e) => {
       e.originalEvent.preventDefault();
-      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
+      if (role === "municipality worker") {
+
+        navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`); //we are navigating to the form and passing the lat and lng to the url so that it can be accessed to the form
+      } else {
+        setIsModalOpen(true);
+      }
     },
   });
 }
