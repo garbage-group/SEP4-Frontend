@@ -1,56 +1,64 @@
 .notification-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .notification-icon {
-    position: relative;
-  }
-  
-  .notification-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 4px;
-    font-size: 12px;
-  }
-  
-  .notification-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    min-width: 200px;
-    z-index: 1;
-    display: none;
-  }
-  
-  .notification-dropdown.show {
-    display: block;
-  }
-  
-  .notification-dropdown-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .notification-dropdown-item.unread {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .empty-mailbox-message {
-    padding: 10px;
-    font-size: 14px;
-    color: #888;
-  }
-  
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.notification-icon {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px;
+  font-size: 12px;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Increased border radius for a more modern look */
+  min-width: 300px; /* Adjust the width based on your content */
+  z-index: 1;
+  display: none;
+}
+
+.notification-dropdown.show {
+  display: block;
+}
+
+.notification-dropdown-item {
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  transition: background-color 0.3s ease;
+  white-space: normal; /* Allow the text to wrap to the next line */
+  overflow: auto; /* Enable scrolling if the content is too long */
+  max-height: 150px; /* Adjust the maximum height as needed */
+}
+
+.notification-dropdown-item.unread {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.notification-dropdown-item:hover {
+  background-color: #f8f8f8;
+}
+
+.empty-mailbox-message {
+  padding: 15px;
+  font-size: 16px;
+  color: #888;
+}
+
+

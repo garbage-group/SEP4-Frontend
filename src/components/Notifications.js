@@ -19,15 +19,16 @@ const Notifications = () => {
       </div>
       <div className={`notification-dropdown ${isDropdownVisible ? 'show' : ''}`}>
         {notifications.length > 0 ? (
-          notifications.map((notification) => (
-            <div
-              key={notification.id}
-              className={`notification-dropdown-item ${notification.unread ? 'unread' : ''}`}
-              onClick={() => markAsRead(notification.id)}
-            >
-              {notification.message}
-            </div>
-          ))
+         notifications.map((notification, index) => (
+          <div
+            key={notification.id || index} // Use a default if ID is missing
+            className={`notification-dropdown-item ${notification.unread ? 'unread' : ''}`}
+            onClick={() => markAsRead(notification.id)}
+          >
+            {notification.message}
+          </div>
+        ))
+        
         ) : (
           <div className="empty-mailbox-message">Mailbox is empty</div>
         )}
