@@ -21,7 +21,7 @@ const currentUserRole = localStorage.getItem("role");
 function Users() {
   return (
     <div className="users-container">
-      {/* Render UserListContainer and AddUserContainer components */}
+      {/* Render UserListContainer and FilterContainer components */}
       <UserListContainer />
       <AddUserContainer />
     </div>

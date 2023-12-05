@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import '../../styles/user_css/AddUser.css';
 import humanIcon from '../../styles/images/human_icon.png';
 import passwordIcon from '../../styles/images/password.png';
 import pencilIcon from '../../styles/images/pencil.png';
 import { Button } from '../Button';
-
+import { useUserManagement } from '../../contexts/UserContext';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
@@ -13,16 +12,12 @@ const AddUser = () => {
   const [region, setRegion] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const USER_ROLE = "Garbage Collector"; // Define a constant role
+  const { addUser, isLoading } = useUserManagement();
 
-  function handleAddUser() {
-
+  async function handleAddUser() {
     if (!username || !fullName || !region || !password || !repeatPassword) {
       alert('Please fill in all fields.');
-      return;
-    }
-
-    if (username === 'existingUsername') {
-      alert('Username already exists. Please choose a different username.');
       return;
     }
 
@@ -31,8 +26,26 @@ const AddUser = () => {
       return;
     }
 
-    alert(`Successfully signed up: ${username}`);
+    const userData = {
+      username,
+      fullName,
+      password,
+      role: USER_ROLE,
+      region
+    };
 
+    try {
+      await addUser(userData);
+      alert(`Successfully signed up: ${username}`);
+      // Reset form after successful signup
+      setUsername('');
+      setFullName('');
+      setRegion('');
+      setPassword('');
+      setRepeatPassword('');
+    } catch (error) {
+      alert('Failed to sign up user. Please try again.');
+    }
   }
 
   return (
@@ -94,13 +107,12 @@ const AddUser = () => {
             />
           </div>
         </div>
-        <Button onClick={handleAddUser} className="adduser-signup-btn">
-          Sign up</Button>
+        <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
+          {isLoading ? 'Signing up...' : 'Sign up'}
+        </Button>
       </div>
     </div>
-
   );
 };
-
 
 export { AddUser };
