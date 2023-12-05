@@ -1,3 +1,4 @@
+/* Container styling */
 .notification-container {
   position: relative;
   display: flex;
@@ -5,10 +6,15 @@
   cursor: pointer;
 }
 
+/* Icon styling */
 .notification-icon {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
+
+/* Badge styling */
 .notification-badge {
   position: absolute;
   top: 0;
@@ -16,49 +22,113 @@
   background-color: red;
   color: white;
   border-radius: 50%;
-  padding: 4px;
-  font-size: 12px;
+  padding: 6px 8px; /* Increase padding for better visibility */
+  font-size: 14px; /* Adjust font size for better readability */
+  display: none; /* Hide by default */
 }
 
+/* Unread badge styling */
+.unread-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -60%); /* Adjust the second value for vertical centering */
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px; /* Adjust padding for a smaller badge */
+  width: 20px; /* Set width and height to create a perfect circle */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px; /* Adjust font size for a smaller badge */
+  animation:badgeRing 1.3s infinite;
+}
+
+@keyframes badgeRing {
+  0%,
+  100% {
+    transform: translate(50%, -60%);
+  }
+  50% {
+    transform: translate(50%, -60%) translateX(2px); /* Adjust the values for the desired movement */
+  }
+}
+
+
+
+
+/* Dropdown styling */
 .notification-dropdown {
   position: absolute;
   top: 100%;
   right: 0;
   background-color: white;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 8px; /* Increased border radius for a more modern look */
-  min-width: 300px; /* Adjust the width based on your content */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+  border-radius: 8px;
+  min-width: 320px; /* Slightly increase the width */
   z-index: 1;
   display: none;
+  overflow: hidden;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #eee; /* Light border for separation */
+  padding: 8px; /* Add padding for a cleaner look */
 }
 
-.notification-dropdown.show {
+/* Show dropdown on hover */
+.notification-container:hover .notification-dropdown {
   display: block;
 }
 
+/* Dropdown header styling */
+.notification-dropdown-header {
+  padding: 12px 16px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Dropdown item styling */
 .notification-dropdown-item {
-  padding: 15px;
+  padding: 12px 16px;
   font-size: 16px;
   color: #333;
   transition: background-color 0.3s ease;
-  white-space: normal; /* Allow the text to wrap to the next line */
-  overflow: auto; /* Enable scrolling if the content is too long */
-  max-height: 150px; /* Adjust the maximum height as needed */
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* Unread item styling */
 .notification-dropdown-item.unread {
-  background-color: #f2f2f2;
+  background-color: #f8f8f8; /* Slight color change for readability */
   font-weight: bold;
 }
 
+/* Hover effect for better user experience */
 .notification-dropdown-item:hover {
-  background-color: #f8f8f8;
+  background-color: #f2f2f2;
 }
 
+/* Empty message styling */
 .empty-mailbox-message {
-  padding: 15px;
+  padding: 12px 16px;
   font-size: 16px;
   color: #888;
 }
 
+/* Read icon styling */
+.read-icon {
+  color: green;
+  margin-left: 10px;
+}
 
+/* Unread icon styling */
+.unread-icon {
+  color: red;
+  margin-left: 10px;
+}
