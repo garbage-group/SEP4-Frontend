@@ -1,4 +1,3 @@
-
 .weatherApp {
   background-image: url("../../images/infoBox/cloudy.jpg");
   background-size: cover;
@@ -9,12 +8,10 @@
 }
 
 .weatherMain {
- 
   max-height: 20vh;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
   padding: 1.4rem;
   border-radius: 10px;
-  
 }
 
 .weatherMain.sunny {
@@ -24,7 +21,6 @@
   transition: 0.4s ease-out;
   border-radius: 10px;
   height: 25vh;
-  
 }
 
 .weatherMain.snowy {
@@ -34,11 +30,9 @@
   transition: 0.4s ease-out;
   border-radius: 10px;
   height: 25vh;
-
 }
 .searchBox {
   width: 100%;
- 
 }
 
 .searchBox .searchBar {
@@ -105,17 +99,98 @@
   font-weight: 600;
   text-shadow: 3px, 6px rgba(50, 50, 70, 0.5);
   text-align: center;
-  
 }
 
-@media (max-width: 600.98px){
+/* media queries for small screens */
+@media (max-width: 600.98px) {
+  .weatherMain {
+    max-height: 18.15vh;
+  }
+  .searchBox .searchBar {
+    width: 20vw;
+    padding: 0.2rem 1rem;
+    margin-left: 0;
+    font-size: 1em;
+  }
 
+  .locationBox {
+    color: #fff;
+    font-size: 1em;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+
+  .weatherBox .temperature {
+    margin: 0.7rem auto;
+    padding: 0.1rem 2rem;
+    font-size: 1.3em;
+    font-weight: 900;
+  }
+
+  .weatherBox .weather {
+    font-size: 1.3em;
+    font-weight: 600;
+  }
 }
 
-@media (min-width: 601px) and (max-width: 991.98px){
+/* medium screen */
+@media (min-width: 601px) and (max-width: 991.98px) {
+  .searchBox .searchBar {
+    padding: 0.2rem 1rem;
+    margin-left: 0;
+    margin-top: -1.3rem;
+    font-size: 1em;
+  }
 
+  .locationBox {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+
+  .locationBox .date {
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  .weatherBox .temperature {
+    margin: 1rem auto;
+    padding: 0.3rem 2rem;
+    font-size: 1.7em;
+    font-weight: 900;
+  }
+
+  .weatherBox .weather {
+    font-size: 1.4em;
+    font-weight: 600;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1024px) {
-    
+  .searchBox .searchBar {
+    padding: 0.4rem 1rem;
+    margin-left: 0;
+    font-size: 1em;
+  }
+
+  .locationBox {
+    font-size: 1.3em;
+    margin-top: 1rem;
+  }
+
+  .locationBox .date {
+    font-size: 1em;
+  }
+
+  .weatherBox .temperature {
+    margin: 2.2rem auto;
+    padding: 0.3rem 2rem;
+    font-size: 2.5em;
+  }
+
+  .weatherBox .weather {
+    font-size: 1.6em;
+    font-weight: 600;
+  }
 }
+
