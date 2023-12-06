@@ -33,6 +33,8 @@ const formatDate = (date) =>
     minute: "numeric"
   }).format(new Date(date));
 
+
+
 // HistoryTable component
 function HistoryTable() {
   // Fetch bins data and loading state from context
@@ -41,6 +43,7 @@ function HistoryTable() {
   // State for pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currOpen, setCurrOpen] = useState(null);
 
   // Handler for changing page
   const handleChangePage = (event, newPage) => {
@@ -81,8 +84,8 @@ function HistoryTable() {
                   page * rowsPerPage + rowsPerPage
                 )
                 : bins
-              ).map((bin) => (
-                <Row key={bin.id} value={bin} />
+              ).map((bin, index) => (
+                <Row key={bin.id} value={bin} index={index} currOpen={currOpen} setCurrOpen={setCurrOpen}/>
               ))}
             </TableBody>
 
@@ -106,13 +109,20 @@ function HistoryTable() {
 }
 
 // Row component for rendering each row in the table
-function Row({ value }) {
-  const [open, setOpen] = useState(false);
-  console.log(value)
+function Row({ value, index, currOpen, setCurrOpen }) {
+
+
+  console.log(index)
+
+  let isOpen = currOpen === index;
 
   // Function to format timestamp or return "N/A" if null
   const formatTimestamp = (timestamp) => {
     return timestamp ? new Date(timestamp).toLocaleString() : "N/A";
+  };
+
+  const handleAccordionToggle = () => {
+    setCurrOpen(isOpen? null : index);
   };
 
   return (
@@ -126,9 +136,9 @@ function Row({ value }) {
           <IconButton
             aria-label="expand row"
             size="small"
-            onClick={() => setOpen(!open)}
+            onClick={handleAccordionToggle}
           >
-            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+            {isOpen ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
         <TableCell align="center">{value.id}</TableCell>
@@ -140,17 +150,19 @@ function Row({ value }) {
       </TableRow>
 
       <TableRow>
-        <TableCell colSpan={7}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box>
+        <TableCell colSpan={7} sx={{
+          backgroundColor: "#EAEBF4"
+         }}>
+          <Collapse in={isOpen} timeout="auto" unmountOnExit>
+            <Box >
               <Typography variant="h6" gutterBottom component="div">
                 Bin {value.id}'s History
               </Typography>
               <Table size="small" aria-label="last emptied,fill-levels and humidity">
 
                 {/* fill level */}
-                <TableHead>
-                  <TableRow>
+                <TableHead  >
+                  <TableRow >
                     <TableCell>Fill level</TableCell>
                     <TableCell>Date</TableCell>
 
@@ -158,7 +170,7 @@ function Row({ value }) {
                 </TableHead>
                 <TableBody>
                   {value.fillLevels.map((level) => (
-                    <TableRow key={value.id}>
+                    <TableRow key={level.dateTime}>
                       <TableCell>{level.value}</TableCell>
                       <TableCell>{formatDate(level.dateTime)}</TableCell>
                     </TableRow>))
@@ -173,8 +185,8 @@ function Row({ value }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {value.fillLevels.map((level) => (
-                    <TableRow key={value.id}>
+                  {value.humidity.map((level) => (
+                    <TableRow key={level.dateTime}>
                       <TableCell>{level.value}</TableCell>
                       <TableCell>{formatDate(level.dateTime)}</TableCell>
                     </TableRow>))
@@ -190,7 +202,7 @@ function Row({ value }) {
                 </TableHead>
                 <TableBody>
                   {value.temperatures.map((temp) => (
-                    <TableRow key={value.id}>
+                    <TableRow key={temp.dateTime}>
                       <TableCell>{temp.value}</TableCell>
                       <TableCell>{formatDate(temp.dateTime)}</TableCell>
                     </TableRow>))
