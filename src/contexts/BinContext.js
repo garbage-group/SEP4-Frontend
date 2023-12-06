@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import Modal from "../components/Modal";
+
 
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
@@ -16,30 +16,29 @@ function BinProvider({ children }) {
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
-  const [isModalOpen, setIsModalOpen] = useState(true);
+ 
   const [status, setStatus] = useState("");
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   useEffect(function () {
     let intervalId;
     async function fetchBins() {
    
       try {
-
-        
+   
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/bins/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         });
+
+        if (!res.ok) {
+          throw new Error(`Failed to fetch bins. Status: ${res.status}`);
+        }
         const data = await res.json();
         setBins(data);
       } catch (e) {
-        alert(e.message);
+        console.log(e.message);
       } finally {
         setIsLoading(false);
       }
@@ -74,11 +73,14 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (!res.ok) {
+        throw new Error(`Failed to fetch bin with binId ${id}. Status: ${res.status}`);
+      }
       const data = await res.json();
-      console.log(data);
+      
       setCurrentBin(data);
-    } catch {
-        return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
+    } catch(e) {
+        console.log(e.message);
     } finally {
       setIsLoading(false);
     }
@@ -99,11 +101,19 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await res.json();
+
+      if(!res.ok){
+        setStatus("OFFLINE");
+        throw new Error("Could not fetch information")
+      }
+      
+      if(res.ok){
+        setStatus("ACTIVE");
   
-      setStatus(data);
-    } catch {
-      return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
+      } 
+    } catch (e) {
+      console.log(e.message);
+    
     } finally {
       setIsLoading(false);
     }
@@ -124,10 +134,14 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (!res.ok) {
+        throw new Error(`Failed to create a bin.Status: ${res.status}`);
+      }
       const data = await res.json();
       setBins((bins) => [...bins, data]);
-    } catch {
-      alert("There was an error creating bin");
+    } catch (e) {
+      console.log("There was an error creating bin");
     } finally {
       setIsLoading(false);
     }
@@ -166,11 +180,15 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch humidity.Status: ${response.status}`);
+      }
+
       const humidityData = await response.json();
       setCurrentBinHumidity(humidityData);
     } catch (error) {
       console.error("Error fetching humidity data:", error);
-      alert("There was an error loading the humidity data: " + error.message);
     } finally {
       setIsLoading(false);
     }
@@ -200,14 +218,12 @@ function BinProvider({ children }) {
         },
       });
 
-      console.log("Request Payload:", JSON.stringify(newUpdatedBin));
 
       if (res.ok) {
         // If successful, update the currentBin value
         setCurrentBin(newUpdatedBin);
       }
     } catch (error) {
-      alert(error);
       console.error("Error updating bin:", error.message);
     } finally {
       setIsLoading(false);
@@ -227,7 +243,7 @@ function BinProvider({ children }) {
         deleteBin,
         updateBin,
         getBinStatus,
-        status
+        status,
       }}
     >
       {children}

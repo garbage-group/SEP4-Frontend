@@ -6,6 +6,9 @@ import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 import Modal from "../Modal";
 import { useNotifications } from "../../contexts/NotificationContext";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import CircleIcon from '@mui/icons-material/Circle';
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -186,12 +189,22 @@ function Bin() {
         {/* Displaying Bin Capacity */}
         <div className="row">
           <h6>Device Status</h6>
-          <input
-            className={"binInput binInput_disabled"}
-            value={status}
-            data-testid="status"
-            readOnly
-          />
+          <label className="status">
+            {status === "ACTIVE" ? (
+              <span >
+                Active <CheckCircleIcon className="active" />
+              </span>
+            ) : status === "INACTIVE" ? (
+              <span >
+                  OFFLINE <CircleIcon className="offline" />
+              </span>
+            ) : (
+              <span >
+                    DEFECT <ErrorIcon className="defect" />
+              </span>
+            )}
+
+          </label>
         </div>
 
         {/* Displaying Bin Capacity */}

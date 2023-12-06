@@ -130,7 +130,20 @@
 
 }
 
-.edit-save-button {}
+
+
+.active{
+  color: #00c46a !important;
+
+}
+
+.offline{
+  color: red !important;
+}
+
+.defect {
+  color: goldenrod !important;
+}
 
 /*small devices and down*/
 @media (max-width: 767.98px) {
