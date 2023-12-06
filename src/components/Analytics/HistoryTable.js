@@ -19,16 +19,21 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Spinner } from "../Spinner";
 import { TablePaginationActions } from "./TablePaginationActions";
 
+// HistoryTable component
 function HistoryTable() {
+  // Fetch bins data and loading state from context
   const { bins, isLoading } = useBins();
 
+  // State for pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  // Handler for changing page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  // Handler for changing rows per page
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -39,11 +44,11 @@ function HistoryTable() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <TableContainer className="table-inner-container" component={Paper}>
+        <TableContainer component={Paper}>
           <Table stickyHeader>
-            {/* table heading */}
+            {/* Table heading */}
             <TableHead>
-              <TableRow className="table-heading">
+              <TableRow>
                 <TableCell />
                 <TableCell>Bin Id</TableCell>
                 <TableCell align="center">Latitude</TableCell>
@@ -53,7 +58,7 @@ function HistoryTable() {
               </TableRow>
             </TableHead>
 
-            {/* table body */}
+            {/* Table body */}
             <TableBody>
               {(rowsPerPage > 0
                 ? bins.slice(
@@ -66,8 +71,8 @@ function HistoryTable() {
               ))}
             </TableBody>
 
-            {/* Table footer */}
-            <TableFooter d q>
+            {/* Table footer with pagination */}
+            <TableFooter>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 count={bins.length}
@@ -85,14 +90,12 @@ function HistoryTable() {
   );
 }
 
+// Row component for rendering each row in the table
 function Row({ value }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <TableRow
-      className="table-body-row"
-      sx={{ "& > *": { borderBottom: "0px" } }}
-    >
+    <TableRow className="table-body-row">
       <TableCell>
         <IconButton
           aria-label="expand row"
