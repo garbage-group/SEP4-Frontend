@@ -7,7 +7,7 @@ import {
 import { Box, IconButton } from "@mui/material";
 import React from "react";
 
-function PaginationAction(props) {
+function TablePaginationAction(props) {
   const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleFirstPageButtonClick = (event) => {
@@ -60,4 +60,4 @@ function PaginationAction(props) {
   );
 }
 
-export { PaginationAction };
+export { TablePaginationAction };

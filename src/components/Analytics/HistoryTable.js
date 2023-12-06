@@ -20,7 +20,7 @@ import { useBins } from "../../contexts/BinContext";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
 import { Spinner } from "../Spinner";
-import { PaginationAction } from "../utils/PaginationAction";
+import { TablePaginationAction } from "../utils/TablePaginationAction";
 
 //format date
 const formatDate = (date) =>
@@ -102,7 +102,7 @@ function HistoryTable() {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={PaginationAction}
+                ActionsComponent={TablePaginationAction}
               />
             </TableFooter>
           </Table>

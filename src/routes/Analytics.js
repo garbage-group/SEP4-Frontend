@@ -1,5 +1,5 @@
 import React from "react";
-import { HistoryTable } from "../components/analytics/HistoryTable";
+import { HistoryTable } from "../components/Analytics/HistoryTable";
 
 export function Analytics() {
   return (
