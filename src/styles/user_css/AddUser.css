@@ -4,11 +4,12 @@
     justify-content: center;
     align-items: center;
     min-height: 100%;
+    background-color: rgb(165, 171, 211);
+    border-radius: 15px;
   }
 
 
   .adduser-content {
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: calc(100% - 40px);
@@ -19,6 +20,7 @@
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
+    background-color: rgb(106, 113, 170);
   }
 
 
@@ -77,8 +79,8 @@
     margin-left: auto;
     margin-right: auto;
     border: none;
-    border-radius: 4px;
-    background-color: #ff4b2b;
+    border-radius: 6px;
+    background-color: #133A64;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -87,7 +89,7 @@
   }
 
   .adduser-signup-btn:hover {
-    background-color: #e04322;
+    background-color: #133A64;
   }
 
   .region-select {
@@ -107,36 +109,23 @@
     background-color: #f0f0f0;
   }
 
+
   .region-select-icon {
     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
+
+
 
   .region-select:focus {
     outline: none;
     border-color: #007bff;
   }
 
-  .adduser-cancel-btn {
-    width: 40%;
-    padding: 10px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #c0c0c0;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .adduser-cancel-btn:hover {
-    background-color: #a9a9a9;
-  }
 
   @media (max-width: 600px) {
     .adduser-content {
