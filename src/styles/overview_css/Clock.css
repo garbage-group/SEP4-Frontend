@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    background-color: #36435c;
+    /* background-color: #36435c; */
+    background-image: url("../../images/svgs/sidebar_bg.svg");
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease;
     height: 25vh;

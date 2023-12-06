@@ -42,7 +42,7 @@ const Clock = () => {
         <div className="clock-container">
             <div className="clock-face">
                 <div className="time">{formatTime(currentTime)}</div>
-                <div className="city-name">{cityName}</div>
+                <div className="city-name">{cityName}</div><br />
                 <Button variant="contained" onClick={toggleFormat} className="toggle-format">
                     {is24HourFormat ? '12-Hour Format' : '24-Hour Format'}
                 </Button>
