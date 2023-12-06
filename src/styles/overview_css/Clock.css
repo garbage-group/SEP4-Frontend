@@ -1,0 +1,40 @@
+.clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #36435c;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    height: 25vh;
+}
+
+.clock-face {
+    text-align: center;
+    color: #4caf50;
+    /* Material UI green color */
+    font-family: 'LCD', 'Lucida Console', monospace;
+    font-size: 2em;
+}
+
+.city-name {
+    color: #8AF3E9;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+.toggle-format {
+    margin-top: 20px;
+    background-color: #5a6a87;
+    color: #ede9e3;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: none;
+    text-transform: none;
+}
+
+.toggle-format:hover {
+    background-color: #4e4b4b;
+    color: #8AF3E9;
+    transform: scale(1.1);
+}
