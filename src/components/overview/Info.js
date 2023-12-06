@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Clock } from "./TimeInfo";
 
 import "../../styles/overview_css/Info.css";
 // import { TrafficInformation } from "./TrafficInformation";
@@ -9,7 +9,7 @@ function Info() {
   return (
     <div className="info-container">
       <div className="info-box">
-       
+
       </div>
       <div className="info-box">
         {/* <TrafficInformation /> */}
@@ -18,7 +18,7 @@ function Info() {
         <WeatherInfo />
       </div>
       <div className="info-box">
-        
+        <Clock />
       </div>
     </div>
   );
