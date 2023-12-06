@@ -23,7 +23,6 @@ function Bin() {
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading } = useBins();
 
-
   //extracting data from bin object;
   const {
     deviceId,
@@ -43,8 +42,6 @@ function Bin() {
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -56,10 +53,6 @@ function Bin() {
     const fetchData = async () => {
       await getBin(id);
     };
-
-    /* setNewFillThreshold(currentBin?.fillThreshold ?? 0);
-    setNewLatitude(currentBin?.latitude ?? 0);
-    setNewLongitude(currentBin?.longitude ?? 0); */
 
     // Check if currentBin is available before setting initial state values
     if (currentBin) {
@@ -79,7 +72,6 @@ function Bin() {
   //handle edit
   function handleEdit() {
     setIsDisabled(!isDisabled);
-    
   }
 
   //handle save
@@ -122,19 +114,16 @@ function Bin() {
 
     updateBin(id, updatedBin);
     setIsModalOpen(true);
-    
   }
 
   return (
     <div className="bin">
       <Modal isOpened={isModalOpen} onClose={closeModal}>
         <div className="savedImage">
-
           <img src={require("../../images/popUp/tick.gif")} alt="" />
-          
         </div>
         <span>Data Updated</span>
-        </Modal>
+      </Modal>
       {/* Displaying Bin Id */}
       <div className="row">
         <h6>Bin</h6>
@@ -277,8 +266,6 @@ function Bin() {
           </button>
         </div>
       </div>
-
-      
     </div>
   );
 }

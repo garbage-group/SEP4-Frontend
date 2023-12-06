@@ -15,12 +15,12 @@ import {
   Typography,
 } from "@mui/material";
 
-import "../../styles/analytics_css/HistoryTable.css";
+import "../../styles/Analytics_css/HistoryTable.css";
 import { useBins } from "../../contexts/BinContext";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
 import { Spinner } from "../Spinner";
-import { TablePaginationActions } from "./TablePaginationActions";
+import { PaginationAction } from "../utils/PaginationAction";
 
 //format date
 const formatDate = (date) =>
@@ -30,10 +30,8 @@ const formatDate = (date) =>
     year: "numeric",
     weekday: "long",
     hour: "numeric",
-    minute: "numeric"
+    minute: "numeric",
   }).format(new Date(date));
-
-
 
 // HistoryTable component
 function HistoryTable() {
@@ -80,12 +78,18 @@ function HistoryTable() {
             <TableBody>
               {(rowsPerPage > 0
                 ? bins.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
                 : bins
               ).map((bin, index) => (
-                <Row key={bin.id} value={bin} index={index} currOpen={currOpen} setCurrOpen={setCurrOpen}/>
+                <Row
+                  key={bin.id}
+                  value={bin}
+                  index={index}
+                  currOpen={currOpen}
+                  setCurrOpen={setCurrOpen}
+                />
               ))}
             </TableBody>
 
@@ -98,7 +102,7 @@ function HistoryTable() {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
+                ActionsComponent={PaginationAction}
               />
             </TableFooter>
           </Table>
@@ -110,7 +114,6 @@ function HistoryTable() {
 
 // Row component for rendering each row in the table
 function Row({ value, index, currOpen, setCurrOpen }) {
-
   let isOpen = currOpen === index;
 
   // Function to format timestamp or return "N/A" if null
@@ -119,17 +122,17 @@ function Row({ value, index, currOpen, setCurrOpen }) {
   };
 
   const handleAccordionToggle = () => {
-    setCurrOpen(isOpen? null : index);
+    setCurrOpen(isOpen ? null : index);
   };
 
   return (
-    <React.Fragment>
+    <>
       <TableRow
         className="table-body-row"
         sx={{ "& > *": { borderBottom: "0px" } }}
         colSpan={7}
       >
-        <TableCell >
+        <TableCell>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -143,26 +146,32 @@ function Row({ value, index, currOpen, setCurrOpen }) {
         <TableCell align="center">{value.longitude}</TableCell>
         <TableCell align="center">{value.capacity}</TableCell>
         <TableCell align="center">{value.fillThreshold}</TableCell>
-        <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
+        <TableCell align="center">
+          {formatTimestamp(value.emptiedLast)}
+        </TableCell>
       </TableRow>
 
       <TableRow>
-        <TableCell colSpan={7} sx={{
-          backgroundColor: "#EAEBF4"
-         }}>
+        <TableCell
+          colSpan={7}
+          sx={{
+            backgroundColor: "#EAEBF4",
+          }}
+        >
           <Collapse in={isOpen} timeout="auto" unmountOnExit>
-            <Box >
+            <Box>
               <Typography variant="h6" gutterBottom component="div">
                 Bin {value.id}'s History
               </Typography>
-              <Table size="small" aria-label="last emptied,fill-levels and humidity">
-
+              <Table
+                size="small"
+                aria-label="last emptied,fill-levels and humidity"
+              >
                 {/* fill level */}
-                <TableHead  >
-                  <TableRow >
+                <TableHead>
+                  <TableRow>
                     <TableCell>Fill level</TableCell>
                     <TableCell>Date</TableCell>
-
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -170,10 +179,10 @@ function Row({ value, index, currOpen, setCurrOpen }) {
                     <TableRow key={level.dateTime}>
                       <TableCell>{level.value}</TableCell>
                       <TableCell>{formatDate(level.dateTime)}</TableCell>
-                    </TableRow>))
-                  }
+                    </TableRow>
+                  ))}
                 </TableBody>
-                
+
                 {/* humidity */}
                 <TableHead>
                   <TableRow>
@@ -186,8 +195,8 @@ function Row({ value, index, currOpen, setCurrOpen }) {
                     <TableRow key={level.dateTime}>
                       <TableCell>{level.value}</TableCell>
                       <TableCell>{formatDate(level.dateTime)}</TableCell>
-                    </TableRow>))
-                  }
+                    </TableRow>
+                  ))}
                 </TableBody>
 
                 {/* temperature */}
@@ -202,16 +211,15 @@ function Row({ value, index, currOpen, setCurrOpen }) {
                     <TableRow key={temp.dateTime}>
                       <TableCell>{temp.value}</TableCell>
                       <TableCell>{formatDate(temp.dateTime)}</TableCell>
-                    </TableRow>))
-                  }
+                    </TableRow>
+                  ))}
                 </TableBody>
-
               </Table>
             </Box>
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
   );
 }
 
