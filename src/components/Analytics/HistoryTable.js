@@ -111,9 +111,6 @@ function HistoryTable() {
 // Row component for rendering each row in the table
 function Row({ value, index, currOpen, setCurrOpen }) {
 
-
-  console.log(index)
-
   let isOpen = currOpen === index;
 
   // Function to format timestamp or return "N/A" if null
