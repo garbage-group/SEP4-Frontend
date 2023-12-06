@@ -127,9 +127,7 @@ const AddUser = ({ onCancel }) => {
           </Button>
 
 
-          <Button onClick={onCancel} className="adduser-cancel-btn">
-            Cancel
-          </Button>
+
         </div>
       </div>
       <Modal isOpened={isModalOpen} onClose={closeModal}>

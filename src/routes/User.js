@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button, Chip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
@@ -19,20 +19,26 @@ const currentUserRole = localStorage.getItem("role");
 
 // Users component
 function Users() {
+  const [showAddUser, setShowAddUser] = useState(false);
+
+  const handleToggleAddUser = () => {
+    setShowAddUser(!showAddUser);
+  };
+
   return (
     <div className="users-container">
-      {/* Render UserListContainer and FilterContainer components */}
-      <UserListContainer />
-      <AddUserContainer />
+      <UserListContainer onAddUserClick={handleToggleAddUser} />
+      {showAddUser && <AddUserContainer />}
     </div>
   );
 }
 
 // UserListContainer component
-function UserListContainer() {
-  // const [currentUserRole, setCurrentUserRole] = useState(
-  //   localStorage.getItem("role")
-  // );
+function UserListContainer({ onAddUserClick }) {
+
+  function handleAddButtonClick() {
+    onAddUserClick(); // Calling the function passed down from the parent component
+  }
 
   useEffect(() => {
     // Update the role when it changes in localStorage
@@ -41,10 +47,6 @@ function UserListContainer() {
 
   // Use UserListContext to fetch user data
   const { isLoading, users: data } = useUserListContext();
-
-  function handleAddButtonClick() {
-    alert("Clicked");
-  }
 
   // Extra elements component
   function ExtraElements({ region, role }) {
@@ -91,10 +93,9 @@ function UserListContainer() {
           {/* <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} /> */}
           <Button
             variant="contained"
-            className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""
-              }`}
+            className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""}`}
             endIcon={<PersonAddAltRoundedIcon />}
-            onClick={handleAddButtonClick}
+            onClick={handleAddButtonClick} // Use the handleAddButtonClick function here
           >
             Add User
           </Button>
