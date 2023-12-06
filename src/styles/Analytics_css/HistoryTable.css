@@ -1,0 +1,83 @@
+/* Container Styles */
+.table-outer-container {
+  border: 2px solid #2166b0;
+  border-radius: 10px;
+  width: 55vw;
+  height: 70vh;
+  margin: 1vh 1vw;
+  overflow: auto;
+}
+
+/* MUI Table Container Styles */
+.MuiTableContainer-root {
+  height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+/* MUI Table Styles */
+.MuiTableContainer-root>Table {
+  height: 100%;
+  border-collapse: collapse;
+}
+
+/* Scrollbar Styles (for Webkit browsers) */
+.MuiTableContainer-root::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+/* Table Cell Styles */
+.MuiTableCell-body {
+  padding: 10px;
+  margin: 0;
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+
+/* Table Heading Styles */
+.MuiTableCell-head {
+  background-color: #2166b0 !important;
+  color: white !important;
+}
+
+/* Table Heading Styles */
+/* Table Heading Styles */
+.MuiTableRow-head :nth-child(1),
+.MuiTableRow-head :nth-child(2) {
+  width: 12%;
+}
+
+.MuiTableRow-head :nth-child(3),
+.MuiTableRow-head :nth-child(4),
+.MuiTableRow-head :nth-child(5),
+.MuiTableRow-head :nth-child(6),
+.MuiTableRow-head :nth-child(7) {
+  width: calc((100% - 24%) / 5);
+}
+
+/* Table Footer Styles */
+.MuiTableFooter-root {
+  flex-shrink: 0;
+  background-color: #2166b0;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Pagination Styles */
+
+.MuiTablePagination-root {
+  color: white !important;
+}

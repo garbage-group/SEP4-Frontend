@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import Modal from "../components/Modal";
 
-
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
 
@@ -22,45 +21,41 @@ function BinProvider({ children }) {
     setIsModalOpen(false);
   };
 
-  useEffect(function () {
-    let intervalId;
-    async function fetchBins() {
-   
-      try {
-
-        
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/bins/all`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-        const data = await res.json();
-        setBins(data);
-      } catch (e) {
-        alert(e.message);
-      } finally {
-        setIsLoading(false);
+  useEffect(
+    function () {
+      let intervalId;
+      async function fetchBins() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(`${BASE_URL}/bins/all`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const data = await res.json();
+          setBins(data);
+        } catch (e) {
+          alert(e.message);
+        } finally {
+          setIsLoading(false);
+        }
       }
-    }
-    if(isAuthenticated){
-
-      fetchBins();
-      intervalId = setInterval(fetchBins, fetchInterval);
-    }
-
-    return() => {
-      if(intervalId){
-        clearInterval(intervalId);
+      if (isAuthenticated) {
+        fetchBins();
+        intervalId = setInterval(fetchBins, fetchInterval);
       }
-    }
-  }, [isAuthenticated, token]);
 
-  
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
+    },
+    [isAuthenticated, token]
+  );
 
   //get bin by id
   async function getBin(id) {
-
     if (!isAuthenticated || !token) {
       return;
     }
@@ -77,7 +72,12 @@ function BinProvider({ children }) {
       console.log(data);
       setCurrentBin(data);
     } catch {
-        return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
+      return (
+        <Modal
+          isOpened={isModalOpen}
+          onClose={closeModal}
+        >{`There is no bin with bin Id: ${id}`}</Modal>
+      );
     } finally {
       setIsLoading(false);
     }
@@ -199,7 +199,7 @@ function BinProvider({ children }) {
         getBinHumidity,
         createBin,
         deleteBin,
-        updateBin
+        updateBin,
       }}
     >
       {children}
