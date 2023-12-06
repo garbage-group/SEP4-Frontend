@@ -17,6 +17,7 @@ function BinProvider({ children }) {
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [status, setStatus] = useState("");
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -78,6 +79,31 @@ function BinProvider({ children }) {
       setCurrentBin(data);
     } catch {
         return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  //get bin status
+  async function getBinStatus(id) {
+
+    if (!isAuthenticated || !token) {
+      return;
+    }
+    if (Number(id) === currentBin.id) return;
+
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/bins/${id}/device_status`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+  
+      setStatus(data);
+    } catch {
+      return <Modal isOpened={isModalOpen} onClose={closeModal}>{`There is no bin with bin Id: ${id}`}</Modal>
     } finally {
       setIsLoading(false);
     }
@@ -199,7 +225,9 @@ function BinProvider({ children }) {
         getBinHumidity,
         createBin,
         deleteBin,
-        updateBin
+        updateBin,
+        getBinStatus,
+        status
       }}
     >
       {children}
