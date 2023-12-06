@@ -33,16 +33,21 @@ const formatDate = (date) =>
     minute: "numeric"
   }).format(new Date(date));
 
+// HistoryTable component
 function HistoryTable() {
+  // Fetch bins data and loading state from context
   const { bins, isLoading } = useBins();
 
+  // State for pagination
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  // Handler for changing page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  // Handler for changing rows per page
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -53,21 +58,22 @@ function HistoryTable() {
       {isLoading ? (
         <Spinner />
       ) : (
-        <TableContainer className="table-inner-container" component={Paper}>
+        <TableContainer component={Paper}>
           <Table stickyHeader>
-            {/* table heading */}
+            {/* Table heading */}
             <TableHead>
-              <TableRow className="table-heading">
+              <TableRow>
                 <TableCell />
                 <TableCell>Bin Id</TableCell>
                 <TableCell align="center">Latitude</TableCell>
                 <TableCell align="center">Longitude</TableCell>
                 <TableCell align="center">Capacity</TableCell>
                 <TableCell align="center">Fill Threshold</TableCell>
+                <TableCell align="center">Last Emptied</TableCell>
               </TableRow>
             </TableHead>
 
-            {/* table body */}
+            {/* Table body */}
             <TableBody>
               {(rowsPerPage > 0
                 ? bins.slice(
@@ -80,8 +86,8 @@ function HistoryTable() {
               ))}
             </TableBody>
 
-            {/* Table footer */}
-            <TableFooter d q>
+            {/* Table footer with pagination */}
+            <TableFooter>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 count={bins.length}
@@ -99,16 +105,23 @@ function HistoryTable() {
   );
 }
 
+// Row component for rendering each row in the table
 function Row({ value }) {
   const [open, setOpen] = useState(false);
+
+  // Function to format timestamp or return "N/A" if null
+  const formatTimestamp = (timestamp) => {
+    return timestamp ? new Date(timestamp).toLocaleString() : "N/A";
+  };
 
   return (
     <React.Fragment>
       <TableRow
         className="table-body-row"
-        sx={{ "& > *": { borderBottom: "0px" } }}
+        sx={{ "& > *": { borderBottom: "0px" } }} 
+        colSpan={7}
       >
-        <TableCell>
+        <TableCell >
           <IconButton
             aria-label="expand row"
             size="small"
@@ -122,10 +135,11 @@ function Row({ value }) {
         <TableCell align="center">{value.longitude}</TableCell>
         <TableCell align="center">{value.capacity}</TableCell>
         <TableCell align="center">{value.fillThreshold}</TableCell>
+         <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
       </TableRow>
 
       <TableRow>
-        <TableCell colSpan={6}l>
+        <TableCell colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Typography variant="h6" gutterBottom component="div">
@@ -157,6 +171,23 @@ function Row({ value }) {
         </TableCell>
       </TableRow>
     </React.Fragment>
+    // <TableRow className="table-body-row">
+    //   <TableCell>
+    //     <IconButton
+    //       aria-label="expand row"
+    //       size="small"
+    //       onClick={() => setOpen(!open)}
+    //     >
+    //       {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+    //     </IconButton>
+    //   </TableCell>
+    //   <TableCell align="center">{value.id}</TableCell>
+    //   <TableCell align="center">{value.latitude}</TableCell>
+    //   <TableCell align="center">{value.longitude}</TableCell>
+    //   <TableCell align="center">{value.capacity}</TableCell>
+    //   <TableCell align="center">{value.fillThreshold}</TableCell>
+    //   <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
+    // </TableRow>
   );
 }
 
