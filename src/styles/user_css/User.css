@@ -3,7 +3,7 @@
   background-color: #e7eafb;
   height: 100%;
   display: grid;
-  grid-template-columns: 1.2fr 0.35fr;
+  grid-template-columns: .6fr 0.35fr;
   border-radius: 10px;
   margin-left: 0.5vw;
   justify-content: center;
@@ -154,10 +154,11 @@
 
 
 /* styling for container rendering filters(maybe) */
-.filter-container {
+.addUser-container {
   /* border: 1px solid brown; */
   background-color: #ffffff;
   margin: 1vh 1vw;
   margin-left: 0;
   border-radius: 15px;
+
 }

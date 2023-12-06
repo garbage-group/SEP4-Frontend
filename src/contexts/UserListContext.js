@@ -21,9 +21,6 @@ function UserListProvider({ children }) {
           },
         });
         const data = await res.json();
-
-        // console.log(isAuthenticated);
-
         setUsers(data);
       } catch (e) {
         alert(e.Message);

@@ -7,7 +7,6 @@ import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
 import { Root } from "./routes/Root";
 import { UserListProvider } from "./contexts/UserListContext";
-
 import "../src/styles/App.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
@@ -17,6 +16,8 @@ import Bin from "./components/Bin/Bin";
 import BinForm from "./components/Bin/BinForm";
 import { BinProvider } from "./contexts/BinContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import { UserManagementProvider } from './contexts/UserContext';
+
 
 const router = createHashRouter([
   {
@@ -77,15 +78,18 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <BinProvider>
-            <UserListProvider>
-              <NotificationProvider>
-                <RouterProvider router={router} />
-              </NotificationProvider>
-            </UserListProvider>
-          </BinProvider>
-        </AuthProvider>
+        <UserManagementProvider>
+
+          <AuthProvider>
+            <BinProvider>
+              <UserListProvider>
+                <NotificationProvider>
+                  <RouterProvider router={router} />
+                </NotificationProvider>
+              </UserListProvider>
+            </BinProvider>
+          </AuthProvider>
+        </UserManagementProvider>
       </QueryClientProvider>
     </>
   );
