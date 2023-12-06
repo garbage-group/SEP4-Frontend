@@ -55,6 +55,7 @@ function HistoryTable() {
                 <TableCell align="center">Longitude</TableCell>
                 <TableCell align="center">Capacity</TableCell>
                 <TableCell align="center">Fill Threshold</TableCell>
+                <TableCell align="center">Last Emptied</TableCell>
               </TableRow>
             </TableHead>
 
@@ -94,6 +95,11 @@ function HistoryTable() {
 function Row({ value }) {
   const [open, setOpen] = useState(false);
 
+  // Function to format timestamp or return "N/A" if null
+  const formatTimestamp = (timestamp) => {
+    return timestamp ? new Date(timestamp).toLocaleString() : "N/A";
+  };
+
   return (
     <TableRow className="table-body-row">
       <TableCell>
@@ -110,6 +116,7 @@ function Row({ value }) {
       <TableCell align="center">{value.longitude}</TableCell>
       <TableCell align="center">{value.capacity}</TableCell>
       <TableCell align="center">{value.fillThreshold}</TableCell>
+      <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
     </TableRow>
   );
 }

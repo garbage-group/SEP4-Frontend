@@ -3,7 +3,7 @@
   border: 2px solid #2166b0;
   border-radius: 10px;
   width: 55vw;
-  height: 64vh;
+  height: 70vh;
   margin: 1vh 1vw;
   overflow: auto;
 }
@@ -52,13 +52,19 @@
   color: white !important;
 }
 
+/* Table Heading Styles */
+/* Table Heading Styles */
 .MuiTableRow-head :nth-child(1),
-.MuiTableRow-head :nth-child(2),
+.MuiTableRow-head :nth-child(2) {
+  width: 12%;
+}
+
 .MuiTableRow-head :nth-child(3),
 .MuiTableRow-head :nth-child(4),
 .MuiTableRow-head :nth-child(5),
-.MuiTableRow-head :nth-child(6) {
-  flex-grow: 1;
+.MuiTableRow-head :nth-child(6),
+.MuiTableRow-head :nth-child(7) {
+  width: calc((100% - 24%) / 5);
 }
 
 /* Table Footer Styles */
@@ -71,12 +77,6 @@
 }
 
 /* Pagination Styles */
-.MuiTablePagination-root .MuiTablePagination-menuItem,
-.MuiTablePagination-root .MuiTablePagination-input,
-.MuiTablePagination-root .MuiTablePagination-caption,
-.MuiTablePagination-root .MuiIconButton-root {
-  color: white !important;
-}
 
 .MuiTablePagination-root {
   color: white !important;
