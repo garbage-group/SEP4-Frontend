@@ -48,12 +48,25 @@ function WeatherInfo() {
         };
     }
 
+    const weatherType = () =>{
+        if(typeof weather.main !== "undefined"){
+            
+            if (weather.weather[0].main === "Snow"){
+                return "weatherMain snowy";
+            } else if (weather.weather[0].main === "Clouds"){
+                return "weatherMain";
+            } else {
+                return "weatherMain sunny";
+            }
+        }
+    }
+    console.log(weather)
 
     return (
         <>
 
             <div className="weatherApp">
-                <main className="weatherMain">
+                <main className={weatherType()}>
                     <div className="searchBox">
                         <input
                             type="text"
