@@ -108,6 +108,7 @@ function HistoryTable() {
 // Row component for rendering each row in the table
 function Row({ value }) {
   const [open, setOpen] = useState(false);
+  console.log(value)
 
   // Function to format timestamp or return "N/A" if null
   const formatTimestamp = (timestamp) => {
@@ -118,7 +119,7 @@ function Row({ value }) {
     <React.Fragment>
       <TableRow
         className="table-body-row"
-        sx={{ "& > *": { borderBottom: "0px" } }} 
+        sx={{ "& > *": { borderBottom: "0px" } }}
         colSpan={7}
       >
         <TableCell >
@@ -135,7 +136,7 @@ function Row({ value }) {
         <TableCell align="center">{value.longitude}</TableCell>
         <TableCell align="center">{value.capacity}</TableCell>
         <TableCell align="center">{value.fillThreshold}</TableCell>
-         <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
+        <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
       </TableRow>
 
       <TableRow>
@@ -143,25 +144,56 @@ function Row({ value }) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Typography variant="h6" gutterBottom component="div">
-                Bin History
+                Bin {value.id}'s History
               </Typography>
               <Table size="small" aria-label="last emptied,fill-levels and humidity">
+
+                {/* fill level */}
                 <TableHead>
                   <TableRow>
                     <TableCell>Fill level</TableCell>
-                    <TableCell>Fill level date</TableCell>
-                    <TableCell>Humidity</TableCell>
-                    <TableCell>Humidity date</TableCell>
+                    <TableCell>Date</TableCell>
+
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {
-                    value.fillLevels.map((level) =>(
-                      <TableRow key={`${level.value}-${level.dateTime}`}>
-                        <TableCell>{level.value}</TableCell>
-                        <TableCell>{formatDate(level.dateTime)}</TableCell>
-                      </TableRow>
-                    ))
+                  {value.fillLevels.map((level) => (
+                    <TableRow key={value.id}>
+                      <TableCell>{level.value}</TableCell>
+                      <TableCell>{formatDate(level.dateTime)}</TableCell>
+                    </TableRow>))
+                  }
+                </TableBody>
+                
+                {/* humidity */}
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Humidity</TableCell>
+                    <TableCell>Date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {value.fillLevels.map((level) => (
+                    <TableRow key={value.id}>
+                      <TableCell>{level.value}</TableCell>
+                      <TableCell>{formatDate(level.dateTime)}</TableCell>
+                    </TableRow>))
+                  }
+                </TableBody>
+
+                {/* temperature */}
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Temperature</TableCell>
+                    <TableCell>Date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {value.temperatures.map((temp) => (
+                    <TableRow key={value.id}>
+                      <TableCell>{temp.value}</TableCell>
+                      <TableCell>{formatDate(temp.dateTime)}</TableCell>
+                    </TableRow>))
                   }
                 </TableBody>
 
@@ -171,23 +203,6 @@ function Row({ value }) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-    // <TableRow className="table-body-row">
-    //   <TableCell>
-    //     <IconButton
-    //       aria-label="expand row"
-    //       size="small"
-    //       onClick={() => setOpen(!open)}
-    //     >
-    //       {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-    //     </IconButton>
-    //   </TableCell>
-    //   <TableCell align="center">{value.id}</TableCell>
-    //   <TableCell align="center">{value.latitude}</TableCell>
-    //   <TableCell align="center">{value.longitude}</TableCell>
-    //   <TableCell align="center">{value.capacity}</TableCell>
-    //   <TableCell align="center">{value.fillThreshold}</TableCell>
-    //   <TableCell align="center">{formatTimestamp(value.emptiedLast)}</TableCell>
-    // </TableRow>
   );
 }
 
