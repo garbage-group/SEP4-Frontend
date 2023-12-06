@@ -1,8 +1,5 @@
 import React from "react";
-// import { HumidityLGComponent } from "../components/Analytics/HumidityLG";
-import { HistoryTable } from "../components/Analytics/HistoryTable";
-// import { HumidityDisplay } from "../components/HumidityDisplay";
-// import { LineChart } from "@mui/x-charts";
+import { HistoryTable } from "../components/analytics/HistoryTable";
 
 export function Analytics() {
   return (

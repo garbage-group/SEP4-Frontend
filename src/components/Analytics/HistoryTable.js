@@ -8,23 +8,15 @@ import {
   TableCell,
   IconButton,
   TableBody,
-  Box,
   TableFooter,
   TablePagination,
 } from "@mui/material";
 
-import "../../styles/Analytics_css/HistoryTable.css";
+import "../../styles/analytics_css/HistoryTable.css";
 import { useBins } from "../../contexts/BinContext";
-import {
-  FirstPage,
-  KeyboardArrowDown,
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  KeyboardArrowUp,
-  LastPage,
-} from "@mui/icons-material";
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
-import { Spinner } from "../../components/Spinner";
+import { Spinner } from "../Spinner";
 import { TablePaginationActions } from "./TablePaginationActions";
 
 function HistoryTable() {
@@ -43,15 +35,15 @@ function HistoryTable() {
   };
 
   return (
-    <div className="table-container">
+    <div className="table-outer-container">
       {isLoading ? (
         <Spinner />
       ) : (
-        <TableContainer component={Paper}>
-          <Table>
-            {/* table headin */}
-            <TableHead className="table-heading">
-              <TableRow>
+        <TableContainer className="table-inner-container" component={Paper}>
+          <Table stickyHeader>
+            {/* table heading */}
+            <TableHead>
+              <TableRow className="table-heading">
                 <TableCell />
                 <TableCell>Bin Id</TableCell>
                 <TableCell align="center">Latitude</TableCell>
@@ -74,7 +66,8 @@ function HistoryTable() {
               ))}
             </TableBody>
 
-            <TableFooter>
+            {/* Table footer */}
+            <TableFooter d q>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 count={bins.length}
@@ -96,7 +89,10 @@ function Row({ value }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <TableRow sx={{ "& > *": { borderBottom: "1px" } }}>
+    <TableRow
+      className="table-body-row"
+      sx={{ "& > *": { borderBottom: "0px" } }}
+    >
       <TableCell>
         <IconButton
           aria-label="expand row"

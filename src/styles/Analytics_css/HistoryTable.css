@@ -1,58 +1,72 @@
-.MuiTable-root {
-  /* color: white !important; */
+.table-outer-container {
+  border: 2px solid #2166b0;
   border-radius: 10px;
-  width: 100% !important;
-  height: 100% !important;
-  /* border: 1px solid var(--accent) !important; */
+  width: 55vw;
+  height: 64vh;
+  margin: 1vh 1vw;
 }
 
-.table-container {
-  width: 50vw;
-  height: 63vh;
-  background-color: #e0e0e0;
-  overflow: auto;
-  border-radius: 10px;
-  margin: 10px;
+.table-inner-container {
+  height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px !important;
 }
+
+.table-inner-container>Table {
+  height: 100%;
+  border: 0px !important;
+}
+
+
+/* .table-body-row {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.table-body-row:hover {
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+}
+ */
+
+
 
 /* Scrollbar Styles (for Webkit browsers) */
-.table-container::-webkit-scrollbar {
+.table-inner-container::-webkit-scrollbar {
   width: 0.5vw;
 }
 
-.table-container::-webkit-scrollbar-track {
+.table-inner-container::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: transparent;
 }
 
-.table-container::-webkit-scrollbar-thumb {
+.table-inner-container::-webkit-scrollbar-thumb {
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #555;
 }
 
+
+
 .MuiTableCell-body {
-  /* background-color: aqua; */
   border-bottom: 1px solid black !important;
+  margin-bottom: 10px !important;
 }
 
 .table-heading :nth-child(1) {
-  background-color: rgb(0, 255, 89) !important;
   width: 6% !important;
 }
 
 .table-heading :nth-child(2) {
-  background-color: aqua !important;
   width: 10% !important;
 }
 
 .table-heading :nth-child(3) {
-  background-color: bisque !important;
   width: 21% !important;
 }
 
 .table-heading :nth-child(4) {
-  background-color: cadetblue;
   width: 21% !important;
 }
 
@@ -61,6 +75,40 @@
 }
 
 .table-heading :nth-child(6) {
-  background-color: gold !important;
   width: 21% !important;
 }
+
+.MuiTableCell-root {
+  padding: 10px !important;
+  margin: 0px !important;
+}
+
+.MuiTableCell-head {
+  background-color: aliceblue !important;
+}
+
+.table-body-row {
+
+  /*  background: #199BF5;
+  background: linear-gradient(270deg, #199BF5, #1EAFB3); */
+  border-bottom: 1px solid rgb(0, 0, 0);
+  border-radius: 10px !important;
+  border-collapse: separate !important;
+  border-spacing: 10px;
+}
+
+.sticky-footer {
+  bottom: 0 !important;
+  position: "fixed" !important;
+  background-color: "#ffffff" !important;
+}
+
+
+/* .table-body-row {
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.table-body-row:hover {
+  background: linear-gradient(to right, #43e97b, #38f9d7);
+} */

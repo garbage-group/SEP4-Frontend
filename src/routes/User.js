@@ -13,8 +13,6 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import "../styles/user_css/User.css";
 import { LoadingComponent } from "../components/LoadingError";
 
-// const currentUserRole = localStorage.getItem("role");
-
 // Users component
 function Users() {
   return (

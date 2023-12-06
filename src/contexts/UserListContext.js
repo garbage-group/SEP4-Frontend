@@ -24,8 +24,6 @@ function UserListProvider({ children }) {
 
         // console.log(isAuthenticated);
 
-        console.log(users.fullname);
-
         setUsers(data);
       } catch (e) {
         alert(e.Message);
