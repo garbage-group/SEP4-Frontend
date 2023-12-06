@@ -10,6 +10,9 @@ import {
   TableBody,
   TableFooter,
   TablePagination,
+  Box,
+  Collapse,
+  Typography,
 } from "@mui/material";
 
 import "../../styles/analytics_css/HistoryTable.css";
@@ -18,6 +21,17 @@ import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
 import { Spinner } from "../Spinner";
 import { TablePaginationActions } from "./TablePaginationActions";
+
+//format date
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    weekday: "long",
+    hour: "numeric",
+    minute: "numeric"
+  }).format(new Date(date));
 
 function HistoryTable() {
   const { bins, isLoading } = useBins();
@@ -57,9 +71,9 @@ function HistoryTable() {
             <TableBody>
               {(rowsPerPage > 0
                 ? bins.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
                 : bins
               ).map((bin) => (
                 <Row key={bin.id} value={bin} />
@@ -89,25 +103,60 @@ function Row({ value }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <TableRow
-      className="table-body-row"
-      sx={{ "& > *": { borderBottom: "0px" } }}
-    >
-      <TableCell>
-        <IconButton
-          aria-label="expand row"
-          size="small"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-        </IconButton>
-      </TableCell>
-      <TableCell align="center">{value.id}</TableCell>
-      <TableCell align="center">{value.latitude}</TableCell>
-      <TableCell align="center">{value.longitude}</TableCell>
-      <TableCell align="center">{value.capacity}</TableCell>
-      <TableCell align="center">{value.fillThreshold}</TableCell>
-    </TableRow>
+    <React.Fragment>
+      <TableRow
+        className="table-body-row"
+        sx={{ "& > *": { borderBottom: "0px" } }}
+      >
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+        <TableCell align="center">{value.id}</TableCell>
+        <TableCell align="center">{value.latitude}</TableCell>
+        <TableCell align="center">{value.longitude}</TableCell>
+        <TableCell align="center">{value.capacity}</TableCell>
+        <TableCell align="center">{value.fillThreshold}</TableCell>
+      </TableRow>
+
+      <TableRow>
+        <TableCell colSpan={6}l>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box>
+              <Typography variant="h6" gutterBottom component="div">
+                Bin History
+              </Typography>
+              <Table size="small" aria-label="last emptied,fill-levels and humidity">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Fill level</TableCell>
+                    <TableCell>Fill level date</TableCell>
+                    <TableCell>Humidity</TableCell>
+                    <TableCell>Humidity date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {
+                    value.fillLevels.map((level) =>(
+                      <TableRow key={`${level.value}-${level.dateTime}`}>
+                        <TableCell>{level.value}</TableCell>
+                        <TableCell>{formatDate(level.dateTime)}</TableCell>
+                      </TableRow>
+                    ))
+                  }
+                </TableBody>
+
+              </Table>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
   );
 }
 
