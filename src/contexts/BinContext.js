@@ -27,7 +27,7 @@ function BinProvider({ children }) {
       async function fetchBins() {
         try {
           setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/bins/all`, {
+          const res = await fetch(`${BASE_URL}/bins`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
