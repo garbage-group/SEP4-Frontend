@@ -18,6 +18,7 @@ import { LoadingComponent } from "../components/LoadingError";
 // Users component
 function Users() {
   const [showAddUser, setShowAddUser] = useState(false);
+ 
 
   const handleToggleAddUser = () => {
     setShowAddUser(!showAddUser);
@@ -33,6 +34,7 @@ function Users() {
 
 // UserListContainer component
 function UserListContainer({ onAddUserClick }) {
+  const [currentUserRole, setCurrentUserRole] = useState(localStorage.getItem("role"));
 
   function handleAddButtonClick() {
     onAddUserClick(); // Calling the function passed down from the parent component
@@ -40,7 +42,7 @@ function UserListContainer({ onAddUserClick }) {
 
   useEffect(() => {
     // Update the role when it changes in localStorage
-    // setCurrentUserRole(localStorage.getItem("role"));
+    setCurrentUserRole(localStorage.getItem("role"));
   }, []);
 
   // Use UserListContext to fetch user data

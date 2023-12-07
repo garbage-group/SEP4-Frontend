@@ -24,10 +24,14 @@ function BinProvider({ children }) {
   useEffect(
     function () {
       let intervalId;
+      
       async function fetchBins() {
+        if (!isAuthenticated || !token) {
+          return;
+        }
         try {
           setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/bins/all`, {
+          const res = await fetch(`${BASE_URL}/bins`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
