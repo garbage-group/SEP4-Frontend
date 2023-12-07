@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import logoImage from "../../images/bin-icon.png";
 import { useURLPosition } from "../../hooks/useURLPosition";
-import { useAuth } from "../../contexts/LoginAuthContext";
 import Modal from "../Modal";
 
 function BinMap() {
@@ -86,7 +85,7 @@ function ChangeMapPosition({ position }) {
 //detecting a click on the map
 function DetectClick({ setIsModalOpen }) {
   const navigate = useNavigate();
-  const { role } = useAuth();
+  const role = localStorage.getItem("role");
 
 
 
