@@ -72,6 +72,7 @@
   cursor: pointer;
   margin-bottom: 1rem;
   background-color: #143A63;
+  
 
 }
 
@@ -92,28 +93,11 @@
   color: #143A63;
 }
 
-.edit-button {
-  display: inline-block;
-  outline: none;
-  cursor: pointer;
-  padding: 0 16px;
-  background-color: #143A63;
-  border-radius: 0.25rem;
-  border: 1px solid #143A63;
-  color: #fff;
-  font-size: 13px;
-  line-height: 28px;
-  font-weight: 400;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.edit-button:hover {
-  background-color: #00c46a;
-  border-color: #00c46a;
-  color: #143A63;
-
+.buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
 }
 
 .editbutton_disabled {
@@ -130,7 +114,11 @@
 
 }
 
-
+.status span{
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 0.4rem;
+}
 
 .active{
   color: #00c46a !important;

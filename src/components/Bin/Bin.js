@@ -9,6 +9,7 @@ import { useNotifications } from "../../contexts/NotificationContext";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CircleIcon from '@mui/icons-material/Circle';
+import { Button } from "../Button";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -149,6 +150,11 @@ function Bin() {
     updateBin(id, updatedBin);
     setIsModalOpen(true);
 
+  }
+
+  //buzzer
+  const handleBuzzer = () =>{
+    alert("BeeeeeeeeeeeeeeeeeeeeeeeeeeP");
   }
 
   return (
@@ -329,17 +335,19 @@ function Bin() {
         <div className="buttons-container">
           <BackButton className={"btn"}>&larr; Back </BackButton>
 
-          <div className="edit-save-button">
-            <button onClick={handleEdit} className="edit-button">
+        
+            <Button onClick={handleEdit} className="btn">
               Edit
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleSave}
-              className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
+              className={`btn  ${isDisabled ? "editbutton_disabled" : ""}`}
             >
               Save
-            </button>
-          </div>
+            </Button>
+
+            <Button onClick={handleBuzzer} className="btn">Buzzer</Button>
+          
         </div>
 
 
