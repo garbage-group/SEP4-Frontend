@@ -17,7 +17,6 @@ function BinProvider({ children }) {
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
  
-  const [status, setStatus] = useState("");
 
   useEffect(function () {
     let intervalId;
@@ -26,7 +25,7 @@ function BinProvider({ children }) {
       try {
    
         setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/bins/all`, {
+        const res = await fetch(`${BASE_URL}/bins`, {
           headers: {
             Authorization: `Bearer ${token}`,
           }
@@ -86,38 +85,6 @@ function BinProvider({ children }) {
     }
   }
 
-  //get bin status
-  async function getBinStatus(id) {
-
-    if (!isAuthenticated || !token) {
-      return;
-    }
-    if (Number(id) === currentBin.id) return;
-
-    try {
-      setIsLoading(true);
-      const res = await fetch(`${BASE_URL}/bins/${id}/device_status`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if(!res.ok){
-        setStatus("OFFLINE");
-        throw new Error("Could not fetch information")
-      }
-      
-      if(res.ok){
-        setStatus("ACTIVE");
-  
-      } 
-    } catch (e) {
-      console.log(e.message);
-    
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   //create new bin
   async function createBin(newBin) {
@@ -147,6 +114,30 @@ function BinProvider({ children }) {
     }
   }
 
+  async function activateBuzzer(id) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/bins/${id}/buzzerActivate`, {
+        method: "POST",
+        body: JSON.stringify({binId: id}),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to activate a buzzer.Status: ${res.status}`);
+      }
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   //delete bin by id
   async function deleteBin(id) {
     if (!isAuthenticated || !token) {
@@ -154,7 +145,7 @@ function BinProvider({ children }) {
     }
     try {
       setIsLoading(true);
-      await fetch(`${BASE_URL}/bins/delete/${id}`, {
+      await fetch(`${BASE_URL}/bins/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -242,8 +233,7 @@ function BinProvider({ children }) {
         createBin,
         deleteBin,
         updateBin,
-        getBinStatus,
-        status,
+        activateBuzzer
       }}
     >
       {children}

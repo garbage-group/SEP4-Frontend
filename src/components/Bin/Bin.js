@@ -26,7 +26,7 @@ function Bin() {
   const [isDisabled, setIsDisabled] = useState(true);
 
   // Accessing functions and data from BinContext
-  const { getBin, updateBin, currentBin, isLoading, getBinStatus, status } = useBins();
+  const { getBin, updateBin, currentBin, isLoading, activateBuzzer } = useBins();
 
 
   //extracting data from bin object;
@@ -39,6 +39,8 @@ function Bin() {
     longitude,
     fillLevels,
     humidity,
+    status,
+    pickUpTime
   } = currentBin;
 
   const [newFIllThreshold, setNewFillThreshold] = useState(
@@ -48,35 +50,17 @@ function Bin() {
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [pickUpTime, setPickUpTime] = useState("");
-  const { notifications } = useNotifications();
-
-
-  // Function to check if a bin has a notification
-  const hasNotification = (id) => {
-    return notifications.some((notification) => notification.binId === id);
-  };
-
-  if (hasNotification(id)) {
-    setPickUpTime(formatDate(notifications.find((notification) => notification.binId === id).scheduledPickupTime))
-  }
-
 
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  /*   // Accessing functions and data from BinContext
-  const { getBin, currentBin, isLoading } = useBins(); */
 
   useEffect(() => {
     const fetchData = async () => {
       await getBin(id);
     };
 
-    /* setNewFillThreshold(currentBin?.fillThreshold ?? 0);
-    setNewLatitude(currentBin?.latitude ?? 0);
-    setNewLongitude(currentBin?.longitude ?? 0); */
 
     // Check if currentBin is available before setting initial state values
     if (currentBin) {
@@ -89,14 +73,6 @@ function Bin() {
   }, [id, getBin, currentBin]);
 
 
-  //for bin status
-  useEffect(() => {
-    const fetchBinStatus = async () =>{
-      await getBinStatus(id);
-    }
-
-  fetchBinStatus();
-  },[getBinStatus, id])
 
   // Loading spinner while data is being fetched
   if (isLoading) {
@@ -153,8 +129,8 @@ function Bin() {
   }
 
   //buzzer
-  const handleBuzzer = () =>{
-    alert("BeeeeeeeeeeeeeeeeeeeeeeeeeeP");
+  const handleBuzzer = async() =>{
+      await activateBuzzer(id);
   }
 
   return (
@@ -255,7 +231,7 @@ function Bin() {
           <h6>Next pick up on</h6>
           <input
             className="binInput binInput_disabled"
-            value={pickUpTime ? pickUpTime : "N/A"}
+            value={pickUpTime ? formatDate(pickUpTime) : "N/A"}
             data-testid="emptiedLast"
             readOnly
           />
