@@ -8,6 +8,7 @@ import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
 import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
+import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
 
 import "../styles/user_css/User.css";
 
@@ -70,10 +71,22 @@ function UserListContainer({ onAddUserClick }) {
 
 // ListHeader component
 function ListHeader({ users, currentUserRole, onAddUserClick }) {
+  const { fetchUsers } = useUserListContext();
+
+  const handleRefresh = () => {
+    fetchUsers();
+  };
+
   return (
     <div className="list-header">
       <p className="members-text">User</p>
       <div className="right-content">
+        <ReplayCircleFilledOutlinedIcon
+          color="primary"
+          sx={{ fontSize: 45, color: "#133a64" }}
+          onClick={handleRefresh}
+        />
+
         <p className="number-of-users">{users ? users.length : 0} users</p>
         <Button
           variant="contained"
