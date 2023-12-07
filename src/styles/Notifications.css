@@ -4,6 +4,8 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  z-index: 1; 
+  transform: translateZ(0);
 }
 
 /* Icon styling */
@@ -13,51 +15,38 @@
   align-items: center;
 }
 
-
 /* Badge styling */
-.notification-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 6px 8px; /* Increase padding for better visibility */
-  font-size: 14px; /* Adjust font size for better readability */
-  display: none; /* Hide by default */
-}
-
-/* Unread badge styling */
+.notification-badge,
 .unread-badge {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(50%, -60%); /* Adjust the second value for vertical centering */
   background-color: red;
   color: white;
   border-radius: 50%;
-  padding: 4px; /* Adjust padding for a smaller badge */
-  width: 20px; /* Set width and height to create a perfect circle */
+  padding: 6px 8px; 
+  font-size: 14px; 
+  display: none; 
+  z-index: 2; 
+}
+
+.unread-badge {
+  transform: translate(50%, -60%);
+  padding: 4px; 
+  width: 20px; 
   height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px; /* Adjust font size for a smaller badge */
-  animation:badgeRing 1.3s infinite;
+  font-size: 12px;
+  animation: badgeRing 1.3s infinite;
 }
 
 @keyframes badgeRing {
-  0%,
-  100% {
+  0%, 100% {
     transform: translate(50%, -60%);
   }
   50% {
-    transform: translate(50%, -60%) translateX(2px); /* Adjust the values for the desired movement */
+    transform: translate(50%, -60%) translateX(2px);
   }
 }
-
-
-
 
 /* Dropdown styling */
 .notification-dropdown {
@@ -65,22 +54,23 @@
   top: 100%;
   right: 0;
   background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  min-width: 320px; /* Slightly increase the width */
-  z-index: 1;
+  min-width: 320px;
+  z-index: 3; 
   display: none;
   overflow: hidden;
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid #eee; /* Light border for separation */
-  padding: 8px; /* Add padding for a cleaner look */
+  border: 1px solid #eee;
+  padding: 8px;
 }
 
 /* Show dropdown on hover */
 .notification-container:hover .notification-dropdown {
   display: block;
 }
+
 
 /* Dropdown header styling */
 .notification-dropdown-header {
@@ -105,7 +95,7 @@
 
 /* Unread item styling */
 .notification-dropdown-item.unread {
-  background-color: #f8f8f8; /* Slight color change for readability */
+  background-color: #f8f8f8;
   font-weight: bold;
 }
 
@@ -131,4 +121,103 @@
 .unread-icon {
   color: red;
   margin-left: 10px;
+}
+
+/* Media Queries */
+
+/* Styles for Small Screens */
+@media (max-width: 600px) {
+  .notification-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .notification-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 50%; 
+    transform: translateX(50%);
+    width: 90%; 
+    max-width: 300px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    padding: 8px;
+    display: none; 
+  }
+
+  .notification-container:hover .notification-dropdown {
+    display: block; /* Show the dropdown on hover */
+  }
+
+  .notification-dropdown-header,
+  .notification-dropdown-item {
+    text-align: center; /* Center text for small screens */
+  }
+}
+
+
+/* Styles for Medium Screens */
+@media (min-width: 601px) and (max-width: 991px) {
+  .notification-container {
+    padding: 10px; 
+  }
+
+  .notification-icon {
+    margin-right: 10px; 
+  }
+
+  .notification-badge {
+    font-size: 12px; 
+  }
+
+  .unread-badge {
+    font-size: 10px; 
+  }
+
+  .notification-dropdown {
+    min-width: 280px; 
+  }
+
+  .notification-dropdown-header {
+    font-size: 16px; 
+  }
+
+  .notification-dropdown-item {
+    font-size: 14px; 
+  }
+}
+
+/* Styles for Large Screens */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .notification-container {
+    padding: 20px; 
+  }
+
+  .notification-icon {
+    margin-right: 20px; 
+  }
+
+  .notification-badge {
+    font-size: 14px; 
+  }
+
+  .unread-badge {
+    font-size: 12px; 
+  }
+
+  .notification-dropdown {
+    min-width: 320px; 
+  }
+
+  .notification-dropdown-header {
+    font-size: 18px; 
+  }
+
+  .notification-dropdown-item {
+    font-size: 16px; 
+  }
 }
