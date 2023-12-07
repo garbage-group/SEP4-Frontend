@@ -11,6 +11,7 @@ import { ExtraElements } from "../components/utils/ExtraElements";
 import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
 
 import "../styles/user_css/User.css";
+import { ListPagination } from "../components/utils/ListPagination";
 
 // UserListContainer component
 function UserListContainer({ onAddUserClick }) {
@@ -59,12 +60,14 @@ function UserListContainer({ onAddUserClick }) {
       />
 
       {/* Render list footer with pagination */}
-      <ListFooter
-        users={users}
-        itemsPerPage={itemsPerPage}
-        currentPage={currentPage}
-        handlePaginationChange={handlePaginationChange}
-      />
+      <div className="list-footer">
+        <ListPagination
+          totalItems={users ? users.length : 0}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePaginationChange}
+        />
+      </div>
     </div>
   );
 }
@@ -128,24 +131,6 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
               }
             />
           ))}
-    </div>
-  );
-}
-
-// ListFooter component
-function ListFooter({
-  users,
-  itemsPerPage,
-  currentPage,
-  handlePaginationChange,
-}) {
-  return (
-    <div className="list-footer">
-      <Pagination
-        count={Math.ceil(users.length / itemsPerPage)}
-        page={currentPage}
-        onChange={handlePaginationChange}
-      />
     </div>
   );
 }
