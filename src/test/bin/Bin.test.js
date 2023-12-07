@@ -1,13 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import "@testing-library/jest-dom";
-import Bin from "../components/Bin/Bin";
-import { useBins } from "../contexts/BinContext";
+import Bin from "../../components/Bin/Bin";
+import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router-dom";
 
-
 // Mock the useBins context
-jest.mock("../contexts/BinContext.js");
+jest.mock("../../contexts/BinContext.js");
 
 jest.mock("react-router", () => {
   const module = jest.requireActual("react-router");
@@ -18,7 +17,7 @@ jest.mock("react-router", () => {
   };
 });
 
-jest.mock("../components/Modal.js", () => ({
+jest.mock("../../components/Modal.js", () => ({
   __esModule: true,
   default: jest
     .fn()
@@ -27,7 +26,6 @@ jest.mock("../components/Modal.js", () => ({
         isOpened && <div onClick={onClose}>Mocked Modal</div>
     ),
 }));
-
 
 describe("Bin component", () => {
   const mockUpdateBin = jest.fn();
@@ -64,7 +62,6 @@ describe("Bin component", () => {
   });
 
   it("verifies all the texts to be displayed on the document", () => {
-
     render(<Bin />);
 
     expect(screen.getByText(/Bin/i)).toBeInTheDocument();
@@ -116,7 +113,6 @@ describe("Bin component", () => {
     });
   });
 
-
   it("tests if input fields are enabled when edit button is clicked", async () => {
     render(<Bin />);
 
@@ -138,4 +134,3 @@ describe("Bin component", () => {
     expect(longitude).not.toHaveClass("binInput_disabled");
   });
 });
-
