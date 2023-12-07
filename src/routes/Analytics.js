@@ -6,20 +6,16 @@ import { HistoryTable } from "../components/Analytics/HistoryTable";
 import "../styles/Analytics_css/Analytics.css"
 import GroupIcon from '@mui/icons-material/Group';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-
-
+import { PieChartHumidity } from "../components/utils/PieChartHumidity";
 
 
 
 export function Analytics() {
   const { bins } = useBins();
   const { users } = useUserListContext();
-  console.log(users);
-
   const totalAdmin = users.filter(user => user.role === "municipality worker").length;
   const totalBins = bins.length;
   const totalGarbCollector = users.length - totalAdmin;
- 
 
   return (
     <div>
@@ -45,7 +41,9 @@ export function Analytics() {
         <DataCard title={"Total Garbage Collectors"} icon={<GroupIcon className="groupIcon"/>} data={totalGarbCollector} className={"totalUsers"} /> 
         <DataCard title={"Total Garbage Bins"} icon={<DeleteSweepIcon className="binIcon"/>} data={totalBins} className={"totalBins"} />
       </div>
+      <PieChartHumidity />
       <HistoryTable />
+
     </div>
   );
 }
