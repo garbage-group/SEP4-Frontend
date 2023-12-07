@@ -1,0 +1,23 @@
+.cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 1rem;
+}
+
+.totalBins, .totalUsers {
+    background: linear-gradient(to right, #0095E2, #00B8FF) !important;
+    color: #fff !important;
+}
+
+.groupIcon, .binIcon {
+    font-weight: 900 !important;
+    font-size: 1.3em !important;
+}
+
+.groupIcon{
+    color: yellow;
+}
+
+.binIcon{
+    color: greenyellow;
+}
