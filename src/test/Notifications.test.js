@@ -7,7 +7,7 @@ import "@testing-library/jest-dom/extend-expect";
 // Mock the useNotifications hook
 jest.mock("../contexts/NotificationContext.js");
 
-/* jest.mock("../contexts/NotificationContext.js", () => ({
+ jest.mock("../contexts/NotificationContext.js", () => ({
   useNotifications: jest.fn(() => ({
     notifications: [
       { id: 1, message: "Notification 1", unread: true },
@@ -16,10 +16,10 @@ jest.mock("../contexts/NotificationContext.js");
     unreadCount: 1,
     markAsRead: jest.fn(),
   })),
-})); */
+})); 
 
 describe("Notifications Component", () => {
-  /*  const mockNotifications = [
+    const mockNotifications = [
     {
       id: "1",
       message: "Test Notification 1",
@@ -41,7 +41,7 @@ describe("Notifications Component", () => {
   beforeEach(() => {
     useNotifications.mockReturnValue(mockUseNotifications);
   });
- */
+ 
   const mockUpdateBin = jest.fn();
 
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe("Notifications Component", () => {
   });
 
   test("renders notifications component and clicking calls markAsRead", () => {
-    // const { markAsRead } = useNotifications();
+    const { markAsRead } = useNotifications();
 
     render(<Notifications />);
 
