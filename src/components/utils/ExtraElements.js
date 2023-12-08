@@ -4,7 +4,7 @@ import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import { useUserManagement } from '../../contexts/UserContext';
+import { useUserManagement } from "../../contexts/UserContext";
 import "../../styles/utils_css/ExtraElements.css";
 
 function ExtraElements({ region, role, currentUserRole, username }) {

@@ -41,11 +41,15 @@ function UserListContainer({ onAddUserClick }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  const filteredUsers = users.filter(
+    (user) => user.role.toLowerCase() === "garbage collector"
+  );
+
   return (
     <div className="userlist-container">
       {/* Render list header */}
       <ListHeader
-        users={users}
+        users={filteredUsers}
         currentUserRole={currentUserRole}
         onAddUserClick={handleAddButtonClick}
       />
@@ -53,7 +57,7 @@ function UserListContainer({ onAddUserClick }) {
       {/* Render list body with individual user components */}
       <ListBody
         isLoading={isLoading}
-        users={users}
+        users={filteredUsers}
         startIndex={startIndex}
         endIndex={endIndex}
         currentUserRole={currentUserRole}
@@ -62,7 +66,7 @@ function UserListContainer({ onAddUserClick }) {
       {/* Render list footer with pagination */}
       <div className="list-footer">
         <ListPagination
-          totalItems={users ? users.length : 0}
+          totalItems={filteredUsers ? filteredUsers.length : 0}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={handlePaginationChange}
@@ -127,6 +131,7 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
                   region={user.region}
                   role={user.role}
                   currentUserRole={currentUserRole}
+                  username={user.username}
                 />
               }
             />

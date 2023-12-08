@@ -1,12 +1,13 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton} from "@mui/material";
+import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import stc from "string-to-color";
-import { ExtraElements } from "../utils/ExtraElements";
+// import { ExtraElements } from "../utils/ExtraElements";
 import "../../styles/user_css/IndividualUser.css";
 
 export function IndividualUserComponent({
   fullname,
   username,
   showExtraElements = false,
+  extraElements,
 }) {
   return (
     <ListItem className="listitem-collector" style={{ width: "auto" }}>
@@ -16,11 +17,15 @@ export function IndividualUserComponent({
       <ListItemText primary={fullname} secondary={`@${username}`} />
 
       {/* Display extra elements if showExtraElements is true */}
-      {showExtraElements && <ExtraElements region="YourRegion" role="UserRole" currentUserRole="municipality worker" username={username} />}
+      {showExtraElements && extraElements && (
+        <div>
+          {/* Rendering extra elements */}
+          {extraElements}
+        </div>
+      )}
     </ListItem>
   );
 }
-
 
 // Function to convert a string to a color
 function stringToColor(string) {
