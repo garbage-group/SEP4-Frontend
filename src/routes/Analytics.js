@@ -1,10 +1,5 @@
-import React from 'react';
-import { HumidityDisplay } from '../components/HumidityDisplay';
+import React from "react";
 
 export function Analytics() {
-    return (
-        <div>
-            <HumidityDisplay />
-        </div>
-    );
+  return <div>Analytics</div>;
 }

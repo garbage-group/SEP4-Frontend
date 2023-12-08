@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 4px;
 }
 
 .humidity-display form {
-    margin-bottom: 20px;
+    margin-bottom: 4px;
+    background-color: #e0e0e0;
 }
 
 .humidity-display input {
@@ -32,4 +33,9 @@
 .humidity-display p {
     font-size: 1.2rem;
     color: #333;
+}
+
+.humidity-bin-text>p {
+    padding: 0px;
+    margin: 10px;
 }

@@ -8,6 +8,7 @@ const BinContext = createContext();
 
 function BinProvider({ children }) {
   const [bins, setBins] = useState([]);
+  const [errorMsg, setErrorMSg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentBin, setCurrentBin] = useState({});
   const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
@@ -21,7 +22,7 @@ function BinProvider({ children }) {
       async function fetchBins() {
         try {
           setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/bins/all`, {
+          const res = await fetch(`${BASE_URL}/bins`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -132,8 +133,9 @@ function BinProvider({ children }) {
       const humidityData = await response.json();
       setCurrentBinHumidity(humidityData);
     } catch (error) {
-      console.error("Error fetching humidity data:", error);
-      alert("There was an error loading the humidity data: " + error.message);
+      // console.error("Error fetching humidity data:", error);
+      alert(`Bin with id ${binId} not found!!!`);
+      // setErrorMSg(`Bin with id ${binId} not found!!!`);
     } finally {
       setIsLoading(false);
     }
@@ -189,6 +191,7 @@ function BinProvider({ children }) {
         createBin,
         deleteBin,
         updateBin,
+        errorMsg,
       }}
     >
       {children}
