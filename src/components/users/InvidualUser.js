@@ -1,34 +1,29 @@
-import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
+import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton} from "@mui/material";
 import stc from "string-to-color";
-
+import { ExtraElements } from "../utils/ExtraElements";
 import "../../styles/user_css/IndividualUser.css";
 
-// Component to display individual collector information
 export function IndividualUserComponent({
   fullname,
   username,
   showExtraElements = false,
-  extraElements,
+  extraElements
 }) {
-  // console.log(fullname);
   return (
     <ListItem className="listitem-collector" style={{ width: "auto" }}>
-      {/* Displaying collector avatar and information */}
+       {/* Displaying collector avatar and information */}
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />
       </ListItemAvatar>
       <ListItemText primary={fullname} secondary={`@${username}`} />
 
       {/* Display extra elements if showExtraElements is true */}
-      {showExtraElements && extraElements && (
-        <div>
-          {/* Rendering extra elements */}
-          {extraElements}
-        </div>
-      )}
+      {showExtraElements && extraElements && <ExtraElements region="YourRegion" role="UserRole" currentUserRole="municipality worker" username={username} />}
+   
     </ListItem>
   );
 }
+
 
 // Function to convert a string to a color
 function stringToColor(string) {

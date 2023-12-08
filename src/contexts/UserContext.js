@@ -7,6 +7,7 @@ const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 export function UserManagementProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false);
     const token = localStorage.getItem("token");
+    
 
     const addUser = async (userData) => {
         setIsLoading(true);
@@ -19,7 +20,6 @@ export function UserManagementProvider({ children }) {
                 },
                 body: JSON.stringify(userData),
             });
-            // Check if the response has content and is of type JSON
             const contentType = response.headers.get('content-type');
             let data;
             if (contentType && contentType.indexOf('application/json') !== -1) {
@@ -28,7 +28,6 @@ export function UserManagementProvider({ children }) {
             if (response.ok) {
                 return data;
             } else {
-                // Handle different statuses
                 if (response.status === 409) {
                     throw new Error(`Failed to sign up. Username: ${userData.username} already exists.`);
                 } else if (response.status === 500) {
@@ -39,23 +38,55 @@ export function UserManagementProvider({ children }) {
             }
         } catch (error) {
             console.error('Error:', error);
-            throw error; // Rethrow the error to be handled in the component
+            throw error;
         } finally {
             setIsLoading(false);
         }
     };
 
-    return (
-        <UserManagementContext.Provider value={{ isLoading, addUser }}>
-            {children}
+    const deleteUser = async (username) => {
+        setIsLoading(true);
+        try {
+          const response = await fetch(`${BASE_URL}/users/${username}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          console.log('Delete User Response:', response);
+    
+          if (!response.ok) {
+            if (response.status === 404) {
+              throw new Error(`User ${username} not found.`);
+            } else {
+              const data = await response.json();
+              throw new Error(data?.message || 'An unknown error occurred.');
+            }
+          }
+    
+          // Handle success (optional)
+          console.log('User deleted successfully');
+        } catch (error) {
+          console.error('Error:', error);
+          throw error;
+        } finally {
+          setIsLoading(false);
+        }
+      };
+    
+      return (
+        <UserManagementContext.Provider value={{ isLoading, addUser, deleteUser }}>
+          {children}
         </UserManagementContext.Provider>
-    );
-}
-
-export function useUserManagement() {
-    const context = useContext(UserManagementContext);
-    if (!context) {
-        throw new Error("useUserManagement must be used within a UserManagementProvider");
+      );
     }
-    return context;
-}
+    
+    export function useUserManagement() {
+      const context = useContext(UserManagementContext);
+      if (!context) {
+        throw new Error("useUserManagement must be used within a UserManagementProvider");
+      }
+      return context;
+    }
