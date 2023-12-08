@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { useUserListContext } from "../../contexts/UserListContext";
-import { render, waitFor, screen, fireEvent } from "@testing-library/react";
+import { render, waitFor, screen } from "@testing-library/react";
 
 import { ListOfCollectors } from "../../components/overview/ListofCollectors";
 
