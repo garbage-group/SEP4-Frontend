@@ -5,18 +5,13 @@ import BinSidebar from "../components/Bin/BinSidebar";
 
 import "../styles/Bin_css/Bins.css";
 
-
-
-
-
 export function Bins() {
  
 
     return (
         <div className="mainContainer">
             <BinSidebar />
-            <BinMap />
-            {/* <InfoSidebar /> */}
+            <BinMap />     
         </div>
     )
 }

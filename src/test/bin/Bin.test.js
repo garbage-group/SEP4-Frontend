@@ -17,15 +17,20 @@ jest.mock("react-router", () => {
   };
 });
 
-jest.mock("../../components/Modal.js", () => ({
-  __esModule: true,
-  default: jest
-    .fn()
-    .mockImplementation(
-      ({ isOpened, onClose }) =>
-        isOpened && <div onClick={onClose}>Mocked Modal</div>
-    ),
-}));
+jest.mock('../../components/Modal', () => {
+  return {
+    __esModule: true,
+    default: ({ isOpened, onClose }) => {
+      return isOpened ? (
+        <div data-testid="mocked-modal">
+          {/* Mocked Modal Content */}
+          Data Updated
+          <button onClick={onClose}>Close</button>
+        </div>
+      ) : null;
+    },
+  };
+});
 
 describe("Bin component", () => {
   const mockUpdateBin = jest.fn();
@@ -64,26 +69,26 @@ describe("Bin component", () => {
   it("verifies all the texts to be displayed on the document", () => {
     render(<Bin />);
 
-    expect(screen.getByText(/Bin/i)).toBeInTheDocument();
-    expect(screen.getByText(/Capacity/i)).toBeInTheDocument();
-    expect(screen.getByText(/Device Id/i)).toBeInTheDocument();
-    expect(screen.getByText(/Fill Threshold/i)).toBeInTheDocument();
-    expect(screen.getByText(/Position/i)).toBeInTheDocument();
-    expect(screen.getByText(/Last emptied on/i)).toBeInTheDocument();
-    expect(screen.getByText(/Fill Level/i)).toBeInTheDocument();
-    expect(screen.getByText(/Humidity/i)).toBeInTheDocument();
+    expect(screen.getByText(/bin/i)).toBeInTheDocument();
+    expect(screen.getByText(/capacity/i)).toBeInTheDocument();
+    expect(screen.getByText(/device id/i)).toBeInTheDocument();
+    expect(screen.getByText(/fill threshold/i)).toBeInTheDocument();
+    expect(screen.getByText(/position/i)).toBeInTheDocument();
+    expect(screen.getByText(/last emptied on/i)).toBeInTheDocument();
+    expect(screen.getByText(/fill level/i)).toBeInTheDocument();
+    expect(screen.getByText(/humidity/i)).toBeInTheDocument();
   });
 
   it("verifies that the input fields displays the values", () => {
     render(<Bin />);
-    expect(screen.getByTestId(/Bin/i)).toHaveValue(1);
-    expect(screen.getByTestId(/Capacity/i)).toHaveValue("100");
-    expect(screen.getByTestId(/DeviceId/i)).toHaveValue("8080");
-    expect(screen.getByTestId(/Fill Threshold/i)).toHaveValue("75");
-    expect(screen.getByTestId(/Latitude/i)).toHaveValue(40.7128);
-    expect(screen.getByTestId(/Longitude/i)).toHaveValue(-74.006);
+    expect(screen.getByTestId(/bin/i)).toHaveValue(1);
+    expect(screen.getByTestId(/capacity/i)).toHaveValue("100");
+    expect(screen.getByTestId(/deviceid/i)).toHaveValue("8080");
+    expect(screen.getByTestId(/fill threshold/i)).toHaveValue("75");
+    expect(screen.getByTestId(/latitude/i)).toHaveValue(40.7128);
+    expect(screen.getByTestId(/longitude/i)).toHaveValue(-74.006);
     expect(screen.getByTestId(/fillLevel/i)).toHaveValue("75%");
-    expect(screen.getByTestId(/Humidity/i)).toHaveValue("40%");
+    expect(screen.getByTestId(/humidity/i)).toHaveValue("40%");
   });
 
   it("calls updateBin when Save button is clicked", async () => {
@@ -133,4 +138,27 @@ describe("Bin component", () => {
     expect(latitude).not.toHaveClass("binInput_disabled");
     expect(longitude).not.toHaveClass("binInput_disabled");
   });
+
+  test("opens and closes modal based on user role", async() => {
+    localStorage.setItem("role", "municipality worker");
+
+    render(
+      <Bin />
+    );
+
+    fireEvent.click(screen.getByText("Save"));
+    await waitFor(() => {
+      expect(screen.getByText(/Data Updated/i)).toBeInTheDocument()
+      });
+
+    //Modal should close when clicked on closed button
+    const closeModalButton = screen.getByText("Close");
+    fireEvent.click(closeModalButton);
+
+    expect(screen.queryByText(/Data Updated/i)).not.toBeInTheDocument();
+
+  })
 });
+
+
+
