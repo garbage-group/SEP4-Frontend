@@ -7,19 +7,16 @@ export function IndividualUserComponent({
   fullname,
   username,
   showExtraElements = false,
-  extraElements
 }) {
   return (
     <ListItem className="listitem-collector" style={{ width: "auto" }}>
-       {/* Displaying collector avatar and information */}
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />
       </ListItemAvatar>
       <ListItemText primary={fullname} secondary={`@${username}`} />
 
       {/* Display extra elements if showExtraElements is true */}
-      {showExtraElements && extraElements && <ExtraElements region="YourRegion" role="UserRole" currentUserRole="municipality worker" username={username} />}
-   
+      {showExtraElements && <ExtraElements region="YourRegion" role="UserRole" currentUserRole="municipality worker" username={username} />}
     </ListItem>
   );
 }

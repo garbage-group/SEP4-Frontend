@@ -45,36 +45,34 @@ export function UserManagementProvider({ children }) {
     };
 
     const deleteUser = async (username) => {
-        setIsLoading(true);
-        try {
-          const response = await fetch(`${BASE_URL}/users/${username}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          });
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${BASE_URL}/users/${username}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        });
     
-          console.log('Delete User Response:', response);
+        console.log('Delete User Response:', response);
     
-          if (!response.ok) {
-            if (response.status === 404) {
-              throw new Error(`User ${username} not found.`);
-            } else {
-              const data = await response.json();
-              throw new Error(data?.message || 'An unknown error occurred.');
-            }
+        if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error(`User ${username} not found.`);
+          } else {
+            const data = await response.json();
+            throw new Error(data?.message || 'An unknown error occurred.');
           }
-    
-          // Handle success (optional)
-          console.log('User deleted successfully');
-        } catch (error) {
-          console.error('Error:', error);
-          throw error;
-        } finally {
-          setIsLoading(false);
         }
-      };
+      } catch (error) {
+        console.error('Error:', error);
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
     
       return (
         <UserManagementContext.Provider value={{ isLoading, addUser, deleteUser }}>
