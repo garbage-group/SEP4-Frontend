@@ -13,9 +13,10 @@ import { DataCard } from "../components/Analytics/DataCard";
 import { HistoryTable } from "../components/Analytics/HistoryTable";
 import "../styles/Analytics_css/Analytics.css";
 import { LineChartFillLevel } from "../components/Analytics/LineChartFillLevel";
+import { Spinner } from "../components/Spinner";
 
 export function Analytics() {
-  const { bins } = useBins();
+  const { isLoading, bins } = useBins();
   const { users } = useUserListContext();
   const totalAdmin = users.filter(
     (user) => user.role === "municipality worker"
@@ -47,14 +48,12 @@ export function Analytics() {
       </div>
 
       <div className="stats-container">
-        
-  
-
         <div className="history-table-container">
           <HistoryTable />
         </div>
         <div className="graph-container">
-          <TabComponet />
+          {isLoading && <Spinner />}
+          {!isLoading && <TabComponet />}
         </div>
       </div>
     </div>
