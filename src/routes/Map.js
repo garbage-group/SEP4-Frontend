@@ -4,6 +4,7 @@ import "../styles/Map.css";
 
 
 export function Map() {
+
     return (
         <div className="map-page-container">
             <GoogleMapComponent />
