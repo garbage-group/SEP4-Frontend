@@ -12,6 +12,7 @@ import { useUserListContext } from "../contexts/UserListContext";
 import { DataCard } from "../components/Analytics/DataCard";
 import { HistoryTable } from "../components/Analytics/HistoryTable";
 import "../styles/Analytics_css/Analytics.css";
+import { LineChartFillLevel } from "../components/Analytics/LineChartFillLevel";
 
 export function Analytics() {
   const { bins } = useBins();
@@ -75,6 +76,9 @@ function TabComponet() {
         </TabPanel>
         <TabPanel>
           <h2>Any content 2</h2>
+        </TabPanel>
+        <TabPanel>
+          <LineChartFillLevel />
         </TabPanel>
       </Tabs>
     </>

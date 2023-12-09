@@ -88,7 +88,7 @@ function BarChartTemp() {
         </select>
       </div>
       {selectedBin && (
-        <div style={{ width: "500px", padding: "20px" }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Bar data={data} options={options}></Bar>
         </div>
       )}
