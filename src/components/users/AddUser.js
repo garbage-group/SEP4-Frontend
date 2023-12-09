@@ -8,9 +8,9 @@ import { useUserManagement } from "../../contexts/UserContext";
 import Modal from "../Modal.js";
 
 // AddUser component
-function AddUser({ selectedUser, showTitle, isManagingUser }) {
+function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   // Access the user management context
-  const { addUser, isLoading } = useUserManagement();
+  const { addUser, isLoading, deleteUser } = useUserManagement();
 
   // State variables for form input fields
   const [username, setUsername] = useState("");
@@ -37,6 +37,20 @@ function AddUser({ selectedUser, showTitle, isManagingUser }) {
     setIsModalOpen(false);
     setModalMessage("");
   }
+
+  // Function to handle the user delete
+  const handleDeleteClick = async () => {
+    try {
+      console.log("Before Delete: " + selectedUser.username);
+
+      await deleteUser(selectedUser.username);
+      showModal(`Successfully deleted username: ${selectedUser.username}`);
+      setSelectedUser(null);
+      console.log("After Delete: " + selectedUser);
+    } catch (error) {
+      console.error("Error deleting user:", error.message);
+    }
+  };
 
   // Function to handle the user addition
   async function handleAddUser() {
@@ -150,7 +164,10 @@ function AddUser({ selectedUser, showTitle, isManagingUser }) {
           </div>
           <div>
             {isManagingUser ? (
-              <ManageUserButtons />
+              <ManageUserButtons
+                handleDeleteClick={handleDeleteClick}
+                selectedUser={selectedUser}
+              />
             ) : (
               <AddUserButton
                 handleAddUser={handleAddUser}
@@ -168,12 +185,21 @@ function AddUser({ selectedUser, showTitle, isManagingUser }) {
 }
 
 // ManageUserButtons component
-function ManageUserButtons() {
+function ManageUserButtons({ handleDeleteClick, selectedUser }) {
+  const isRemoveButtonDisabled = !selectedUser;
+
   return (
     <div className="manage-user-buttons-container">
       <Button className="adduser-signup-btn">Edit</Button>
       <Button className="adduser-signup-btn">Save</Button>
-      <Button className="adduser-signup-btn">Remove</Button>
+      <Button
+        className={`adduser-signup-btn ${
+          isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""
+        }`}
+        onClick={handleDeleteClick}
+      >
+        Remove
+      </Button>
     </div>
   );
 }

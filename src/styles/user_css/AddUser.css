@@ -92,6 +92,14 @@
     background-color: #133A64;
   }
 
+  .adduser-signup-btn_disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    border: 0px;
+    filter: brightness(0.7);
+    /* background-color: #6cb9cc; */
+  }
+
   .region-select {
     width: 100%;
     padding: 10px 10px 10px 40px;

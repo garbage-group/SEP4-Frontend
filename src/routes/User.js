@@ -158,6 +158,7 @@ function AddUserContainer({
   selectedUser,
   isManagingUser,
   canManageUser,
+  setSelectedUser,
 }) {
   return (
     <div className="addUser-container">
@@ -166,6 +167,7 @@ function AddUserContainer({
           showTitle={showTitle}
           selectedUser={selectedUser}
           isManagingUser={isManagingUser}
+          setSelectedUser={setSelectedUser}
         />
       ) : (
         <p>Only Municipality worker can manage user</p>
@@ -194,8 +196,6 @@ function Users() {
     setIsAddUserClicked(false);
   }
 
-  console.log(selectedUser);
-
   return (
     <div className="users-container">
       <UserListContainer
@@ -207,6 +207,7 @@ function Users() {
 
       <AddUserContainer
         selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
         showTitle={isAddUserClicked ? "Add User" : "Manage User"}
         isManagingUser={!isAddUserClicked}
         canManageUser={currentUserRole === "municipality worker" ? true : false}

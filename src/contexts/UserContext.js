@@ -56,8 +56,6 @@ export function UserManagementProvider({ children }) {
         },
       });
 
-      console.log("Delete User Response:", response);
-
       if (!response.ok) {
         if (response.status === 404) {
           throw new Error(`User ${username} not found.`);
