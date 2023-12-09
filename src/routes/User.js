@@ -15,10 +15,12 @@ import { ListPagination } from "../components/utils/ListPagination";
 import { useUserManagement } from "../contexts/UserContext";
 
 // UserListContainer component
-function UserListContainer({ onAddUserClick, onHandleUserClick }) {
-  const [currentUserRole, setCurrentUserRole] = useState(
-    localStorage.getItem("role")
-  );
+function UserListContainer({
+  onAddUserClick,
+  onHandleUserClick,
+  currentUserRole,
+  setCurrentUserRole,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Use UserListContext to fetch user data
@@ -151,38 +153,64 @@ function ListBody({
 }
 
 // Add user component
-function AddUserContainer({ showTitle, buttonText }) {
+function AddUserContainer({
+  showTitle,
+  selectedUser,
+  isManagingUser,
+  canManageUser,
+}) {
   return (
     <div className="addUser-container">
-      <AddUser showTitle={showTitle} buttonText={buttonText} />
+      {canManageUser ? (
+        <AddUser
+          showTitle={showTitle}
+          selectedUser={selectedUser}
+          isManagingUser={isManagingUser}
+        />
+      ) : (
+        <p>Only Municipality worker can manage user</p>
+      )}
     </div>
   );
 }
 
 // Users component
 function Users() {
-  const [showAddUser, setShowAddUser] = useState(false);
   const [selectedUser, setSelectedUser] = useState();
-  // const { fetchUserByUsername } = useUserManagement();
+  const [isAddUserClicked, setIsAddUserClicked] = useState(true);
+  const [currentUserRole, setCurrentUserRole] = useState(
+    localStorage.getItem("role")
+  );
 
   const { fetchUserByUsername } = useUserManagement();
 
   const handleToggleAddUser = () => {
-    setShowAddUser(!showAddUser);
+    setIsAddUserClicked(true);
   };
 
   async function handleUserClick(username) {
     const user = await fetchUserByUsername(username);
     setSelectedUser(user);
+    setIsAddUserClicked(false);
   }
+
+  console.log(selectedUser);
 
   return (
     <div className="users-container">
       <UserListContainer
         onAddUserClick={handleToggleAddUser}
         onHandleUserClick={handleUserClick}
+        currentUserRole={currentUserRole}
+        setCurrentUserRole={setCurrentUserRole}
       />
-      {showAddUser && <AddUserContainer />}
+
+      <AddUserContainer
+        selectedUser={selectedUser}
+        showTitle={isAddUserClicked ? "Add User" : "Manage User"}
+        isManagingUser={!isAddUserClicked}
+        canManageUser={currentUserRole === "municipality worker" ? true : false}
+      />
     </div>
   );
 }

@@ -78,7 +78,6 @@ export function UserManagementProvider({ children }) {
     try {
       setIsLoading(true);
 
-      console.log(username);
       const res = await fetch(`${BASE_URL}/users/${username}`, {
         headers: {
           Authorization: `Bearer ${token}`,

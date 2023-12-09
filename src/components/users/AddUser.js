@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/user_css/AddUser.css";
 import humanIcon from "../../styles/images/human_icon.png";
 import passwordIcon from "../../styles/images/password.png";
 import pencilIcon from "../../styles/images/pencil.png";
 import { Button } from "../Button";
 import { useUserManagement } from "../../contexts/UserContext";
-import Modal from "../Modal.js"; // Adjust the import path as necessary
+import Modal from "../Modal.js";
 
-const AddUser = ({ showTitle, buttonText }) => {
+// AddUser component
+function AddUser({ selectedUser, showTitle, isManagingUser }) {
+  // Access the user management context
   const { addUser, isLoading } = useUserManagement();
 
+  // State variables for form input fields
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [region, setRegion] = useState("Horsens North"); // Default to first option
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+
+  // State variables for modal message and its visibility
   const [modalMessage, setModalMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Default role for new users
   const USER_ROLE = "Garbage Collector";
 
-  const showModal = (message) => {
+  // Function to show the modal with a given message
+  function showModal(message) {
     setModalMessage(message);
     setIsModalOpen(true);
-  };
+  }
 
-  const closeModal = () => {
+  // Function to close the modal
+  function closeModal() {
     setIsModalOpen(false);
     setModalMessage("");
-  };
+  }
 
+  // Function to handle the user addition
   async function handleAddUser() {
+    // Validate form input fields
     if (!username || !fullName || !region || !password || !repeatPassword) {
       showModal("Please fill in all fields.");
       return;
     }
 
+    // Check if passwords match
     if (password !== repeatPassword) {
       showModal("Passwords do not match. Please re-enter your passwords.");
       return;
     }
 
+    // Construct user data object
     const userData = {
       username,
       fullName,
@@ -49,8 +62,10 @@ const AddUser = ({ showTitle, buttonText }) => {
     };
 
     try {
+      // Call the addUser function from the user management context
       await addUser(userData);
       showModal(`Successfully signed up: ${username}`);
+
       // Reset form after successful signup
       setUsername("");
       setFullName("");
@@ -68,7 +83,7 @@ const AddUser = ({ showTitle, buttonText }) => {
       <div className="adduser-content">
         <div className="adduser-form-container">
           <div className="adduser-header">
-            <div className="adduser-title">Add New User</div>
+            <div className="adduser-title">{showTitle}</div>
           </div>
           <div className="adduser-inputs">
             <img src={humanIcon} alt="Username Icon" />
@@ -76,7 +91,9 @@ const AddUser = ({ showTitle, buttonText }) => {
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={function (e) {
+                setUsername(e.target.value);
+              }}
             />
           </div>
 
@@ -86,7 +103,9 @@ const AddUser = ({ showTitle, buttonText }) => {
               type="text"
               placeholder="Full Name"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={function (e) {
+                setFullName(e.target.value);
+              }}
             />
           </div>
 
@@ -94,7 +113,9 @@ const AddUser = ({ showTitle, buttonText }) => {
             <img src={pencilIcon} alt="Region Icon" />
             <select
               value={region}
-              onChange={(e) => setRegion(e.target.value)}
+              onChange={function (e) {
+                setRegion(e.target.value);
+              }}
               className="region-select"
             >
               <option value="Horsens North">Horsens North</option>
@@ -110,7 +131,9 @@ const AddUser = ({ showTitle, buttonText }) => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={function (e) {
+                setPassword(e.target.value);
+              }}
             />
           </div>
 
@@ -120,16 +143,21 @@ const AddUser = ({ showTitle, buttonText }) => {
               type="password"
               placeholder="Repeat Password"
               value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
+              onChange={function (e) {
+                setRepeatPassword(e.target.value);
+              }}
             />
           </div>
-          <Button
-            onClick={handleAddUser}
-            disabled={isLoading}
-            className="adduser-signup-btn"
-          >
-            {isLoading ? "Signing up" : "Sign Up"}
-          </Button>
+          <div>
+            {isManagingUser ? (
+              <ManageUserButtons />
+            ) : (
+              <AddUserButton
+                handleAddUser={handleAddUser}
+                isLoading={isLoading}
+              />
+            )}
+          </div>
         </div>
       </div>
       <Modal isOpened={isModalOpen} onClose={closeModal}>
@@ -137,6 +165,32 @@ const AddUser = ({ showTitle, buttonText }) => {
       </Modal>
     </div>
   );
-};
+}
+
+// ManageUserButtons component
+function ManageUserButtons() {
+  return (
+    <div className="manage-user-buttons-container">
+      <Button className="adduser-signup-btn">Edit</Button>
+      <Button className="adduser-signup-btn">Save</Button>
+      <Button className="adduser-signup-btn">Remove</Button>
+    </div>
+  );
+}
+
+// AddUserButton component
+function AddUserButton({ handleAddUser, isLoading }) {
+  return (
+    <div>
+      <Button
+        onClick={handleAddUser}
+        disabled={isLoading}
+        className="adduser-signup-btn"
+      >
+        {isLoading ? "Signing up" : "Sign Up"}
+      </Button>
+    </div>
+  );
+}
 
 export { AddUser };
