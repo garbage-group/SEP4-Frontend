@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
-import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
+import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
+
+import { Button } from "@mui/material";
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
@@ -15,10 +18,9 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 
 import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
-import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
+import { ListPagination } from "../components/utils/ListPagination";
 
 import "../styles/user_css/User.css";
-import { ListPagination } from "../components/utils/ListPagination";
 
 // UserListContainer component
 function UserListContainer({ onAddUserClick }) {
@@ -100,9 +102,8 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
         <p className="number-of-users">{users ? users.length : 0} users</p>
         <Button
           variant="contained"
-          className={`add-member-button ${
-            currentUserRole !== "municipality worker" ? "disabled" : ""
-          }`}
+          className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""
+            }`}
           endIcon={<PersonAddAltRoundedIcon />}
           onClick={onAddUserClick}
         >
