@@ -1,0 +1,146 @@
+  .adduser-page-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    background-color: rgb(165, 171, 211);
+    border-radius: 15px;
+  }
+
+
+  .adduser-content {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 40px);
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(106, 113, 170);
+  }
+
+
+  .adduser-header {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+
+  .adduser-inputs,
+  .input-text {
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+
+  }
+
+  /* Icon inside input container */
+  .adduser-inputs img,
+  .input-text img {
+    position: absolute;
+    /* Position the icon absolutely within the input container */
+    left: 10px;
+    /* 10px from the left */
+    top: 50%;
+    /* Center vertically */
+    transform: translateY(-50%);
+    /* Offset by half its height for perfect centering */
+    width: 24px;
+    /* Width of the icon */
+    height: 24px;
+    /* Height of the icon */
+  }
+
+  /* Style for input fields */
+  .adduser-inputs input,
+  .input-text input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    /* Padding to make room for the icon */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+  }
+
+  /* Sign up button */
+  .adduser-signup-btn {
+    width: 40%;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    border-radius: 6px;
+    background-color: #133A64;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+  }
+
+  .adduser-signup-btn:hover {
+    background-color: #133A64;
+  }
+
+  .region-select {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: #838282;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    background-color: #f0f0f0;
+  }
+
+
+  .region-select-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+  }
+
+
+
+  .region-select:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+
+
+  @media (max-width: 600px) {
+    .adduser-content {
+      max-width: 90%;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 991px) {
+    .adduser-content {
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .adduser-content {
+      max-width: 400px;
+    }
+  }

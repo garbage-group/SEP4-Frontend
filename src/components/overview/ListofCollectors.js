@@ -34,11 +34,12 @@ export function ListOfCollectors() {
           Array.isArray(users) &&
           users
             .filter((item, index) => index < 5)
-            .map((collector, index) => (
+            .map((user, index) => (
               <IndividualUserComponent
                 key={index}
-                username={collector.username}
-                fullname={collector.name}
+                username={user.username}
+                fullname={user.fullname}
+                showExtraElements={false}
               />
             ))}
       </List>

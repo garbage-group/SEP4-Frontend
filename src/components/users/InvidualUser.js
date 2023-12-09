@@ -1,9 +1,4 @@
-import {
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-} from "@mui/material";
+import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import stc from "string-to-color";
 
 import "../../styles/user_css/IndividualUser.css";
@@ -15,6 +10,7 @@ export function IndividualUserComponent({
   showExtraElements = false,
   extraElements,
 }) {
+  // console.log(fullname);
   return (
     <ListItem className="listitem-collector" style={{ width: "auto" }}>
       {/* Displaying collector avatar and information */}

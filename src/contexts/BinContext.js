@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
+import Modal from "../components/Modal";
+
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
@@ -15,6 +17,12 @@ function BinProvider({ children }) {
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   useEffect(
     function () {
@@ -66,8 +74,13 @@ function BinProvider({ children }) {
       const data = await res.json();
       console.log(data);
       setCurrentBin(data);
-    } catch (e) {
-      console.log(e.message);
+    } catch {
+      return (
+        <Modal
+          isOpened={isModalOpen}
+          onClose={closeModal}
+        >{`There is no bin with bin Id: ${id}`}</Modal>
+      );
     } finally {
       setIsLoading(false);
     }
