@@ -3,7 +3,7 @@ import { GoogleMap, Marker, DirectionsRenderer, InfoWindow, useLoadScript, Autoc
 import "../../styles/MapDirections/GoogleMap.css"
 import { useBins } from '../../contexts/BinContext';
 import { useNotifications } from '../../contexts/NotificationContext';
-import GreenBinImage from "../../images/bin-icon.png"; // Replace with the path to your green bin icon image
+import GreenBinImage from "../../images/bin-icon.png";
 import RedBinImage from "../../images/bin-icon-full.png";
 
 
@@ -125,7 +125,7 @@ const GoogleMapComponent = () => {
                     <h3>Select Bins</h3>
                     {selectedBins.map(bin => (
                         <div key={bin.id} className="destination-bin">
-                            <span>Bin ID: {bin.id}</span> {/* Wrapped text in a span for additional styling if needed */}
+                            <span>Bin ID: {bin.id}</span>
                             <button className="remove-button" onClick={() => toggleBinSelection(bin)}>Remove</button>
                         </div>
                     ))}
