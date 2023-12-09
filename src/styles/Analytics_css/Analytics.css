@@ -1,23 +1,73 @@
-.cards {
+.analytics-container {
     display: flex;
-    gap: 1.5rem;
-    margin-left: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 0 0.5vw;
+    background-color: #e7eafb;
+    padding: 2vh;
+    height: 95%;
+    position: relative;
 }
 
-.totalBins, .totalUsers {
+
+
+/* styling for cards container and its card*/
+.cards-container {
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    gap: 1.5rem;
+    padding: 1vh 0;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    position: relative;
+}
+
+.totalBins,
+.totalUsers {
     background: linear-gradient(to right, #0095E2, #00B8FF) !important;
     color: #fff !important;
 }
 
-.groupIcon, .binIcon {
+.groupIcon,
+.binIcon {
     font-weight: 900 !important;
     font-size: 1.3em !important;
 }
 
-.groupIcon{
+.groupIcon {
     color: yellow;
 }
 
-.binIcon{
+.binIcon {
     color: greenyellow;
+}
+
+/*styling for stats container*/
+.stats-container {
+    flex: 1;
+    background-color: #fff;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-table-container {
+    margin: 0;
+    height: 100%;
+    width: 50vw;
+}
+
+.graph-container {
+    flex: 1;
+    height: 95%;
+    padding: 10px;
+
 }
