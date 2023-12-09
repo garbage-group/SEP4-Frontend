@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Pagination } from "@mui/material";
+import { Button } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
 import { IndividualUserComponent } from "../components/users/InvidualUser";
@@ -93,9 +93,8 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
         <p className="number-of-users">{users ? users.length : 0} users</p>
         <Button
           variant="contained"
-          className={`add-member-button ${
-            currentUserRole !== "municipality worker" ? "disabled" : ""
-          }`}
+          className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""
+            }`}
           endIcon={<PersonAddAltRoundedIcon />}
           onClick={onAddUserClick}
         >
