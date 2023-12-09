@@ -12,6 +12,7 @@ import {
 import { useBins } from "../../contexts/BinContext";
 import { Dropdown } from "../utils/Dropdown";
 
+// Registering Chart.js elements and plugins
 Chartjs.register(
   LineElement,
   CategoryScale,
@@ -21,6 +22,7 @@ Chartjs.register(
   Tooltip
 );
 
+// Function to format date
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
     day: "numeric",
@@ -28,8 +30,12 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
+// Main LineChartFillLevel component
 function LineChartFillLevel() {
+  // Fetching bins data using context
   const { isLoading, bins } = useBins();
+
+  // State to manage the selected bin
   const [selectedBin, setSelectedBin] = useState(
     bins.length > 0 ? bins[0].id : null
   );
@@ -41,6 +47,7 @@ function LineChartFillLevel() {
     }
   }, [bins]);
 
+  // Handling change in the selected bin
   function handleBinChange(event) {
     const selectedBin = event.target.value;
     const selectedBinId =
@@ -48,23 +55,17 @@ function LineChartFillLevel() {
     setSelectedBin(selectedBinId);
   }
 
+  // Extracting data for the selected bin
   const selectedBinData = selectedBin
     ? bins.find((bin) => bin.id === selectedBin)
     : null;
 
-  /*  const fillLevelDate = selectedBinData
-    ? selectedBinData.fillLevels.map((temp) => formatDate(temp.dateTime))
-    : [];
-
-  const fillLevelValue = selectedBinData
-    ? selectedBinData.fillLevels.map((temp) => temp.value)
-    : []; */
-
+  // Calculating daily averages for fill levels
   const dailyAverages = selectedBinData
     ? calculateDailyAverage(selectedBinData.fillLevels)
     : {};
 
-  // Convert dates to Date objects and sort
+  // Sorting and formatting dates for the chart
   const sortedDates = Object.keys(dailyAverages)
     .map((date) => new Date(date))
     .sort((a, b) => a - b)
@@ -73,6 +74,7 @@ function LineChartFillLevel() {
   const averageFillLevelDate = sortedDates;
   const averageFillLevelValue = sortedDates.map((date) => dailyAverages[date]);
 
+  // Chart data and options
   const data = {
     labels: averageFillLevelDate,
     datasets: [
@@ -92,19 +94,23 @@ function LineChartFillLevel() {
     plugins: {
       legend: true,
     },
+
     scales: {},
   };
 
+  // Rendering the component
   return (
     <>
+      {/* Dropdown for selecting bins */}
       <Dropdown
         bins={bins}
         selectedBin={selectedBin}
         handleBinChange={handleBinChange}
       />
 
+      {/* Render chart if a bin is selected */}
       {selectedBin && (
-        <div className="line-graph">
+        <div style={{}}>
           <Line data={data} options={options}></Line>
         </div>
       )}
@@ -112,6 +118,7 @@ function LineChartFillLevel() {
   );
 }
 
+// Function to calculate daily averages
 function calculateDailyAverage(fillLevels) {
   const dailyData = {};
 
