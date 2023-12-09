@@ -1,30 +1,23 @@
-import React, { useState } from 'react';
-import '../../styles/user_css/AddUser.css';
-import humanIcon from '../../styles/images/human_icon.png';
-import passwordIcon from '../../styles/images/password.png';
-import pencilIcon from '../../styles/images/pencil.png';
-import { Button } from '../Button';
-import { useUserManagement } from '../../contexts/UserContext';
-import Modal from '../Modal.js'; // Adjust the import path as necessary
+import React, { useState } from "react";
+import "../../styles/user_css/AddUser.css";
+import humanIcon from "../../styles/images/human_icon.png";
+import passwordIcon from "../../styles/images/password.png";
+import pencilIcon from "../../styles/images/pencil.png";
+import { Button } from "../Button";
+import { useUserManagement } from "../../contexts/UserContext";
+import Modal from "../Modal.js"; // Adjust the import path as necessary
 
-const AddUser = ( {showTitle, buttonText},) => {
-  const { addUser, user, fetchUserByUsername, isLoading } = useUserManagement();
+const AddUser = ({ showTitle, buttonText }) => {
+  const { addUser, isLoading } = useUserManagement();
 
-
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [region, setRegion] = useState('Horsens North'); // Default to first option
-  const [password, setPassword] = useState(user ? user.password : "");
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [modalMessage, setModalMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [region, setRegion] = useState("Horsens North"); // Default to first option
+  const [password, setPassword] = useState();
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const USER_ROLE = "Garbage Collector";
-  const [newUsername, setNewUsername] = useState('');
-  const [newFullName, setNewFullName] = useState('');
-  const [newRegion, setNewRegion] = useState('Horsens North'); // Default to first option
-  
-  
-
 
   const showModal = (message) => {
     setModalMessage(message);
@@ -33,17 +26,17 @@ const AddUser = ( {showTitle, buttonText},) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setModalMessage('');
+    setModalMessage("");
   };
 
   async function handleAddUser() {
     if (!username || !fullName || !region || !password || !repeatPassword) {
-      showModal('Please fill in all fields.');
+      showModal("Please fill in all fields.");
       return;
     }
 
     if (password !== repeatPassword) {
-      showModal('Passwords do not match. Please re-enter your passwords.');
+      showModal("Passwords do not match. Please re-enter your passwords.");
       return;
     }
 
@@ -52,18 +45,18 @@ const AddUser = ( {showTitle, buttonText},) => {
       fullName,
       password,
       role: USER_ROLE,
-      region
+      region,
     };
 
     try {
       await addUser(userData);
       showModal(`Successfully signed up: ${username}`);
       // Reset form after successful signup
-      setUsername('');
-      setFullName('');
-      setRegion('Horsens North'); // Reset to the default value
-      setPassword('');
-      setRepeatPassword('');
+      setUsername("");
+      setFullName("");
+      setRegion("Horsens North"); // Reset to the default value
+      setPassword("");
+      setRepeatPassword("");
     } catch (error) {
       showModal(error.message);
     }
@@ -75,7 +68,7 @@ const AddUser = ( {showTitle, buttonText},) => {
       <div className="adduser-content">
         <div className="adduser-form-container">
           <div className="adduser-header">
-            <div className="adduser-title">{showTitle}</div>
+            <div className="adduser-title">Add New User</div>
           </div>
           <div className="adduser-inputs">
             <img src={humanIcon} alt="Username Icon" />
@@ -130,12 +123,13 @@ const AddUser = ( {showTitle, buttonText},) => {
               onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
-          <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
-            {isLoading ? 'Signing up' : buttonText}
+          <Button
+            onClick={handleAddUser}
+            disabled={isLoading}
+            className="adduser-signup-btn"
+          >
+            {isLoading ? "Signing up" : "Sign Up"}
           </Button>
-
-
-
         </div>
       </div>
       <Modal isOpened={isModalOpen} onClose={closeModal}>

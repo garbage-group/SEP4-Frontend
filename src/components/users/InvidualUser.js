@@ -1,5 +1,6 @@
 import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import stc from "string-to-color";
+
 // import { ExtraElements } from "../utils/ExtraElements";
 import "../../styles/user_css/IndividualUser.css";
 import { UpdateUser } from "./UpdateUser";
@@ -9,9 +10,18 @@ export function IndividualUserComponent({
   username,
   showExtraElements = false,
   extraElements,
+  onHandleUserClick,
 }) {
+  function handleClick() {
+    onHandleUserClick(username);
+  }
+
   return (
-    <ListItem className="listitem-collector" style={{ width: "auto" }}>
+    <ListItem
+      className="listitem-collector"
+      style={{ width: "auto" }}
+      onClick={handleClick}
+    >
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />
       </ListItemAvatar>

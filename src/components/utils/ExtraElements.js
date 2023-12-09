@@ -2,21 +2,27 @@ import React from "react";
 import { Chip, IconButton } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
+/* import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import { useUserManagement } from "../../contexts/UserContext";
+import { useUserManagement } from "../../contexts/UserContext"; */
 import "../../styles/utils_css/ExtraElements.css";
 
-function ExtraElements({ region, role, currentUserRole, username, onEditUserClick }) {
-  const { deleteUser } = useUserManagement();
+function ExtraElements({
+  region,
+  role,
+  /*   currentUserRole,
+  username,
+  onEditUserClick, */
+}) {
+  // const { deleteUser } = useUserManagement();
 
-  const handleDeleteClick = async () => {
+  /*  const handleDeleteClick = async () => {
     try {
       await deleteUser(username);
     } catch (error) {
       console.error("Error deleting user:", error.message);
     }
-  };
+  }; */
 
   return (
     <div className="extra-elements">
@@ -34,7 +40,7 @@ function ExtraElements({ region, role, currentUserRole, username, onEditUserClic
       />
 
       {/* Display the Delete button */}
-      <IconButton
+      {/* <IconButton
         edge="end"
         aria-label="delete"
         onClick={handleDeleteClick}
@@ -49,8 +55,8 @@ function ExtraElements({ region, role, currentUserRole, username, onEditUserClic
         data-testid="edit-button"
         className={`useredit-icon ${
           currentUserRole !== "municipality worker" ? "disabled" : ""
-        }`} onClick={onEditUserClick}
-      />
+        }`}
+      /> */}
     </div>
   );
 }

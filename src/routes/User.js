@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Pagination } from "@mui/material";
+import { Button } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
 import { IndividualUserComponent } from "../components/users/InvidualUser";
@@ -12,9 +12,10 @@ import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFill
 
 import "../styles/user_css/User.css";
 import { ListPagination } from "../components/utils/ListPagination";
+import { useUserManagement } from "../contexts/UserContext";
 
 // UserListContainer component
-function UserListContainer({ onAddUserClick, onEditUserClick }) {
+function UserListContainer({ onAddUserClick, onHandleUserClick }) {
   const [currentUserRole, setCurrentUserRole] = useState(
     localStorage.getItem("role")
   );
@@ -61,7 +62,7 @@ function UserListContainer({ onAddUserClick, onEditUserClick }) {
         startIndex={startIndex}
         endIndex={endIndex}
         currentUserRole={currentUserRole}
-        onEditUserClick={onEditUserClick}
+        onHandleUserClick={onHandleUserClick}
       />
 
       {/* Render list footer with pagination */}
@@ -112,7 +113,14 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
 }
 
 // ListBody component
-function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onEditUserClick}) {
+function ListBody({
+  isLoading,
+  users,
+  startIndex,
+  endIndex,
+  currentUserRole,
+  onHandleUserClick,
+}) {
   return (
     <div className="list-body">
       {isLoading && <LoadingComponent />}
@@ -133,9 +141,9 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onE
                   role={user.role}
                   currentUserRole={currentUserRole}
                   username={user.username}
-                  onEditUserClick={onEditUserClick}
                 />
               }
+              onHandleUserClick={onHandleUserClick}
             />
           ))}
     </div>
@@ -143,10 +151,10 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onE
 }
 
 // Add user component
-function AddUserContainer({showTitle, buttonText}
-) {  return (
+function AddUserContainer({ showTitle, buttonText }) {
+  return (
     <div className="addUser-container">
-      <AddUser showTitle={showTitle} buttonText={buttonText}/>
+      <AddUser showTitle={showTitle} buttonText={buttonText} />
     </div>
   );
 }
@@ -154,28 +162,27 @@ function AddUserContainer({showTitle, buttonText}
 // Users component
 function Users() {
   const [showAddUser, setShowAddUser] = useState(false);
+  const [selectedUser, setSelectedUser] = useState();
+  // const { fetchUserByUsername } = useUserManagement();
 
-  const [showTitle, setShowTitle] = useState("addUser");
-
-  const[buttonText, setButtonText] = useState("Signup");
+  const { fetchUserByUsername } = useUserManagement();
 
   const handleToggleAddUser = () => {
     setShowAddUser(!showAddUser);
-    setShowTitle("Add User");
-    setButtonText("Sign up");
   };
 
-  const handleEditClick = (event) => {
-    setShowAddUser(!showAddUser);
-    setShowTitle("Edit User");
-    setButtonText("Save user");
-    console.log(event.target)
-  };
+  async function handleUserClick(username) {
+    const user = await fetchUserByUsername(username);
+    setSelectedUser(user);
+  }
 
   return (
     <div className="users-container">
-      <UserListContainer onAddUserClick={handleToggleAddUser} onEditUserClick={handleEditClick} />
-      {showAddUser && <AddUserContainer showTitle={showTitle} buttonText={buttonText}/>}
+      <UserListContainer
+        onAddUserClick={handleToggleAddUser}
+        onHandleUserClick={handleUserClick}
+      />
+      {showAddUser && <AddUserContainer />}
     </div>
   );
 }
