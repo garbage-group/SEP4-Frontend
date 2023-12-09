@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Pagination } from "@mui/material";
+import { Button } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
 
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+/* import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined"; */
 // import RefreshIcon from "@mui/icons-material/Refresh";
-
 
 import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
@@ -74,7 +73,6 @@ function UserListContainer({ onAddUserClick }) {
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={handlePaginationChange}
-
         />
       </div>
     </div>
@@ -118,38 +116,14 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
 // ListBody component
 function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
   return (
-
-    <div className="userlist-container">
-      {/* Render list header */}
-      <div className="list-header">
-        <p className="members-text">User</p>
-
-        {/* Render right content with user count and Add User button */}
-        <div className="right-content">
-          <p className="number-of-users">{data ? data.length : 0} users</p>
-          {/* <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} /> */}
-          <Button
-            variant="contained"
-            className={`add-member-button ${
-              currentUserRole !== "municipality worker" ? "disabled" : ""
-            }`}
-            endIcon={<PersonAddAltRoundedIcon />}
-            onClick={handleAddButtonClick}
-          >
-            Add User
-          </Button>
-        </div>
-      </div>
-
-      {/* Render list body with individual user components */}
-      <div className="list-body">
-        {isLoading && <LoadingComponent />}
-
-        {/* Render users if data is available */}
-        {!isLoading &&
-          data &&
-          Array.isArray(data) &&
-          data.map((collector, index) => (
+    <div className="list-body">
+      {isLoading && <LoadingComponent />}
+      {!isLoading &&
+        users &&
+        Array.isArray(users) &&
+        users
+          .slice(startIndex, endIndex)
+          .map((user, index) => (
             <IndividualUserComponent
               key={index}
               username={user.username}

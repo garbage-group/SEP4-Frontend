@@ -1,9 +1,8 @@
-
 import { React, createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../contexts/BinContext";
 
 export const UserContext = createContext();
-const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
+// const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 function UserListProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +37,6 @@ function UserListProvider({ children }) {
 
   return (
     <UserContext.Provider value={{ isLoading, users, fetchUsers }}>
-
       {children}
     </UserContext.Provider>
   );
