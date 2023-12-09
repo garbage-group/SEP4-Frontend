@@ -7,7 +7,7 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import { useUserManagement } from "../../contexts/UserContext";
 import "../../styles/utils_css/ExtraElements.css";
 
-function ExtraElements({ region, role, currentUserRole, username }) {
+function ExtraElements({ region, role, currentUserRole, username, handleEditClick }) {
   const { deleteUser } = useUserManagement();
 
   const handleDeleteClick = async () => {
@@ -49,7 +49,7 @@ function ExtraElements({ region, role, currentUserRole, username }) {
         data-testid="edit-button"
         className={`useredit-icon ${
           currentUserRole !== "municipality worker" ? "disabled" : ""
-        }`}
+        }`} onClick={handleEditClick}
       />
     </div>
   );

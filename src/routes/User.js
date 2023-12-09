@@ -111,7 +111,7 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
 }
 
 // ListBody component
-function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
+function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onEditUserClick}) {
   return (
     <div className="list-body">
       {isLoading && <LoadingComponent />}
@@ -132,6 +132,7 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
                   role={user.role}
                   currentUserRole={currentUserRole}
                   username={user.username}
+                  onClick={onEditUserClick}
                 />
               }
             />
@@ -157,9 +158,14 @@ function Users() {
     setShowAddUser(!showAddUser);
   };
 
+  const handleEditClick = () => {
+    alert(showAddUser)
+    setShowAddUser(!showAddUser);
+  };
+
   return (
     <div className="users-container">
-      <UserListContainer onAddUserClick={handleToggleAddUser} />
+      <UserListContainer onAddUserClick={handleToggleAddUser} onEditUserClick={handleEditClick} />
       {showAddUser && <AddUserContainer />}
     </div>
   );

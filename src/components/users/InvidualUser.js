@@ -2,6 +2,7 @@ import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import stc from "string-to-color";
 // import { ExtraElements } from "../utils/ExtraElements";
 import "../../styles/user_css/IndividualUser.css";
+import { UpdateUser } from "./UpdateUser";
 
 export function IndividualUserComponent({
   fullname,
