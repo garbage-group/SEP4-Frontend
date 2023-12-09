@@ -7,16 +7,24 @@ import { Button } from '../Button';
 import { useUserManagement } from '../../contexts/UserContext';
 import Modal from '../Modal.js'; // Adjust the import path as necessary
 
-const AddUser = ({ onCancel }) => {
+const AddUser = ( {showTitle, buttonText},) => {
+  const { addUser, user, fetchUserByUsername, isLoading } = useUserManagement();
+
+
   const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [region, setRegion] = useState('Horsens North'); // Default to first option
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(user ? user.password : "");
   const [repeatPassword, setRepeatPassword] = useState('');
   const [modalMessage, setModalMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const USER_ROLE = "Garbage Collector";
-  const { addUser, isLoading } = useUserManagement();
+  const [newUsername, setNewUsername] = useState('');
+  const [newFullName, setNewFullName] = useState('');
+  const [newRegion, setNewRegion] = useState('Horsens North'); // Default to first option
+  
+  
+
 
   const showModal = (message) => {
     setModalMessage(message);
@@ -67,7 +75,7 @@ const AddUser = ({ onCancel }) => {
       <div className="adduser-content">
         <div className="adduser-form-container">
           <div className="adduser-header">
-            <div className="adduser-title">Add New User</div>
+            <div className="adduser-title">{showTitle}</div>
           </div>
           <div className="adduser-inputs">
             <img src={humanIcon} alt="Username Icon" />
@@ -123,7 +131,7 @@ const AddUser = ({ onCancel }) => {
             />
           </div>
           <Button onClick={handleAddUser} disabled={isLoading} className="adduser-signup-btn">
-            {isLoading ? 'Signing up' : 'Sign up'}
+            {isLoading ? 'Signing up' : buttonText}
           </Button>
 
 

@@ -14,7 +14,7 @@ import "../styles/user_css/User.css";
 import { ListPagination } from "../components/utils/ListPagination";
 
 // UserListContainer component
-function UserListContainer({ onAddUserClick }) {
+function UserListContainer({ onAddUserClick, onEditUserClick }) {
   const [currentUserRole, setCurrentUserRole] = useState(
     localStorage.getItem("role")
   );
@@ -61,6 +61,7 @@ function UserListContainer({ onAddUserClick }) {
         startIndex={startIndex}
         endIndex={endIndex}
         currentUserRole={currentUserRole}
+        onEditUserClick={onEditUserClick}
       />
 
       {/* Render list footer with pagination */}
@@ -132,7 +133,7 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onE
                   role={user.role}
                   currentUserRole={currentUserRole}
                   username={user.username}
-                  onClick={onEditUserClick}
+                  onEditUserClick={onEditUserClick}
                 />
               }
             />
@@ -142,10 +143,10 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole ,onE
 }
 
 // Add user component
-function AddUserContainer() {
-  return (
+function AddUserContainer({showTitle, buttonText}
+) {  return (
     <div className="addUser-container">
-      <AddUser />
+      <AddUser showTitle={showTitle} buttonText={buttonText}/>
     </div>
   );
 }
@@ -154,19 +155,27 @@ function AddUserContainer() {
 function Users() {
   const [showAddUser, setShowAddUser] = useState(false);
 
+  const [showTitle, setShowTitle] = useState("addUser");
+
+  const[buttonText, setButtonText] = useState("Signup");
+
   const handleToggleAddUser = () => {
     setShowAddUser(!showAddUser);
+    setShowTitle("Add User");
+    setButtonText("Sign up");
   };
 
-  const handleEditClick = () => {
-    alert(showAddUser)
+  const handleEditClick = (event) => {
     setShowAddUser(!showAddUser);
+    setShowTitle("Edit User");
+    setButtonText("Save user");
+    console.log(event.target)
   };
 
   return (
     <div className="users-container">
       <UserListContainer onAddUserClick={handleToggleAddUser} onEditUserClick={handleEditClick} />
-      {showAddUser && <AddUserContainer />}
+      {showAddUser && <AddUserContainer showTitle={showTitle} buttonText={buttonText}/>}
     </div>
   );
 }
