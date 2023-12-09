@@ -1,11 +1,14 @@
 import React from "react";
 
-import "../../styles/overview_css/Info.css";
-import "../../styles/overview_css/News.css"
+import { Clock } from "./TimeInfo";
 import { LatestNews } from "../overview/LatestNews"
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import { WeatherInfo } from "./WeatherInfo";
+import { HumidityDisplay } from "./HumidityDisplay";
+import "../../styles/overview_css/Info.css";
+import "../../styles/overview_css/News.css"
 
-export function Info() {
+function Info() {
   return (
     <div className="info-container">
       <div id="first-info-box" className="info-box">
@@ -16,8 +19,14 @@ export function Info() {
           <LatestNews />
         </div>
       </div>
-      <div className="info-box"></div>
-      <div className="info-box"></div>
+      <div className="info-box"><HumidityDisplay /></div>
+      <div className="info-box"> <WeatherInfo /></div>
+     <div className="info-box">
+        <Clock />
+      </div>
     </div>
   );
 }
+
+export { Info };
+

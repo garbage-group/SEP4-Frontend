@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import Modal from "../components/Modal";
 
+
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 // const BASE_URL = "http://localhost:8080";
 
@@ -9,6 +10,7 @@ const BinContext = createContext();
 
 function BinProvider({ children }) {
   const [bins, setBins] = useState([]);
+  const [errorMsg, setErrorMSg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentBin, setCurrentBin] = useState({});
   const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
@@ -20,6 +22,7 @@ function BinProvider({ children }) {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
 
   useEffect(
     function () {
@@ -143,8 +146,9 @@ function BinProvider({ children }) {
       const humidityData = await response.json();
       setCurrentBinHumidity(humidityData);
     } catch (error) {
-      console.error("Error fetching humidity data:", error);
-      alert("There was an error loading the humidity data: " + error.message);
+      // console.error("Error fetching humidity data:", error);
+      alert(`Bin with id ${binId} not found!!!`);
+      // setErrorMSg(`Bin with id ${binId} not found!!!`);
     } finally {
       setIsLoading(false);
     }
@@ -200,6 +204,7 @@ function BinProvider({ children }) {
         createBin,
         deleteBin,
         updateBin,
+        errorMsg,
       }}
     >
       {children}
@@ -216,4 +221,4 @@ function useBins() {
   return context;
 }
 
-export { BinProvider, useBins };
+export { BinProvider, useBins, BASE_URL };
