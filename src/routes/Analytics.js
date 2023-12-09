@@ -5,7 +5,7 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-// import BarChartHumidity from "../components/Analytics/BarChartHumidity";
+import BarChartHumidity from "../components/Analytics/BarChartHumidity";
 import BarChartTemp from "../components/Analytics/BarChartTemp";
 import { useBins } from "../contexts/BinContext";
 import { useUserListContext } from "../contexts/UserListContext";
@@ -47,8 +47,8 @@ export function Analytics() {
       </div>
 
       <div className="stats-container">
-        {/* <BarChartHumidity /> */}
-        {/* */}
+        
+  
 
         <div className="history-table-container">
           <HistoryTable />
@@ -75,7 +75,7 @@ function TabComponet() {
           <BarChartTemp />
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <BarChartHumidity />
         </TabPanel>
         <TabPanel>
           <LineChartFillLevel />

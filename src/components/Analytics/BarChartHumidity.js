@@ -11,6 +11,7 @@ import {
 
 import { Bar } from "react-chartjs-2";
 import { useBins } from "../../contexts/BinContext";
+import { Dropdown } from "../utils/Dropdown";
 
 // Registering Chart.js components with ReactChartJS
 Chartjs.register(BarElement, CategoryScale, LinearScale, Legend, Tooltip);
@@ -47,7 +48,6 @@ function BarChartHumidity() {
     setSelectedBin(selectedBinId);
   };
 
-  console.log(typeof selectedBin);
 
   // Set selected data to the first bin ID when the component mounts
   useEffect(() => {
@@ -93,22 +93,11 @@ function BarChartHumidity() {
 
   return (
     <div>
-      <div>
-        {/* Dropdown to select a bin */}
-        <label>Select a Bin:</label>
-        <select onChange={handleBinChange} value={selectedBin}>
-          <option value={null}>Select a Bin</option>
-          {bins.map((bin) => (
-            <option key={bin.id} value={bin.id}>
-              Bin {bin.id}
-            </option>
-          ))}
-        </select>
-      </div>
+      <Dropdown bins={bins} selectedBin={selectedBin} handleBinChange={handleBinChange} />
 
       {/* Displaying the Bar Chart if a bin is selected */}
       {selectedBin && (
-        <div style={{ width: "500px", padding: "20px" }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Bar data={data} options={options}></Bar>
         </div>
       )}

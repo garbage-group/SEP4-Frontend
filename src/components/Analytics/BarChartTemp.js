@@ -30,7 +30,6 @@ function BarChartTemp() {
 
   const handleBinChange = (event) => {
     const selectedBinValue = event.target.value;
-    console.log(selectedBinValue);
     // Parse the selectedBinValue to an integer
     const selectedBinId =
       selectedBinValue !== "Select a Bin" && parseInt(selectedBinValue, 10);
