@@ -1,24 +1,150 @@
 import React, { useEffect, useState } from "react";
-
-import { Button, Chip } from "@mui/material";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
+
+import { Button } from "@mui/material";
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-
-// import RefreshIcon from "@mui/icons-material/Refresh";
+import { LoadingComponent } from "../components/LoadingError";
+import { ExtraElements } from "../components/utils/ExtraElements";
+import { ListPagination } from "../components/utils/ListPagination";
 
 import "../styles/user_css/User.css";
-import { LoadingComponent } from "../components/LoadingError";
+
+// UserListContainer component
+function UserListContainer({ onAddUserClick }) {
+  const [currentUserRole, setCurrentUserRole] = useState(
+    localStorage.getItem("role")
+  );
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Use UserListContext to fetch user data
+  const { isLoading, users } = useUserListContext();
+
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    // Update the role when it changes in localStorage
+    setCurrentUserRole(localStorage.getItem("role"));
+  }, []);
+
+  const handleAddButtonClick = () => {
+    onAddUserClick();
+  };
+
+  const handlePaginationChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  return (
+    <div className="userlist-container">
+      {/* Render list header */}
+      <ListHeader
+        users={users}
+        currentUserRole={currentUserRole}
+        onAddUserClick={handleAddButtonClick}
+      />
+
+      {/* Render list body with individual user components */}
+      <ListBody
+        isLoading={isLoading}
+        users={users}
+        startIndex={startIndex}
+        endIndex={endIndex}
+        currentUserRole={currentUserRole}
+      />
+
+      {/* Render list footer with pagination */}
+      <div className="list-footer">
+        <ListPagination
+          totalItems={users ? users.length : 0}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePaginationChange}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ListHeader component
+function ListHeader({ users, currentUserRole, onAddUserClick }) {
+  const { fetchUsers } = useUserListContext();
+
+  const handleRefresh = () => {
+    fetchUsers();
+  };
+
+  return (
+    <div className="list-header">
+      <p className="members-text">User</p>
+      <div className="right-content">
+        <ReplayCircleFilledOutlinedIcon
+          color="primary"
+          sx={{ fontSize: 45, color: "#133a64" }}
+          onClick={handleRefresh}
+        />
+
+        <p className="number-of-users">{users ? users.length : 0} users</p>
+        <Button
+          variant="contained"
+          className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""
+            }`}
+          endIcon={<PersonAddAltRoundedIcon />}
+          onClick={onAddUserClick}
+        >
+          Add User
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// ListBody component
+function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
+  return (
+    <div className="list-body">
+      {isLoading && <LoadingComponent />}
+      {!isLoading &&
+        users &&
+        Array.isArray(users) &&
+        users
+          .slice(startIndex, endIndex)
+          .map((user, index) => (
+            <IndividualUserComponent
+              key={index}
+              username={user.username}
+              fullname={user.fullname}
+              showExtraElements={true}
+              extraElements={
+                <ExtraElements
+                  region={user.region}
+                  role={user.role}
+                  currentUserRole={currentUserRole}
+                />
+              }
+            />
+          ))}
+    </div>
+  );
+}
+
+// Add user component
+function AddUserContainer() {
+  return (
+    <div className="addUser-container">
+      <AddUser />
+    </div>
+  );
+}
 
 // Users component
 function Users() {
   const [showAddUser, setShowAddUser] = useState(false);
- 
 
   const handleToggleAddUser = () => {
     setShowAddUser(!showAddUser);
@@ -30,108 +156,6 @@ function Users() {
       {showAddUser && <AddUserContainer />}
     </div>
   );
-}
-
-// UserListContainer component
-function UserListContainer({ onAddUserClick }) {
-  const [currentUserRole, setCurrentUserRole] = useState(localStorage.getItem("role"));
-
-  function handleAddButtonClick() {
-    onAddUserClick(); // Calling the function passed down from the parent component
-  }
-
-  useEffect(() => {
-    // Update the role when it changes in localStorage
-    setCurrentUserRole(localStorage.getItem("role"));
-  }, []);
-
-  // Use UserListContext to fetch user data
-  const { isLoading, users: data } = useUserListContext();
-
-  // Extra elements component
-  function ExtraElements({ region, role }) {
-    return (
-      <div className="extra-elements">
-        <Chip
-          icon={<PlaceOutlinedIcon />}
-          label={region ? region : "N/A"}
-          sx={{ m: 1 }}
-          className="extra-elements-chip"
-        />
-        <Chip
-          label={role ? role : "N/A"}
-          icon={<PersonOutlineOutlinedIcon />}
-          className="extra-elements-chip"
-          sx={{ m: 1 }}
-        />
-
-        {/* Disables edit and remove button if user is not admin */}
-        <PersonRemoveOutlinedIcon
-          data-testid="remove-button"
-          className={`userminus-icon ${currentUserRole !== "municipality worker" ? "disabled" : ""
-            }`}
-        />
-
-        <ModeEditOutlineOutlinedIcon
-          data-testid="edit-button"
-          className={`useredit-icon ${currentUserRole !== "municipality worker" ? "disabled" : ""
-            }`}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="userlist-container">
-      {/* Render list header */}
-      <div className="list-header">
-        <p className="members-text">User</p>
-
-        {/* Render right content with user count and Add User button */}
-        <div className="right-content">
-          <p className="number-of-users">{data ? data.length : 0} users</p>
-          {/* <RefreshIcon className="refresh-icon" onClick={handleRefreshClick} /> */}
-          <Button
-            variant="contained"
-            className={`add-member-button ${currentUserRole !== "municipality worker" ? "disabled" : ""}`}
-            endIcon={<PersonAddAltRoundedIcon />}
-            onClick={handleAddButtonClick} // Use the handleAddButtonClick function here
-          >
-            Add User
-          </Button>
-        </div>
-      </div>
-
-      {/* Render list body with individual user components */}
-      <div className="list-body">
-        {isLoading && <LoadingComponent />}
-
-        {/* Render users if data is available */}
-        {!isLoading &&
-          data &&
-          Array.isArray(data) &&
-          data.map((user, index) => (
-            <IndividualUserComponent
-              key={index}
-              username={user.username}
-              fullname={user.fullname}
-              showExtraElements={true}
-              extraElements={
-                <ExtraElements region={user.region} role={user.role} />
-              }
-            />
-          ))}
-      </div>
-    </div>
-  );
-}
-
-// Add user component
-function AddUserContainer() {
-  return <div className="addUser-container">
-    <AddUser />
-
-  </div>;
 }
 
 // Export Users component

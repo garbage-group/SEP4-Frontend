@@ -11,9 +11,12 @@ import { useBins } from "../contexts/BinContext";
 import { useUserListContext } from "../contexts/UserListContext";
 import { DataCard } from "../components/Analytics/DataCard";
 import { HistoryTable } from "../components/Analytics/HistoryTable";
-import "../styles/Analytics_css/Analytics.css";
 import { LineChartFillLevel } from "../components/Analytics/LineChartFillLevel";
 import { Spinner } from "../components/Spinner";
+
+import "../styles/Analytics_css/Analytics.css";
+
+
 
 export function Analytics() {
   const { isLoading, bins } = useBins();

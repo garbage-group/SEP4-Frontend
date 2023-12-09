@@ -39,6 +39,7 @@ export function ListOfCollectors() {
                 key={index}
                 username={user.username}
                 fullname={user.fullname}
+                showExtraElements={false}
               />
             ))}
       </List>
