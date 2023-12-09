@@ -5,7 +5,7 @@ import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-import BarChartHumidity from "../components/Analytics/BarChartHumidity";
+// import BarChartHumidity from "../components/Analytics/BarChartHumidity";
 import BarChartTemp from "../components/Analytics/BarChartTemp";
 import { useBins } from "../contexts/BinContext";
 import { useUserListContext } from "../contexts/UserListContext";

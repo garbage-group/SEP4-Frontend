@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { useBins } from "../../contexts/BinContext";
+import { Dropdown } from "../utils/Dropdown";
 
 Chartjs.register(BarElement, CategoryScale, LinearScale, Legend, Tooltip);
 
@@ -76,17 +77,7 @@ function BarChartTemp() {
 
   return (
     <div>
-      <div>
-        <label>Select a Bin:</label>
-        <select onChange={handleBinChange} value={selectedBin}>
-          <option value={null}>Select a Bin</option>
-          {bins.map((bin) => (
-            <option key={bin.id} value={bin.id}>
-              Bin {bin.id}
-            </option>
-          ))}
-        </select>
-      </div>
+       <Dropdown bins={bins} selectedBin={selectedBin} handleBinChange={handleBinChange}/>
       {selectedBin && (
         <div style={{ width: "400px", padding: "20px" }}>
           <Bar data={data} options={options}></Bar>
