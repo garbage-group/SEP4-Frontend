@@ -7,6 +7,7 @@ import { Button } from "../Button";
 import { useUserManagement } from "../../contexts/UserContext";
 import Modal from "../Modal.js";
 
+
 // AddUser component
 function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   // Access the user management context
@@ -104,26 +105,23 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
     setSelectedUser(null); // Clear selected user on reset
   }
 
-  // Set form fields with current user info if in edit mode
-// Set form fields with current user info if in edit mode
-useEffect(() => {
-  if (isManagingUser && selectedUser) {
-    setUsername(selectedUser.username);
-    setFullName(selectedUser.fullName);
-    setRegion(selectedUser.region);
-    setPassword("");
-    setRepeatPassword("");
-  } else {
-    setUsername("");
-    setFullName("");
-    setRegion("Horsens North");
-    setPassword("");
-    setRepeatPassword("");
-  }
-}, [isManagingUser, selectedUser]);
-
-
+  useEffect(() => {
+    if (isManagingUser && selectedUser) {
+      setUsername(selectedUser.username);
+      setFullName(selectedUser.fullname);  // Use selectedUser.fullName directly
+      setRegion(selectedUser.region);
+      setPassword(selectedUser.password);
+      setRepeatPassword(selectedUser.password);  // Assuming repeatPassword should match password
+    } else {
+      setUsername("");
+      setFullName("");
+      setRegion("Horsens North");
+      setPassword("");
+      setRepeatPassword("");
+    }
+  }, [isManagingUser, selectedUser]);
   
+
   return (
     <div className="adduser-page-container">
       <div className="adduser-background"></div>
@@ -138,9 +136,7 @@ useEffect(() => {
               type="text"
               placeholder="Username"
               value={username}
-              onChange={function (e) {
-                setUsername(e.target.value);
-              }}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
@@ -150,9 +146,7 @@ useEffect(() => {
               type="text"
               placeholder="Full Name"
               value={fullName}
-              onChange={function (e) {
-                setFullName(e.target.value);
-              }}
+              onChange={(e) => setFullName(e.target.value)}
             />
           </div>
 
@@ -160,9 +154,7 @@ useEffect(() => {
             <img src={pencilIcon} alt="Region Icon" />
             <select
               value={region}
-              onChange={function (e) {
-                setRegion(e.target.value);
-              }}
+              onChange={(e) => setRegion(e.target.value)}
               className="region-select"
             >
               <option value="Horsens North">Horsens North</option>
@@ -178,9 +170,7 @@ useEffect(() => {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={function (e) {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -190,9 +180,7 @@ useEffect(() => {
               type="password"
               placeholder="Repeat Password"
               value={repeatPassword}
-              onChange={function (e) {
-                setRepeatPassword(e.target.value);
-              }}
+              onChange={(e) => setRepeatPassword(e.target.value)}
             />
           </div>
           <div>
@@ -200,7 +188,15 @@ useEffect(() => {
               <ManageUserButtons
                 handleDeleteClick={handleDeleteClick}
                 selectedUser={selectedUser}
-
+                setEditing={setSelectedUser}  // Pass setSelectedUser instead of setEditing
+                updateUser={updateUser}
+                username={username}
+                userData={{
+                  fullname: fullName,
+                  region: region,
+                  password: password,
+                  repeatPassword: repeatPassword,
+                }}
               />
             ) : (
               <AddUserButton
@@ -219,22 +215,49 @@ useEffect(() => {
   );
 }
 
-// ManageUserButtons component
-function ManageUserButtons({ handleDeleteClick, selectedUser }) {
+function ManageUserButtons({ handleDeleteClick, selectedUser, setEditing, updateUser, username, userData }) {
+  const [isEditing, setIsEditing] = useState(false);
+ 
   const isRemoveButtonDisabled = !selectedUser;
-
+ 
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setEditing(true);
+  };
+ 
+  const handleSaveClick = () => {
+    setIsEditing(false);
+    setEditing(false);
+  
+    // Log the values for debugging
+    console.log("Username:", username);
+    console.log("UserData:", userData);
+  
+    updateUser(username, userData);
+  };
+  
+ 
   return (
-    <div className="manage-user-buttons-container">
-      <Button className="adduser-signup-btn">Edit</Button>
-      <Button className="adduser-signup-btn">Save</Button>
-      <Button
-        className={`adduser-signup-btn ${isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""
-          }`}
-        onClick={handleDeleteClick}
-      >
-        Remove
-      </Button>
-    </div>
+<div className="manage-user-buttons-container">
+      {isEditing ? (
+<Button className="adduser-signup-btn" onClick={handleSaveClick}>
+          Save
+</Button>
+      ) : (
+<>
+<Button className="adduser-signup-btn" onClick={handleEditClick} disabled={isRemoveButtonDisabled}>
+            Edit
+</Button>
+<Button
+            className={`adduser-signup-btn ${isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""}`}
+            onClick={handleDeleteClick}
+            disabled={isEditing} // Example of using isEditing state
+>
+            Remove
+</Button>
+</>
+      )}
+</div>
   );
 }
 
@@ -258,8 +281,5 @@ function AddUserButton({ handleAddUser, handleReset, isLoading }) {
     </div>
   );
 }
-
-
-
 
 export { AddUser };

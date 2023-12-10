@@ -70,7 +70,7 @@ export function UserManagementProvider({ children }) {
         },
       });
       const data = await res.json();
-      setUser(data);
+      // setUser(data);
       return data;
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -80,22 +80,35 @@ export function UserManagementProvider({ children }) {
     }
   }
 
-  async function updateUser(username, updatedUser) {
+  const updateUser = async (username, updatedUser) => {
     if (!isAuthenticated || !token) {
       return;
     }
-
+  
+    // Validate that updatedUser has valid properties
+    if (
+      updatedUser.fullname === undefined ||
+      updatedUser.region === undefined ||
+      updatedUser.password === undefined ||
+      updatedUser.repeatPassword === undefined
+    ) {
+      throw new Error("Invalid user data");
+    }
+  
+    const newUpdatedUser = {
+      fullname: updatedUser.fullname,
+      region: updatedUser.region,
+      password: updatedUser.password,
+      repeatPassword: updatedUser.repeatPassword,
+    };
+  
+    setIsLoading(true);
+  
     try {
-      const newUpdatedUser = {
-        username: username,
-        fullName: updatedUser.newFullName,
-        region: updatedUser.newRegion,
-        password: updatedUser.newPassword,
-        repeatPassword: updatedUser.newRepeatPassword,
-      };
-
-      setIsLoading(true);
-
+      // Log the data before making the API call
+      console.log("Updating User:", username);
+      console.log("Updated User Data:", newUpdatedUser);
+  
       const res = await fetch(`${BASE_URL}/users/${username}`, {
         method: "PATCH",
         body: JSON.stringify(newUpdatedUser),
@@ -104,13 +117,13 @@ export function UserManagementProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (res.ok) {
         const data = await res.json();
         setUser(data);
       } else {
         const data = await res.json();
-        throw new Error(data?.message || 'An unknown error occurred.');
+        throw new Error(data?.message || "An unknown error occurred.");
       }
     } catch (error) {
       console.error("Error updating user:", error.message);
@@ -118,7 +131,10 @@ export function UserManagementProvider({ children }) {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
+  
+  
+  
 
   return (
     <UserManagementContext.Provider
@@ -128,6 +144,8 @@ export function UserManagementProvider({ children }) {
     </UserManagementContext.Provider>
   );
 }
+
+
 
 export function useUserManagement() {
   const context = useContext(UserManagementContext);
