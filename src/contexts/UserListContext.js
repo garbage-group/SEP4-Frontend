@@ -1,9 +1,8 @@
 import { React, createContext, useContext, useEffect, useState } from "react";
-// import { useQuery } from "react-query";
-// import { BASE_URL } from "../contexts/BinContext";
+import { BASE_URL } from "../contexts/BinContext";
 
 export const UserContext = createContext();
-const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
+// const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 function UserListProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,39 +10,33 @@ function UserListProvider({ children }) {
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    async function fetchUsers() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/users`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await res.json();
-
-
-
-        setUsers(data);
-      } catch (e) {
-        alert(e.Message);
-      } finally {
-        setIsLoading(false);
-      }
+  async function fetchUsers() {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await res.json();
+      setUsers(data);
+    } catch (e) {
+      alert(e.Message);
+    } finally {
+      setIsLoading(false);
     }
+  }
 
+  useEffect(() => {
     if (isAuthenticated) {
       fetchUsers();
     }
+    // fetchUsers is defined inside UserListProvider and is not changing,
+    // so it's safe to exclude it from the dependency array
   }, [isAuthenticated, token]);
 
-  /* const refreshData = async () => {
-    alert("Refresh");
-    await refetch();
-  }; */
-
   return (
-    <UserContext.Provider value={{ isLoading, users }}>
+    <UserContext.Provider value={{ isLoading, users, fetchUsers }}>
       {children}
     </UserContext.Provider>
   );

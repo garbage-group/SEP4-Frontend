@@ -9,7 +9,7 @@ import "../../styles/overview_css/ListOfCollectors.css";
 
 // Component to display a list of collectors
 export function ListOfCollectors() {
-  const { isLoading, users: data } = useUserListContext();
+  const { isLoading, users } = useUserListContext();
   const navigate = useNavigate();
 
   // Handler function to navigate to the "users" page
@@ -30,15 +30,16 @@ export function ListOfCollectors() {
 
         {/* Render 5 users if data is available */}
         {!isLoading &&
-          data &&
-          Array.isArray(data) &&
-          data
+          users &&
+          Array.isArray(users) &&
+          users
             .filter((item, index) => index < 5)
             .map((user, index) => (
               <IndividualUserComponent
                 key={index}
                 username={user.username}
                 fullname={user.fullname}
+                showExtraElements={false}
               />
             ))}
       </List>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useBins } from "../contexts/BinContext";
-import "../styles/HumidityDisplay.css";
+import { useBins } from "../../contexts/BinContext";
+import "../../styles/overview_css/HumidityDisplay.css";
 
 function HumidityDisplay() {
   const [binId, setBinId] = useState("");
-  const { getBinHumidity, currentBinHumidity, isLoading, error } = useBins();
+  const { getBinHumidity, currentBinHumidity, isLoading, errorMsg } = useBins();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,9 +30,12 @@ function HumidityDisplay() {
         <button type="submit">Get Humidity</button>
       </form>
       {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {currentBinHumidity && (
-        <div>
+
+      {console.log(errorMsg)}
+
+      {errorMsg && <p>Error </p>}
+      {!isLoading && !errorMsg && currentBinHumidity && (
+        <div className="humidity-bin-text">
           <p>Humidity Level: {currentBinHumidity.value}</p>
           <p>Date: {formatDateAndTime(currentBinHumidity.dateTime).date}</p>
           <p>Time: {formatDateAndTime(currentBinHumidity.dateTime).time}</p>

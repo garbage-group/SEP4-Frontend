@@ -4,12 +4,12 @@ import { createContext } from "react";
 
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
-// const BASE_URL = "http://localhost:8080";
 
 const BinContext = createContext();
 
 function BinProvider({ children }) {
   const [bins, setBins] = useState([]);
+  const [errorMsg, setErrorMSg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentBin, setCurrentBin] = useState({});
   const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
@@ -42,24 +42,22 @@ function BinProvider({ children }) {
         setIsLoading(false);
       }
     }
-    if(isAuthenticated){
-
-      fetchBins();
-      intervalId = setInterval(fetchBins, fetchInterval);
-    }
-
-    return() => {
-      if(intervalId){
-        clearInterval(intervalId);
+      if (isAuthenticated) {
+        fetchBins();
+        intervalId = setInterval(fetchBins, fetchInterval);
       }
-    }
-  }, [isAuthenticated, token]);
 
-  
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
+    },
+    [isAuthenticated, token]
+  );
 
   //get bin by id
   async function getBin(id) {
-
     if (!isAuthenticated || !token) {
       return;
     }
@@ -78,8 +76,11 @@ function BinProvider({ children }) {
       const data = await res.json();
       
       setCurrentBin(data);
+
     } catch(e) {
         console.log(e.message);
+
+
     } finally {
       setIsLoading(false);
     }
@@ -108,7 +109,7 @@ function BinProvider({ children }) {
       const data = await res.json();
       setBins((bins) => [...bins, data]);
     } catch (e) {
-      console.log("There was an error creating bin");
+      console.log(e.message);
     } finally {
       setIsLoading(false);
     }
@@ -180,6 +181,7 @@ function BinProvider({ children }) {
       setCurrentBinHumidity(humidityData);
     } catch (error) {
       console.error("Error fetching humidity data:", error);
+
     } finally {
       setIsLoading(false);
     }
@@ -234,6 +236,8 @@ function BinProvider({ children }) {
         deleteBin,
         updateBin,
         activateBuzzer
+        errorMsg,
+
       }}
     >
       {children}
@@ -250,4 +254,4 @@ function useBins() {
   return context;
 }
 
-export { BinProvider, useBins };
+export { BinProvider, useBins, BASE_URL };

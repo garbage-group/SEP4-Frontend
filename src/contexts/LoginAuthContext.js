@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null);
 
     const updateAuthInfo = (token, username, role) => {
+      
         setToken(token);
         setUsername(username);
         setRole(role);

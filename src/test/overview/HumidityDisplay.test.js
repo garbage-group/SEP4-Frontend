@@ -2,8 +2,8 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-import { HumidityDisplay } from "../components/HumidityDisplay";
-import { useBins } from "../contexts/BinContext";
+import { HumidityDisplay } from "../../components/overview/HumidityDisplay";
+import { useBins } from "../../contexts/BinContext";
 
 // Mock fetch
 // global.fetch = jest.fn(() =>
@@ -12,7 +12,7 @@ import { useBins } from "../contexts/BinContext";
 //   })
 // );
 
-jest.mock("../contexts/BinContext", () => ({
+jest.mock("../../contexts/BinContext", () => ({
   useBins: jest.fn(),
 }));
 

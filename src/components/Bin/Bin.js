@@ -28,7 +28,6 @@ function Bin() {
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading, activateBuzzer } = useBins();
 
-
   //extracting data from bin object;
   const {
     deviceId,
@@ -49,7 +48,6 @@ function Bin() {
   const [newLatitude, setNewLatitude] = useState(currentBin.latitude);
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -126,23 +124,24 @@ function Bin() {
     updateBin(id, updatedBin);
     setIsModalOpen(true);
 
+
   }
 
   //buzzer
   const handleBuzzer = async() =>{
       await activateBuzzer(id);
+
   }
 
   return (
     <>
       <Modal isOpened={isModalOpen} onClose={closeModal}>
         <div className="savedImage">
-
           <img src={require("../../images/popUp/tick.gif")} alt="" />
-
         </div>
         <span>Data Updated</span>
       </Modal>
+
       <div className="bin">
 
         {/* Displaying Bin Id */}
@@ -325,8 +324,6 @@ function Bin() {
             <Button onClick={handleBuzzer} className="btn">Buzzer</Button>
           
         </div>
-
-
       </div>
     </>
 

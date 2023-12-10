@@ -1,12 +1,11 @@
 import { Link} from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../../contexts/LoginAuthContext";
 import Modal from "../Modal";
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import "../../styles/Bin_css/BinNav.css";
 function BinNav() {
     const [activeLink, setActiveLink] = useState('binList');
-    const {role} = useAuth();
+    const role = localStorage.getItem("role");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const closeModal = () => {

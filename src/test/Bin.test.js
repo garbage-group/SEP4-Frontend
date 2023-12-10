@@ -1,11 +1,9 @@
-
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import React from 'react';
+import React from "react";
 import "@testing-library/jest-dom";
 import Bin from "../components/Bin/Bin";
 import { useBins } from "../contexts/BinContext";
-import {  useParams } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 
 
 // Mock the useBins context
@@ -20,6 +18,15 @@ jest.mock("react-router", () => {
   };
 });
 
+jest.mock("../components/Modal.js", () => ({
+  __esModule: true,
+  default: jest
+    .fn()
+    .mockImplementation(
+      ({ isOpened, onClose }) =>
+        isOpened && <div onClick={onClose}>Mocked Modal</div>
+    ),
+}));
 
 
 describe("Bin component", () => {
@@ -56,8 +63,8 @@ describe("Bin component", () => {
     useParams.mockReturnValue({ id: "1" });
   });
 
+  it("verifies all the texts to be displayed on the document", () => {
 
-  it("verifies all the texts to be displayed on the document", () =>{
     render(<Bin />);
 
     expect(screen.getByText(/Bin/i)).toBeInTheDocument();
@@ -74,41 +81,41 @@ describe("Bin component", () => {
     render(<Bin />);
     expect(screen.getByTestId(/Bin/i)).toHaveValue(1);
     expect(screen.getByTestId(/Capacity/i)).toHaveValue("100");
-    expect(screen.getByTestId(/DeviceId/i)).toHaveValue('8080');
-    expect(screen.getByTestId(/Fill Threshold/i)).toHaveValue('75');
+    expect(screen.getByTestId(/DeviceId/i)).toHaveValue("8080");
+    expect(screen.getByTestId(/Fill Threshold/i)).toHaveValue("75");
     expect(screen.getByTestId(/Latitude/i)).toHaveValue(40.7128);
     expect(screen.getByTestId(/Longitude/i)).toHaveValue(-74.006);
-    expect(screen.getByTestId(/fillLevel/i)).toHaveValue('75%');
-    expect(screen.getByTestId(/Humidity/i)).toHaveValue('40%');
-
+    expect(screen.getByTestId(/fillLevel/i)).toHaveValue("75%");
+    expect(screen.getByTestId(/Humidity/i)).toHaveValue("40%");
   });
 
-  // it("calls updateBin when Save button is clicked", async () => {
-  //   render(<Bin />);
+  it("calls updateBin when Save button is clicked", async () => {
+    render(<Bin />);
 
-  //   // "Save" button clicked
-  //   fireEvent.click(screen.getByText("Save"));
+    // "Save" button clicked
+    fireEvent.click(screen.getByText("Save"));
 
-  //   // Wait for the updateBin function to be called
-  //   await waitFor(() => {
-  //     expect(mockUpdateBin).toHaveBeenCalled();
-  //   });
-  // });
+    // Wait for the updateBin function to be called
+    await waitFor(() => {
+      expect(mockUpdateBin).toHaveBeenCalled();
+    });
+  });
 
-  // it("tests updateBin is called with correct values", async () => {
-  //   render(<Bin />);
+  it("tests updateBin is called with correct values", async () => {
+    render(<Bin />);
 
-  //   fireEvent.click(screen.getByText("Save"));
+    fireEvent.click(screen.getByText("Save"));
 
-  //   await waitFor(() => {
-  //     expect(mockUpdateBin).toHaveBeenCalledWith("1", {
-  //       id: "1",
-  //       newFIllThreshold: 75,
-  //       newLatitude: 40.7128,
-  //       newLongitude: -74.006,
-  //     });
-  //   });
-  // });
+    await waitFor(() => {
+      expect(mockUpdateBin).toHaveBeenCalledWith("1", {
+        id: "1",
+        newFIllThreshold: 75,
+        newLatitude: 40.7128,
+        newLongitude: -74.006,
+      });
+    });
+  });
+
 
   it("tests if input fields are enabled when edit button is clicked", async () => {
     render(<Bin />);
