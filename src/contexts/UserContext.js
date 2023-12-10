@@ -7,6 +7,9 @@ const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 export function UserManagementProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem("token");
+  const [user, setUser] = useState();
+
+  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
 
   const addUser = async (userData) => {
     setIsLoading(true);
@@ -19,23 +22,13 @@ export function UserManagementProvider({ children }) {
         },
         body: JSON.stringify(userData),
       });
-      const contentType = response.headers.get("content-type");
-      let data;
-      if (contentType && contentType.indexOf("application/json") !== -1) {
-        data = await response.json();
-      }
+
       if (response.ok) {
+        const data = await response.json();
         return data;
       } else {
-        if (response.status === 409) {
-          throw new Error(
-            `Failed to sign up. Username: ${userData.username} already exists.`
-          );
-        } else if (response.status === 500) {
-          throw new Error("Error code 500, Failed to sign up user.");
-        } else {
-          throw new Error(data?.message || "An unknown error occurred.");
-        }
+        const data = await response.json();
+        throw new Error(data?.message || "An unknown error occurred.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -51,18 +44,13 @@ export function UserManagementProvider({ children }) {
       const response = await fetch(`${BASE_URL}/users/${username}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
 
       if (!response.ok) {
-        if (response.status === 404) {
-          throw new Error(`User ${username} not found.`);
-        } else {
-          const data = await response.json();
-          throw new Error(data?.message || "An unknown error occurred.");
-        }
+        const data = await response.json();
+        throw new Error(data?.message || "An unknown error occurred.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -82,9 +70,51 @@ export function UserManagementProvider({ children }) {
         },
       });
       const data = await res.json();
+      setUser(data);
       return data;
-    } catch {
-      console.error("User not found!!");
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function updateUser(username, updatedUser) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
+
+    try {
+      const newUpdatedUser = {
+        username: username,
+        fullName: updatedUser.newFullName,
+        region: updatedUser.newRegion,
+        password: updatedUser.newPassword,
+        repeatPassword: updatedUser.newRepeatPassword,
+      };
+
+      setIsLoading(true);
+
+      const res = await fetch(`${BASE_URL}/users/${username}`, {
+        method: "PATCH",
+        body: JSON.stringify(newUpdatedUser),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setUser(data);
+      } else {
+        const data = await res.json();
+        throw new Error(data?.message || 'An unknown error occurred.');
+      }
+    } catch (error) {
+      console.error("Error updating user:", error.message);
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -92,7 +122,7 @@ export function UserManagementProvider({ children }) {
 
   return (
     <UserManagementContext.Provider
-      value={{ isLoading, addUser, deleteUser, fetchUserByUsername }}
+      value={{ isLoading, addUser, deleteUser, user, fetchUserByUsername, updateUser }}
     >
       {children}
     </UserManagementContext.Provider>
@@ -102,9 +132,7 @@ export function UserManagementProvider({ children }) {
 export function useUserManagement() {
   const context = useContext(UserManagementContext);
   if (!context) {
-    throw new Error(
-      "useUserManagement must be used within a UserManagementProvider"
-    );
+    throw new Error("useUserManagement must be used within a UserManagementProvider");
   }
   return context;
 }

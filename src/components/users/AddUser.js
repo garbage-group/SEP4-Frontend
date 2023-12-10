@@ -10,12 +10,12 @@ import Modal from "../Modal.js";
 // AddUser component
 function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   // Access the user management context
-  const { addUser, isLoading, deleteUser } = useUserManagement();
+  const { addUser, isLoading, deleteUser, updateUser } = useUserManagement();
 
   // State variables for form input fields
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
-  const [region, setRegion] = useState("Horsens North"); // Default to first option
+  const [region, setRegion] = useState("Horsens North");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
@@ -41,18 +41,15 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   // Function to handle the user delete
   const handleDeleteClick = async () => {
     try {
-      console.log("Before Delete: " + selectedUser.username);
-
       await deleteUser(selectedUser.username);
-      showModal(`Successfully deleted username: ${selectedUser.username}`);
+      showModal(`Successfully deleted: ${selectedUser.username}`);
       setSelectedUser(null);
-      console.log("After Delete: " + selectedUser);
     } catch (error) {
       console.error("Error deleting user:", error.message);
     }
   };
 
-  // Function to handle the user addition
+  // Function to handle the user addition or update
   async function handleAddUser() {
     // Validate form input fields
     if (!username || !fullName || !region || !password || !repeatPassword) {
@@ -76,16 +73,22 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
     };
 
     try {
-      // Call the addUser function from the user management context
-      await addUser(userData);
-      showModal(`Successfully signed up: ${username}`);
+      // If in edit mode, update the user; otherwise, add a new user
+      if (isManagingUser) {
+        await updateUser(selectedUser.username, userData);
+        showModal(`Successfully updated: ${username}`);
+      } else {
+        await addUser(userData);
+        showModal(`Successfully signed up: ${username}`);
+      }
 
-      // Reset form after successful signup
+      // Reset form after successful signup or update
       setUsername("");
       setFullName("");
-      setRegion("Horsens North"); // Reset to the default value
+      setRegion("Horsens North");
       setPassword("");
       setRepeatPassword("");
+      setSelectedUser(null); // Clear selected user after action completion
     } catch (error) {
       showModal(error.message);
     }
@@ -95,11 +98,32 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   function handleReset() {
     setUsername("");
     setFullName("");
-    setRegion("Horsens North"); // Default to the first option or any other default value you want
+    setRegion("Horsens North");
+    setPassword("");
+    setRepeatPassword("");
+    setSelectedUser(null); // Clear selected user on reset
+  }
+
+  // Set form fields with current user info if in edit mode
+// Set form fields with current user info if in edit mode
+useEffect(() => {
+  if (isManagingUser && selectedUser) {
+    setUsername(selectedUser.username);
+    setFullName(selectedUser.fullName);
+    setRegion(selectedUser.region);
+    setPassword("");
+    setRepeatPassword("");
+  } else {
+    setUsername("");
+    setFullName("");
+    setRegion("Horsens North");
     setPassword("");
     setRepeatPassword("");
   }
+}, [isManagingUser, selectedUser]);
 
+
+  
   return (
     <div className="adduser-page-container">
       <div className="adduser-background"></div>
@@ -176,6 +200,7 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
               <ManageUserButtons
                 handleDeleteClick={handleDeleteClick}
                 selectedUser={selectedUser}
+
               />
             ) : (
               <AddUserButton
