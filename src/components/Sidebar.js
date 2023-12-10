@@ -19,7 +19,7 @@ export function Sidebar() {
           to="/overview"
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
-          className="nav-element"
+          className="nav-element overview"
         />
 
         <NavItem

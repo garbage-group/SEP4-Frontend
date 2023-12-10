@@ -44,7 +44,7 @@ function BinMap() {
 
   return (
     <>
-      <div className="mapContainer" >
+      <div className="mapContainer" data-testid="map-container">
         <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
           <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           />
