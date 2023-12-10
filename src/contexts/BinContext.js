@@ -235,7 +235,7 @@ function BinProvider({ children }) {
         createBin,
         deleteBin,
         updateBin,
-        activateBuzzer
+        activateBuzzer,
         errorMsg,
 
       }}
