@@ -48,6 +48,14 @@ function BinForm() {
         }
     }
 
+    //handle cancel button
+    const handleCancel = (e) =>{
+        e.preventDefault();
+        setCapacity("");
+        setThreshold("");
+        setLat("");
+        setLng("");
+    }
 
     return (
         <form className="binForm" onSubmit={(e) => handleSubmit(e)}>
@@ -113,7 +121,7 @@ function BinForm() {
             <div className="binButtons">
                 <div className="addCancel">
                     <button className={"btn"}>Add</button>
-                    <button className={"btn"}>Cancel</button>
+                    <button className={"btn"} onClick={handleCancel}>Cancel</button>
                 </div>
                 <BackButton className={"btn"}>&larr; Back </BackButton>
             </div>
