@@ -96,6 +96,7 @@ export function UserManagementProvider({ children }) {
     }
   
     const newUpdatedUser = {
+      username: username,
       fullname: updatedUser.newFullName,
       region: updatedUser.newRegion,
       password: updatedUser.newPassword,
