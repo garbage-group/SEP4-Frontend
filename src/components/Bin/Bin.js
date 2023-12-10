@@ -6,12 +6,10 @@ import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 import Modal from "../Modal";
 
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ErrorIcon from '@mui/icons-material/Error';
-import CircleIcon from '@mui/icons-material/Circle';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import ErrorIcon from "@mui/icons-material/Error";
+import CircleIcon from "@mui/icons-material/Circle";
 import { Button } from "../Button";
-import { is } from "@react-spring/shared";
-import { isA } from "@jest/expect-utils";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -30,7 +28,8 @@ function Bin() {
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
 
   // Accessing functions and data from BinContext
-  const { getBin, updateBin, currentBin, isLoading, activateBuzzer } = useBins();
+  const { getBin, updateBin, currentBin, isLoading, activateBuzzer } =
+    useBins();
 
   //extracting data from bin object;
   const {
@@ -43,7 +42,7 @@ function Bin() {
     fillLevels,
     humidity,
     status,
-    pickUpTime
+    pickUpTime,
   } = currentBin;
 
   const [newFIllThreshold, setNewFillThreshold] = useState(
@@ -57,10 +56,8 @@ function Bin() {
     setIsModalOpen(false);
   };
 
-
   useEffect(() => {
-    if(isAuthenticated && token) {
-
+    if (isAuthenticated && token) {
       const fetchData = async () => {
         await getBin(id);
       };
@@ -73,10 +70,7 @@ function Bin() {
       setNewLatitude(currentBin.latitude ?? 0);
       setNewLongitude(currentBin.longitude ?? 0);
     }
-
-  
   }, [id, getBin, currentBin, isAuthenticated, token]);
-
 
   // Loading spinner while data is being fetched
   if (isLoading) {
@@ -86,7 +80,6 @@ function Bin() {
   //handle edit
   function handleEdit() {
     setIsDisabled(!isDisabled);
-
   }
 
   //handle save
@@ -129,15 +122,12 @@ function Bin() {
 
     updateBin(id, updatedBin);
     setIsModalOpen(true);
-
-
   }
 
   //buzzer
-  const handleBuzzer = async() =>{
-      await activateBuzzer(id);
-
-  }
+  const handleBuzzer = async () => {
+    await activateBuzzer(id);
+  };
 
   return (
     <>
@@ -149,7 +139,6 @@ function Bin() {
       </Modal>
 
       <div className="bin">
-
         {/* Displaying Bin Id */}
         <div className="row">
           <h6>Bin</h6>
@@ -178,19 +167,18 @@ function Bin() {
           <h6>Device Status</h6>
           <label className="status">
             {status === "ACTIVE" ? (
-              <span >
+              <span>
                 Active <CheckCircleIcon className="active" />
               </span>
             ) : status === "INACTIVE" ? (
-              <span >
-                  OFFLINE <CircleIcon className="offline" />
+              <span>
+                OFFLINE <CircleIcon className="offline" />
               </span>
             ) : (
-              <span >
-                    DEFECT <ErrorIcon className="defect" />
+              <span>
+                DEFECT <ErrorIcon className="defect" />
               </span>
             )}
-
           </label>
         </div>
 
@@ -205,8 +193,6 @@ function Bin() {
           />
         </div>
 
-
-
         {/* Displaying Fill Threshold */}
         <div className="row">
           <h6>Fill Threshold</h6>
@@ -217,8 +203,6 @@ function Bin() {
             data-testid="Fill Threshold"
           />
         </div>
-
-
 
         {/* Displaying Last Emptied Time */}
         <div className="row">
@@ -316,23 +300,22 @@ function Bin() {
         <div className="buttons-container">
           <BackButton className={"btn"}>&larr; Back </BackButton>
 
-        
-            <Button onClick={handleEdit} className="btn">
-              Edit
-            </Button>
-            <Button
-              onClick={handleSave}
-              className={`btn  ${isDisabled ? "editbutton_disabled" : ""}`}
-            >
-              Save
-            </Button>
+          <Button onClick={handleEdit} className="btn">
+            Edit
+          </Button>
+          <Button
+            onClick={handleSave}
+            className={`btn  ${isDisabled ? "editbutton_disabled" : ""}`}
+          >
+            Save
+          </Button>
 
-            <Button onClick={handleBuzzer} className="btn">Buzzer</Button>
-          
+          <Button onClick={handleBuzzer} className="btn">
+            Buzzer
+          </Button>
         </div>
       </div>
     </>
-
   );
 }
 

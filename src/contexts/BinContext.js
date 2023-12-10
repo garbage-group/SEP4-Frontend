@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 
-
-
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 const BinContext = createContext();
@@ -16,35 +14,34 @@ function BinProvider({ children }) {
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
- 
 
-  useEffect(function () {
-    let intervalId;
-    async function fetchBins() {
-   
-      try {
-        if (!isAuthenticated || !token) {
-          return;
-        }
-   
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/bins`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+  useEffect(
+    function () {
+      let intervalId;
+      async function fetchBins() {
+        try {
+          if (!isAuthenticated || !token) {
+            return;
           }
-        });
 
-        if (!res.ok) {
-          throw new Error(`Failed to fetch bins. Status: ${res.status}`);
+          setIsLoading(true);
+          const res = await fetch(`${BASE_URL}/bins`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (!res.ok) {
+            throw new Error(`Failed to fetch bins. Status: ${res.status}`);
+          }
+          const data = await res.json();
+          setBins(data);
+        } catch (e) {
+          setErrorMSg(e.message);
+        } finally {
+          setIsLoading(false);
         }
-        const data = await res.json();
-        setBins(data);
-      } catch (e) {
-        console.log(e.message);
-      } finally {
-        setIsLoading(false);
       }
-    }
       if (isAuthenticated && token) {
         fetchBins();
         intervalId = setInterval(fetchBins, fetchInterval);
@@ -74,21 +71,19 @@ function BinProvider({ children }) {
         },
       });
       if (!res.ok) {
-        throw new Error(`Failed to fetch bin with binId ${id}. Status: ${res.status}`);
+        throw new Error(
+          `Failed to fetch bin with binId ${id}. Status: ${res.status}`
+        );
       }
       const data = await res.json();
-      
+
       setCurrentBin(data);
-
-    } catch(e) {
-        console.log(e.message);
-
-
+    } catch (e) {
+      console.log(e.message);
     } finally {
       setIsLoading(false);
     }
   }
-
 
   //create new bin
   async function createBin(newBin) {
@@ -126,7 +121,7 @@ function BinProvider({ children }) {
       setIsLoading(true);
       const res = await fetch(`${BASE_URL}/bins/${id}/buzzerActivate`, {
         method: "POST",
-        body: JSON.stringify({binId: id}),
+        body: JSON.stringify({ binId: id }),
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -184,7 +179,6 @@ function BinProvider({ children }) {
       setCurrentBinHumidity(humidityData);
     } catch (error) {
       console.error("Error fetching humidity data:", error);
-
     } finally {
       setIsLoading(false);
     }
@@ -214,7 +208,6 @@ function BinProvider({ children }) {
         },
       });
 
-
       if (res.ok) {
         // If successful, update the currentBin value
         setCurrentBin(newUpdatedBin);
@@ -240,7 +233,6 @@ function BinProvider({ children }) {
         updateBin,
         activateBuzzer,
         errorMsg,
-
       }}
     >
       {children}

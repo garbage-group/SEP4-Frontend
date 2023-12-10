@@ -1,4 +1,4 @@
-import { React, createContext, useContext, useEffect, useState } from "react";
+import { React, createContext, useContext } from "react";
 import { BASE_URL } from "../contexts/BinContext";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,14 +11,10 @@ function UserListProvider({ children }) {
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const token = localStorage.getItem("token");
 
-  const {
-    isLoading,
-    data: users,
-    isError,
-  } = useQuery({
+  const { isLoading, data: users } = useQuery({
     queryKey: ["fetchUsers"],
     queryFn: fetchUsers,
-    enabled: isAuthenticated,
+    enabled: isAuthenticated && token,
   });
 
   async function fetchUsers() {
