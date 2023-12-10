@@ -84,13 +84,14 @@
 
 /* Styles for elements with the class .binInput */
 .binInput {
-  background-color: #D1EEDF;
+  background-color:#E6EFD9;
   border-radius: 10px;
 }
 
 .binInput_disabled {
   cursor: not-allowed;
   color: #143A63;
+  background-color: #D1EEDF
 }
 
 .buttons-container {
