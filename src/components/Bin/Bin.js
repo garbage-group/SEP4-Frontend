@@ -5,7 +5,7 @@ import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 import Modal from "../Modal";
-import { useNotifications } from "../../contexts/NotificationContext";
+
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -24,6 +24,8 @@ function Bin() {
   // Extracting bin ID from URL params
   const { id } = useParams();
   const [isDisabled, setIsDisabled] = useState(true);
+  const token = localStorage.getItem("token");
+  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
 
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading, activateBuzzer } = useBins();
@@ -55,6 +57,9 @@ function Bin() {
 
 
   useEffect(() => {
+    if (!isAuthenticated || !token) {
+      return;
+    }
     const fetchData = async () => {
       await getBin(id);
     };
@@ -68,7 +73,7 @@ function Bin() {
     }
 
     fetchData();
-  }, [id, getBin, currentBin]);
+  }, [id, getBin, currentBin, isAuthenticated, token]);
 
 
 

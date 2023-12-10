@@ -23,6 +23,9 @@ function BinProvider({ children }) {
     async function fetchBins() {
    
       try {
+        if (!isAuthenticated || !token) {
+          return;
+        }
    
         setIsLoading(true);
         const res = await fetch(`${BASE_URL}/bins`, {
