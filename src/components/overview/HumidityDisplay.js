@@ -31,8 +31,6 @@ function HumidityDisplay() {
       </form>
       {isLoading && <p>Loading...</p>}
 
-      {console.log(errorMsg)}
-
       {errorMsg && <p>Error </p>}
       {!isLoading && !errorMsg && currentBinHumidity && (
         <div className="humidity-bin-text">
