@@ -1,65 +1,70 @@
-.music-container {
-    max-width: 100%;
-    height: 83%; /* Adjust as needed */
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.bin-heading-top {
+  text-align: center;
+  font-size: 18px;
+  color: black; /* Change the text color to white for better visibility */
+}
+
+.bin-container-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+  background-image: url("../../images/infoBox/humidity.jpg");
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s ease-out;
+  border-radius: 10px;
+  max-height: 25 vh;
+}
+
+
+.bin-item-top {
+  margin-top: 3px;
+  width: 70%;
+  margin-bottom: 11px;
+  background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent white background */
+  padding: 3px;
+  border-radius: 8px; /* Add rounded corners for a card-like appearance */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.bin-item-top h3 {
+  color: #333;
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+
+.bin-item-top p {
+  color: #666;
+  margin-bottom: 0px;
+}
+
+.bin-item-top:hover {
+  background-color: rgba(255, 255, 255, 1); /* Change the background color on hover */
+}
+
+.bin-container-top::-webkit-scrollbar {
+  width: 8px;
+}
+
+.bin-container-top::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+@media (max-width: 767.98px) {
+  .info-container {
+    grid-template-columns: 1fr;
+    row-gap: 2vh;
+  }
+
+  .bin-container-top {
+    margin-left: 0;
     padding: 10px;
-    box-sizing: border-box;
-    scrollbar-width: thin;
-    transition: all 0.3s ease;
   }
-  
-  .music-title {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .music-item {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box; /* Ensure padding doesn't add to the width */
-  }
-  
-  .music-item h3 {
-    color: #333;
-    margin-bottom: 3px;
-    font-size: 16px;
-  }
-  
-  .music-item p {
-    color: #666;
-    margin-bottom: 6px;
-    font-size: 14px;
-  }
-  
-  .music-item a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-  .music-item:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .music-container::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .music-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2); 
-    border-radius: 4px;
-  }
-  
-  @media (max-width: 767.98px) {
-    .music-container {
-      height: auto; /* Adjust as needed for small screens */
-    }
-  }
-  
+}

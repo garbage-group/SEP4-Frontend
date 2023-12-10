@@ -12,25 +12,12 @@
   /* border: 1px solid black */
 }
 
-#first-info-box {
+/* #first-info-box {
   display: flex;
   align-items: center;
   background: linear-gradient(45deg, #ff8080, #80ff80);
-}
+} */
 
-.music-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin: 0 20px;
-}
-
-.music-note-icon {
-  font-size: 48px;
-  color: black;
-  margin: 0 10px;
-  animation: moveIcon 1.5s infinite alternate;
-}
 
 @keyframes moveIcon  {
   from {
