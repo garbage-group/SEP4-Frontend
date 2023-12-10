@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import Modal from "../components/Modal";
+
 
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
-// const BASE_URL = "http://localhost:8080";
 
 const BinContext = createContext();
 
@@ -17,36 +16,32 @@ function BinProvider({ children }) {
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
   const fetchInterval = 3600000; // 1 hour in milliseconds
-  const [isModalOpen, setIsModalOpen] = useState(true);
+ 
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  useEffect(function () {
+    let intervalId;
+    async function fetchBins() {
+   
+      try {
+   
+        setIsLoading(true);
+        const res = await fetch(`${BASE_URL}/bins`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        });
 
-
-  useEffect(
-    function () {
-      let intervalId;
-      
-      async function fetchBins() {
-        if (!isAuthenticated || !token) {
-          return;
+        if (!res.ok) {
+          throw new Error(`Failed to fetch bins. Status: ${res.status}`);
         }
-        try {
-          setIsLoading(true);
-          const res = await fetch(`${BASE_URL}/bins`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          const data = await res.json();
-          setBins(data);
-        } catch (e) {
-          alert(e.message);
-        } finally {
-          setIsLoading(false);
-        }
+        const data = await res.json();
+        setBins(data);
+      } catch (e) {
+        console.log(e.message);
+      } finally {
+        setIsLoading(false);
       }
+    }
       if (isAuthenticated) {
         fetchBins();
         intervalId = setInterval(fetchBins, fetchInterval);
@@ -75,20 +70,22 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (!res.ok) {
+        throw new Error(`Failed to fetch bin with binId ${id}. Status: ${res.status}`);
+      }
       const data = await res.json();
-      console.log(data);
+      
       setCurrentBin(data);
-    } catch {
-      return (
-        <Modal
-          isOpened={isModalOpen}
-          onClose={closeModal}
-        >{`There is no bin with bin Id: ${id}`}</Modal>
-      );
+
+    } catch(e) {
+        console.log(e.message);
+
+
     } finally {
       setIsLoading(false);
     }
   }
+
 
   //create new bin
   async function createBin(newBin) {
@@ -105,15 +102,43 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (!res.ok) {
+        throw new Error(`Failed to create a bin.Status: ${res.status}`);
+      }
       const data = await res.json();
       setBins((bins) => [...bins, data]);
-    } catch {
-      alert("There was an error creating bin");
+    } catch (e) {
+      console.log(e.message);
     } finally {
       setIsLoading(false);
     }
   }
 
+  async function activateBuzzer(id) {
+    if (!isAuthenticated || !token) {
+      return;
+    }
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/bins/${id}/buzzerActivate`, {
+        method: "POST",
+        body: JSON.stringify({binId: id}),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`Failed to activate a buzzer.Status: ${res.status}`);
+      }
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
   //delete bin by id
   async function deleteBin(id) {
     if (!isAuthenticated || !token) {
@@ -121,7 +146,7 @@ function BinProvider({ children }) {
     }
     try {
       setIsLoading(true);
-      await fetch(`${BASE_URL}/bins/delete/${id}`, {
+      await fetch(`${BASE_URL}/bins/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -147,12 +172,16 @@ function BinProvider({ children }) {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch humidity.Status: ${response.status}`);
+      }
+
       const humidityData = await response.json();
       setCurrentBinHumidity(humidityData);
     } catch (error) {
-      // console.error("Error fetching humidity data:", error);
-      alert(`Bin with id ${binId} not found!!!`);
-      // setErrorMSg(`Bin with id ${binId} not found!!!`);
+      console.error("Error fetching humidity data:", error);
+
     } finally {
       setIsLoading(false);
     }
@@ -182,14 +211,12 @@ function BinProvider({ children }) {
         },
       });
 
-      console.log("Request Payload:", JSON.stringify(newUpdatedBin));
 
       if (res.ok) {
         // If successful, update the currentBin value
         setCurrentBin(newUpdatedBin);
       }
     } catch (error) {
-      alert(error);
       console.error("Error updating bin:", error.message);
     } finally {
       setIsLoading(false);
@@ -208,7 +235,9 @@ function BinProvider({ children }) {
         createBin,
         deleteBin,
         updateBin,
+        activateBuzzer
         errorMsg,
+
       }}
     >
       {children}

@@ -5,6 +5,11 @@ import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
 import Modal from "../Modal";
+import { useNotifications } from "../../contexts/NotificationContext";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ErrorIcon from '@mui/icons-material/Error';
+import CircleIcon from '@mui/icons-material/Circle';
+import { Button } from "../Button";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -21,7 +26,7 @@ function Bin() {
   const [isDisabled, setIsDisabled] = useState(true);
 
   // Accessing functions and data from BinContext
-  const { getBin, updateBin, currentBin, isLoading } = useBins();
+  const { getBin, updateBin, currentBin, isLoading, activateBuzzer } = useBins();
 
   //extracting data from bin object;
   const {
@@ -33,6 +38,8 @@ function Bin() {
     longitude,
     fillLevels,
     humidity,
+    status,
+    pickUpTime
   } = currentBin;
 
   const [newFIllThreshold, setNewFillThreshold] = useState(
@@ -46,13 +53,12 @@ function Bin() {
     setIsModalOpen(false);
   };
 
-  /*   // Accessing functions and data from BinContext
-  const { getBin, currentBin, isLoading } = useBins(); */
 
   useEffect(() => {
     const fetchData = async () => {
       await getBin(id);
     };
+
 
     // Check if currentBin is available before setting initial state values
     if (currentBin) {
@@ -64,6 +70,8 @@ function Bin() {
     fetchData();
   }, [id, getBin, currentBin]);
 
+
+
   // Loading spinner while data is being fetched
   if (isLoading) {
     return <Spinner />;
@@ -72,6 +80,7 @@ function Bin() {
   //handle edit
   function handleEdit() {
     setIsDisabled(!isDisabled);
+
   }
 
   //handle save
@@ -114,17 +123,25 @@ function Bin() {
 
     updateBin(id, updatedBin);
     setIsModalOpen(true);
+
+
+  }
+
+  //buzzer
+  const handleBuzzer = async() =>{
+      await activateBuzzer(id);
+
   }
 
   return (
     <>
-       <Modal isOpened={isModalOpen} onClose={closeModal}>
+      <Modal isOpened={isModalOpen} onClose={closeModal}>
         <div className="savedImage">
           <img src={require("../../images/popUp/tick.gif")} alt="" />
         </div>
         <span>Data Updated</span>
+      </Modal>
 
-        </Modal>
       <div className="bin">
 
         {/* Displaying Bin Id */}
@@ -135,17 +152,6 @@ function Bin() {
             type="number"
             value={id}
             data-testid="binId"
-            readOnly
-          />
-        </div>
-
-        {/* Displaying Bin Capacity */}
-        <div className="row">
-          <h6>Capacity(Liter)</h6>
-          <input
-            className={"binInput binInput_disabled"}
-            value={capacity}
-            data-testid="capacity"
             readOnly
           />
         </div>
@@ -161,6 +167,40 @@ function Bin() {
           />
         </div>
 
+        {/* Displaying Bin Capacity */}
+        <div className="row">
+          <h6>Device Status</h6>
+          <label className="status">
+            {status === "ACTIVE" ? (
+              <span >
+                Active <CheckCircleIcon className="active" />
+              </span>
+            ) : status === "INACTIVE" ? (
+              <span >
+                  OFFLINE <CircleIcon className="offline" />
+              </span>
+            ) : (
+              <span >
+                    DEFECT <ErrorIcon className="defect" />
+              </span>
+            )}
+
+          </label>
+        </div>
+
+        {/* Displaying Bin Capacity */}
+        <div className="row">
+          <h6>Capacity(Liter)</h6>
+          <input
+            className={"binInput binInput_disabled"}
+            value={capacity}
+            data-testid="capacity"
+            readOnly
+          />
+        </div>
+
+
+
         {/* Displaying Fill Threshold */}
         <div className="row">
           <h6>Fill Threshold</h6>
@@ -172,28 +212,7 @@ function Bin() {
           />
         </div>
 
-        {/* Displaying Latitude and longitude */}
-        <div className="row">
-          <h6>Position</h6>
-          <label htmlFor="lat">Latitude</label>
-          <input
-            id="lat"
-            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
-            type="number"
-            value={`${isDisabled ? latitude : newLatitude}`}
-            onChange={(e) => setNewLatitude(e.target.value)}
-            data-testid="Latitude"
-          />
-          <label htmlFor="lng">Longitude</label>
-          <input
-            id="lng"
-            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
-            type="number"
-            value={`${isDisabled ? longitude : newLongitude}`}
-            onChange={(e) => setNewLongitude(e.target.value)}
-            data-testid="Longitude"
-          />
-        </div>
+
 
         {/* Displaying Last Emptied Time */}
         <div className="row">
@@ -201,6 +220,17 @@ function Bin() {
           <input
             className="binInput binInput_disabled"
             value={emptiedLast ? formatDate(emptiedLast) : "N/A"}
+            data-testid="emptiedLast"
+            readOnly
+          />
+        </div>
+
+        {/* Displaying Next Pick Up Time */}
+        <div className="row">
+          <h6>Next pick up on</h6>
+          <input
+            className="binInput binInput_disabled"
+            value={pickUpTime ? formatDate(pickUpTime) : "N/A"}
             data-testid="emptiedLast"
             readOnly
           />
@@ -253,24 +283,50 @@ function Bin() {
           )}
         </div>
 
+        {/* Displaying Latitude and longitude */}
+        <div className="row">
+          <h6>Position</h6>
+          <label htmlFor="lat">Latitude</label>
+          <input
+            id="lat"
+            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+            type="number"
+            value={`${isDisabled ? latitude : newLatitude}`}
+            onChange={(e) => setNewLatitude(e.target.value)}
+            data-testid="Latitude"
+          />
+          <label htmlFor="lng">Longitude</label>
+          <input
+            id="lng"
+            className={`binInput ${isDisabled ? "binInput_disabled" : ""}`}
+            type="number"
+            value={`${isDisabled ? longitude : newLongitude}`}
+            onChange={(e) => setNewLongitude(e.target.value)}
+            data-testid="Longitude"
+          />
+        </div>
+
         {/* Buttons for navigation and actions */}
         <div className="buttons-container">
           <BackButton className={"btn"}>&larr; Back </BackButton>
 
-          <div className="edit-save-button">
-            <button onClick={handleEdit} className="edit-button">
+        
+            <Button onClick={handleEdit} className="btn">
               Edit
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={handleSave}
-              className={`edit-button ${isDisabled ? "editbutton_disabled" : ""}`}
+              className={`btn  ${isDisabled ? "editbutton_disabled" : ""}`}
             >
               Save
-            </button>
-          </div>
+            </Button>
+
+            <Button onClick={handleBuzzer} className="btn">Buzzer</Button>
+          
         </div>
       </div>
     </>
+
   );
 }
 
