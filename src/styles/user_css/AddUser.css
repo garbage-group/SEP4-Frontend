@@ -1,4 +1,8 @@
-  .adduser-page-container {
+.usernameDisabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+ .adduser-page-container {
     position: relative;
     display: flex;
     justify-content: center;

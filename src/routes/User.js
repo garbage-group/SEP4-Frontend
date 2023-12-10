@@ -209,7 +209,6 @@ function Users() {
         selectedUser={selectedUser}
         setSelectedUser={setSelectedUser}
         showTitle={isAddUserClicked ? "Add User" : "Manage User"}
-        isManagingUser={!isAddUserClicked}
         canManageUser={currentUserRole === "municipality worker" ? true : false}
       />
     </div>

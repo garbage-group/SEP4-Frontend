@@ -87,19 +87,18 @@ export function UserManagementProvider({ children }) {
   
     // Validate that updatedUser has valid properties
     if (
-      updatedUser.fullname === undefined ||
-      updatedUser.region === undefined ||
-      updatedUser.password === undefined ||
-      updatedUser.repeatPassword === undefined
+      updatedUser.newFullName === undefined ||
+      updatedUser.newRegion === undefined ||
+      updatedUser.newPassword === undefined ||
+      updatedUser.newRepeatPassword === undefined
     ) {
       throw new Error("Invalid user data");
     }
   
     const newUpdatedUser = {
-      fullname: updatedUser.fullname,
-      region: updatedUser.region,
-      password: updatedUser.password,
-      repeatPassword: updatedUser.repeatPassword,
+      fullname: updatedUser.newFullName,
+      region: updatedUser.newRegion,
+      password: updatedUser.newPassword,
     };
   
     setIsLoading(true);
@@ -132,6 +131,7 @@ export function UserManagementProvider({ children }) {
       setIsLoading(false);
     }
   };
+  
   
   
   

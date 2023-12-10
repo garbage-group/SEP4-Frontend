@@ -9,7 +9,7 @@ import Modal from "../Modal.js";
 
 
 // AddUser component
-function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
+function AddUser({ selectedUser, showTitle, setSelectedUser }) {
   // Access the user management context
   const { addUser, isLoading, deleteUser, updateUser } = useUserManagement();
 
@@ -19,10 +19,19 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   const [region, setRegion] = useState("Horsens North");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [isManagingUser,setIsManagingUser] = useState(false);
+
+  const [newUsername, setNewUsername] = useState("");
+  const [newFullName, setNewFullName] = useState("");
+  const [newRegion, setNewRegion] = useState("Horsens North");
+  const [newPassword, setNewPassword] = useState("");
+  const [newRepeatPassword, setNewRepeatNewPassword] = useState("");
 
   // State variables for modal message and its visibility
   const [modalMessage, setModalMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isDisabled, setIsDisabled] = useState(true);
 
   // Default role for new users
   const USER_ROLE = "Garbage Collector";
@@ -106,21 +115,39 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   }
 
   useEffect(() => {
-    if (isManagingUser && selectedUser) {
+    if ( selectedUser) {
+      // setIsDisabled(true);
       setUsername(selectedUser.username);
-      setFullName(selectedUser.fullname);  // Use selectedUser.fullName directly
-      setRegion(selectedUser.region);
-      setPassword(selectedUser.password);
-      setRepeatPassword(selectedUser.password);  // Assuming repeatPassword should match password
+      setNewFullName(selectedUser.fullname);
+      setNewRegion(selectedUser.region);
+      setNewPassword(selectedUser.password);
+      setNewRepeatNewPassword(selectedUser.password);
+setIsManagingUser(true)
     } else {
+      setIsDisabled(false);
+      setIsManagingUser(false);
+      setSelectedUser(null);
       setUsername("");
       setFullName("");
       setRegion("Horsens North");
       setPassword("");
       setRepeatPassword("");
     }
-  }, [isManagingUser, selectedUser]);
+  }, [isManagingUser, selectedUser, isDisabled]);
   
+
+  function handleSaveClick() {
+    const updatedUser = {
+      username,
+      newFullName,
+      newRegion,
+      newPassword,
+      newRepeatPassword,
+    };
+  
+    updateUser(username, updatedUser);
+    setIsModalOpen(true);
+  }
 
   return (
     <div className="adduser-page-container">
@@ -136,7 +163,7 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)} className={` ${isManagingUser ? "usernameDisabled" : ""}`}
             />
           </div>
 
@@ -145,17 +172,17 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
             <input
               type="text"
               placeholder="Full Name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              value={`${isManagingUser ? newFullName : fullName}`}
+              onChange={(e) => isManagingUser ? setNewFullName(e.target.value): setFullName(e.target.value)} className={` ${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
 
           <div className="input-text">
             <img src={pencilIcon} alt="Region Icon" />
             <select
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-              className="region-select"
+              value={`${isManagingUser ? newRegion : region}`}
+              onChange={(e) => isManagingUser ? setNewRegion(e.target.value): setRegion(e.target.value)} className={`region-select ${isDisabled ? "usernameDisabled" : ""}`}
+              
             >
               <option value="Horsens North">Horsens North</option>
               <option value="Horsens South">Horsens South</option>
@@ -169,8 +196,8 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
             <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={`${isManagingUser ? newPassword : password}`}
+              onChange={(e) => isManagingUser ? setNewPassword(e.target.value): setPassword(e.target.value)} className={` ${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
 
@@ -179,24 +206,19 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
             <input
               type="password"
               placeholder="Repeat Password"
-              value={repeatPassword}
-              onChange={(e) => setRepeatPassword(e.target.value)}
+              value={`${isManagingUser ? newRepeatPassword : repeatPassword}`}
+              onChange={(e) => isManagingUser ? setNewRepeatNewPassword(e.target.value): setRepeatPassword(e.target.value)}className={`${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
           <div>
             {isManagingUser ? (
               <ManageUserButtons
                 handleDeleteClick={handleDeleteClick}
+                handleSaveClick = {handleSaveClick}
                 selectedUser={selectedUser}
                 setEditing={setSelectedUser}  // Pass setSelectedUser instead of setEditing
-                updateUser={updateUser}
-                username={username}
-                userData={{
-                  fullname: fullName,
-                  region: region,
-                  password: password,
-                  repeatPassword: repeatPassword,
-                }}
+                onSaveClick = {handleSaveClick}
+                setIsDisabled = {setIsDisabled}
               />
             ) : (
               <AddUserButton
@@ -215,48 +237,34 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
   );
 }
 
-function ManageUserButtons({ handleDeleteClick, selectedUser, setEditing, updateUser, username, userData }) {
-  const [isEditing, setIsEditing] = useState(false);
+function ManageUserButtons({ handleDeleteClick, selectedUser, setEditing, updateUser, setIsDisabled, onSaveClick }) {
  
   const isRemoveButtonDisabled = !selectedUser;
  
   const handleEditClick = () => {
-    setIsEditing(true);
-    setEditing(true);
-  };
+setIsDisabled(false) };
  
   const handleSaveClick = () => {
-    setIsEditing(false);
-    setEditing(false);
-  
-    // Log the values for debugging
-    console.log("Username:", username);
-    console.log("UserData:", userData);
-  
-    updateUser(username, userData);
+    onSaveClick();
+    setIsDisabled(true)
   };
   
  
   return (
 <div className="manage-user-buttons-container">
-      {isEditing ? (
 <Button className="adduser-signup-btn" onClick={handleSaveClick}>
           Save
 </Button>
-      ) : (
-<>
+       
 <Button className="adduser-signup-btn" onClick={handleEditClick} disabled={isRemoveButtonDisabled}>
             Edit
 </Button>
 <Button
             className={`adduser-signup-btn ${isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""}`}
             onClick={handleDeleteClick}
-            disabled={isEditing} // Example of using isEditing state
 >
             Remove
 </Button>
-</>
-      )}
 </div>
   );
 }
