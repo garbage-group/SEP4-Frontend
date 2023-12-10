@@ -45,7 +45,7 @@ function BinProvider({ children }) {
         setIsLoading(false);
       }
     }
-      if (isAuthenticated) {
+      if (isAuthenticated && token) {
         fetchBins();
         intervalId = setInterval(fetchBins, fetchInterval);
       }

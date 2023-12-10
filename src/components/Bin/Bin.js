@@ -10,6 +10,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Button } from "../Button";
+import { is } from "@react-spring/shared";
+import { isA } from "@jest/expect-utils";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -57,13 +59,13 @@ function Bin() {
 
 
   useEffect(() => {
-    if (!isAuthenticated || !token) {
-      return;
-    }
-    const fetchData = async () => {
-      await getBin(id);
-    };
+    if(isAuthenticated && token) {
 
+      const fetchData = async () => {
+        await getBin(id);
+      };
+      fetchData();
+    }
 
     // Check if currentBin is available before setting initial state values
     if (currentBin) {
@@ -72,9 +74,8 @@ function Bin() {
       setNewLongitude(currentBin.longitude ?? 0);
     }
 
-    fetchData();
+  
   }, [id, getBin, currentBin, isAuthenticated, token]);
-
 
 
   // Loading spinner while data is being fetched
