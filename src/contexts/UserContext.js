@@ -87,10 +87,10 @@ export function UserManagementProvider({ children }) {
   
     // Validate that updatedUser has valid properties
     if (
+      updatedUser.username === undefined ||
       updatedUser.newFullName === undefined ||
       updatedUser.newRegion === undefined ||
-      updatedUser.newPassword === undefined ||
-      updatedUser.newRepeatPassword === undefined
+      updatedUser.newPassword === undefined 
     ) {
       throw new Error("Invalid user data");
     }
@@ -101,7 +101,7 @@ export function UserManagementProvider({ children }) {
       region: updatedUser.newRegion,
       password: updatedUser.newPassword,
     };
-  
+
     setIsLoading(true);
   
     try {
@@ -132,7 +132,6 @@ export function UserManagementProvider({ children }) {
       setIsLoading(false);
     }
   };
-  
   
   
   
