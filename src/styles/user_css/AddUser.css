@@ -32,6 +32,7 @@
   }
 
 
+
   .adduser-inputs,
   .input-text {
     width: 100%;
@@ -70,14 +71,20 @@
     /* Include padding in width calculation */
   }
 
-  /* Sign up button */
-  .adduser-signup-btn {
-    width: 40%;
+  /* Container for both buttons */
+  .adduser-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+
+  .adduser-signup-btn,
+  .adduser-reset-btn {
+    width: calc(50% - 5px);
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
     border: none;
     border-radius: 6px;
     background-color: #133A64;
@@ -85,7 +92,6 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block;
   }
 
   .adduser-signup-btn:hover {

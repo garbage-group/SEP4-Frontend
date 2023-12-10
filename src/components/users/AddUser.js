@@ -91,6 +91,15 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
     }
   }
 
+  // Function to Reset all variables
+  function handleReset() {
+    setUsername("");
+    setFullName("");
+    setRegion("Horsens North"); // Default to the first option or any other default value you want
+    setPassword("");
+    setRepeatPassword("");
+  }
+
   return (
     <div className="adduser-page-container">
       <div className="adduser-background"></div>
@@ -171,6 +180,7 @@ function AddUser({ selectedUser, showTitle, isManagingUser, setSelectedUser }) {
             ) : (
               <AddUserButton
                 handleAddUser={handleAddUser}
+                handleReset={handleReset}
                 isLoading={isLoading}
               />
             )}
@@ -193,9 +203,8 @@ function ManageUserButtons({ handleDeleteClick, selectedUser }) {
       <Button className="adduser-signup-btn">Edit</Button>
       <Button className="adduser-signup-btn">Save</Button>
       <Button
-        className={`adduser-signup-btn ${
-          isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""
-        }`}
+        className={`adduser-signup-btn ${isRemoveButtonDisabled ? "adduser-signup-btn_disabled" : ""
+          }`}
         onClick={handleDeleteClick}
       >
         Remove
@@ -205,9 +214,9 @@ function ManageUserButtons({ handleDeleteClick, selectedUser }) {
 }
 
 // AddUserButton component
-function AddUserButton({ handleAddUser, isLoading }) {
+function AddUserButton({ handleAddUser, handleReset, isLoading }) {
   return (
-    <div>
+    <div className="adduser-buttons-container">
       <Button
         onClick={handleAddUser}
         disabled={isLoading}
@@ -215,8 +224,17 @@ function AddUserButton({ handleAddUser, isLoading }) {
       >
         {isLoading ? "Signing up" : "Sign Up"}
       </Button>
+      <Button
+        onClick={handleReset}
+        className="adduser-reset-btn"
+      >
+        Cancel
+      </Button>
     </div>
   );
 }
+
+
+
 
 export { AddUser };
