@@ -6,124 +6,136 @@ import { useNavigate } from "react-router-dom";
 import { useBins } from "../../contexts/BinContext";
 
 function BinForm() {
-  // State hooks for form inputs and necessary values
+    // State hooks for form inputs and necessary values
 
-  const [mapLat, mapLng] = useURLPosition();
-  const [formError, setFormError] = useState("");
-  const [capacity, setCapacity] = useState("");
-  const [threshold, setThreshold] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-  const { createBin } = useBins();
-  const navigate = useNavigate();
+    const [mapLat, mapLng] = useURLPosition();
+    const [formError, setFormError] = useState("");
+    const [capacity, setCapacity] = useState("");
+    const [threshold, setThreshold] = useState("");
+    const [lat, setLat] = useState("");
+    const [lng, setLng] = useState("");
+    const { createBin } = useBins();
+    const navigate = useNavigate();
 
-  useEffect(
-    function () {
-      if (mapLat && mapLng) {
-        setLat(mapLat);
-        setLng(mapLng);
-      }
-    },
-    [mapLat, mapLng]
-  );
+    useEffect(
+        function () {
+            if (mapLat && mapLng) {
+                setLat(mapLat);
+                setLng(mapLng);
+            }
+        },
+        [mapLat, mapLng]
+    );
 
-  // Handling form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Handling form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    // Creating a new bin object
-    const newBin = {
-      capacity,
-      fillThreshold: threshold,
-      latitude: lat,
-      longitude: lng,
-    };
+        // Creating a new bin object
+        const newBin = {
+            capacity,
+            fillThreshold: threshold,
+            latitude: lat,
+            longitude: lng,
+        };
 
-    // Validating form data before submitting
-    if (capacity && threshold && lat && lng) {
-      await createBin(newBin);
-      navigate("/bins/binList");
-    } else {
+        // Validating form data before submitting
+        if (capacity && threshold && lat && lng) {
+            await createBin(newBin);
+            navigate("/bins/binList");
+        } else {
       /* return (
         <p data-testid="form-submission-failed">
           Form submission failed. Please fill in all the required fields.
         </p>
       ); */ setFormError(
-        "Form submission failed. Please fill in all the required fields."
-      );
+            "Form submission failed. Please fill in all the required fields."
+        );
+        }
+    };
+
+    //handle cancel button
+    const handleCancel = (e) => {
+        e.preventDefault();
+        setCapacity("");
+        setThreshold("");
+        setLat("");
+        setLng("");
     }
-  };
 
-  return (
-    <form className="binForm" onSubmit={(e) => handleSubmit(e)}>
-      {/* Form Section: Capacity and Fill Threshold */}
-      <div className="row1">
-        <div className="binRow">
-          <label htmlFor="capacity">Capacity</label>
-          <input
-            id="capacity"
-            type="number"
-            min={0}
-            placeholder="Bin capacity..."
-            required
-            value={capacity}
-            onChange={(e) => setCapacity(e.target.value)}
-          />
-        </div>
+    return (
+        <form className="binForm" onSubmit={(e) => handleSubmit(e)}>
+            {/* Form Section: Capacity and Fill Threshold */}
+            <div className="row1">
+                <div className="binRow">
+                    <label htmlFor="capacity">Capacity</label>
+                    <input
+                        id="capacity"
+                        type="number"
+                        min={0}
+                        placeholder="Bin capacity..."
+                        required
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                    />
+                </div>
 
-        <div className="binRow">
-          <label htmlFor="threshold">Fill Threshold</label>
-          <input
-            id="threshold"
-            type="number"
-            max={100}
-            min={0}
-            placeholder="Bin threshold..."
-            required
-            value={threshold}
-            onChange={(e) => setThreshold(e.target.value)}
-            className="binForm_input"
-          />
-        </div>
-      </div>
+                <div className="binRow">
+                    <label htmlFor="threshold">Fill Threshold</label>
+                    <input
+                        id="threshold"
+                        type="number"
+                        max={100}
+                        min={0}
+                        placeholder="Bin threshold..."
+                        required
+                        value={threshold}
+                        onChange={(e) => setThreshold(e.target.value)}
+                        className="binForm_input"
+                    />
+                </div>
+            </div>
 
-      {/* Form Section: Latitude and Longitude */}
-      <div className="row2">
-        <div className="binRow">
-          <label htmlFor="latitude">Latitude</label>
-          <input
-            id="latitude"
-            type="number"
-            placeholder="Enter latitude..."
-            required
-            value={lat}
-            onChange={(e) => setLat(e.target.value)}
-          />
-        </div>
+            {/* Form Section: Latitude and Longitude */}
+            <div className="row2">
+                <div className="binRow">
+                    <label htmlFor="latitude">Latitude</label>
+                    <input
+                        id="latitude"
+                        type="number"
+                        placeholder="Enter latitude..."
+                        required
+                        value={lat}
+                        onChange={(e) => setLat(e.target.value)}
+                    />
+                </div>
 
-        <div className="binRow">
-          <label htmlFor="longitude">Longitude</label>
-          <input
-            id="longitude"
-            type="number"
-            placeholder="Enter longitude..."
-            required
-            value={lng}
-            onChange={(e) => setLng(e.target.value)}
-          />
-        </div>
-      </div>
+                <div className="binRow">
+                    <label htmlFor="longitude">Longitude</label>
+                    <input
+                        id="longitude"
+                        type="number"
+                        placeholder="Enter longitude..."
+                        required
+                        value={lng}
+                        onChange={(e) => setLng(e.target.value)}
+                    />
+                </div>
+            </div>
 
-      {/* Form Submission Buttons */}
-      <div className="binButtons">
-        <button className={"btn"}>Add</button>
-        <BackButton className={"btn"}>&larr; Back </BackButton>
-      </div>
+            {/* Form Submission Buttons */}
+            <div className="binButtons">
+                <div className="addCancel">
+                    <button className={"btn"}>Add</button>
+                    <button className={"btn"} onClick={handleCancel}>Cancel</button>
+                </div>
+                <BackButton className={"btn"}>&larr; Back </BackButton>
+            </div>
 
-      {/* Conditionally render the error message */}
-      {formError && <p data-testid="form-submission-failed">{formError}</p>}
-    </form>
-  );
+            {/* Conditionally render the error message */}
+            {formError && <p data-testid="form-submission-failed">{formError}</p>}
+        </form>
+    );
 }
 
 export default BinForm;
