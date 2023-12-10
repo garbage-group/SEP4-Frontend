@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Pagination } from "@mui/material";
+import { Button } from "@mui/material";
+
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
+import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
 
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
+
+/* import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined"; */
+// import RefreshIcon from "@mui/icons-material/Refresh";
+
 import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
-import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
+import { ListPagination } from "../components/utils/ListPagination";
 
 import "../styles/user_css/User.css";
-import { ListPagination } from "../components/utils/ListPagination";
 
 // UserListContainer component
 function UserListContainer({ onAddUserClick }) {

@@ -5,6 +5,7 @@ import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import "../../styles/Bin_css/BinNav.css";
 function BinNav() {
     const [activeLink, setActiveLink] = useState('binList');
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const role = localStorage.getItem("role");

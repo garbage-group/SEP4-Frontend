@@ -38,7 +38,7 @@ export function Sidebar() {
 
         <NavItem
           to="/map"
-          linkText="Map"
+          linkText="Plan Route"
           icon={<MapOutlinedIcon />}
           className="nav-element"
         />

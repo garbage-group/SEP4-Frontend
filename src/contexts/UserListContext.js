@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { React, createContext, useContext, useEffect, useState } from "react";
-// import { useQuery } from "react-query";
-// import { BASE_URL } from "../contexts/BinContext";
+import { BASE_URL } from "../contexts/BinContext";
 
 export const UserContext = createContext();
-const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
+// const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 function UserListProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
