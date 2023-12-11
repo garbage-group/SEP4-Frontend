@@ -5,7 +5,7 @@ import { useBins } from '../../contexts/BinContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import GreenBinImage from "../../images/bin-icon.png";
 import RedBinImage from "../../images/bin-icon-full.png";
-
+import Modal from "../Modal";
 
 const center = {
     lat: 55.86352,
@@ -22,6 +22,8 @@ const GoogleMapComponent = () => {
     const [autocomplete, setAutocomplete] = useState(null);
     const [mapRefreshKey, setMapRefreshKey] = useState(0);
     const [mapReady, setMapReady] = useState(false);
+    const [startLocationError, setStartLocationError] = useState(false);
+    const [selectedBinsError, setSelectedBinsError] = useState(false);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -50,6 +52,28 @@ const GoogleMapComponent = () => {
 
     const handleDirectionsSubmit = (event) => {
         event.preventDefault();
+
+        //Errors
+        // Check if start address is empty
+        if (!startAddress) {
+            setStartLocationError(true);
+            setSelectedBinsError(false);
+            return;
+        }
+
+        // Check if at least one bin is selected
+        if (selectedBins.length === 0) {
+            setSelectedBinsError(true);
+            setStartLocationError(false);
+            return;
+        }
+
+        // Clear any previous errors
+        setStartLocationError(false);
+        setSelectedBinsError(false);
+
+        //If no Errors present, proceed to the next step
+
         if (!startAddress || selectedBins.length === 0) return;
 
         const waypoints = selectedBins.map(bin => ({ location: { lat: bin.latitude, lng: bin.longitude } }));
@@ -68,6 +92,9 @@ const GoogleMapComponent = () => {
                 window.alert('Directions request failed due to ' + status);
             }
         });
+
+
+
     };
 
     const resetDirections = () => {
@@ -118,6 +145,11 @@ const GoogleMapComponent = () => {
                             onChange={(e) => setStartAddress(e.target.value)}
                         />
                     </Autocomplete>
+                    {/* Display start location error modal */}
+                    <Modal isOpened={startLocationError} onClose={() => setStartLocationError(false)}>
+                        Please enter a start location.
+                    </Modal>
+
                     <button className="directions-button" type="submit">Get Directions</button>
                     <button className="directions-button" type="button" onClick={resetDirections}>Reset</button>
                 </form>
@@ -129,6 +161,10 @@ const GoogleMapComponent = () => {
                             <button className="remove-button" onClick={() => toggleBinSelection(bin)}>Remove</button>
                         </div>
                     ))}
+                    {/* Display selected bins error modal */}
+                    <Modal isOpened={selectedBinsError} onClose={() => setSelectedBinsError(false)}>
+                        Please select at least one bin.
+                    </Modal>
                 </div>
             </div>
             <div className="google-map-container">
