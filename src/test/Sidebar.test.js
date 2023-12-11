@@ -2,10 +2,10 @@ import React from "react";
 
 // Importing testing utilities and dependencies
 import "@testing-library/jest-dom";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Sidebar } from "../components/Sidebar";
 import { MemoryRouter } from "react-router-dom";
-import { createMemoryHistory } from "@remix-run/router";
+// import { createMemoryHistory } from "@remix-run/router";
 
 // Test suite for the Sidebar component
 describe("Sidebar Component", () => {
@@ -25,7 +25,7 @@ describe("Sidebar Component", () => {
     expect(screen.getByText(/Overview/i)).toBeInTheDocument();
     expect(screen.getByText(/User/i)).toBeInTheDocument();
     expect(screen.getByText(/Bins/i)).toBeInTheDocument();
-    expect(screen.getByText(/Map/i)).toBeInTheDocument();
+    expect(screen.getByText(/Plan Route/i)).toBeInTheDocument();
     expect(screen.getByText(/Analytics/i)).toBeInTheDocument();
   });
 
