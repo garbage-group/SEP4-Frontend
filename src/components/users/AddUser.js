@@ -104,9 +104,8 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
       showModal(error.message);
     }
   }
-
-  // Function to Reset all variables
-  function handleReset() {
+   // Function to Reset all variables
+   function handleReset() {
     setUsername("");
     setFullName("");
     setRegion("Horsens North");
@@ -114,6 +113,8 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
     setRepeatPassword("");
     setSelectedUser(null); 
   }
+
+ 
 
   useEffect(() => {
     if ( selectedUser && isManagingUser) {
