@@ -243,7 +243,7 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
                 handleDeleteClick={handleDeleteClick}
                 handleSaveClick = {handleSaveClick}
                 selectedUser={selectedUser}
-                setEditing={setSelectedUser}  // Pass setSelectedUser instead of setEditing
+                // setEditing={setSelectedUser}  // Pass setSelectedUser instead of setEditing
                 onSaveClick = {handleSaveClick}
                 handleOnEditClick = {handleOnEditClick}
               />

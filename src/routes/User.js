@@ -32,6 +32,7 @@ function UserListContainer({
   useEffect(() => {
     // Update the role when it changes in localStorage
     setCurrentUserRole(localStorage.getItem("role"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddButtonClick = () => {

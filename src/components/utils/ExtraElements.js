@@ -1,5 +1,5 @@
 import React from "react";
-import { Chip, IconButton } from "@mui/material";
+import { Chip } from "@mui/material";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 /* import PersonRemoveOutlinedIcon from "@mui/icons-material/PersonRemoveOutlined";
