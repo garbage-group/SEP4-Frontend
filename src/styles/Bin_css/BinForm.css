@@ -45,7 +45,8 @@
 
 .binButtons {
   display: flex;
-  gap: 5vw;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .btn {
@@ -66,6 +67,15 @@
 .btn:hover {
   background-color: #00c46a;
   color: #143A63;
+}
+
+.addCancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-left: -1.7rem;
+
 }
 
 /*small devices and down*/

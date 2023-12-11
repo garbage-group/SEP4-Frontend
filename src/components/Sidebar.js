@@ -19,7 +19,7 @@ export function Sidebar() {
           to="/overview"
           linkText="Overview"
           icon={<HomeOutlinedIcon />}
-          className="nav-element"
+          className="nav-element overview"
         />
 
         <NavItem
@@ -38,7 +38,7 @@ export function Sidebar() {
 
         <NavItem
           to="/map"
-          linkText="Map"
+          linkText="Plan Route"
           icon={<MapOutlinedIcon />}
           className="nav-element"
         />

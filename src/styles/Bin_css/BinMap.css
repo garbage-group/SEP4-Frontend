@@ -3,6 +3,7 @@
   height: 100%;
   position: relative;
   border-radius: 10px;
+  z-index: 1;
 }
 
 .map {
@@ -29,5 +30,10 @@
 
 .leaflet-popup .leaflet-popup-tip {
   background-color: #00c46a;
+}
+
+.errorIcon{
+  color: red !important;
+ 
 }
 

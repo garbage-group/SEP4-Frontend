@@ -46,7 +46,6 @@ const MapOverview = () => {
               Capacity: {bin.capacity ? `${bin.capacity} Liters` : 'N/A'} <br />
               Fill Threshold: {bin.fillThreshold ? `${bin.fillThreshold}%` : 'N/A'} <br />
               Last Emptied Time: {bin.emptiedLast ? formatDateAndTime(bin.emptiedLast) : 'N/A'} <br />
-              Last Pickup Time: {bin.pickUpTime ? formatDateAndTime(bin.pickUpTime) : 'N/A'} <br />
             </div>
 
             <div className="data-section">
@@ -63,11 +62,10 @@ const MapOverview = () => {
               <div className="data-section">
                 Fill Threshold reached: {formatDateAndTime(notifications.find((notification) => notification.binId === bin.id).timestamp)}
                 <br />
-                Scheduled Pickup Time: {formatDateAndTime(notifications.find((notification) => notification.binId === bin.id).scheduledPickupTime)}
+                Scheduled Pickup Time: {bin.pickUpTime ? formatDateAndTime(bin.pickUpTime) : 'N/A'} <br />
               </div>
             )}
 
-            <a href={`/map?lat=${bin.latitude}&lng=${bin.longitude}`}>Directions to this Bin</a>
           </Popup>
         </Marker>
       ))}

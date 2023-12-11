@@ -1,5 +1,19 @@
-.map-container {
+.map-page-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 150px);
+    /* Adjust this value to account for header and footer */
     width: 100%;
-    height: 100%;
-    border-radius: 10px;
+    overflow: auto;
+    /* Use auto instead of hidden to allow scrolling */
+}
+
+/* Ensure the GoogleMapComponent takes all available space */
+.google-map-component-container {
+    /* Removed flex-grow: 1; */
+    width: 100%;
+    /* Full width */
+    position: relative;
+    /* Positioning context for the map */
+    /* Set a max-height if necessary, or adjust flexbox settings */
 }

@@ -34,3 +34,8 @@
 .nav a:global(.active) {
   background-color: var(--primary);
 }
+
+.errorIcon{
+  color: red !important;
+ 
+}
