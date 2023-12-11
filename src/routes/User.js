@@ -70,7 +70,7 @@ function UserListContainer({
       />
 
       {/* Render list footer with pagination */}
-      <div className="list-footer">
+      <div className="list-footer" data-testid="user-list-footer">
         <ListPagination
           totalItems={filteredUsers ? filteredUsers.length : 0}
           itemsPerPage={itemsPerPage}

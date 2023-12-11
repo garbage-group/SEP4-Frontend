@@ -1,16 +1,16 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
-// import React from "react";
+import React from "react";
 import "@testing-library/jest-dom";
-/* import {
+import {
   render,
   waitFor,
   screen,
   fireEvent,
   within,
-} from "@testing-library/react"; */
+} from "@testing-library/react";
 
 import { useUserListContext } from "../../contexts/UserListContext.js";
-// import { Users } from "../../routes/User.js";
+import { Users } from "../../routes/User.js";
 import { useUserManagement } from "../../contexts/UserContext.js";
 
 jest.mock("../../contexts/UserListContext.js");
@@ -24,13 +24,13 @@ jest.mock("react-router-dom", () => ({
 }));
 
 const mockUsers = [
-  { username: "collector1", fullname: "Collector One" },
-  { username: "collector2", fullname: "Collector Two" },
-  { username: "collector3", fullname: "Collector Three" },
-  { username: "collector4", fullname: "Collector Four" },
-  { username: "collector5", fullname: "Collector Five" },
-  { username: "collector6", fullname: "Collector Six" },
-  { username: "collector7", fullname: "Collector Seven" },
+  { username: "collector1", fullname: "Collector One", role: "Garbage Collector" },
+  { username: "collector2", fullname: "Collector Two" , role: "Garbage Collector" },
+  { username: "collector3", fullname: "Collector Three", role: "Garbage Collector"  },
+  { username: "collector4", fullname: "Collector Four", role: "Garbage Collector"  },
+  { username: "collector5", fullname: "Collector Five", role: "Garbage Collector"  },
+  { username: "collector6", fullname: "Collector Six" , role: "Garbage Collector" },
+  { username: "collector7", fullname: "Collector Seven" , role: "Garbage Collector" },
 ];
 
 describe("User List Container", () => {
@@ -47,8 +47,10 @@ describe("User List Container", () => {
 
   });
 
-  /* it("renders only six users", async () => {
-    localStorage.setItem("role", "Municipality Worker");
+  it("renders only six users", async () => {
+    // localStorage.setItem("role", "municipality worker");
+
+    console.log(mockUsers);
 
     render(<Users />);
 
@@ -65,9 +67,9 @@ describe("User List Container", () => {
       // collector seven should not be rendered since only six users in displayed on page 1
       expect(screen.queryByText("Collector Seven")).not.toBeInTheDocument();
     });
-  }); */
+  });
 
-  /* it("change the page when the pagination component is interacted with", async () => {
+  it("change the page when the pagination component is interacted with", async () => {
     localStorage.setItem("role", "Municipality Worker");
     render(<Users />);
 
@@ -81,5 +83,5 @@ describe("User List Container", () => {
     // collector seven should  be rendered now since page is changed to 2
     expect(screen.getByText("Collector Seven")).toBeInTheDocument();
     expect(screen.queryByText("Collector Two")).not.toBeInTheDocument();
-  }); */
+  });
 });
