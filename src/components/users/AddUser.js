@@ -7,9 +7,9 @@ import { Button } from "../Button";
 import { useUserManagement } from "../../contexts/UserContext";
 import Modal from "../Modal.js";
 
-
 // AddUser component
-function AddUser({ selectedUser, showTitle, setSelectedUser }) {
+function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
+
   // Access the user management context
   const { addUser, isLoading, deleteUser, updateUser } = useUserManagement();
 
@@ -19,9 +19,6 @@ function AddUser({ selectedUser, showTitle, setSelectedUser }) {
   const [region, setRegion] = useState("Horsens North");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [isManagingUser,setIsManagingUser] = useState(false);
-
-  const [newUsername, setNewUsername] = useState("");
   const [newFullName, setNewFullName] = useState("");
   const [newRegion, setNewRegion] = useState("Horsens North");
   const [newPassword, setNewPassword] = useState("");
@@ -53,7 +50,12 @@ function AddUser({ selectedUser, showTitle, setSelectedUser }) {
     try {
       await deleteUser(selectedUser.username);
       showModal(`Successfully deleted: ${selectedUser.username}`);
-      setSelectedUser(null);
+      setUsername("");
+      setNewFullName("");
+      setNewRegion("Horsens North");
+      setNewPassword("");
+      setNewRepeatNewPassword("");
+      setSelectedUser(null); // Clear selected user after action completion
     } catch (error) {
       console.error("Error deleting user:", error.message);
     }
@@ -82,15 +84,14 @@ function AddUser({ selectedUser, showTitle, setSelectedUser }) {
       region,
     };
 
+    console.log(userData);
+
     try {
       // If in edit mode, update the user; otherwise, add a new user
-      if (isManagingUser) {
-        await updateUser(selectedUser.username, userData);
-        showModal(`Successfully updated: ${username}`);
-      } else {
+  
         await addUser(userData);
         showModal(`Successfully signed up: ${username}`);
-      }
+  
 
       // Reset form after successful signup or update
       setUsername("");
@@ -111,21 +112,19 @@ function AddUser({ selectedUser, showTitle, setSelectedUser }) {
     setRegion("Horsens North");
     setPassword("");
     setRepeatPassword("");
-    setSelectedUser(null); // Clear selected user on reset
+    setSelectedUser(null); 
   }
 
   useEffect(() => {
-    if ( selectedUser) {
-      // setIsDisabled(true);
+    if ( selectedUser && isManagingUser) {
+      setIsDisabled(true);
       setUsername(selectedUser.username);
       setNewFullName(selectedUser.fullname);
       setNewRegion(selectedUser.region);
       setNewPassword(selectedUser.password);
       setNewRepeatNewPassword(selectedUser.password);
-setIsManagingUser(true)
     } else {
-      setIsDisabled(false);
-      setIsManagingUser(false);
+      setIsDisabled(false)
       setSelectedUser(null);
       setUsername("");
       setFullName("");
@@ -133,10 +132,25 @@ setIsManagingUser(true)
       setPassword("");
       setRepeatPassword("");
     }
-  }, [isManagingUser, selectedUser, isDisabled]);
+  }, [isManagingUser, selectedUser, setIsDisabled]);
+
+   function handleOnEditClick()
+   {
+    setIsDisabled(false);
+   }
   
 
   function handleSaveClick() {
+    if (!username || !newFullName || !newRegion || !newPassword || !newRepeatPassword) {
+      showModal("Please fill in all fields.");
+      return;
+    }
+
+    // Check if passwords match
+    if (password !== repeatPassword) {
+      showModal("Passwords do not match. Please re-enter your passwords.");
+      return;
+    }
     const updatedUser = {
       username,
       newFullName,
@@ -146,7 +160,13 @@ setIsManagingUser(true)
     };
   
     updateUser(username, updatedUser);
-    setIsModalOpen(true);
+    showModal(`Successfully updated: ${username}`);
+    setUsername("");
+    setNewFullName("");
+    setNewRegion("Horsens North");
+    setNewPassword("");
+    setNewRepeatNewPassword("");
+    setSelectedUser(null); // Clear selected user after action completion
   }
 
   return (
@@ -163,6 +183,7 @@ setIsManagingUser(true)
               type="text"
               placeholder="Username"
               value={username}
+              required
               onChange={(e) => setUsername(e.target.value)} className={` ${isManagingUser ? "usernameDisabled" : ""}`}
             />
           </div>
@@ -173,6 +194,7 @@ setIsManagingUser(true)
               type="text"
               placeholder="Full Name"
               value={`${isManagingUser ? newFullName : fullName}`}
+              required
               onChange={(e) => isManagingUser ? setNewFullName(e.target.value): setFullName(e.target.value)} className={` ${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
@@ -181,6 +203,7 @@ setIsManagingUser(true)
             <img src={pencilIcon} alt="Region Icon" />
             <select
               value={`${isManagingUser ? newRegion : region}`}
+              required
               onChange={(e) => isManagingUser ? setNewRegion(e.target.value): setRegion(e.target.value)} className={`region-select ${isDisabled ? "usernameDisabled" : ""}`}
               
             >
@@ -197,6 +220,7 @@ setIsManagingUser(true)
               type="password"
               placeholder="Password"
               value={`${isManagingUser ? newPassword : password}`}
+              required
               onChange={(e) => isManagingUser ? setNewPassword(e.target.value): setPassword(e.target.value)} className={` ${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
@@ -207,6 +231,7 @@ setIsManagingUser(true)
               type="password"
               placeholder="Repeat Password"
               value={`${isManagingUser ? newRepeatPassword : repeatPassword}`}
+              required
               onChange={(e) => isManagingUser ? setNewRepeatNewPassword(e.target.value): setRepeatPassword(e.target.value)}className={`${isDisabled ? "usernameDisabled" : ""}`}
             />
           </div>
@@ -218,7 +243,7 @@ setIsManagingUser(true)
                 selectedUser={selectedUser}
                 setEditing={setSelectedUser}  // Pass setSelectedUser instead of setEditing
                 onSaveClick = {handleSaveClick}
-                setIsDisabled = {setIsDisabled}
+                handleOnEditClick = {handleOnEditClick}
               />
             ) : (
               <AddUserButton
@@ -237,16 +262,15 @@ setIsManagingUser(true)
   );
 }
 
-function ManageUserButtons({ handleDeleteClick, selectedUser, setEditing, updateUser, setIsDisabled, onSaveClick }) {
+function ManageUserButtons({ handleDeleteClick, selectedUser, handleOnEditClick, onSaveClick }) {
  
   const isRemoveButtonDisabled = !selectedUser;
  
   const handleEditClick = () => {
-setIsDisabled(false) };
+    handleOnEditClick() };
  
   const handleSaveClick = () => {
     onSaveClick();
-    setIsDisabled(true)
   };
   
  

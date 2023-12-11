@@ -28,6 +28,7 @@ function UserListContainer({
 
   const itemsPerPage = 6;
 
+
   useEffect(() => {
     // Update the role when it changes in localStorage
     setCurrentUserRole(localStorage.getItem("role"));
@@ -182,18 +183,21 @@ function Users() {
   const [isAddUserClicked, setIsAddUserClicked] = useState(true);
   const [currentUserRole, setCurrentUserRole] = useState(
     localStorage.getItem("role")
-  );
+  );  const [isManagingUser,setIsManagingUser] = useState(false);
+
 
   const { fetchUserByUsername } = useUserManagement();
 
   const handleToggleAddUser = () => {
     setIsAddUserClicked(true);
+    setIsManagingUser(false)
   };
 
   async function handleUserClick(username) {
     const user = await fetchUserByUsername(username);
     setSelectedUser(user);
     setIsAddUserClicked(false);
+    setIsManagingUser(true)
   }
 
   return (
@@ -210,6 +214,7 @@ function Users() {
         setSelectedUser={setSelectedUser}
         showTitle={isAddUserClicked ? "Add User" : "Manage User"}
         canManageUser={currentUserRole === "municipality worker" ? true : false}
+        isManagingUser={isManagingUser}
       />
     </div>
   );
