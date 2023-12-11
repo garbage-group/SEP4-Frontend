@@ -11,7 +11,7 @@ import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
 import Bin from "./components/Bin/Bin";
-import BinForm from "./components/Bin/BinForm";
+import BinForm from "./components/Analytics/BinForm";
 import { BinProvider } from "./contexts/BinContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import { UserManagementProvider } from "./contexts/UserContext";
@@ -67,11 +67,14 @@ const router = createHashRouter([
       },
       {
         path: "/analytics",
-        element: <Analytics />,
+        element: <Analytics />, 
+
       },
     ],
   },
 ]);
+
+
 
 const queryClient = new QueryClient();
 
