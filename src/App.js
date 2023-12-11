@@ -7,17 +7,18 @@ import { Analytics } from "./routes/Analytics";
 import { Map } from "./routes/Map";
 import { Root } from "./routes/Root";
 import { UserListProvider } from "./contexts/UserListContext";
-import "../src/styles/App.css";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { Login } from "./routes/Login";
 import { AuthProvider } from "./contexts/LoginAuthContext";
 import BinList from "./components/Bin/BinList";
 import Bin from "./components/Bin/Bin";
-import BinForm from "./components/Bin/BinForm";
+import BinForm from "./components/Analytics/BinForm";
 import { BinProvider } from "./contexts/BinContext";
 import { NotificationProvider } from "./contexts/NotificationContext";
-import { UserManagementProvider } from './contexts/UserContext';
+import { UserManagementProvider } from "./contexts/UserContext";
 
+import "../src/styles/App.css";
+import { QueryClient } from "@tanstack/query-core";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 const router = createHashRouter([
   {
@@ -66,11 +67,14 @@ const router = createHashRouter([
       },
       {
         path: "/analytics",
-        element: <Analytics />,
+        element: <Analytics />, 
+
       },
     ],
   },
 ]);
+
+
 
 const queryClient = new QueryClient();
 
@@ -79,7 +83,6 @@ export function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <UserManagementProvider>
-
           <AuthProvider>
             <BinProvider>
               <UserListProvider>

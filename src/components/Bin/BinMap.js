@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import logoImage from "../../images/bin-icon.png";
 import { useURLPosition } from "../../hooks/useURLPosition";
-import { useAuth } from "../../contexts/LoginAuthContext";
 import Modal from "../Modal";
 
 function BinMap() {
@@ -45,7 +44,7 @@ function BinMap() {
 
   return (
     <>
-      <div className="mapContainer" >
+      <div className="mapContainer" data-testid="map-container">
         <MapContainer className="map" center={mapPosition} zoom={13} scrollWheelZoom={true}>
           <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
           />
@@ -86,7 +85,7 @@ function ChangeMapPosition({ position }) {
 //detecting a click on the map
 function DetectClick({ setIsModalOpen }) {
   const navigate = useNavigate();
-  const { role } = useAuth();
+  const role = localStorage.getItem("role");
 
 
 

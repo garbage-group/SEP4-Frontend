@@ -4,10 +4,11 @@ import { useAuth } from "../contexts/LoginAuthContext";
 
 const HumidityDataContext = createContext();
 
-export const HumidityDataProvider = ({ children }) => {
+const HumidityDataProvider = ({ children,binId }) => {
     const { token } = useAuth();
 
     const fetchHumidity = async ({ queryKey }) => {
+        // eslint-disable-next-line no-unused-vars
         const [_, binId] = queryKey;
         const response = await fetch(
             `https://garbage-backend-service-kq2hras2oq-ey.a.run.app/bins/${binId}/humidity`,
@@ -33,3 +34,13 @@ export const HumidityDataProvider = ({ children }) => {
         </HumidityDataContext.Provider>
     );
 };
+
+const useHumidity = () => {
+    const context = useContext(HumidityDataContext);
+    if (context === undefined) {
+        throw new Error("HumidityContext was used outside the HumidityProvider ");
+    }
+    return context;
+};
+
+export { HumidityDataProvider, useHumidity };

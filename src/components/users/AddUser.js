@@ -133,6 +133,7 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
       setPassword("");
       setRepeatPassword("");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isManagingUser, selectedUser, setIsDisabled]);
 
    function handleOnEditClick()

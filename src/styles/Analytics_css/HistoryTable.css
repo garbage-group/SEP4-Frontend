@@ -1,11 +1,11 @@
 /* Container Styles */
 .table-outer-container {
-  border: 2px solid #2166b0;
   border-radius: 10px;
-  width: 55vw;
-  height: 70vh;
-  margin: 1vh 1vw;
+  width: 49vw;
+  height: 62vh;
   overflow: auto;
+  margin: 10px;
+  position: relative;
 }
 
 /* MUI Table Container Styles */

@@ -16,10 +16,6 @@ jest.mock('react-router', () => {
 });
 
 
-// jest.mock("react-router");
-// useNavigate.mockReturnValue({
-//     useNavigate: jest.fn()
-// });
 
 
 
