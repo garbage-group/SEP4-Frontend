@@ -25,7 +25,7 @@ describe("Sidebar Component", () => {
     expect(screen.getByText(/Overview/i)).toBeInTheDocument();
     expect(screen.getByText(/User/i)).toBeInTheDocument();
     expect(screen.getByText(/Bins/i)).toBeInTheDocument();
-    expect(screen.getByText(/Plan Route/i)).toBeInTheDocument();
+    expect(screen.getByText(/Plan route/i)).toBeInTheDocument();
     expect(screen.getByText(/Analytics/i)).toBeInTheDocument();
   });
 
