@@ -33,7 +33,7 @@ const formatDate = (date) =>
 // Main LineChartFillLevel component
 function LineChartFillLevel() {
   // Fetching bins data using context
-  const { isLoading, bins } = useBins();
+  const { bins } = useBins();
 
   // State to manage the selected bin
   const [selectedBin, setSelectedBin] = useState(

@@ -33,6 +33,7 @@ function UserListProvider({ children }) {
     }
     // fetchUsers is defined inside UserListProvider and is not changing,
     // so it's safe to exclude it from the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, token]);
 
   return (
