@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useURLPosition } from "../../hooks/useURLPosition";
 import "../../styles/Bin_css/BinForm.css";
-import BackButton from "./BackButton";
+import BackButton from "../Bin/BackButton";
 import { useNavigate } from "react-router-dom";
 import { useBins } from "../../contexts/BinContext";
 
@@ -32,6 +32,8 @@ function BinForm() {
         e.preventDefault();
 
         // Creating a new bin object
+       
+
         const newBin = {
             capacity,
             fillThreshold: threshold,

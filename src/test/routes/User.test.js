@@ -11,8 +11,11 @@ import {
 
 import { useUserListContext } from "../../contexts/UserListContext.js";
 import { Users } from "../../routes/User.js";
+import { useUserManagement } from "../../contexts/UserContext.js";
 
 jest.mock("../../contexts/UserListContext.js");
+jest.mock("../../contexts/UserContext.js");
+jest.mock("../../contexts/LoginAuthContext")
 
 // Mock the useNavigate hook
 jest.mock("react-router-dom", () => ({
@@ -21,25 +24,36 @@ jest.mock("react-router-dom", () => ({
 }));
 
 const mockUsers = [
-  { username: "collector1", fullname: "Collector One" },
-  { username: "collector2", fullname: "Collector Two" },
-  { username: "collector3", fullname: "Collector Three" },
-  { username: "collector4", fullname: "Collector Four" },
-  { username: "collector5", fullname: "Collector Five" },
-  { username: "collector6", fullname: "Collector Six" },
-  { username: "collector7", fullname: "Collector Seven" },
+  { username: "collector1", fullname: "Collector One", role: "Garbage Collector" },
+  { username: "collector2", fullname: "Collector Two" , role: "Garbage Collector" },
+  { username: "collector3", fullname: "Collector Three", role: "Garbage Collector"  },
+  { username: "collector4", fullname: "Collector Four", role: "Garbage Collector"  },
+  { username: "collector5", fullname: "Collector Five", role: "Garbage Collector"  },
+  { username: "collector6", fullname: "Collector Six" , role: "Garbage Collector" },
+  { username: "collector7", fullname: "Collector Seven" , role: "Garbage Collector" },
 ];
 
 describe("User List Container", () => {
+  
   beforeEach(() => {
     useUserListContext.mockReturnValue({
       users: mockUsers,
       isLoading: false,
     });
+
+    useUserManagement.mockReturnValue({
+      fetchUserByUsername : jest.fn(),
+    })
+
   });
 
   it("renders only six users", async () => {
+    // localStorage.setItem("role", "municipality worker");
+
+    console.log(mockUsers);
+
     render(<Users />);
+
 
     await waitFor(() => {
       // Check if user names are rendered
@@ -56,6 +70,7 @@ describe("User List Container", () => {
   });
 
   it("change the page when the pagination component is interacted with", async () => {
+    localStorage.setItem("role", "Municipality Worker");
     render(<Users />);
 
     expect(screen.getByText("Collector One")).toBeInTheDocument();
