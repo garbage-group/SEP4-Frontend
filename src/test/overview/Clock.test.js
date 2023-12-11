@@ -1,7 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Clock } from "../../components/Overview/TimeInfo";
+import { Clock } from "../../components/overview/TimeInfo";
+// import { Clock } from "../../components/Overview/TimeInfo";
 
 // Mocking the setInterval and clearInterval functions
 jest.useFakeTimers();
