@@ -1,19 +1,24 @@
 import { ListItem, ListItemAvatar, Avatar, ListItemText } from "@mui/material";
 import stc from "string-to-color";
-
 import "../../styles/user_css/IndividualUser.css";
 
-// Component to display individual collector information
 export function IndividualUserComponent({
   fullname,
   username,
   showExtraElements = false,
   extraElements,
+  onHandleUserClick,
 }) {
-  // console.log(fullname);
+  function handleClick() {
+    onHandleUserClick(username);
+  }
+
   return (
-    <ListItem className="listitem-collector" style={{ width: "auto" }}>
-      {/* Displaying collector avatar and information */}
+    <ListItem
+      className="listitem-collector"
+      style={{ width: "auto" }}
+      onClick={handleClick}
+    >
       <ListItemAvatar>
         <Avatar {...stringAvatar(fullname)} />
       </ListItemAvatar>

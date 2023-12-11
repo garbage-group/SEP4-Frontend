@@ -1,10 +1,14 @@
-  .adduser-page-container {
+.usernameDisabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+ .adduser-page-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100%;
-    background-color: #ffffff;
+    background-color: ffffff;
     border-radius: 15px;
   }
 
@@ -20,7 +24,7 @@
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    background-color: #133a64;
+    background-color: #3fcfcd
   }
 
 
@@ -30,6 +34,7 @@
     text-align: center;
     margin-bottom: 20px;
   }
+
 
 
   .adduser-inputs,
@@ -70,14 +75,20 @@
     /* Include padding in width calculation */
   }
 
-  /* Sign up button */
-  .adduser-signup-btn {
-    width: 40%;
+  /* Container for both buttons */
+  .adduser-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+
+  .adduser-signup-btn,
+  .adduser-reset-btn {
+    width: calc(50% - 5px);
     padding: 10px;
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
     border: none;
     border-radius: 6px;
     background-color: #11acf0;
@@ -85,11 +96,18 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block;
   }
 
   .adduser-signup-btn:hover {
-    background-color: #6ab7ca;
+    background-color: #133A64;
+  }
+
+  .adduser-signup-btn_disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    border: 0px;
+    filter: brightness(0.7);
+    /* background-color: #6cb9cc; */
   }
 
   .region-select {
@@ -124,6 +142,11 @@
   .region-select:focus {
     outline: none;
     border-color: #007bff;
+  }
+
+  .manage-user-buttons-container {
+    display: flex;
+    gap: 10px;
   }
 
 

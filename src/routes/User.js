@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
-
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
 
@@ -18,20 +17,22 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
 import { ListPagination } from "../components/utils/ListPagination";
-
-import "../styles/user_css/User.css";
+import { useUserManagement } from "../contexts/UserContext";
 
 // UserListContainer component
-function UserListContainer({ onAddUserClick }) {
-  const [currentUserRole, setCurrentUserRole] = useState(
-    localStorage.getItem("role")
-  );
+function UserListContainer({
+  onAddUserClick,
+  onHandleUserClick,
+  currentUserRole,
+  setCurrentUserRole,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Use UserListContext to fetch user data
   const { isLoading, users } = useUserListContext();
 
   const itemsPerPage = 6;
+
 
   useEffect(() => {
     // Update the role when it changes in localStorage
@@ -49,11 +50,15 @@ function UserListContainer({ onAddUserClick }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  const filteredUsers = users.filter(
+    (user) => user.role.toLowerCase() === "garbage collector"
+  );
+
   return (
     <div className="userlist-container">
       {/* Render list header */}
       <ListHeader
-        users={users}
+        users={filteredUsers}
         currentUserRole={currentUserRole}
         onAddUserClick={handleAddButtonClick}
       />
@@ -61,16 +66,17 @@ function UserListContainer({ onAddUserClick }) {
       {/* Render list body with individual user components */}
       <ListBody
         isLoading={isLoading}
-        users={users}
+        users={filteredUsers}
         startIndex={startIndex}
         endIndex={endIndex}
         currentUserRole={currentUserRole}
+        onHandleUserClick={onHandleUserClick}
       />
 
       {/* Render list footer with pagination */}
       <div className="list-footer" data-testid="user-list-footer">
         <ListPagination
-          totalItems={users ? users.length : 0}
+          totalItems={filteredUsers ? filteredUsers.length : 0}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={handlePaginationChange}
@@ -115,7 +121,14 @@ function ListHeader({ users, currentUserRole, onAddUserClick }) {
 }
 
 // ListBody component
-function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
+function ListBody({
+  isLoading,
+  users,
+  startIndex,
+  endIndex,
+  currentUserRole,
+  onHandleUserClick,
+}) {
   return (
     <div className="list-body">
       {isLoading && <LoadingComponent />}
@@ -135,8 +148,10 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
                   region={user.region}
                   role={user.role}
                   currentUserRole={currentUserRole}
+                  username={user.username}
                 />
               }
+              onHandleUserClick={onHandleUserClick}
             />
           ))}
     </div>
@@ -144,26 +159,68 @@ function ListBody({ isLoading, users, startIndex, endIndex, currentUserRole }) {
 }
 
 // Add user component
-function AddUserContainer() {
+function AddUserContainer({
+  showTitle,
+  selectedUser,
+  isManagingUser,
+  canManageUser,
+  setSelectedUser,
+}) {
   return (
     <div className="addUser-container">
-      <AddUser />
+      {canManageUser ? (
+        <AddUser
+          showTitle={showTitle}
+          selectedUser={selectedUser}
+          isManagingUser={isManagingUser}
+          setSelectedUser={setSelectedUser}
+        />
+      ) : (
+        <p>Only Municipality worker can manage user</p>
+      )}
     </div>
   );
 }
 
 // Users component
 function Users() {
-  const [showAddUser, setShowAddUser] = useState(false);
+  const [selectedUser, setSelectedUser] = useState();
+  const [isAddUserClicked, setIsAddUserClicked] = useState(true);
+  const [currentUserRole, setCurrentUserRole] = useState(
+    localStorage.getItem("role")
+  );  const [isManagingUser,setIsManagingUser] = useState(false);
+
+
+  const { fetchUserByUsername } = useUserManagement();
 
   const handleToggleAddUser = () => {
-    setShowAddUser(!showAddUser);
+    setIsAddUserClicked(true);
+    setIsManagingUser(false)
   };
+
+  async function handleUserClick(username) {
+    const user = await fetchUserByUsername(username);
+    setSelectedUser(user);
+    setIsAddUserClicked(false);
+    setIsManagingUser(true)
+  }
 
   return (
     <div className="users-container">
-      <UserListContainer onAddUserClick={handleToggleAddUser} />
-      {showAddUser && <AddUserContainer />}
+      <UserListContainer
+        onAddUserClick={handleToggleAddUser}
+        onHandleUserClick={handleUserClick}
+        currentUserRole={currentUserRole}
+        setCurrentUserRole={setCurrentUserRole}
+      />
+
+      <AddUserContainer
+        selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
+        showTitle={isAddUserClicked ? "Add User" : "Manage User"}
+        canManageUser={currentUserRole === "municipality worker" ? true : false}
+        isManagingUser={isManagingUser}
+      />
     </div>
   );
 }
