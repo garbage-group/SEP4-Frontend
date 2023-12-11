@@ -19,8 +19,8 @@ import "../../styles/Analytics_css/HistoryTable.css";
 import { useBins } from "../../contexts/BinContext";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
-import { Spinner } from "../Spinner";
 import { TablePaginationAction } from "../utils/TablePaginationAction";
+import {Spinner} from "../utils/Spinner";
 
 //format date
 const formatDate = (date) =>

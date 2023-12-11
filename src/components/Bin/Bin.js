@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router";
-import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
-import Modal from "../Modal";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Button } from "../Button";
+import { Button } from "../utils/Button";
+import Modal from "../utils/Modal";
+import {Spinner} from "../utils/Spinner";
 
 // Function to format date in a readable format
 const formatDate = (date) =>

@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import logoImage from "../../images/bin-icon.png";
 import { useURLPosition } from "../../hooks/useURLPosition";
-import Modal from "../Modal";
+import Modal from "../utils/Modal";
 
 function BinMap() {
   const { bins } = useBins();

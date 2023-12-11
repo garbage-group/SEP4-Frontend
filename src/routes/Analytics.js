@@ -13,7 +13,7 @@ import { useUserListContext } from "../contexts/UserListContext";
 import { DataCard } from "../components/Analytics/DataCard";
 import { HistoryTable } from "../components/Analytics/HistoryTable";
 import { LineChartFillLevel } from "../components/Analytics/LineChartFillLevel";
-import { Spinner } from "../components/Spinner";
+import {Spinner} from "../components/utils/Spinner";
 
 import "../styles/Analytics_css/Analytics.css";
 

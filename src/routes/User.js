@@ -6,13 +6,13 @@ import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { IndividualUserComponent } from "../components/users/InvidualUser";
 import { useUserListContext } from "../contexts/UserListContext";
 import { AddUser } from "../components/users/AddUser";
-import { LoadingComponent } from "../components/LoadingError";
 import { ExtraElements } from "../components/utils/ExtraElements";
 import ReplayCircleFilledOutlinedIcon from "@mui/icons-material/ReplayCircleFilledOutlined";
 
 import "../styles/user_css/User.css";
 import { ListPagination } from "../components/utils/ListPagination";
 import { useUserManagement } from "../contexts/UserContext";
+import {LoadingComponent} from "../components/utils/LoadingError";
 
 // UserListContainer component
 function UserListContainer({
@@ -214,7 +214,7 @@ function Users() {
         selectedUser={selectedUser}
         setSelectedUser={setSelectedUser}
         showTitle={isAddUserClicked ? "Add User" : "Manage User"}
-        canManageUser={currentUserRole === "municipality worker" ? true : false}
+        canManageUser={currentUserRole === "municipality worker"}
         isManagingUser={isManagingUser}
       />
     </div>

@@ -1,8 +1,8 @@
 import { Link} from "react-router-dom";
 import { useState } from "react";
-import Modal from "../Modal";
 import DoDisturbOnIcon from '@mui/icons-material/DoDisturbOn';
 import "../../styles/Bin_css/BinNav.css";
+import Modal from "../utils/Modal";
 function BinNav() {
     const [activeLink, setActiveLink] = useState('binList');
 

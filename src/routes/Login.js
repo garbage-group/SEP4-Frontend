@@ -6,11 +6,10 @@ import KeyIcon from '@mui/icons-material/Key';
 import logo from "../images/logo.png"
 
 import "../styles/Login.css";
-import { Button } from "../components/Button";
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/LoginAuthContext";
-import { Spinner } from "../components/Spinner";
-
+import { Button } from "../components/utils/Button";
+import {Spinner} from "../components/utils/Spinner";
 
 export function Login() {
     const [isLoading, setIsLoading] = useState(false);
