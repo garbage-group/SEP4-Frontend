@@ -17,7 +17,7 @@ jest.mock("react-router", () => {
   };
 });
 
-jest.mock('../../components/Modal', () => {
+jest.mock('../../components/utils/Modal', () => {
   return {
     __esModule: true,
     default: ({ isOpened, onClose }) => {
