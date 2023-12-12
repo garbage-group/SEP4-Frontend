@@ -63,15 +63,18 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
 
   // Function to handle the user addition or update
   async function handleAddUser() {
-    // Validate form input fields
-    if (!username || !fullName || !region || !password || !repeatPassword) {
-      showModal("Please fill in all fields.");
-      return;
-    }
+    // Validate form input fields using formValidation
+  const errorMessage = formValidation({
+    username,
+    fullName,
+    region,
+    password,
+    repeatPassword,
+  });
 
-    // Check if passwords match
-    if (password !== repeatPassword) {
-      showModal("Passwords do not match. Please re-enter your passwords.");
+    // If errorMessage is not null, show the modal with the error message
+    if (errorMessage) {
+      showModal(errorMessage);
       return;
     }
 
@@ -84,15 +87,11 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
       region,
     };
 
-    console.log(userData);
 
-    try {
-      // If in edit mode, update the user; otherwise, add a new user
-  
+    try {  
         await addUser(userData);
         showModal(`Successfully signed up: ${username}`);
   
-
       // Reset form after successful signup or update
       setUsername("");
       setFullName("");
@@ -142,34 +141,41 @@ function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {
    }
   
 
-  function handleSaveClick() {
-    if (!username || !newFullName || !newRegion || !newPassword || !newRepeatPassword) {
-      showModal("Please fill in all fields.");
-      return;
-    }
+  // Function to handle the user addition or update
+async function handleSaveClick() {
+  // Validate form input fields using formValidation
+  const errorMessage = formValidation({
+    username,
+    fullName : newFullName.trim(),
+    region : newRegion,
+    password : newPassword,
+    repeatPassword : newRepeatPassword,
+  });
 
-    // Check if passwords match
-    if (password !== repeatPassword) {
-      showModal("Passwords do not match. Please re-enter your passwords.");
-      return;
-    }
-    const updatedUser = {
-      username,
-      newFullName,
-      newRegion,
-      newPassword,
-      newRepeatPassword,
-    };
-  
-    updateUser(username, updatedUser);
-    showModal(`Successfully updated: ${username}`);
-    setUsername("");
-    setNewFullName("");
-    setNewRegion("Horsens North");
-    setNewPassword("");
-    setNewRepeatNewPassword("");
-    setSelectedUser(null); // Clear selected user after action completion
+  // If errorMessage is not null, show the modal with the error message
+  if (errorMessage) {
+    showModal(errorMessage);
+    return;
   }
+
+  const updatedUser = {
+    username,
+    newFullName,
+    newRegion,
+    newPassword,
+    newRepeatPassword,
+  };
+
+  updateUser(username, updatedUser);
+  showModal(`Successfully updated: ${username}`);
+  setUsername("");
+  setNewFullName("");
+  setNewRegion("Horsens North");
+  setNewPassword("");
+  setNewRepeatNewPassword("");
+  setSelectedUser(null); // Clear selected user after action completion
+}
+
 
   return (
     <div className="adduser-page-container">
@@ -315,5 +321,38 @@ function AddUserButton({ handleAddUser, handleReset, isLoading }) {
     </div>
   );
 }
+
+function formValidation({ username, fullName, region, password, repeatPassword }) {
+  // Check each field separately
+  if (!username) {
+    return "Please enter a username.";
+  }
+
+  if (!fullName) {
+    return "Please enter a full name.";
+  }
+
+  if (!region) {
+    return "Please select a region.";
+  }
+
+  if (!password) {
+    return "Please enter a password.";
+  }
+
+  if (!repeatPassword) {
+    return "Please enter repeat the password.";
+  }
+
+  // Check if passwords match
+  if (password !== repeatPassword) {
+    return "Passwords do not match. Please re-enter your passwords.";
+  }
+
+  // If all validations pass, return null or an empty string
+  return null;
+}
+
+
 
 export { AddUser };
