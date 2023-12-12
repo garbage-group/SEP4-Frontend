@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useBins } from "../../contexts/BinContext";
 import "../../styles/Bin_css/BinList.css";
-import { Spinner } from "../Spinner";
 import { ListPagination } from "../utils/ListPagination";
 import BinItem from "./BinItem";
+import {Spinner} from "../utils/Spinner";
 
 function BinList() {
   const [currentPage, setCurrentPage] = useState(1);

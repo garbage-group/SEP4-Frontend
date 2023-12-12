@@ -3,9 +3,9 @@ import "../../styles/user_css/AddUser.css";
 import humanIcon from "../../styles/images/human_icon.png";
 import passwordIcon from "../../styles/images/password.png";
 import pencilIcon from "../../styles/images/pencil.png";
-import { Button } from "../Button";
 import { useUserManagement } from "../../contexts/UserContext";
-import Modal from "../Modal.js";
+import { Button } from "../utils/Button.js";
+import Modal from "../utils/Modal";
 
 // AddUser component
 function AddUser({ selectedUser, showTitle, setSelectedUser, isManagingUser }) {

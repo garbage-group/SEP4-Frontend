@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useBins } from "../../contexts/BinContext";
 import { useParams } from "react-router";
-import { Spinner } from "../Spinner";
 import BackButton from "./BackButton";
 import "../../styles/Bin_css/Bin.css";
-import Modal from "../Modal";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ErrorIcon from "@mui/icons-material/Error";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Button } from "../Button";
+import { Button } from "../utils/Button";
+import Modal from "../utils/Modal";
+import {Spinner} from "../utils/Spinner";
 
 // Function to format date in a readable format
 const formatDate = (date) =>
@@ -26,6 +26,7 @@ function Bin() {
   const [isDisabled, setIsDisabled] = useState(true);
   const token = localStorage.getItem("token");
   const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
+  const [message, setMessage] = useState("");
 
   // Accessing functions and data from BinContext
   const { getBin, updateBin, currentBin, isLoading, activateBuzzer } =
@@ -55,6 +56,11 @@ function Bin() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const showModal = (message) =>{
+    setMessage(message);
+    setIsModalOpen(true);
+  }
 
   useEffect(() => {
     if (isAuthenticated && token) {
@@ -121,21 +127,26 @@ function Bin() {
     };
 
     updateBin(id, updatedBin);
-    setIsModalOpen(true);
+    showModal(
+      <>
+        <div className="savedImage">
+          <img src={require("../../images/popUp/tick.gif")} alt="" />
+        </div>
+        <span>Data Updated</span>
+      </>
+    );
   }
 
   //buzzer
   const handleBuzzer = async () => {
     await activateBuzzer(id);
+    showModal("Request has been sent.")
   };
 
   return (
     <>
       <Modal isOpened={isModalOpen} onClose={closeModal}>
-        <div className="savedImage">
-          <img src={require("../../images/popUp/tick.gif")} alt="" />
-        </div>
-        <span>Data Updated</span>
+      {message}
       </Modal>
 
       <div className="bin">

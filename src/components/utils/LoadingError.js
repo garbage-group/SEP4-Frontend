@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/LoadingError.css";
+import "../../styles/utils_css/LoadingError.css";
 
 function LoadingComponent() {
   return <span className="loader"></span>;

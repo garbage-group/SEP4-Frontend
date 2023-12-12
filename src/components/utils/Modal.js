@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
-import { Button } from "./Button";
 
-import "../styles/PopUp_css/Modal.css";
+import "../../styles/utils_css/Modal.css";
+import {Button} from "./Button";
 
 const Modal = ({ isOpened, onClose, children }) => {
   if (!isOpened) return null;

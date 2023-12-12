@@ -5,7 +5,7 @@ import { useBins } from '../../contexts/BinContext';
 import { useNotifications } from '../../contexts/NotificationContext';
 import GreenBinImage from "../../images/bin-icon.png";
 import RedBinImage from "../../images/bin-icon-full.png";
-import Modal from "../Modal";
+import Modal from "../utils/Modal";
 
 const center = {
     lat: 55.86352,
