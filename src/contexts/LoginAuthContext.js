@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from "react";
 const LoginAuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("authenticate"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [username, setUsername] = useState(null);
-  const [role, setRole] = useState(null);
-  console.log("auth", isAuthenticated);
+  const [role, setRole] = useState(localStorage.getItem("role"));
+
 
     const updateAuthInfo = (token, username, role) => {
       
