@@ -16,14 +16,6 @@
   height: 100px;
 }
 
-.top-nav-middle {
-  display: flex;
-  justify-content: flex-end;
-  flex-grow: 0;
-  margin-left: auto;
-  margin-right: 2rem;
-}
-
 .search-bar {
   display: flex;
   align-items: center;

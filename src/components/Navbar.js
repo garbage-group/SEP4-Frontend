@@ -22,13 +22,6 @@ export function Navbar() {
         <img src={logo} alt="logo" className="navbar-logo" />
       </div>
 
-      <div className="top-nav-middle">
-        <div className="search-bar">
-          <input type="text" placeholder="Search bins, or collectors....." />
-          <SearchIcon />
-        </div>
-      </div>
-
       <div className="top-nav-right">
         <Notifications />
         {/* <NotificationsNoneOutlinedIcon /> */}
