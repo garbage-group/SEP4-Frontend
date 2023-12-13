@@ -119,6 +119,13 @@
   }
 }
 
+@media (min-width: 992px) and (max-width: 1599.98px){
+  .navbar-logo {
+    height: 80px;
+  }
+
+}
+
 @media (min-width: 1600px) {
   .navbar-container {
     padding: 5px 40px;
@@ -131,6 +138,8 @@
   .top-nav-right svg {
     margin-left: 40px;
   }
+
+   
 }
 
 html,
