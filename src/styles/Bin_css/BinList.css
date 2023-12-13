@@ -26,10 +26,15 @@
   /*small devices and down*/
   @media (max-width: 767.98px) {
     .binList {
-      width: 62vw;
+      width: 70vw;
       gap: 2rem;
       padding: 0px;
       margin: 0px;
+     
+    }
+
+    .bins-footer {
+      width: 100%;
     }
   }
 

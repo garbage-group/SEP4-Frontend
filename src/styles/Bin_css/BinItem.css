@@ -83,6 +83,16 @@
 /*small devices and down*/
 @media (max-width: 767.98px) {
 
+  .name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: auto;
+  color: black;
+}
+
+.name>span {
+  display: none;
+}
 
   .date {
     display: none;
@@ -90,6 +100,11 @@
 
   .emoji {
     display: none;
+  }
+
+  .deleteBtn {
+    height: 1.5rem;
+    font-size: 1.3rem;
   }
 
 }
