@@ -16,7 +16,7 @@
 
 
 /*small devices and down*/
-@media (max-width: 767.98px) {
+@media (max-width: 766px) {
   .sidebar {
     padding: 5px;
   }

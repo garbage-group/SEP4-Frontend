@@ -24,22 +24,27 @@
   }
 
   /*small devices and down*/
-  @media (max-width: 767.98px) {
+  @media (max-width: 766px) {
     .binList {
       width: 70vw;
       gap: 2rem;
       padding: 0px;
       margin: 0px;
-     
     }
 
-    .bins-footer {
+    .bins-footer{
       width: 100%;
     }
   }
 
   /*medium devices only*/
-  @media (min-width: 768px) and (max-width: 991.98px) {}
+  @media (min-width: 767px) and (max-width: 991.98px) {
+    .bins-footer{
+      width: 100%;
+      margin-left: 2.5rem;
+    }
+
+  }
 
 
   /* */
