@@ -7,6 +7,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState(null);
   const [role, setRole] = useState(null);
+  console.log("auth", isAuthenticated);
 
     const updateAuthInfo = (token, username, role) => {
       
