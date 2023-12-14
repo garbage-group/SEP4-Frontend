@@ -1,4 +1,4 @@
-import SearchIcon from "@mui/icons-material/Search";
+
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
