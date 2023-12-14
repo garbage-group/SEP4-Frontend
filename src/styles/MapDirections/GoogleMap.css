@@ -8,14 +8,17 @@
 
 .directions-form {
     width: 300px;
-    padding: 10px;
+    padding: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     margin-top: 10px;
+    margin-bottom: 10px;
     margin-right: 10px;
     font-size: 12px;
     overflow-y: auto;
     position: sticky;
     top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 .google-map-container {
@@ -29,12 +32,6 @@
     width: 100%;
 }
 
-.directions-form {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
 
 .directions-button {
     width: 74%;
@@ -111,38 +108,71 @@
 
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .map-container1 {
         flex-direction: column;
-        align-items: center;
-    }
-
-    .directions-form,
-    .google-map-container {
-        width: 100%;
-    }
-
-    .google-map-container>div {
-        height: 50vh;
-    }
-
-    .directions-button,
-    .remove-button {
-        width: auto;
-        padding: 12px;
-    }
-
-    .directions-form input {
-        width: calc(100% - 16px);
-    }
-}
-
-@media (max-width: 480px) {
-    .map-container1 {
         margin-top: 20px;
     }
 
-    .google-map-container>div {
-        height: 40vh;
+    .directions-form {
+        align-items: center;
+        width: 400px;
+        padding: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        font-size: 12px;
+        overflow-y: auto;
+        position: sticky;
+        top: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
     }
+
+    .google-map-container {
+        width: 95%;
+        height: 60vh;
+        order: 1;
+    }
+
+
+    .selected-bins {
+        color: rgb(95, 94, 94);
+    }
+
+    .destination-bin {
+        position: relative;
+        margin-right: 2%;
+        padding-right: 60px;
+    }
+
+    .remove-button {
+        position: absolute;
+        right: 170px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20%;
+        font-size: 10px;
+        padding: 1.5px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+
+    .remove-button:hover {
+        background-color: #e0e0e0;
+        color: #000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .remove-button:active {
+        background-color: #d0d0d0;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
 }

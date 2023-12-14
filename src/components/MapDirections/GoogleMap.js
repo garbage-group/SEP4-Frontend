@@ -26,7 +26,7 @@ const GoogleMapComponent = () => {
     const [selectedBinsError, setSelectedBinsError] = useState(false);
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: "AIzaSyBuGylnI1u2zV0CVFxezyux8gK2T9DSfXY",
         libraries: ["places"]
     });
 
@@ -154,7 +154,7 @@ const GoogleMapComponent = () => {
                     <button className="directions-button" type="button" onClick={resetDirections}>Reset</button>
                 </form>
                 <div className="selected-bins">
-                    <h3>Select Bins</h3>
+                    <h4>Select Bins</h4>
                     {selectedBins.map(bin => (
                         <div key={bin.id} className="destination-bin">
                             <span>Bin ID: {bin.id}</span>
