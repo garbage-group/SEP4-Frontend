@@ -43,8 +43,8 @@ describe("History Table Component", () => {
 
     // Verify that the bin data is rendered
     expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("45")).toBeInTheDocument();
-    expect(screen.getByText("50")).toBeInTheDocument();
+    expect(screen.getByText("45.000")).toBeInTheDocument();
+    expect(screen.getByText("50.000")).toBeInTheDocument();
     expect(screen.getByText("100")).toBeInTheDocument();
   });
 
