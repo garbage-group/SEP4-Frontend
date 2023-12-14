@@ -1,12 +1,12 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import "../../styles/Analytics_css/DataCard.css";
 
-function DataCard({ title, icon, data, className }) {
+function DataCard({ title, icon, data, className}) {
   return (
-    <Box width={"300px"}>
+    <Box className={"cardBox"} width={"300px"}>
       <Card className={className}>
         <CardContent>
-          <Typography gutterBottom variant="h5" component={"div"}>
+          <Typography gutterBottom variant="h5" component={"div"} className="cardBoxTitle">
             <div className="icons">
               <span> {title}</span>
               <span> {icon}</span>

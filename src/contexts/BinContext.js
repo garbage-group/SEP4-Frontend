@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
+import { useAuth } from "./LoginAuthContext";
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
@@ -11,9 +12,9 @@ function BinProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [currentBin, setCurrentBin] = useState({});
   const [currentBinHumidity, setCurrentBinHumidity] = useState(null);
-  const token = localStorage.getItem("token");
-  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
+  const {token, isAuthenticated} = useAuth();
   const fetchInterval = 3600000; // 1 hour in milliseconds
+
 
   useEffect(
     function () {

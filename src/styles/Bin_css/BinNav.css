@@ -39,3 +39,21 @@
   color: red !important;
  
 }
+
+/*small devices and down*/
+@media (max-width: 766px){
+  .nav a:link,
+.nav a:visited {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding-right: 2.7rem;
+  border-radius: 5px;
+}
+
+
+.nav ul {
+  margin-left: 0.5rem;
+}
+
+
+}

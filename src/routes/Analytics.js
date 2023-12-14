@@ -68,19 +68,19 @@ function TabComponet() {
   return (
     <>
       <Tabs>
-        <TabList>
+        <TabList className={"tabList"}>
           <Tab>Temperature</Tab>
           <Tab>Humidity</Tab>
           <Tab>Fill Level</Tab>
         </TabList>
 
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <BarChartTemp />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <BarChartHumidity />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <LineChartFillLevel />
         </TabPanel>
       </Tabs>
