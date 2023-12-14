@@ -128,20 +128,6 @@
   .users-container {
     overflow: hidden;
   }
-
-/*   .users-container::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .users-container::-webkit-scrollbar-track {
-    display: none;
-
-  }
-  
-  .users-container::-webkit-scrollbar-thumb {
-    display: none;
-
-  } */
 }
 
 @media (min-width: 767px) and (max-width: 992px){

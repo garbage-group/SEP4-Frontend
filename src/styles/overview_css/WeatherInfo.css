@@ -4,14 +4,19 @@
   background-position: bottom;
   transition: 0.4s ease-out;
   border-radius: 10px;
-  height: 25vh;
+  height: 100%;
 }
 
 .weatherMain {
-  max-height: 20vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
+  /* max-height: 20vh; */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
   padding: 1.4rem;
   border-radius: 10px;
+  height: 100%;
 }
 
 .weatherMain.sunny {
@@ -58,16 +63,16 @@
 
 .locationBox {
   color: #fff;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: 500;
   text-align: center;
   text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
-  margin-top: 0.6rem;
+  margin-top: 0.3rem;
 }
 
 .locationBox .date {
   color: white;
-  font-size: 0.7em;
+  font-size: 0.6em;
   font-weight: 500;
   text-align: center;
   text-shadow: 2px 2px rgba(50, 50, 70, 0.5);
@@ -82,11 +87,11 @@
   color: #fff;
   position: relative;
   display: inline-block;
-  margin: 1rem auto;
+  margin: 0.8rem auto;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
-  padding: 0.3rem 2rem;
-  font-size: 2em;
+  padding: 0 2rem;
+  font-size: 1.7em;
   font-weight: 900;
   text-shadow: 3px, 6px rgba(50, 50, 70, 0.5);
   text-align: center;
@@ -102,28 +107,29 @@
 }
 
 /* media queries for small screens */
-@media (max-width: 600.98px) {
+@media (max-width: 766px) {
   .weatherMain {
-    max-height: 18.15vh;
+    height: 100%;
   }
   .searchBox .searchBar {
     width: 20vw;
     padding: 0.2rem 1rem;
-    margin-left: 0;
+    margin-left: 30%;
+    margin-bottom: 2rem;
     font-size: 1em;
   }
 
   .locationBox {
     color: #fff;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: 500;
     margin-top: 0.5rem;
   }
 
   .weatherBox .temperature {
     margin: 0.7rem auto;
-    padding: 0.1rem 2rem;
-    font-size: 1.3em;
+    padding: 0.5rem 2rem;
+    font-size: 1.7em;
     font-weight: 900;
   }
 
@@ -134,7 +140,7 @@
 }
 
 /* medium screen */
-@media (min-width: 601px) and (max-width: 991.98px) {
+@media (min-width: 767px) and (max-width: 992px) {
   .searchBox .searchBar {
     padding: 0.2rem 1rem;
     margin-left: 0;
@@ -143,7 +149,7 @@
   }
 
   .locationBox {
-    font-size: 1.2em;
+    font-size: 1.302em;
     font-weight: 500;
     margin-top: 1rem;
   }
@@ -193,4 +199,3 @@
     font-weight: 600;
   }
 }
-
