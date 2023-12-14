@@ -86,6 +86,9 @@
 .binInput {
   background-color:#E6EFD9;
   border-radius: 10px;
+  padding: 0.5rem;
+  width: 10vw;
+ 
 }
 
 .binInput_disabled {
@@ -135,12 +138,16 @@
 }
 
 /*small devices and down*/
-@media (max-width: 767.98px) {
+@media (max-width: 766px) {
   .bin {
     display: block;
     padding: 1vw;
     align-items: center;
     justify-content: center;
+  }
+
+  .binInput {
+    width: 60vw;
   }
 
   .buttons-container {
@@ -149,8 +156,17 @@
 }
 
 /*medium devices only*/
-@media (min-width: 768px) and (max-width: 991.98px) {}
+@media (min-width: 767px) and (max-width: 1199px) {}
 
 
 /* */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) and (max-width:1599){
+  .binInput {
+  background-color:#E6EFD9;
+  border-radius: 10px;
+  padding: 0.5rem;
+  width: 1vw;
+ 
+}
+
+}
