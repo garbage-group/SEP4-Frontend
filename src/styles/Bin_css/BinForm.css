@@ -1,7 +1,7 @@
 .binForm {
   background-color: white;
   border-radius: 7px;
-  padding: 2rem 3rem;
+  padding: 0rem 3rem;
   display: flex;
   height: 40%;
   justify-content: center;
@@ -9,7 +9,8 @@
   gap: 2rem;
   font-weight: bold;
   flex-direction: column;
-  margin: 0 7.7rem;
+  margin: 0 1.6rem;
+
 }
 
 .binRow {
@@ -36,9 +37,10 @@
 #threshold,
 #latitude,
 #longitude {
-  width: 6vw;
+  width: 8vw;
   background-color: #d1eedf;
   border-radius: 4px;
+  padding: 0.8rem;
 }
 
 .binButtons {
@@ -78,7 +80,7 @@
 @media (max-width: 766px) {
   .binForm {
     width: 50vw;
-    height: 50%;
+    height: 65%;
     margin: 0rem;
   }
 
@@ -105,22 +107,7 @@
     border-radius: 4px;
     padding: 0.6rem;
   }
-  /* 
-  #capacity {
-    margin-left: 8vw;
-  }
 
-  #latitude {
-    margin-left: 10vw;
-  }
-
-  #longitude {
-    margin-left: 6.5vw;
-  } */
-
-  /* .binRow > label {
-    margin-left: 10px;
-  } */
 
   .btn {
     color: white;
@@ -140,7 +127,7 @@
 /*medium devices only*/
 @media (min-width: 767px) and (max-width: 1200px) {
   .binForm {
-    height: 50%;
+    height: 65%;
     width: 45vw;
     margin: 0rem;
   }
@@ -173,6 +160,21 @@
   }
 }
 
-/* */
-@media (min-width: 1201px) and (max-width: 1600) {
+@media (min-width: 1440px) and (max-width: 1599px){
+   .binForm {
+    height: 45%;
+    width: 25vw;
+    margin: 0rem;
+  }
+
+    #capacity,
+  #threshold,
+  #latitude,
+  #longitude {
+    width: 12vw;
+    background-color: #d1eedf;
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+
 }

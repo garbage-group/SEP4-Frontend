@@ -9,6 +9,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   max-height: 90%;
+  width: 25vw;
 }
 
 /* Styles for individual rows within the container */
@@ -16,7 +17,6 @@
   width: 48%;
   margin-bottom: 10px;
 }
-
 
 /* Styles for heading elements within the .bin container */
 .bin h6 {
@@ -26,7 +26,6 @@
   padding: 0;
   margin-top: 0.5em;
   margin-bottom: 0;
-
 }
 
 /* Styles for h3 elements within the .bin container */
@@ -35,9 +34,7 @@
   display: flex;
   align-items: center;
   padding: 0rem 1rem;
-
 }
-
 
 /* Styles for spans within h3 elements */
 .bin h3 span {
@@ -71,30 +68,27 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 1rem;
-  background-color: #143A63;
-  
-
+  background-color: #143a63;
 }
 
 /* Hover styles for buttons with the class .btn */
 .btn:hover {
   background-color: #00c46a;
-  color: #143A63;
+  color: #143a63;
 }
 
 /* Styles for elements with the class .binInput */
 .binInput {
-  background-color:#E6EFD9;
+  background-color: #e6efd9;
   border-radius: 10px;
   padding: 0.5rem;
   width: 10vw;
- 
 }
 
 .binInput_disabled {
   cursor: not-allowed;
-  color: #143A63;
-  background-color: #D1EEDF
+  color: #143a63;
+  background-color: #d1eedf;
 }
 
 .buttons-container {
@@ -115,21 +109,19 @@
 .buttons-container {
   display: flex;
   flex-direction: row;
-
 }
 
-.status span{
+.status span {
   display: flex;
   margin-top: 0.5rem;
   gap: 0.4rem;
 }
 
-.active{
+.active {
   color: #00c46a !important;
-
 }
 
-.offline{
+.offline {
   color: red !important;
 }
 
@@ -144,6 +136,7 @@
     padding: 1vw;
     align-items: center;
     justify-content: center;
+     width: 75vw;
   }
 
   .binInput {
@@ -156,23 +149,22 @@
 }
 
 /*medium devices only*/
-@media (min-width: 767px) and (max-width: 1199px) {
-
+@media (min-width: 767px) and (max-width: 1024px) {
   .binInput {
-    width: 25vw;
+    width: 20vw;
+  }
+   .bin {
+    width: 48vw;
+    height: 100%;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .binInput {
+    width: 13vw;
   }
 
-}
-
-
-/* */
-@media (min-width: 1200px) and (max-width:1599){
-  .binInput {
-  background-color:#E6EFD9;
-  border-radius: 10px;
-  padding: 0.5rem;
-  width: 1vw;
- 
-}
-
+  .bin {
+    width: 33vw;
+  }
 }

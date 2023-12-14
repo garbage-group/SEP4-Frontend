@@ -1,7 +1,7 @@
 .binList {
   height: 65vh;
   list-style: none;
-
+  width: 26vw;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -32,12 +32,12 @@
   }
 
   .bins-footer {
-    width: 100%;
+    width: 90%;
   }
 }
 
 /*medium devices only*/
-@media (min-width: 767px) and (max-width: 1023px) {
+@media (min-width: 767px) and (max-width: 991px) {
   .bins-footer {
     width: 100%;
     margin-left: 2.5rem;
@@ -47,9 +47,24 @@
     height: 65vh;
     padding: 0px;
     margin: 0px;
-    
-
+    width: 68vw;
   }
 }
 
+@media (min-width: 992px) and (max-width: 1200px) {
+  .binList {
+    height: 70vh;
+    padding: 0px;
+    margin: 0px;
+    width: 50vw;
+  }
+  .bins-footer {
+    width: 100%;
+  }
+}
 
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .binList {
+    width: 37vw;
+  }
+}
