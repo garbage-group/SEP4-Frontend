@@ -1,15 +1,17 @@
 .binForm {
   background-color: white;
   border-radius: 7px;
-  padding: 2rem 3rem;
+  padding: 0rem 3rem;
   display: flex;
   height: 40%;
   justify-content: center;
   max-height: 90%;
   gap: 2rem;
   font-weight: bold;
-}
+  flex-direction: column;
+  margin: 0 1.6rem;
 
+}
 
 .binRow {
   display: flex;
@@ -18,7 +20,6 @@
   position: relative;
   align-items: center;
   margin-left: 1.6vw;
-
 }
 
 .row1,
@@ -28,7 +29,6 @@
   align-items: center;
 }
 
-
 .form.loading {
   opacity: 0.3;
 }
@@ -37,10 +37,10 @@
 #threshold,
 #latitude,
 #longitude {
-  width: 6vw;
-  background-color: #D1EEDF;
+  width: 8vw;
+  background-color: #d1eedf;
   border-radius: 4px;
-
+  padding: 0.8rem;
 }
 
 .binButtons {
@@ -60,13 +60,12 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 1rem;
-  background-color: #143A63;
-
+  background-color: #143a63;
 }
 
 .btn:hover {
   background-color: #00c46a;
-  color: #143A63;
+  color: #143a63;
 }
 
 .addCancel {
@@ -74,12 +73,16 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-left: -1.7rem;
-
+  margin-left: -0.4rem;
 }
 
 /*small devices and down*/
-@media (max-width: 767.98px) {
+@media (max-width: 766px) {
+  .binForm {
+    width: 50vw;
+    height: 65%;
+    margin: 0rem;
+  }
 
   .row1,
   .row2 {
@@ -95,8 +98,54 @@
     margin: 0px;
   }
 
+  #capacity,
+  #threshold,
+  #latitude,
+  #longitude {
+    width: 45vw;
+    background-color: #d1eedf;
+    border-radius: 4px;
+    padding: 0.6rem;
+  }
+
+
+  .btn {
+    color: white;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    background-color: #143a63;
+  }
+}
+
+/*medium devices only*/
+@media (min-width: 767px) and (max-width: 1200px) {
   .binForm {
-    padding: 0px;
+    height: 65%;
+    width: 45vw;
+    margin: 0rem;
+  }
+
+  .row1,
+  .row2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0px;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .binButtons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
     width: 100%;
   }
 
@@ -104,33 +153,28 @@
   #threshold,
   #latitude,
   #longitude {
-    width: 30vw;
-    background-color: #D1EEDF;
+    width: 35vw;
+    background-color: #d1eedf;
     border-radius: 4px;
+    padding: 0.5rem;
+  }
+}
 
+@media (min-width: 1440px) and (max-width: 1599px){
+   .binForm {
+    height: 45%;
+    width: 25vw;
+    margin: 0rem;
   }
 
-  #capacity {
-    margin-left: 8vw;
-  }
-
-  #latitude {
-    margin-left: 10vw;
-  }
-
+    #capacity,
+  #threshold,
+  #latitude,
   #longitude {
-    margin-left: 6.5vw;
-  }
-
-  .binRow>label {
-    margin-left: 10px;
+    width: 12vw;
+    background-color: #d1eedf;
+    border-radius: 4px;
+    padding: 0.5rem;
   }
 
 }
-
-/*medium devices only*/
-@media (min-width: 768px) and (max-width: 991.98px) {}
-
-
-/* */
-@media (min-width: 1200px) {}

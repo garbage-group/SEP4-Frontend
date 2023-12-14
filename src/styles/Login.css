@@ -216,7 +216,7 @@ p {
 
 /*Media Queries*/
 /*For Small Screens and down*/
-@media (max-width: 600.98px) {
+@media (max-width: 600px) {
   .container {
     width: 80vw;
     height: 80vh;
@@ -378,7 +378,6 @@ p {
     text-align: center;
     text-wrap: wrap;
     position: absolute;
-    bottom: 3%;
     background: linear-gradient(to right, #ff4b2b, #ff416c);
     color: #fff;
     height: 10vh;
@@ -471,7 +470,6 @@ p {
     text-align: center;
     text-wrap: wrap;
     position: absolute;
-    bottom: 3%;
     background: linear-gradient(to right, #ff4b2b, #ff416c);
     color: #fff;
     height: 15vh;
