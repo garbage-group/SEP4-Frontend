@@ -26,7 +26,7 @@ const GoogleMapComponent = () => {
     const [selectedBinsError, setSelectedBinsError] = useState(false);
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyBuGylnI1u2zV0CVFxezyux8gK2T9DSfXY",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: ["places"]
     });
 
