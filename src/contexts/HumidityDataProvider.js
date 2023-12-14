@@ -27,6 +27,7 @@ const HumidityDataProvider = ({ children,binId }) => {
     const { data, error, isLoading } = useQuery(['humidity', binId], fetchHumidity, {
         enabled: false // Query will not automatically run
     });
+    
 
     return (
         <HumidityDataContext.Provider value={{ data, error, isLoading }}>

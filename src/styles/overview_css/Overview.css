@@ -23,7 +23,9 @@
 @media (max-width: 767.98px) {
   .overview-container {
     grid-template-rows: auto auto;
+    overflow: hidden !important;
   }
+  
 
   .map-list-container {
     grid-template-columns: 1fr;

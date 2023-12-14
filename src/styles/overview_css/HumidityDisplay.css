@@ -1,41 +1,78 @@
+
+
 .humidity-display {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4px;
+  height: 100%;
+  width: 100%;
+  background-image: url("../../images/svgs/sidebar_bg.svg");
 }
 
-.humidity-display form {
-    margin-bottom: 4px;
-    background-color: #e0e0e0;
+.humidity-submit-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1vh;
+  gap: 0.5vw;
 }
 
-.humidity-display input {
-    padding: 8px 15px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.humidity-input-form {
+  border-radius: 10px;  
+  padding: 0.7em 2em;
+  width: 30vw !important;
 }
 
-.humidity-display button {
-    padding: 8px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.humidity-submit-button {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #04a9fb;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.humidity-display button:hover {
-    background-color: #0056b3;
+.humidity-bin-text {
+  color: #ffffff;
+  background-color: #4ea2cc;
+  margin: 0 2vw;
+  border-radius: 10px;
+  padding: 1vh 2vw;
 }
 
-.humidity-display p {
-    font-size: 1.2rem;
-    color: #333;
+.humidity-bin-text p {
+  margin: 1.5vh 0; 
 }
 
-.humidity-bin-text>p {
-    padding: 0px;
-    margin: 10px;
+.error-label-humidity-label {
+   color: #ffffff;
+   background-color: #4ea2cc;
+   margin: 2vh;
+   padding: 10px;
+   border-radius: 10px;
+   text-align: center;
 }
+
+@media (max-width: 766px) {
+  .humidity-input-form {
+    width: 30vw !important;
+    margin-right: 1vw;
+  }
+
+}
+
+
+@media (min-width: 767px) and ( max-width: 1199.98px){
+  .humidity-input-form {
+    width: 5vw !important;
+  }
+
+  .humidity-bin-text {
+    margin: 1vh;
+  }
+}
+
+

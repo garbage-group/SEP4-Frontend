@@ -176,10 +176,12 @@ function BinProvider({ children }) {
         throw new Error(`Failed to fetch humidity.Status: ${response.status}`);
       }
 
+      setErrorMSg(null);
       const humidityData = await response.json();
       setCurrentBinHumidity(humidityData);
     } catch (error) {
-      console.error("Error fetching humidity data:", error);
+      setErrorMSg({error});
+
     } finally {
       setIsLoading(false);
     }
