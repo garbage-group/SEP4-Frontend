@@ -13,7 +13,6 @@
   align-items: center;
 }
 
-
 /* Badge styling */
 .notification-badge {
   position: absolute;
@@ -22,9 +21,9 @@
   background-color: red;
   color: white;
   border-radius: 50%;
-  padding: 6px 8px; /* Increase padding for better visibility */
-  font-size: 14px; /* Adjust font size for better readability */
-  display: none; /* Hide by default */
+  padding: 6px 8px;
+  font-size: 14px;
+  display: none;
 }
 
 /* Unread badge styling */
@@ -32,32 +31,31 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate(50%, -60%); /* Adjust the second value for vertical centering */
+  transform: translate(50%, -60%);
   background-color: red;
   color: white;
   border-radius: 50%;
-  padding: 4px; /* Adjust padding for a smaller badge */
-  width: 20px; /* Set width and height to create a perfect circle */
+  padding: 4px;
+  width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px; /* Adjust font size for a smaller badge */
-  animation:badgeRing 1.3s infinite;
+  font-size: 12px;
+  animation: badgeRing 1.3s infinite;
 }
 
 @keyframes badgeRing {
+
   0%,
   100% {
     transform: translate(50%, -60%);
   }
+
   50% {
-    transform: translate(50%, -60%) translateX(2px); /* Adjust the values for the desired movement */
+    transform: translate(50%, -60%) translateX(2px);
   }
 }
-
-
-
 
 /* Dropdown styling */
 .notification-dropdown {
@@ -65,16 +63,18 @@
   top: 100%;
   right: 0;
   background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  min-width: 320px; /* Slightly increase the width */
+  min-width: 320px;
   z-index: 1;
   display: none;
   overflow: hidden;
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid #eee; /* Light border for separation */
-  padding: 8px; /* Add padding for a cleaner look */
+  border: 1px solid #eee;
+  padding: 8px;
+  z-index: 1000;
+  transition: max-height 0.3s, opacity 0.3s;
 }
 
 /* Show dropdown on hover */
@@ -105,7 +105,7 @@
 
 /* Unread item styling */
 .notification-dropdown-item.unread {
-  background-color: #f8f8f8; /* Slight color change for readability */
+  background-color: #f8f8f8;
   font-weight: bold;
 }
 
@@ -131,4 +131,25 @@
 .unread-icon {
   color: red;
   margin-left: 10px;
+}
+
+/* Media query for small screens */
+@media (max-width: 767px) {
+  .notification-container {
+    justify-content: center;
+  }
+
+  .notification-dropdown {
+    transition: max-height 0.3s, opacity 0.3s;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80vw;
+    /* Use viewport width for responsiveness */
+    max-width: 300px;
+    /* Set a maximum width for larger screens */
+    z-index: 1000;
+
+  }
 }

@@ -154,7 +154,7 @@ const GoogleMapComponent = () => {
                     <button className="directions-button" type="button" onClick={resetDirections}>Reset</button>
                 </form>
                 <div className="selected-bins">
-                    <h3>Select Bins</h3>
+                    <h4>Select Bins</h4>
                     {selectedBins.map(bin => (
                         <div key={bin.id} className="destination-bin">
                             <span>Bin ID: {bin.id}</span>
