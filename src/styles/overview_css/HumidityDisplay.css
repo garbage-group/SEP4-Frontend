@@ -16,7 +16,9 @@
 }
 
 .humidity-input-form {
-  border-radius: 10px;
+  border-radius: 10px;  
+  padding: 0.7em 2em;
+  width: 30vw !important;
 }
 
 .humidity-submit-button {
@@ -47,9 +49,30 @@
 
 .error-label-humidity-label {
    color: #ffffff;
-   background-color: #04a9fb;
+   background-color: #4ea2cc;
    margin: 2vh;
    padding: 10px;
    border-radius: 10px;
- 
+   text-align: center;
 }
+
+@media (max-width: 766px) {
+  .humidity-input-form {
+    width: 30vw !important;
+    margin-right: 1vw;
+  }
+
+}
+
+
+@media (min-width: 767px) and ( max-width: 1199.98px){
+  .humidity-input-form {
+    width: 5vw !important;
+  }
+
+  .humidity-bin-text {
+    margin: 1vh;
+  }
+}
+
+

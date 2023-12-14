@@ -67,7 +67,7 @@
 }
 
 /* Media query for small screens */
-@media (max-width: 767.98px) {
+@media (max-width: 766px) {
   .info-container {
     grid-template-columns: 1fr;
     row-gap: 2vh;
@@ -77,5 +77,21 @@
   .bin-container-top {
     margin-left: 0;
     padding: 10px;
+  }
+}
+
+
+@media (min-width: 767px) and ( max-width: 1199.98px){
+  .bin-container-top {
+    padding: 3vh;
+  }
+
+  .bin-heading-top {
+    padding-top: 5vh;
+    font-size: 12px !important;
+  }
+
+  .bin-item-top {
+    width: 15vw;
   }
 }

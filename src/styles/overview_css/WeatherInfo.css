@@ -109,6 +109,7 @@
 /* media queries for small screens */
 @media (max-width: 766px) {
   .weatherMain {
+    /* max-height: 18.15vh; */
     height: 100%;
   }
   .searchBox .searchBar {
@@ -140,16 +141,16 @@
 }
 
 /* medium screen */
-@media (min-width: 767px) and (max-width: 992px) {
+@media (min-width: 767px) and (max-width: 1199.98pxpx) {
   .searchBox .searchBar {
-    padding: 0.2rem 1rem;
-    margin-left: 0;
+    /* padding: 0.2rem 1rem; */
+    margin-right: 10vw;
     margin-top: -1.3rem;
     font-size: 1em;
   }
 
   .locationBox {
-    font-size: 1.302em;
+    font-size: 0.6em;
     font-weight: 500;
     margin-top: 1rem;
   }
@@ -160,7 +161,7 @@
   }
 
   .weatherBox .temperature {
-    margin: 1rem auto;
+    margin: 0 auto;
     padding: 0.3rem 2rem;
     font-size: 1.7em;
     font-weight: 900;
@@ -172,7 +173,7 @@
   }
 }
 
-@media (min-width: 992px) and (max-width: 1024px) {
+/* @media (min-width: 992px) and (max-width: 1024px) {
   .searchBox .searchBar {
     padding: 0.4rem 1rem;
     margin-left: 0;
@@ -198,4 +199,4 @@
     font-size: 1.6em;
     font-weight: 600;
   }
-}
+} */
