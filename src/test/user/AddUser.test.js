@@ -6,6 +6,7 @@ import {
   UserManagementProvider,
   useUserManagement,
 } from "../../contexts/UserContext";
+import { useAuth } from "../../contexts/LoginAuthContext";
 
 // Mock the Modal component
 jest.mock('../../components/utils/Modal', () => {
@@ -23,6 +24,8 @@ jest.mock('../../components/utils/Modal', () => {
   };
 });
 
+jest.mock("../../contexts/LoginAuthContext.js")
+
 // Mock the UserContext
 jest.mock("../../contexts/UserContext", () => {
   const originalModule = jest.requireActual("../../contexts/UserContext");
@@ -39,6 +42,11 @@ describe("AddUser", () => {
       addUser: jest.fn(),
       isLoading: false,
     }));
+
+    useAuth.mockImplementation(()=> ({
+      token: "thisistoken",
+      isAuthenticated: true
+    }))
   });
 
   test("renders AddUser component", () => {
