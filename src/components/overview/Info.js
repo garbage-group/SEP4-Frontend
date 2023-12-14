@@ -11,12 +11,16 @@ import { TopHumidityBins } from "./TopHumidity";
 function Info() {
   return (
     <div className="info-container">
-       <div className="info-box">
+      <div className="info-box">
         <TopHumidityBins />
       </div>
-      <div className="info-box"><HumidityDisplay /></div>
-      <div className="info-box"> <WeatherInfo /></div>
-     <div className="info-box">
+      <div className="info-box">
+        <HumidityDisplay />
+      </div>
+      <div className="info-box">
+        <WeatherInfo />
+      </div>
+      <div className="info-box">
         <Clock />
       </div>
     </div>
@@ -24,4 +28,3 @@ function Info() {
 }
 
 export { Info };
-

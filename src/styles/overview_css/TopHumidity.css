@@ -8,17 +8,18 @@
 /* Main container for bin items */
 .bin-container-top {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   max-width: 100%;
   box-sizing: border-box;
   transition: all 0.3s ease;
-  border-radius: 10px; /* Increased border radius for consistency */
   background-image: url("../../images/svgs/sidebar_bg.svg");
   background-size: cover;
   background-position: bottom;
-  overflow: auto; /* Enable scrolling */
+  overflow: auto;
   max-height: 25vh;
 }
 

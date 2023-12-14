@@ -79,7 +79,7 @@
   text-align: center;
 }
 
-form {
+.signInContainer form {
   background: #ffffff;
   display: flex;
   align-items: center;
