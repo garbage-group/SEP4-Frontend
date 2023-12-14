@@ -115,7 +115,7 @@
 /* media query for small screens */
 @media (max-width: 766px) {
   .users-container {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
   .userlist-container {
     width: 79vw;
@@ -124,6 +124,24 @@
   .list-footer {
     margin-bottom: 3vh ;
   }
+
+  .users-container {
+    overflow: hidden;
+  }
+
+/*   .users-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .users-container::-webkit-scrollbar-track {
+    display: none;
+
+  }
+  
+  .users-container::-webkit-scrollbar-thumb {
+    display: none;
+
+  } */
 }
 
 @media (min-width: 767px) and (max-width: 992px){

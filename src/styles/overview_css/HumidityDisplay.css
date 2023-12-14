@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
     padding: 4px;
+    background-image: url("../../images/svgs/sidebar_bg.svg");
+    height: 100%;
 }
 
 .humidity-display form {

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/overview_css/News.css'; // Make sure this path is correct
+
+import {Spinner} from "../utils/Spinner"
+import '../../styles/overview_css/TopHumidity.css';
 
 const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
@@ -23,13 +25,11 @@ function TopHumidityBins() {
         });
         const bins = await response.json();
 
-        // Get the latest humidity value for each bin
         const binsWithLatestHumidity = bins.map(bin => ({
           ...bin,
           latestHumidity: bin.humidity.length > 0 ? bin.humidity[bin.humidity.length - 1].value : 0
         }));
 
-        // Sort bins by their latest humidity and take the top 3
         const sortedBins = binsWithLatestHumidity.sort((a, b) => b.latestHumidity - a.latestHumidity).slice(0, 3);
 
         setTopBins(sortedBins);
@@ -44,13 +44,13 @@ function TopHumidityBins() {
   }, [token]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div className='loading-topHumidity'><Spinner/></div>;
   }
 
   return (
     <div className='bin-container-top'>
-      <h2 className='bin-heading-top'>Top Humidity Control Bins</h2> {/* Add this line for the heading */}
-      {topBins.length > 0 ? ( // Check if there are bins to display
+      <h2 className='bin-heading-top'>Top Humidity Control Bins</h2> 
+      {topBins.length > 0 ? ( 
         topBins.map(bin => (
           <div key={bin.id} className='bin-item-top'>
             <h3>Bin ID: {bin.id}</h3>
@@ -58,7 +58,7 @@ function TopHumidityBins() {
           </div>
         ))
       ) : (
-        <p>No bins data available.</p> // Display this if no bins data is fetched
+        <p>No bins data available.</p> 
       )}
     </div>
   );
