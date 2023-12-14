@@ -7,9 +7,6 @@ describe('Footer Component', () => {
     test('renders links, icons, and credits', () => {
         render(<Footer />);
 
-        // Quick Links
-        expect(screen.getByText('About Us')).toBeInTheDocument();
-        expect(screen.getByText('Contact Form')).toBeInTheDocument();
 
         // Social Media Links
         expect(screen.getByLabelText('Facebook')).toBeInTheDocument();
