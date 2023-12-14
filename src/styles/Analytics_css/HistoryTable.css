@@ -81,3 +81,10 @@
 .MuiTablePagination-root {
   color: white !important;
 }
+
+@media (min-width: 767px) and (max-width: 992px){
+  .table-outer-container{
+    width: 77.3vw;
+    margin-left: 7px;
+  }
+}

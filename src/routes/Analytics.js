@@ -74,13 +74,13 @@ function TabComponet() {
           <Tab>Fill Level</Tab>
         </TabList>
 
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <BarChartTemp />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <BarChartHumidity />
         </TabPanel>
-        <TabPanel>
+        <TabPanel className={"analyticsTabPanel"}>
           <LineChartFillLevel />
         </TabPanel>
       </Tabs>

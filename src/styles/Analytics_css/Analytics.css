@@ -88,18 +88,14 @@
     padding: 1px;
   }
 
-  .stats-container {
-    flex: 1;
-    background-color: #fff;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .tabList{
     font-size: 0.7em;
   }
+}
+
+@media (min-width: 767px) and (max-width: 992px){
+    .tabList, .analyticsTabPanel {
+        display: none;
+    }
+
 }
