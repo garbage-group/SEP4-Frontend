@@ -43,3 +43,15 @@
   background-color: #c7e5e3;
   border-radius: 10px;
 }
+
+@media (max-width: 766px) {
+  .role-chip {
+    display: none !important;
+  }
+
+  .region-chip {
+    margin-left: 23vw !important;
+  }
+}
+
+

@@ -30,12 +30,12 @@ function ExtraElements({
         icon={<PlaceOutlinedIcon />}
         label={region ? region : "N/A"}
         sx={{ m: 1 }}
-        className="extra-elements-chip"
+        className="extra-elements-chip region-chip"
       />
       <Chip
         label={role ? role : "N/A"}
         icon={<PersonOutlineOutlinedIcon />}
-        className="extra-elements-chip"
+        className="extra-elements-chip role-chip"
         sx={{ m: 1 }}
       />
 
