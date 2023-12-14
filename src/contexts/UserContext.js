@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { useAuth } from "./LoginAuthContext";
 
 export const UserManagementContext = createContext();
 
@@ -6,11 +7,10 @@ const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
 
 export function UserManagementProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   const [user, setUser] = useState();
 
-  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
-
+  const {token, isAuthenticated} = useAuth();
   const addUser = async (userData) => {
     setIsLoading(true);
     try {

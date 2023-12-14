@@ -82,8 +82,9 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+
         <UserManagementProvider>
-          <AuthProvider>
             <BinProvider>
               <UserListProvider>
                 <NotificationProvider>
@@ -91,8 +92,8 @@ export function App() {
                 </NotificationProvider>
               </UserListProvider>
             </BinProvider>
-          </AuthProvider>
         </UserManagementProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   );

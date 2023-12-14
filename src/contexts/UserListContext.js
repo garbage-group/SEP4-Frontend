@@ -1,5 +1,6 @@
 import { React, createContext, useContext, useEffect, useState } from "react";
 import { BASE_URL } from "../contexts/BinContext";
+import { useAuth } from "./LoginAuthContext";
 
 export const UserContext = createContext();
 // const BASE_URL = "https://garbage-backend-service-kq2hras2oq-ey.a.run.app";
@@ -7,8 +8,8 @@ export const UserContext = createContext();
 function UserListProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
-  const isAuthenticated = Boolean(localStorage.getItem("authenticate"));
-  const token = localStorage.getItem("token");
+  const {token, isAuthenticated} = useAuth();  
+  // const token = localStorage.getItem("token");
 
   async function fetchUsers() {
     try {
