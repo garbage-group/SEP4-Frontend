@@ -6,7 +6,7 @@ import { MemoryRouter } from "react-router-dom";
 import { AuthProvider } from "../../contexts/LoginAuthContext";
 
 
-jest.mock('../../components/Modal', () => {
+jest.mock('../../components/utils/Modal.js', () => {
   return {
     __esModule: true,
     default: ({ isOpened, onClose }) => {

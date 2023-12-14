@@ -9,21 +9,15 @@ export function Footer() {
 
   return (
     <div className="footer-container">
-      <div className="footer-section footer-quick-links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/contact">Contact Form</a></li>
-        </ul>
-      </div>
       <div className="footer-section footer-social-media">
         <h3>Follow Us</h3>
         <div className="social-icons">
           <a href="https://facebook.com" aria-label="Facebook"><FacebookIcon /></a>
-          <a href="https://www.instagram.com/sep04_via/" aria-label="Instagram"><InstagramIcon /></a>
+          <a href="https://www.instagram.com/wastewisetech/" aria-label="Instagram"><InstagramIcon /></a>
           <a href="https://github.com/garbage-group" aria-label="GitHub"><GitHubIcon /></a>
         </div>
       </div>
+
       <div className="footer-section footer-credits">
         <h3>Credits</h3>
         <p>Developed by The Garbage Crew</p>

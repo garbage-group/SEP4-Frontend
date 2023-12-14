@@ -67,14 +67,11 @@ const router = createHashRouter([
       },
       {
         path: "/analytics",
-        element: <Analytics />, 
-
+        element: <Analytics />,
       },
     ],
   },
 ]);
-
-
 
 const queryClient = new QueryClient();
 
@@ -82,17 +79,17 @@ export function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <UserManagementProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <UserManagementProvider>
             <BinProvider>
-              <UserListProvider>
-                <NotificationProvider>
-                  <RouterProvider router={router} />
-                </NotificationProvider>
-              </UserListProvider>
+                <UserListProvider>
+                  <NotificationProvider>
+                    <RouterProvider router={router} />
+                  </NotificationProvider>
+                </UserListProvider>
             </BinProvider>
-          </AuthProvider>
-        </UserManagementProvider>
+          </UserManagementProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   );

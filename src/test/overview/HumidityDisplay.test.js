@@ -34,7 +34,7 @@ describe("HumidityDisplay Component", () => {
       screen.getByPlaceholderText(/Enter Bin Number/i)
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /Get Humidity/i })
+      screen.getByRole("button", { name: /Submit/i })
     ).toBeInTheDocument();
   });
 

@@ -37,3 +37,10 @@
  
 }
 
+/*medium devices only*/
+@media (max-width: 991.98px) {
+  .mapContainer {
+    display: none;
+  }
+}
+

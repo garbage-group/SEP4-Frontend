@@ -142,8 +142,8 @@ function Row({ value, index, currOpen, setCurrOpen }) {
           </IconButton>
         </TableCell>
         <TableCell align="center">{value.id}</TableCell>
-        <TableCell align="center">{value.latitude}</TableCell>
-        <TableCell align="center">{value.longitude}</TableCell>
+        <TableCell align="center">{value.latitude.toFixed(3)}</TableCell>
+        <TableCell align="center">{value.longitude.toFixed(3)}</TableCell>
         <TableCell align="center">{value.capacity}</TableCell>
         <TableCell align="center">{value.fillThreshold}</TableCell>
         <TableCell align="center">

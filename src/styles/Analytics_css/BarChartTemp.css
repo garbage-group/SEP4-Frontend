@@ -1,0 +1,6 @@
+@media (max-width: 766px) {
+    .barChartTemp{
+        width: 15rem !important;
+        padding: 1rem;
+    }
+}

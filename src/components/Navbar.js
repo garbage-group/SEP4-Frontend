@@ -1,4 +1,4 @@
-import SearchIcon from "@mui/icons-material/Search";
+
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../images/logo.png";
 import "../styles/Navbar.css";
@@ -20,13 +20,6 @@ export function Navbar() {
     <div className="navbar-container">
       <div className="top-nav-left">
         <img src={logo} alt="logo" className="navbar-logo" />
-      </div>
-
-      <div className="top-nav-middle">
-        <div className="search-bar">
-          <input type="text" placeholder="Search bins, or collectors....." />
-          <SearchIcon />
-        </div>
       </div>
 
       <div className="top-nav-right">

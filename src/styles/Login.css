@@ -79,7 +79,7 @@
   text-align: center;
 }
 
-form {
+.signInContainer form {
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -103,7 +103,7 @@ h5 {
   text-align: center;
 }
 
-input {
+.page-container input {
   background-color: #eee;
   border: none;
   padding: 0.7em 2em;
@@ -173,7 +173,7 @@ p {
   color: transparent;
   -webkit-text-stroke: 1px #fff;
   background: url("../images/login/back.png");
-  -webkit-background-clip: text;
+    background-clip: text;
   background-position: 0 0;
   animation: back 20s linear infinite;
 }
@@ -324,7 +324,7 @@ p {
     height: 4vh;
   }
 
-  input {
+ .page-container input {
     font-size: 1em;
   }
 
@@ -422,7 +422,7 @@ p {
     height: 4vh;
   }
 
-  input {
+  .page-container input {
     font-size: 1.2em;
   }
 

@@ -23,29 +23,6 @@
 }
 
 
-
-/* Styles for quick links list */
-.footer-quick-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px;
-}
-
-.footer-quick-links li {
-    margin-bottom: px;
-}
-
-.footer-quick-links li a {
-    color: #8AF3E9;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-quick-links li a:hover {
-    color: #ffffff;
-}
-
-
 /* Styles for social media icons */
 .social-icons {
     display: flex;
@@ -86,7 +63,7 @@
 }
 
 /* Media Queries for responsiveness */
-@media (max-width: 767.98px) {
+@media (max-width: 766px) {
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -107,9 +84,10 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 767px) and (max-width: 991.98px) {
     .footer-container {
         justify-content: space-between;
+        font-size: smaller;
     }
 }
 

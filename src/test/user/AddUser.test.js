@@ -1,19 +1,30 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { AddUser } from "../../components/users/AddUser";
 import {
   UserManagementProvider,
   useUserManagement,
 } from "../../contexts/UserContext";
+import { useAuth } from "../../contexts/LoginAuthContext";
 
 // Mock the Modal component
-jest.mock(
-  "../../components/Modal",
-  () =>
-    ({ children, isOpened }) =>
-      isOpened ? <div>{children}</div> : null
-);
+jest.mock('../../components/utils/Modal', () => {
+  return {
+    __esModule: true,
+    default: ({ isOpened, onClose }) => {
+      return isOpened ? (
+        <div data-testid="mocked-modal">
+          {/* Mocked Modal Content */}
+          Data Updated
+          <button onClick={onClose}>Close</button>
+        </div>
+      ) : null;
+    },
+  };
+});
+
+jest.mock("../../contexts/LoginAuthContext.js")
 
 // Mock the UserContext
 jest.mock("../../contexts/UserContext", () => {
@@ -31,6 +42,11 @@ describe("AddUser", () => {
       addUser: jest.fn(),
       isLoading: false,
     }));
+
+    useAuth.mockImplementation(()=> ({
+      token: "thisistoken",
+      isAuthenticated: true
+    }))
   });
 
   test("renders AddUser component", () => {
