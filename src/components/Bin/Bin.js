@@ -53,6 +53,8 @@ function Bin() {
   const [newLongitude, setNewLongitude] = useState(currentBin.longitude);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  console.log(isAuthenticated);
+
   const closeModal = () => {
     setIsModalOpen(false);
   };

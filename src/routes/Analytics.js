@@ -68,7 +68,7 @@ function TabComponet() {
   return (
     <>
       <Tabs>
-        <TabList>
+        <TabList className={"tabList"}>
           <Tab>Temperature</Tab>
           <Tab>Humidity</Tab>
           <Tab>Fill Level</Tab>

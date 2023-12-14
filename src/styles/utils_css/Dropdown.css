@@ -1,0 +1,9 @@
+@media (max-width: 766px){
+
+    .dropdown > label{
+        margin-left: 2.5rem;
+        font-size: 0.9em;
+    }
+
+   
+}

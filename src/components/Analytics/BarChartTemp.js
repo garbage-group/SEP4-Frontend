@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { useBins } from "../../contexts/BinContext";
 import { Dropdown } from "../utils/Dropdown";
+import  "../../styles/Analytics_css/BarChartTemp.css"
 
 Chartjs.register(BarElement, CategoryScale, LinearScale, Legend, Tooltip);
 
@@ -48,11 +49,13 @@ function BarChartTemp() {
     : null;
 
   const tempDate = selectedBinData
-    ? selectedBinData.temperatures.map((temp) => formatDate(temp.dateTime))
+    ? selectedBinData.temperatures.map(
+      (temp) => formatDate(temp.dateTime))
     : [];
 
   const tempValue = selectedBinData
-    ? selectedBinData.temperatures.map((temp) => temp.value)
+    ? selectedBinData.temperatures.map(
+      (temp) => temp.value)
     : [];
 
   const data = {
@@ -76,10 +79,17 @@ function BarChartTemp() {
 
   return (
     <div>
-       <Dropdown bins={bins} selectedBin={selectedBin} handleBinChange={handleBinChange}/>
+      <Dropdown
+        bins={bins}
+        selectedBin={selectedBin}
+        handleBinChange={handleBinChange}
+      />
       {selectedBin && (
-        <div style={{ width: "400px", padding: "20px" }}>
-          <Bar data={data} options={options}></Bar>
+        <div style={{ width: "400px", padding: "20px" }} className="barChartTemp">
+          <Bar
+            data={data}
+            options={options}>
+          </Bar>
         </div>
       )}
     </div>

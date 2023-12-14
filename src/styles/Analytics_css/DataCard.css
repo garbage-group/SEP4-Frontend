@@ -2,3 +2,14 @@
     display: flex;
     gap: 3rem;
 }
+
+@media (max-width: 766px){
+
+    .cardBox {
+        width: 80px !important;
+    }
+    
+    .cardBoxTitle{
+        font-size: 10px !important;
+    }
+}
