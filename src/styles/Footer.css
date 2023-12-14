@@ -23,29 +23,6 @@
 }
 
 
-
-/* Styles for quick links list */
-.footer-quick-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 10px;
-}
-
-.footer-quick-links li {
-    margin-bottom: px;
-}
-
-.footer-quick-links li a {
-    color: #8AF3E9;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-quick-links li a:hover {
-    color: #ffffff;
-}
-
-
 /* Styles for social media icons */
 .social-icons {
     display: flex;
