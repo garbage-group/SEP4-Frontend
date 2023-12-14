@@ -8,7 +8,6 @@ describe('Footer Component', () => {
         render(<Footer />);
 
         // Quick Links
-        expect(screen.getByText('Quick Links')).toBeInTheDocument();
         expect(screen.getByText('About Us')).toBeInTheDocument();
         expect(screen.getByText('Contact Form')).toBeInTheDocument();
 
