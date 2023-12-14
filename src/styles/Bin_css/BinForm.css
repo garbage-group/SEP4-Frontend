@@ -28,8 +28,6 @@
   align-items: center;
 }
 
-
-
 .form.loading {
   opacity: 0.3;
 }
@@ -78,11 +76,11 @@
 
 /*small devices and down*/
 @media (max-width: 766px) {
-
   .binForm {
-  width: 50vw;
-  height: 50%;
-}
+    width: 50vw;
+    height: 50%;
+    margin: 0rem;
+  }
 
   .row1,
   .row2 {
@@ -106,9 +104,8 @@
     background-color: #d1eedf;
     border-radius: 4px;
     padding: 0.6rem;
-    
   }
-/* 
+  /* 
   #capacity {
     margin-left: 8vw;
   }
@@ -126,23 +123,27 @@
   } */
 
   .btn {
-  color: white;
-  text-transform: uppercase;
-  padding: 0.3rem 0.6rem;
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  background-color: #143a63;
-  
-}
+    color: white;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    background-color: #143a63;
+  }
 }
 
 /*medium devices only*/
 @media (min-width: 767px) and (max-width: 1200px) {
+  .binForm {
+    height: 50%;
+    width: 45vw;
+    margin: 0rem;
+  }
 
   .row1,
   .row2 {
@@ -165,16 +166,13 @@
   #threshold,
   #latitude,
   #longitude {
-    width: 20vw;
+    width: 35vw;
     background-color: #d1eedf;
     border-radius: 4px;
+    padding: 0.5rem;
   }
-
-
 }
 
 /* */
 @media (min-width: 1201px) and (max-width: 1600) {
-
-
 }

@@ -156,7 +156,13 @@
 }
 
 /*medium devices only*/
-@media (min-width: 767px) and (max-width: 1199px) {}
+@media (min-width: 767px) and (max-width: 1199px) {
+
+  .binInput {
+    width: 25vw;
+  }
+
+}
 
 
 /* */

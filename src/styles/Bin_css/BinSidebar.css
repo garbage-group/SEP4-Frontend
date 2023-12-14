@@ -27,7 +27,5 @@
 
 /*medium devices only*/
 @media (min-width: 768px) and (max-width: 1199px) {
-   .sidebar {
-    width: 30vw;
-  }
+ 
 }

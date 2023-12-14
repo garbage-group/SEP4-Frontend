@@ -1,51 +1,55 @@
+.binList {
+  height: 65vh;
+  list-style: none;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.binList::-webkit-scrollbar {
+  width: 0;
+}
+
+.bins-footer {
+  background-color: #05d671;
+  width: 20vw;
+  border-radius: 5px;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*small devices and down*/
+@media (max-width: 766px) {
   .binList {
-
-    height: 65vh;
-    list-style: none;
-   
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-  }
-
-  .binList::-webkit-scrollbar {
-    width: 0;
+    width: 70vw;
+    gap: 2rem;
+    padding: 0px;
+    margin: 0px;
   }
 
   .bins-footer {
-    background-color: #05d671;
-    width: 20vw;
-    border-radius: 5px;
-    height: 6vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+  }
+}
+
+/*medium devices only*/
+@media (min-width: 767px) and (max-width: 1023px) {
+  .bins-footer {
+    width: 100%;
+    margin-left: 2.5rem;
   }
 
-  /*small devices and down*/
-  @media (max-width: 766px) {
-    .binList {
-      width: 70vw;
-      gap: 2rem;
-      padding: 0px;
-      margin: 0px;
-    }
-
-    .bins-footer{
-      width: 100%;
-    }
-  }
-
-  /*medium devices only*/
-  @media (min-width: 767px) and (max-width: 991.98px) {
-    .bins-footer{
-      width: 100%;
-      margin-left: 2.5rem;
-    }
+  .binList {
+    height: 65vh;
+    padding: 0px;
+    margin: 0px;
+    
 
   }
+}
 
 
-  /* */
-  @media (min-width: 1200px) {}
